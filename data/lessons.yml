@@ -121,7 +121,7 @@ lessons:
     lab: "lab-04-multilevel-linear-beauty.html"
     
   - title: "Team project 2"
-    #project: "team-project-02.html"
+    project: "team-project-02.html"
     
   - title: "WEEK 9"
   
@@ -137,7 +137,6 @@ lessons:
   
   - date: "Tue, Oct 29"
     title: "Missing values, errors, and outliers; single imputation methods"
-    #hw: "New-hw-04.html"
     
   - date: "Thur, Oct 31"
     title: "Multiple imputation"
@@ -154,6 +153,7 @@ lessons:
   
   - date: "Tue, Nov 5"
     title: "Association vs. causation; confounding (HW4 DUE!)"
+    #hw: "New-hw-04.html"
     
   - date: "Thur, Nov 7"
     title: "The potential outcomes framework: introduction, assumptions and estimands"
