@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>STA 199: Intro to Data Science on STA 199</title>
+    <title>IDS 702: FALL 2019</title>
     <link>/</link>
-    <description>Recent content in STA 199: Intro to Data Science on STA 199</description>
+    <description>Recent content on IDS 702: FALL 2019</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Apr 2017 00:00:00 +0000</lastBuildDate>
@@ -17,7 +17,9 @@
       <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>/syllabus/</guid>
-      <description>Note: Due dates of exams and project will not move, however the timeline of topics and smaller assignments might be updated throughout the semester.  Date Lesson Slides Reading Lab AE HW EC Exam Project    Week 00           Wed, Jan 10 Welcome to Data Science           Thur, Jan 11 Lab 00: Logistics            Week 01           Mon, Jan 15 No class - Martin Luther King, Jr.</description>
+      <description>Note: Please check this page frequently for updates and always remember to refresh the page.
+
+ Date Lesson Slides Reading Lab HW Project    WEEK 1        Tue, Aug 27 Introduction to course         PART I: MULTIPLE LINEAR REGRESSION        Thur, Aug 29 Introduction to multiple linear regression         WEEK 2        Tue, Sept 3 Model assessment, diagnostics and validation I        Thur, Sept 5 Model assessment, diagnostics and validation II        Fri, Sept 6 Lab 1: multiple linear regression (beer consumption in sao paulo)         WEEK 3        Tue, Sept 10 Special predictors and multicollinearity        Thur, Sept 12 Model building and selection         PART II: GENERALIZED LINEAR MODELS (GLMs)         WEEK 4         Final project outline        Tue, Sept 17 Introduction to logistic regression (HW2 DUE!</description>
     </item>
     
     <item>
@@ -26,8 +28,17 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/policies/</guid>
-      <description>Class: Class time is designed to be as interactive as possible. My role as instructor is to introduce you new tools and techniques, but it is up to you to take them and make use of them. Programming is a skill that is best learned by doing, so as much as possible you will be working on a variety of tasks and activities throughout each class.
-Diversity &amp;amp; Inclusiveness: It is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students&#39; learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit.</description>
+      <description>When in doubt about anything at all, ask questions!!!
+Prerequisites Students are expected to know all topics covered in the MIDS summer course review and boot camp. These include basic probability (including conditional probability, expectations and common probability distributions), and statistical inference (including hypothesis testing, confidence intervals, linear regression with one predictor, and exploratory data analysis). Students are also expected to be familiar with R/Rstudio. Due to space constraints, the course is open only to students in the MIDS program.</description>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/</guid>
+      <description>Supplementary Textbooks These textbooks are great resources for some of the topics we will cover. You do not need to buy them, but you may be able to borrow them from Duke library should you need extra reading materials, besides the class slides and main textbooks. I may also select and adapt questions from the books for your homework assignments from time to time, but you will not need access to them when I do so.</description>
     </item>
     
   </channel>

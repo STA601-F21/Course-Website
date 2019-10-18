@@ -1,7 +1,8 @@
 ---
-title: "Reading 05"
+title: "Readings for hierarchical linear models"
 output: 
-  html_document: 
+  html_document:
+    css: reading.css
     theme: yeti
 ---
 
@@ -9,15 +10,21 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Due
 
-Monday, Mar 19
+## Optional:
 
-## Required:
+### Book sections
 
-- [OpenIntro - Intro Stat with Randomization and Simulation](https://drive.google.com/file/d/0B-DHaDEbiOGkRHNndUlBaHVmaGM/view):
-    - 2.1 Randomization case study: gender discrimination
-    - 2.2 Randomization case study: opportunity cost
-    - 2.3 Hypothesis testing 
-    - 2.4 Simulation case studies
-    - 4.5 Bootstrapping to study the standard deviation (except for 4.5.3)
+- [Data Analysis Using Regression and Multilevel/Hierarchical Models](https://www.amazon.com/gp/product/052168689X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=052168689X&linkCode=as2&tag=andrsblog0f-20&linkId=PX5B5V6ZPCT2UIYV) by Gelman A., and Hill, J.:
+    + Section 11: Multilevel structures
+    + Section 12: Multilevel linear models: the basics
+    + Section 13: Multilevel linear models: varying slopes, non-nested models, and other complexities.
+
+- [An Introduction to Categorical Data Analysis, Second Edition](https://www.amazon.com/Introduction-Categorical-Analysis-Probability-Statistics/dp/1119405262) by Alan Agresti:
+    + Section 10: Random Effects: Generalized Linear Mixed Models
+    Download pdf versions of individual chapters, including this one, via Duke library [here](https://find.library.duke.edu/catalog/DUKE005142588). Let me know if you have trouble downloading the chapter.
+
+
+<!-- ### Articles -->
+
+<!-- - S.K. Sarkar, Habshah Midi and Sohel Rana, 2011, *[Detection of Outliers and Influential Observations in Binary Logistic Regression: An Empirical Study](https://scialert.net/fulltextmobile/?doi=jas.2011.26.35)*, Journal of Applied Sciences, 11: 26-35. -->

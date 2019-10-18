@@ -1,7 +1,8 @@
 ---
-title: "Reading 01"
+title: "Reading for multiple linear regression"
 output: 
-  html_document: 
+  html_document:
+    css: reading.css
     theme: yeti
 ---
 
@@ -9,22 +10,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Due
-
-Monday, Jan 22
-
-## Required:
-
-- [OpenIntro Statistics](https://drive.google.com/file/d/0B-DHaDEbiOGkc1RycUtIcUtIelE/view):
-    + Section 1.6: Examining numerical data
-    + Section 1.7: Considering categorical data
-
-- [What's so hard about histograms?](http://tinlizzie.org/histograms/)
 
 ## Optional:
 
-- Reproducibility case studies:
-    - [Science retracts gay marriage paper without agreement of lead author LaCour](http://news.sciencemag.org/policy/2015/05/science-retracts-gay-marriage-paper-without-lead-author-s-consent)
-    - [Tracking retractions as a window into the scientific process Seizure study retracted after authors realize data got “terribly mixed”](http://retractionwatch.com/2013/02/01/seizure-study-retracted-after-authors-realize-data-got-terribly-mixed/)
-    - [Tracking retractions as a window into the scientific process
-Bad spreadsheet merge kills depression paper, quick fix resurrects it](http://retractionwatch.com/2014/07/01/bad-spreadsheet-merge-kills-depression-paper-quick-fix-resurrects-it/)
+- [Data Analysis Using Regression and Multilevel/Hierarchical Models](https://www.amazon.com/gp/product/052168689X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=052168689X&linkCode=as2&tag=andrsblog0f-20&linkId=PX5B5V6ZPCT2UIYV) by Gelman A., and Hill, J.:
+    + Section 3: Linear regression: the basics
+    + Section 4: Linear regression: before and after fitting the model
+
+- [An Introduction to Statistical Learning with Applications in R](http://faculty.marshall.usc.edu/gareth-james/ISL/) by James, G., Witten, D., Hastie, T., and Tibshirani, R.:
+    + Section 3: Linear regression (you can skip section 3.5)

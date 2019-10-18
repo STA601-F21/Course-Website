@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/</loc>
+    <lastmod>2017-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/syllabus/</loc>
     <lastmod>2017-04-19T00:00:00+00:00</lastmod>
   </url>
@@ -22,8 +27,7 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-04-19T00:00:00+00:00</lastmod>
+    <loc>/resources/</loc>
   </url>
   
   <url>
