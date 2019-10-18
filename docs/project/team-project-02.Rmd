@@ -30,30 +30,40 @@ You MUST work within your MIDS-assigned teams.
 
 ### GitHub
 
-Each team MUST collaborate using GitHub. A blank repository has been created for this project with the necessary data files. Follow this link: https://classroom.github.com/g/rfttmYjL to gain access. The first student within each team to accept the invitation will be responsible for adding the team name as well. All other members of the team will be able to join the team once the first person has added the team name. You MUST join your MIDS-assigned team. Each individual's contributions should be obvious via the commits history of the team's repository. Feel free to create other folders within the repository as needed but you must add your final reports and presentation slides in the corresponding folders already created for you.
+Each team MUST collaborate using GitHub. A blank repository has been created for this project with the necessary data files. Follow this link: https://classroom.github.com/g/rfttmYjL to gain access. The first student within each team to accept the invitation will be responsible for adding the team name as well. All other members of the team will be able to join the team once the first person has added the team name. You should only join your MIDS-assigned team. Each individual's contributions should be obvious via the commits history of the team's repository. Feel free to create other folders within the repository as needed but you must add your final reports and presentation slides in the corresponding folders already created for you.
 
 
 ### Presentations
 
-Each team will give a brief (6 minute) presentation of their findings in class.
+Each team MUST give a brief (6 minute) presentation of their findings in class.
 
   + The presentation should only cover a brief introduction and your most interesting and important findings.
   + Create your presentation slides with the time limit in mind. You should consider making between 5 and 7 slides, so that you have approximately one minute to get through each one.
   + You are free to create your presentation slides using PowerPoint, LaTeX or any other application you choose.
   + The order of the presentations will be randomized; each team is expected to come to class fully prepared to present first.
-- For the reports, each team MUST turn in only one report with team members' names at the top of the report. 
 
 
 ### Reports
+
+Each team MUST turn in only one report with team members' names at the top of the report. 
 
   + Please limit your report to a total of 10 pages. <font color="red">You will be penalized should your report exceed 10 pages!</font>
   + Please type your reports using R Markdown, LaTeX or any other word processor but be sure to knit or convert the final output file to ".pdf". 
   + **DO NOT INCLUDE R CODE OR OUTPUT IN YOUR REPORT!** R outputs should be converted to nicely formatted tables. Feel free to use R packages such as `kable` and `xtable`.
   + All R-code must be included in the appendix. Feel free to also include any supplemental material that is important for your analysis, such as diagnostic checks or exploratory plots that you feel justify the conclusions in your report.
   + Submissions should be made on gradescope: go to Assignments $\rightarrow$ Team Project 1. Gradescope will let you select your team mates when submitting, so make sure to do so. Only one person needs to submit the report. 
-  
-  
 
+
+### Other instructions
+
+Your analysis MUST address the two sets of questions directly. The report should be written so that there is a section which clearly answers the first set of questions about wages and another section which clearly answers the second set of questions about positive wages. If you prefer, you can write two 5-paged reports, one to address each set of questions. Be sure to also include the following in your report: 
+
+- the final models you ultimately decided to use,
+- clear model building, that is, justification for the models (e.g., why you chose certain transformations and why you decided the final models are reasonable),
+- model assessment and validation for the final models,
+- the relevant regression output (includes: a table with coefficients and SEs, and p-values or confidence intervals; and somewhere in the text or table the estimated regression standard deviation and R-squared for linear regression, or area under the curve and accuracy for logistic regression),
+- your interpretation of the results in the context of the questions of interest, including clear and direct answers to the questions posed, and
+- any potential limitations of the analysis.
 
 
 
@@ -92,18 +102,6 @@ Use regression models with multiple predictors (to control for the effects of po
   + Is there any evidence that the effects differ by demographic groups?
   + Are there other interesting associations with positive wages that are worth mentioning?
 
-      
-
-### Other instructions
-
-Your analysis MUST address the two sets of questions directly. The report should be written so that there is a section which clearly answers the first set of questions about wages and another section which clearly answers the second set of questions about positive wages. If you prefer, you can write two 5-paged reports, one to address each set of questions. Be sure to also include the following in your report: 
-
-- the final models you ultimately decided to use,
-- clear model building, that is, justification for the models (e.g., why you chose certain transformations and why you decided the final models are reasonable),
-- model assessment and validation for the final models,
-- the relevant regression output (includes: a table with coefficients and SEs, and p-values or confidence intervals; and somewhere in the text or table the estimated regression standard deviation and R-squared for linear regression, or area under the curve and accuracy for logistic regression),
-- your interpretation of the results in the context of the questions of interest, including clear and direct answers to the questions posed, and
-- any potential limitations of the analysis.
 
 
 ### Code Book
@@ -125,7 +123,7 @@ re78           |    real annual earnings in 1978.
 
 ## Grading
 
-30 points: 15 points for each part.
+40 points: 20 points for each part.
 
 
 
