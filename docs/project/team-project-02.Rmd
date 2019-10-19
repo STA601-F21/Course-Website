@@ -30,7 +30,7 @@ You MUST work within your MIDS-assigned teams.
 
 ### GitHub
 
-Each team MUST collaborate using GitHub. A blank repository has been created for this project with the necessary data files. Follow this link: https://classroom.github.com/g/rfttmYjL to gain access. You should already know how to clone the repository locally once you gain access. The first student to accept the invitation within each team will be responsible for creating the team name. All other members of the team will be able to join the team once the first person has added the team name. You should only join your MIDS-assigned team. Each individual's contributions will be assessed via the commits history of the team's repository. Feel free to create other folders within the repository as needed but you must push your final reports and presentation slides to the corresponding folders already created for you.
+Each team MUST collaborate using GitHub. A blank repository has been created for this project. Follow this link: https://classroom.github.com/g/rfttmYjL to gain access. You should already know how to clone the repository locally once you gain access. The first student to accept the invitation within each team will be responsible for creating the team name. All other members of the team will be able to join the team once the first person has added the team name. You should only join your MIDS-assigned team. Each individual's contributions will be assessed via the commits history of the team's repository. Feel free to create other folders within the repository as needed but you must push your final reports and presentation slides to the corresponding folders already created for you.
 
 
 ### Presentations
@@ -88,7 +88,7 @@ The basic design randomizes female rats to treatment groups, with groups consist
 
 ### Data
 
-The data for this project can be found in the file `bioassay.txt` within the `Data` folder of the GitHub repository.
+The data for this part of the project can be found in the file `bioassay.txt` on Sakai.
 
 
 ### Questions
@@ -123,7 +123,7 @@ The North Carolina State Board of Elections (NCSBE) is the agency charged with t
 
 ### Data
 
-The data for this project can be found in the `Data` folder of the GitHub repository. The file `voter_stats_20161108.txt` contains information about the aggregate number of registered voters by the demographic variables; the data dictionary can be found in the file `DataDictionaryForVoterStats.txt`. The file `history_stats_20161108.txt` contains information about the aggregate number of voters who actually voted by the demographic variables. 
+The data for this part of the project can be found on Sakai. The file `voter_stats_20161108.txt` contains information about the aggregate number of registered voters by the demographic variables; the data dictionary can be found in the file `DataDictionaryForVoterStats.txt`. The file `history_stats_20161108.txt` contains information about the aggregate number of voters who actually voted by the demographic variables. 
 
 There are a few million rows in both datasets but you will only work with a subset of those. Take a random sample of 20 counties out of all the counties in both datasets. You should indicate the counties you sampled in your final report. You will need to merge the two files `voter_stats_20161108.txt` and `history_stats_20161108.txt` by the common variables for the counties you care about. Take a look at the set of `join` functions in the `dplyr` package in R (https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join) or the `merge` function in base R. I recommend the functions in `dplyr`. You may choose to merge the datasets before or after selecting the samples you want, but be careful if you decide to do the latter.
 
