@@ -127,6 +127,8 @@ lessons:
   
   - date: "Tue, Oct 22"
     title: "Multilevel/hierarchical models III"
+    slides: "lec-slides/15-hierarchical-models-III.html"
+    reading: "reading-06.html"
     
   - date: "Thur, Oct 24"
     title: "In-class analysis"

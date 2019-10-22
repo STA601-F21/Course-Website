@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
     + Section 13: Multilevel linear models: varying slopes, non-nested models, and other complexities.
 
 - [An Introduction to Categorical Data Analysis, Second Edition](https://www.amazon.com/Introduction-Categorical-Analysis-Probability-Statistics/dp/1119405262) by Alan Agresti:
-    + Section 10: Random Effects: Generalized Linear Mixed Models
+    + Section 10: Random Effects: Generalized Linear Mixed Models  
     Download pdf versions of individual chapters, including this one, via Duke library [here](https://find.library.duke.edu/catalog/DUKE005142588). Let me know if you have trouble downloading the chapter.
 
 
