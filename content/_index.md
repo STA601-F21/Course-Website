@@ -73,9 +73,11 @@ Fri, September 6 | Drop/add ends
 Fri, October 4, 7:30pm | Fall break begins
 Wed, October 9, 8:30am | Fall break ends
 Mon, November 4, 11:59pm | Final project proposal due
+Tue, November 26 | Final project presentations I
 Tue, November 26, 10:30pm | Thanksgiving; graduate classes end
-Tue, December 3 | Final project presentations
-Thur, December 5 | Final project presentations
+Tue, December 3 | Final project presentations II
+Thur, December 5 | Final project presentations III
+Tue, December 10 | Final project report due
 
 
 ### Green Classroom

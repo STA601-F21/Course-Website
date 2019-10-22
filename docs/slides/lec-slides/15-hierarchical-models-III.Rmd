@@ -52,6 +52,8 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 - Full instructions for the proposals will be posted by the end of the week.
 
+- Updated dates for final project presentations
+
 ## Outline
 
 - Questions from last lecture

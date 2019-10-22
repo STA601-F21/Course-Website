@@ -130,63 +130,62 @@ lessons:
     slides: "lec-slides/15-hierarchical-models-III.html"
     reading: "reading-06.html"
     
-  - date: "Thur, Oct 24"
-    title: "In-class analysis"
-  
   - title: "PART  IV: DEALING WITH MESSY DATA"
+    
+  - date: "Thur, Oct 24"
+    title: "Missing values, errors, and outliers; single imputation methods"
   
   - title: "WEEK 10"
   
   - date: "Tue, Oct 29"
-    title: "Missing values, errors, and outliers; single imputation methods"
-    
-  - date: "Thur, Oct 31"
     title: "Multiple imputation"
     
-  - date: "Fri, Nov 1"
-    title: "Lab 5: team project 2 presentations"
-    
   - title: "PART  V: METHODS FOR CAUSAL INFERENCE"
-  
+    
+  - date: "Thur, Oct 31"
+    title: "Association vs. causation; confounding"
+    
+  - date: "Fri, Nov 1"
+    title: "Lab 5: team project 2 presentations (reports due midnight on Sunday Nov 3)"
+    
   - title: "WEEK 11"
   
   - date: "Mon, Nov 4"
     title: "Final project proposal due"
   
   - date: "Tue, Nov 5"
-    title: "Association vs. causation; confounding (HW4 DUE!)"
+    title: "The potential outcomes framework: introduction, assumptions and estimands"
     #hw: "New-hw-04.html"
     
   - date: "Thur, Nov 7"
-    title: "The potential outcomes framework: introduction, assumptions and estimands"
+    title: "Completely randomized experiments: model-based approach"
     
   - title: "WEEK 12"
   
   - date: "Tue, Nov 12"
-    title: "Completely randomized experiments: model-based approach"
+    title: "Observational studies: matching, weighting, regression, and propensity scores methods"
     #hw: "New-hw-05.html"
     
+  - title: "PART  VI: TIME SERIES MODELS"
+    
   - date: "Thur, Nov 14"
-    title: "Observational studies: matching, weighting, regression, and propensity scores methods"
+    title: "Time series models I"
     
   - date: "Fri, Nov 15"
     title: "Lab 6: comparing different causal inference methods"
-    
-  - title: "PART  VI: TIME SERIES MODELS"
   
   - title: "WEEK 13"
   
   - date: "Tue, Nov 19"
-    title: "Time series models I (HW5 DUE!)"
+    title: "Time series models II"
     
   - date: "Thur, Nov 21"
-    title: "Time series models II"
+    title: "Wrap up (work on final project)"
     
   - title: "WEEK 14"
   
   - date: "Tue, Nov 26"
-    #title: "Wrap up (would cover introduction to nonparametric methods should time permit)"
-    title: "Wrap up (work on final project)"
+    title: "Final project presentations I"
     
   - date: "Thur, Nov 28"
     title: "No class: reading period"
@@ -194,10 +193,10 @@ lessons:
   - title: "WEEK 15"
   
   - date: "Tue, Dec 3"
-    title: "Final project presentations I"
+    title: "Final project presentations II"
     
   - date: "Thur, Dec 5"
-    title: "Final project presentations II"
+    title: "Final project presentations III"
     
   - date: "Tue, Dec 10"
     title: "Final project report due"
