@@ -303,7 +303,7 @@ $$\textrm{log}\left(\dfrac{\Pr[\textrm{ideology}_i \leq j| x_i]}{\Pr[\textrm{ide
 ---
 class: center, middle
 
-# In-class analysis: move to the R script [here](https://akandelanre.github.io/IDS702_F19/slides/lec-slides/Political.R)
+# In-class analysis: move to the R script [here](https://ids-702-f19.github.io/Course-Website/slides/lec-slides/Political.R)
 
 
 

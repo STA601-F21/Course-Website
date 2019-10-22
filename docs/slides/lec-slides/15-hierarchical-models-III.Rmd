@@ -518,7 +518,7 @@ summary(model3)
   
 - We can fit the model under the Bayesian paradigm in the `brms` package, using mildly informative priors and quantify uncertainty based on the posterior samples.
 
-- In-class analysis: move to the R script [here](https://akandelanre.github.io/IDS702_F19/slides/lec-slides/Elections88.R)
+- In-class analysis: move to the R script [here](https://ids-702-f19.github.io/Course-Website/slides/lec-slides/Elections88.R)
 
 - Windows users: install Rtools for windows, then the `rstan` package in R. Mac users: install Xcode, Try `xcode-select --install` from the Terminal app or the Terminal tab of the RStudio console, then install the `rstan` package in R.
 
