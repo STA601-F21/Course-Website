@@ -50,13 +50,14 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 - Final reports for Team Project 2 now due 11:59pm, Monday, November 4.
 
+- Project proposals are now due 11:59pm, Tuesday, November 5. 
+
 
 ## Outline
 
 - Missing data
   + Introduction
-  + Types of missing data
-  + Types of missing data mechanisms
+  + Types of missing data and mechanisms
   + Mathematical formulation
 
 - Strategies for handling missing data
@@ -120,7 +121,7 @@ class: center, middle
 ---
 ## Why should we care?
 
-- <font color="red">Loss of power</font>
+- <font color="red">Loss of power</font> due to the the smaller sample size
   + can't regain lost power
 
 --
@@ -136,7 +137,7 @@ class: center, middle
 --
 
 - Some popular analyses with missing data are <font color="red">inefficient</font>
-  + so that confidence intervals wider than they need be
+  + so that confidence intervals are wider than they need be
 
 
 ---
@@ -159,9 +160,9 @@ Approach by design:
 ## What to do: analysis
 
 - A suitable method of analysis would:
-  + make the correct assumption about the missing data
+  + make the correct (or plausible) assumption about the missing data
   + give an unbiased estimate (under that assumption)
-  + give an unbiased standard error (so that P-values and confidence intervals are correct)
+  + give an unbiased standard error (so that p-values and confidence intervals are correct)
   + be efficient (make best use of the available data)
 
 --
@@ -191,7 +192,7 @@ Approach by design:
 ---
 ## Types of nonresponse (missing data)
 
-- .hlight[Unit nonresponse]: the individual has no values recorded for any of the variables.
+- .hlight[Unit nonresponse]: the individual has no values recorded for any of the variables. For example, when participants do not complete a survey questionnaire at all.
 
 - .hlight[Item nonresponse]: the individual has values recorded for at least one variable, but not all variables.
 
@@ -247,11 +248,11 @@ Approach by design:
 - For example, suppose
   - you handed out a double-sided survey questionnaire of 20 questions to a sample of participants;
   - questions 1-15 were on the first page but questions 16-20 were at the back; and
-  - some of the participants did not respond to questions 16-20
+  - some of the participants did not respond to questions 16-20.
  
 --
  
-- Then, the values for questions 16-20 for those people who did not respond would be .hlight[missing completely at random] if they simply did not realize the pages were double-sided; they had no reason to ignore those questions
+- Then, the values for questions 16-20 for those people who did not respond would be .hlight[missing completely at random] if they simply did not realize the pages were double-sided; they had no reason to ignore those questions.
  
 --
  
@@ -268,7 +269,7 @@ Approach by design:
 - Using our previous example, suppose
   - questions 1-15 include demographic information such as age and education;
   - questions 16-20 include income related questions; and
-  - once again, some of the participants did not respond to questions 16-20
+  - once again, some of the participants did not respond to questions 16-20.
 
 --
   
@@ -289,7 +290,7 @@ Approach by design:
 - Continuing with our previous example, suppose again that
   - questions 1-15 include demographic information such as age and education;
   - questions 16-20 include income related questions; and
-  - once again, some of the participants did not respond to questions 16-20
+  - once again, some of the participants did not respond to questions 16-20.
 
 --
   
