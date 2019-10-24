@@ -13,7 +13,7 @@ output:
 ## Due dates
 
 - In-class presentations: 10:00 - 11:20am, Friday, November 1.
-- Final reports: 11:59pm, Sunday, November 3.
+- Final reports: 11:59pm, Monday, November 4.
 
 ## General instructions
 

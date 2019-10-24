@@ -133,12 +133,13 @@ lessons:
   - title: "PART  IV: DEALING WITH MESSY DATA"
     
   - date: "Thur, Oct 24"
-    title: "Missing values, errors, and outliers; single imputation methods"
+    title: "Missing data methods I"
+    slides: "lec-slides/16-missing-data-I.html"
   
   - title: "WEEK 10"
   
   - date: "Tue, Oct 29"
-    title: "Multiple imputation"
+    title: "Missing data methods II"
     
   - title: "PART  V: METHODS FOR CAUSAL INFERENCE"
     
