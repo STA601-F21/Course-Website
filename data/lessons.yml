@@ -135,6 +135,11 @@ lessons:
   - date: "Thur, Oct 24"
     title: "Missing data methods I"
     slides: "lec-slides/16-missing-data-I.html"
+    
+  - date: "Fri, Oct 25"
+    title: "Instructions for final project proposals"
+    project: "final-project-proposal.html"
+  
   
   - title: "WEEK 10"
   
