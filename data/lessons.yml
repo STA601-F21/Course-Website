@@ -140,11 +140,11 @@ lessons:
     title: "Instructions for final project proposals"
     project: "final-project-proposal.html"
   
-  
   - title: "WEEK 10"
   
   - date: "Tue, Oct 29"
     title: "Missing data methods II"
+    slides: "lec-slides/17-missing-data-II.html"
     
   - title: "PART  V: METHODS FOR CAUSAL INFERENCE"
     

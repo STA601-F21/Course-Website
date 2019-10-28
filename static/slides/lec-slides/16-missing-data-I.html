@@ -396,7 +396,7 @@ $$
 
 - Without missingness in `\(\boldsymbol{Y}\)`, the likelihood function is
 .block[
-`$$L(\boldsymbol{\beta},\sigma^2_\epsilon | \boldsymbol{Y}_{obs}) \propto f(\boldsymbol{Y}_{obs} | \boldsymbol{\beta},\sigma^2_\epsilon)$$`
+`$$L(\boldsymbol{\beta},\sigma^2_\epsilon | \boldsymbol{Y}_{obs}, \boldsymbol{X}) \propto f(\boldsymbol{Y}_{obs} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon)$$`
 ]
 
 --
@@ -405,7 +405,7 @@ $$
 .block[
 $$
 `\begin{split}
-L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs}, \boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
+L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs},\boldsymbol{X}, \boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} |\boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
 &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 \end{split}`
 $$
@@ -425,7 +425,7 @@ For MCAR, we have:
 .block[
 $$
 `\begin{split}
-f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
+f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{X},\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = \int f(\boldsymbol{R} | \boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{\theta}) \int f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{\theta}) f(\boldsymbol{Y}_{obs} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon). \\
@@ -439,7 +439,7 @@ That is, the likelihood function is
 .block[
 $$
 `\begin{split}
-L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs}, \boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
+L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs}, \boldsymbol{X}, \boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{\theta}) f(\boldsymbol{Y}_{obs} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon). \\
 \end{split}`
 $$
@@ -459,7 +459,7 @@ For MAR, we have:
 .block[
 $$
 `\begin{split}
-f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
+f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{X},\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta}) \int f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis} \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon). \\
@@ -473,7 +473,7 @@ That is, the likelihood function is
 .block[
 $$
 `\begin{split}
-L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs}, \boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
+L(\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta} | \boldsymbol{Y}_{obs}, \boldsymbol{X},\boldsymbol{R}) &amp; \propto f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{X},\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) \\
 &amp; = f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon). \\
 \end{split}`
 $$
@@ -492,7 +492,7 @@ For MNAR, we have:
 .block[
 $$
 `\begin{split}
-f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis}. \\
+f(\boldsymbol{Y}_{obs}, \boldsymbol{R} | \boldsymbol{X},\boldsymbol{\beta},\sigma^2_\epsilon,\boldsymbol{\theta}) &amp; = \int f(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{X},\boldsymbol{\theta}) f(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{X}, \boldsymbol{\beta},\sigma^2_\epsilon) \textrm{d}\boldsymbol{Y}_{mis}. \\
 \end{split}`
 $$
 ]
@@ -675,7 +675,7 @@ Plug in donors' observed values.
 ---
 ## Multiple imputation (MI)
 
-- Fill in data sets `\(m\)` times with imputations.
+- Fill in dataset `\(m\)` times with imputations.
 
 --
 
