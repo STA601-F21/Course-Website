@@ -631,7 +631,7 @@ methods(mice)
   
 --
  
-  + Draw a new $\beta^\star$ from the posterior predictive distribution of $\hat{\beta}$ (e.g, multivariate normal);
+  + Draw a new $\beta^\star$ from the posterior distribution of $\hat{\beta}$ (e.g, multivariate normal);
   
 --
  
