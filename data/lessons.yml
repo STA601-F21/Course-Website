@@ -149,7 +149,8 @@ lessons:
   - title: "PART  V: METHODS FOR CAUSAL INFERENCE"
     
   - date: "Thur, Oct 31"
-    title: "Association vs. causation; confounding"
+    title: "Introduction to causal inference"
+    slides: "lec-slides/18-causal-inference-I.html"
     
   - date: "Fri, Nov 1"
     title: "Lab 5: team project 2 presentations (reports due midnight on Sunday Nov 3)"
