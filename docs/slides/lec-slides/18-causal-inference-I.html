@@ -109,14 +109,14 @@ We do not have knowledge of a thing until we have grasped its why, that is to sa
 --
 
 - Causal relationship
-<div id="htmlwidget-e6896b1939be257ed8de" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e6896b1939be257ed8de">{"x":{"diagram":"\n\t        graph LR\n\t        W(Treatment)-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-723629c61567e0595780" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-723629c61567e0595780">{"x":{"diagram":"\n\t        graph LR\n\t        W(Treatment)-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
 
 --
 
 - Confounding
-<div id="htmlwidget-aaf5f1900b5a97ce3d9f" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aaf5f1900b5a97ce3d9f">{"x":{"diagram":"\n\t        graph TB\n\t        C(Confounder)-->W(Treatment)\n\t        C-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ccfa1d57db30f42c52c0" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ccfa1d57db30f42c52c0">{"x":{"diagram":"\n\t        graph TB\n\t        C(Confounder)-->W(Treatment)\n\t        C-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -434,7 +434,7 @@ To quote the Causal Inference book by Imbens and Rubin,
 
 
 ---
-## Interference
+## SUTVA: no interference
 
 - .hlight[Interference]: the potential outcome `\(Y_i(w)\)` where `\(w = 0,1\)` for an individual `\(i\)` depends on what treatment other people receive.
 
@@ -456,9 +456,9 @@ To quote the Causal Inference book by Imbens and Rubin,
 
 
 ---
-## Multiple versions of treatment
+## SUTVA: no hidden/multiple variations of treatment
 
-- .hlight[Multiple versions of treatment]: Sometimes the treatment `\(W\)` doesn't have a clear meaning, as it has many versions.
+- .hlight[Multiple variations of treatment]: Sometimes the treatment `\(W\)` doesn't have a clear meaning, as it has many versions.
 
 --
 
@@ -574,7 +574,11 @@ $$
 ---
 ## Assignment mechanism
 
-- The key identifying assumptions are on the assignment mechanism
+- The assignment mechanism describes how each individual actually came to receive each treatment level they actually received.
+
+--
+
+- Usually, this is the key piece of information that we key; thus, most key identifying assumptions in causal inference are on the assignment mechanism.
 
 --
 
@@ -587,6 +591,61 @@ $$
 --
 
 - In .hlight[observational studies], assignment mechanism is usually .hlight[unknown] and .hlight[uncontrolled].
+
+
+---
+## Example
+
+&lt;table&gt;
+  &lt;caption&gt;Medical example with two treatments, four units and SUTVA: Surgery (S) and Drug Treatment (D)&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Unit &lt;/th&gt;
+    &lt;th height="30px" colspan="2"&gt;Potential Outcomes&lt;/th&gt;
+    &lt;th&gt; Causal Effect &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt; &lt;/th&gt;
+    &lt;td height="30px" style="text-align:center" width="150px"&gt; Y&lt;sub&gt;i&lt;/sub&gt;(0) &lt;/td&gt;
+    &lt;td style="text-align:center" width="150px"&gt; Y&lt;sub&gt;i&lt;/sub&gt;(1) &lt;/td&gt;
+    &lt;td style="text-align:center" width="250px"&gt; Y&lt;sub&gt;i&lt;/sub&gt;(1) - Y&lt;sub&gt;i&lt;/sub&gt;(0) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="130px"&gt; Patient #1 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 1 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 7 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="100px"&gt; Patient #2 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 6 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 5 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; -1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="100px"&gt; Patient #3 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 1 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 5 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="100px"&gt;Patient #4 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 8 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 7 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; -1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="100px"&gt; &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td height="30px" style="text-align:center" width="100px"&gt; Average &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 4 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 6 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
 
 
 ---
@@ -694,6 +753,10 @@ $$
 
 ---
 ## Properties of assignment mechanisms
+
+- We will not all the  mathematical details on assignment mechanisms in this course.
+
+--
 
 - Use bold font to denote the vector of a variable of all sample units, e.g. `\(\boldsymbol{W} = (W_1, \ldots, W_N)\)`, `\(\boldsymbol{Y}(1) = (Y_1(1), \ldots, Y_N(1))\)`, and so on.
 
@@ -810,7 +873,7 @@ $$
 .block[
 .small[
 $$
-\mathbb{Pr}(Y(w)) = \mathbb{Pr}[Y^\textrm{obs}|W=w], \ \ \ \ w= 0,1.
+\mathbb{Pr}(Y_i(w)) = \mathbb{Pr}[Y_i^\textrm{obs}|W_i=w], \ \ \ \ w= 0,1.
 $$
 ]
 ]
@@ -821,7 +884,7 @@ $$
 .block[
 .small[
 $$
-\textrm{ATE} = \mathbb{E}[Y^\textrm{obs}|W=1] - \mathbb{E}[Y^\textrm{obs}|W=0].
+\textrm{ATE} = \mathbb{E}[Y_i^\textrm{obs}|W_i=1] - \mathbb{E}[Y_i^\textrm{obs}|W_i=0].
 $$
 ]
 ]
@@ -834,7 +897,7 @@ $$
 $$
 `\begin{split}
 \textrm{ATE} &amp; = \mathbb{E}[Y_i(1) - Y_i(0)] = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] \\
-&amp; = \mathbb{E}[Y^\textrm{obs}|W=1] - \mathbb{E}[Y^\textrm{obs}|W=0],
+&amp; = \mathbb{E}[Y_i^\textrm{obs}|W_i=1] - \mathbb{E}[Y_i^\textrm{obs}|W_i=0],
 \end{split}`
 $$
 ]
