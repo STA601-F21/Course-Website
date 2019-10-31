@@ -109,14 +109,14 @@ We do not have knowledge of a thing until we have grasped its why, that is to sa
 --
 
 - Causal relationship
-<div id="htmlwidget-723629c61567e0595780" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-723629c61567e0595780">{"x":{"diagram":"\n\t        graph LR\n\t        W(Treatment)-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b1d2a9b26625270e53e5" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b1d2a9b26625270e53e5">{"x":{"diagram":"\n\t        graph LR\n\t        W(Treatment)-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
 
 --
 
 - Confounding
-<div id="htmlwidget-ccfa1d57db30f42c52c0" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ccfa1d57db30f42c52c0">{"x":{"diagram":"\n\t        graph TB\n\t        C(Confounder)-->W(Treatment)\n\t        C-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e486787b6eca8f29e89c" style="width:2100px;height:180px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e486787b6eca8f29e89c">{"x":{"diagram":"\n\t        graph TB\n\t        C(Confounder)-->W(Treatment)\n\t        C-->Y(Outcome)\n\t        "},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -362,8 +362,8 @@ Applying the potential outcomes framework to this quotation:
   &lt;tr&gt;
     &lt;td height="30px" style="text-align:center" width="80px"&gt; you&lt;/td&gt;
     &lt;td style="text-align:center"&gt; 80 &lt;/td&gt;
-    &lt;td style="text-align:center"&gt; 25 &lt;/td&gt;
-    &lt;td style="text-align:center"&gt; 75 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; -55 &lt;/td&gt;
+    &lt;td style="text-align:center"&gt; -5 &lt;/td&gt;
     &lt;td style="text-align:center"&gt; -50 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
@@ -839,7 +839,7 @@ $$
 
 --
 
-- .hlight[Irregular assignment mechanisms]: an assignment mechanism is regular if
+- .hlight[Irregular assignment mechanisms]: an assignment mechanism is irregular if
   + instrumental variables (latent regular design)
   + regression discontinuity (the probabilistic assignment assumption is violated)
   + before/after control/treatment group designs or difference in differences methods
@@ -929,6 +929,12 @@ $$
 --
 
 - In observational studies, ATE is usually different from ATT and ATC.
+
+
+---
+## Acknowledgements
+
+These slides contain materials adapted from courses taught by Dr. Fan Li.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

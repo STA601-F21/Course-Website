@@ -388,8 +388,8 @@ Applying the potential outcomes framework to this quotation:
   <tr>
     <td height="30px" style="text-align:center" width="80px"> you</td>
     <td style="text-align:center"> 80 </td>
-    <td style="text-align:center"> 25 </td>
-    <td style="text-align:center"> 75 </td>
+    <td style="text-align:center"> -55 </td>
+    <td style="text-align:center"> -5 </td>
     <td style="text-align:center"> -50 </td>
   </tr>
 </table>
@@ -865,7 +865,7 @@ $$
 
 --
 
-- .hlight[Irregular assignment mechanisms]: an assignment mechanism is regular if
+- .hlight[Irregular assignment mechanisms]: an assignment mechanism is irregular if
   + instrumental variables (latent regular design)
   + regression discontinuity (the probabilistic assignment assumption is violated)
   + before/after control/treatment group designs or difference in differences methods
@@ -956,6 +956,11 @@ $$
 
 - In observational studies, ATE is usually different from ATT and ATC.
 
+
+---
+## Acknowledgements
+
+These slides contain materials adapted from courses taught by Dr. Fan Li.
 
 
 
