@@ -1,5 +1,5 @@
 ---
-title: "Readings for association vs. causation; confounding"
+title: "Readings for causal inference"
 output: 
   html_document:
     css: reading.css
@@ -15,6 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Book sections
 
+- [Basic Concepts of Statistical Inference for Causal Effects in Experiments
+and Observational Studies (course materials used in Quantitative Reasoning (QR) 33)](http://www.stat.columbia.edu/~cook/qr33.pdf) by Donald B. Rubin.
+
 <!-- - [Data Analysis Using Regression and Multilevel/Hierarchical Models](https://www.amazon.com/gp/product/052168689X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=052168689X&linkCode=as2&tag=andrsblog0f-20&linkId=PX5B5V6ZPCT2UIYV) by Gelman A., and Hill, J.: -->
 <!--     + Section 14: Multilevel logistic regression -->
 
@@ -23,6 +26,6 @@ knitr::opts_chunk$set(echo = TRUE)
 <!--     Download pdf versions of individual chapters, including this one, via Duke library [here](https://find.library.duke.edu/catalog/DUKE005142588). Let me know if you have trouble downloading the chapter. -->
 
 
-<!-- ### Articles -->
+### Articles
 
-<!-- - S.K. Sarkar, Habshah Midi and Sohel Rana, 2011, *[Detection of Outliers and Influential Observations in Binary Logistic Regression: An Empirical Study](https://scialert.net/fulltextmobile/?doi=jas.2011.26.35)*, Journal of Applied Sciences, 11: 26-35. -->
+- Donald B Rubin (2011), ["Causal Inference Using Potential Outcomes"](https://amstat.tandfonline.com/doi/abs/10.1198/016214504000001880#.XcBMAC-ZNTa), *Journal of the American Statistical Association*, 100:469, 322-331.
