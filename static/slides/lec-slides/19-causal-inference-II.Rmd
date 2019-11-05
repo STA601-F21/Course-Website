@@ -56,6 +56,11 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 - Modified office hours for Chenxi (this week only): 4.30-6.30 on Wed.
 
+- HW4 later today.
+
+- Second class survey later today.
+
+---
 ## Outline
 
 - Observational studies
@@ -63,8 +68,10 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 - Regression-based estimation
 
 - Balancing covariates
-  + Stratification
-  + Matching
+
+- Stratification
+
+- Matching
 
 
 ---
