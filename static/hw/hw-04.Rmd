@@ -14,7 +14,7 @@ output:
 
 ## Instructions
 
-This assignment involves missing data.
+This assignment involves missing data. Note that this is an individual assignment.
 <!-- The datasets (for question 2) can be found on Sakai: go to Resources $\rightarrow$ Datasets $\rightarrow$ Homework Datasets $\rightarrow$ Methods and Data Analysis 2.  -->
 Please type your solutions using R Markdown, LaTeX or any other word processor but be sure to knit or convert the final output file to ".pdf". Submissions should be made on gradescope: go to Assignments $\rightarrow$ Methods and Data Analysis 4.
 
