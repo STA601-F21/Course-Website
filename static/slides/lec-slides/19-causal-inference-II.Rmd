@@ -1,5 +1,5 @@
 ---
-title: "Observational studies: matching, weighting, regression, and propensity scores methods I"
+title: "Observational studies: regression, stratification and matching"
 author: "Dr. Olanrewaju Michael Akande"
 date: "Nov 5, 2019"
 output:
@@ -23,6 +23,8 @@ library(lattice)
 #library(ggplot2)
 #library(arm)
 library(DiagrammeR)
+library(MatchIt)
+library(cobalt)
 ```
 
 ```{r setup, include=FALSE}
@@ -48,747 +50,254 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 ## Announcements
 
-- Reminder: project presentations tomorrow at 10:00am. 
+- Reminder: project proposals are due at 11:59pm today.
 
-- Everyone should be in class by 9:55 at most.
+- Regrade requests for all assignments should be submitted via gradescope.
+
+- Modified office hours for Chenxi (this week only): 4.30-6.30 on Wed.
 
 ## Outline
 
-- Association vs. causation; confounding
+- Observational studies
 
-- Potential outcomes framework
+- Regression-based estimation
 
-- Causal estimands
-
-- Assignment mechanisms
-
-- Randomization vs observational studies
+- Balancing covariates
+  + Stratification
+  + Matching
 
 
 ---
 class: center, middle
 
-# Association vs. causation; confounding
+# Observational studies: setup, estimands and assumptions
 
-
----
-## Causality
-
---- 
-<i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
-<i class="fa fa-quote-right fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
-We do not have knowledge of a thing until we have grasped its why, that is to say, <font color="red">its cause</font>.
-
--- Aristotle, Physics
-
---
-
-</br>
-- Over the next few classes, we will discuss causal inference, specifically, we will focus on measuring the .hlight[effects of causes]. 
-
---
-
-- For today's class, we will simply lay the foundations for causal inference. We will get more into the actual methods in the next class.
-
----
-## Association vs. causation
-
-- In the models we have covered so far, our focus has been on inferring .hlight[associations] using samples drawn from our population of interest.
-
---
-
-- For example, we have been asking questions such as, do people who receive job training tend to earn more wages than people who do not?
-
---
-
-- Causal inference goes further as we try to infer aspects of the actual data generating process, that is, .hlight[causation].
-
---
-
-- For example, does receiving job training actually cause one to earn more wage than they would have without the training?
-
---
-
-- The additional information needed to move from association to causation is often provided by .hlight[causal assumptions] (often untestable).
-
---
-
-- Note: in most cases, .hlight[association does not imply causation]!
 
 
 ---
-## Confounding
+## Observational studies
 
-- Why is it that association does not often imply causation? .hlight[confounding variables or confounders]!
-
---
-
-- Causal relationship
-```{r echo=F, fig.height=0.6}
-mermaid("
-	        graph LR
-	        W(Treatment)-->Y(Outcome)
-	        ")
-```
+- We will not focus on randomized experiments since most of the data you will have to analyze in practice are actually based on observational studies.
 
 --
 
-- Confounding
-```{r echo=F, fig.height=0.6}
-mermaid("
-	        graph TB
-	        C(Confounder)-->W(Treatment)
-	        C-->Y(Outcome)
-	        ")
-```
+- Recall that in observational studies, we do not control or know the assignment mechanism.
+
+--
+
+- In addition, the presence of measured and unmeasured confounders can create unbalance between the groups.
+
+--
+
+- To do causal inference, we often have to make some structural (often untestable) assumptions, e.g. on the treatment assignment, for identifying causal effects.
+
+--
+
+- Once we have those general assumptions, we also usually have to make model assumptions to do the actual estimation.
 
 
 ---
-## Examples of confounding
+## Estimands
 
-- Ice cream consumption and number of people who drowned.  
-  .hlight[Confounder: temperature]; people tend to consume more ice cream and also swim more when it is hot.
-
---
-
-- Medical treatment and patient outcome.  
-  .hlight[Confounders: age, sex, other complications]
-  
---
-
-- Education and income.  
-  .hlight[Confounder: socio-economic status of family]
-  
---
-
-- An extreme example of confounding is Simpson’s paradox: where  a confounder reverses the sign of the correlation between treatment and outcome
-
-
----
-## Simpson's paradox
-
-
-- Example: kidney stone treatment (Charig et al., BMJ, 1986).
-  + Compare the success rates of two treatments for kidney stones
-  + Treatment A: open surgery; treatment B: small puncture
-
---
-
-<br />       | Treatment A | Treatment B   |
-:----------- | :--------- | :---------   |
-Small stones | <b>93%</b> (81/87) | 87% (234/270) |
-Large stones | <b>73%</b> (192/263) | 69% (55/80) |
-Both         | 78% (273/350) | <b>83%</b> (289/350) |
-
---
-
-  + What is the confounder here? Severity of the case/type of stones.
-  
-  
----
-## Simpson's paradox or Yule-Simpson effect
-
-- Simpson’s paradox: a trend appears in different groups of data but disappears or reverses when these groups are combined.
-
-```{r echo=FALSE, out.height="250px"}
-knitr::include_graphics("img/SimpsonsParadox.png")
-```
-
---
-
-- Mathematically, it is about conditioning.
-
---
-
-- Another well-known example is the Berkeley admission gender bias (Bickel et al., Science, 1976).
-
-
----
-## General notation
-
-- .hlight[W]: Treatment (e.g. job training); we will focus on binary treatments.
-
-- .hlight[Y]: Outcome (e.g. annual wages).
-
-- .hlight[X]: Observed predictors or confounders (e.g. age, education, etc).
-
-- .hlight[U]: Unobserved predictors or confounders.
-
-</br>
-
---
-
-- Examples of causal questions:
-  + Causal effect of exposure to a disease.
-  
-  + Comparative effectiveness research such as in clinical trials: whether one drug or medical procedure is better than the other.
-  
-  + Program evaluation in economics and policy.
-
-
----
-class: center, middle
-
-# Potential outcomes framework
-
-
----
-## Potential outcomes framework
-
-- The .hlight[potential outcomes framework] or the counterfactual framework or the Rubin Causal Model (RCM) is arguably the most widely used framework across many disciplines, e.g., medicine, health care, policy, social sciences.
-
---
-
-- Under this framework, causal inference is viewed as a problem of missing data with explicit mathematical modeling of the assignment mechanism as a process for revealing the observed data.
-
---
-
-- Rooted in the statistical work on randomized experiments by Fisher (1918, 1925) and Neyman (1923), as extended by Rubin (1974, 1976, 1977, 1978, 1990).
-
-
-
----
-## Potential outcomes framework
-
-- For a binary treatment, each individual gets exactly one or the two options, and we observe the corresponding response for that. 
-
---
-
-- Conceptually, under the potential outcomes framework, we think about what each individual's response should have been had they gotten the other treatment option instead of the one they actually got.
-
---
-
-- The individual causal effect then is the difference between the two "potential" outcomes, only one of which is observed.
-
---
-
-- Clearly, we never observe the two potential outcomes for any individual, making it natural to think of this as a missing data problem.
-
-
----
-## Potential outcomes framework
-
---- 
-<i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
-<i class="fa fa-quote-right fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
-If a person eats of a particular dish, and dies in consequence, that is, would not have died if he had not eaten of it, people would be apt to say that eating of that dish was the source of his death.
-
--- Philosopher and economist Mill (1973, pp.327)
-
-
----
-## Potential outcomes framework
-
-Applying the potential outcomes framework to this quotation:
-  + There are two treatments: 1="eat dish" and 0="not eat dish".
-  
---
-
-  + There are therefore two potential outcomes $Y(1)$ and $Y(0)$ for the same person.
-  
---
-
-  + The observed outcome here for $Y(1)$ is "death", so that $Y(0)$ is in fact, unobserved.
-  
---
-
-  + Mills appears to posit that if the alternate potential outcome $Y(1)$ is "not death", then one could conclude that eating the dish was the "cause" of the death.
-  
-
----
-## Potential outcomes framework
-
-- No causation without manipulation - "cause" must be (hypothetically speaking) something we can manipulate. e.g., intervention, action, treatment.
-
---
-
-- That is, gender, time and age are not well defined “causes" under the RCM.
-
---
-
-- Three integral components of the potential outcomes framework:
-  + .hlight[potential outcomes] corresponding to the various levels of a treatment.
-  
-  + .hlight[assignment mechanisms], that is, the treatment indicator for all observations.
-  
-  + a .hlight[model] for the science (the potential outcomes and covariates).
-
-
-
----
-## Potential outcomes framework: basic concepts
-
-- .hlight[Unit]: The person, place, or thing upon which a treatment will operate, at a particular time (note: A single person, place, or thing at two different times comprises two different units).
-
---
-
-- .hlight[Treatment]: An intervention, the effects of which (on some particular measurement of the units) the investigator wishes to assess relative to no intervention (i.e., the control).
-
---
-
-- .hlight[Potential Outcomes]: The values of a unit’s measurement of interest after (a) application of the treatment and (b) non-application of the treatment (i.e., under control).
-
---
-
-- .hlight[Causal Effect]: For each unit, the comparison of the potential outcome under treatment and the potential outcome under control.
-
-
----
-## Causal effects
-
-- For a single unit, let $Y(0)$ denote the outcome given the control treatment and $Y(1)$, the outcome given the active treatment.
-
---
-
-- For example, suppose $Y$ denotes a score (level of severity) for headache, then for a single unit, we could have
-
---
-
-<table>
-  <caption>Raw scores</caption>
-  <tr>
-    <th>Unit</th>
-    <th>Initial headache</th>
-    <th height="30px" colspan="2">Potential outcomes</th>
-    <th>Causal effect</th>
-  </tr>
-  <tr>
-    <th> </th>
-    <td height="30px" style="text-align:center" width="100px"> X </td>
-    <td style="text-align:center" width="100px"> Y(asp) </td>
-    <td style="text-align:center" width="100px"> Y(not) </td>
-    <td style="text-align:center" width="250px"> Y(asp) - Y(not) </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="80px"> you</td>
-    <td style="text-align:center"> 80 </td>
-    <td style="text-align:center"> 25 </td>
-    <td style="text-align:center"> 75 </td>
-    <td style="text-align:center"> -50 </td>
-  </tr>
-</table>
-
---
-
-<table>
-  <caption>Gain scores</caption>
-  <tr>
-    <th>Unit</th>
-    <th>Initial headache</th>
-    <th height="30px" colspan="2">Potential outcomes</th>
-    <th>Causal effect</th>
-  </tr>
-  <tr>
-    <th> </th>
-    <td height="30px" style="text-align:center" width="100px"> X </td>
-    <td style="text-align:center" width="100px"> Y(asp) - X </td>
-    <td style="text-align:center" width="100px"> Y(not) - X </td>
-    <td style="text-align:center" width="250px"> [Y(asp) - X] - [Y(not) - X] </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="80px"> you</td>
-    <td style="text-align:center"> 80 </td>
-    <td style="text-align:center"> -55 </td>
-    <td style="text-align:center"> -5 </td>
-    <td style="text-align:center"> -50 </td>
-  </tr>
-</table>
-
-
----
-## The fundamental problem of causal inference
-
-As mentioned before,
-
-- The fundamental problem of causal inference: we can observe at most one of the potential outcomes for each unit.
-
---
-
-- Causal inference under the potential outcome framework is essentially a missing data problem.
-
---
-
-- To identify causal effects from observed data, under any mathematical framework, one must make assumptions (structural or/and stochastic)
-
---
-
-- Since we can at most observe a single potential outcome, we must rely on multiple units (and a lot of assumptions) to make causal inferences.
-
-
----
-## The stable unit treatment value assumption (SUTVA)
-
-To quote the Causal Inference book by Imbens and Rubin,
-
-- In many situations, it may be reasonable assume that treatments applied to one unit do not affect the outcome of another unit.
-
---
-
-- For example, if we are in different locations and have no contact with each other, it would appear reasonable to assume that whether you take an aspirin has no effect on the status of my headache.
-
---
-
-- .hlight[SUTVA] incorporates both this idea that units do not interfere with one another and the concept that for each unit, there is only a single version of each treatment (ruling out, in this case, that a particular individual could take aspirin tablets of varying efficacy).
-
---
-
-- Formally, we have....
-
-
----
-## SUTVA
-
-- .hlight[SUTVA] 
-
-   .block[The potential outcomes for any unit do not vary with the treatments assigned to other units, and for each unit, there are no different forms or versions of each treatment level, which lead to different potential outcomes.]
-
---
-
-- Mathematically, SUTVA $\Rightarrow$
-  + If $W_i = 1$, then $Y_i = Y_i(1)$
-  + If $W_i = 0$, then $Y_i = Y_i(0)$
-  
-  Seems trivial but may not hold
-
---
-  
-- SUTVA includes two assumptions: (1) no interference, (2) no different versions of a treatment
-
-<!-- -- -->
-
-<!-- - Also know as .hlight[consistency] -->
-
-
----
-## SUTVA: no interference
-
-- .hlight[Interference]: the potential outcome $Y_i(w)$ where $w = 0,1$ for an individual $i$ depends on what treatment other people receive.
-
---
-
-- SUTVA assumes we can't have this problem.
-
---
-
-- Examples: infectious diseases, social networks, agricultural experiments.
-
---
-
-- That is, there are lots of possible $Y_i(w)$ *depending on what happens to other people*.
-
---
-
-- When in the presence of interference, other assumptions required for causal inference (e.g., Rosebaum 2007; Hudgens and Hollaran 2008)
-
-
----
-## SUTVA: no hidden/multiple variations of treatment
-
-- .hlight[Multiple variations of treatment]: Sometimes the treatment $W$ doesn't have a clear meaning, as it has many versions.
-
---
-
-- SUTVA also assumes we can't have this problem.
-
---
-
-- For example, suppose two people need to take one aspirin tablet each.
-
---
-
-- However, suppose that one of the tablets is old and no longer contains an effect dose, whereas the other is new and at full strength.
-
---
-
-- In that case, each person may now have three treatments available, and we can now think of there being three potential outcomes for each person.
-
---
-
-- There are lots of possible $Y_i(w)$ values depending on what version of $W$ gets selected.
-
-
----
-## Basic setup
-
-- .hlight[Target population]: a well-defined population of individuals whose outcomes are going to be compared
-
---
-
-- .hlight[Data]: a random sample of $N$ units from a target population.
-
---
-
-- A treatment with two levels: $w = 0,1$.
-
---
-
-- For each unit $i$, we observe 
-  + the binary treatment status $W_i \in \{0,1\}$, 
-  
-  + a vector of $p$ predictors/covariates $X_i = (X_{i1}, \ldots, X_{ip})$, and 
-  
-  + an outcome $Y_i^{\text{obs}}$.
-
-
----
-## Basic setup
-
-- For each unit $i$, there are two potential outcomes $(Y_i(0),Y_i(1))$.
-
---
-
-- That is, the outcomes under the two values of the treatment, at most one of which is observed.
-
---
-
-- Potential outcomes and assignments jointly determine the values of the observed outcomes
-.block[
-$$
-Y_i^{\text{obs}} \equiv Y_i(W_i) = W_i \cdot Y_i(1) + (1-W_i) \cdot Y_i(0)
-$$
-]
-
---
-
-  and the missing outcomes:
-.block[
-$$
-Y_i^{\text{mis}} \equiv Y_i(1-W_i) = (1-W_i) \cdot Y_i(1) + W_i \cdot Y_i(0)
-$$
-]
-
----
-## Causal estimands
+Once again, we will focus on the following estimands:
 
 - The .hlight[average treatment effect (ATE)]:
 .block[
+.small[
 $$
 \tau = \mathbb{E}[Y_i(1) - Y_i(0)].
 $$
+]
 ]
 
 --
 
 - The .hlight[average treatment effect for the treated (ATT)]:
 .block[
+.small[
 $$
 \tau = \mathbb{E}[Y_i(1) - Y_i(0) | W_i = 1].
 $$
+]
 ]
 
 --
 
 - The .hlight[average treatment effect for the control (ATC)]:
 .block[
+.small[
 $$
 \tau = \mathbb{E}[Y_i(1) - Y_i(0) | W_i = 0].
 $$
+]
 ]
 
 --
 
 - For binary outcomes, .hlight[causal odds ratio (OR) or risk ratio (RR):]:
 .block[
+.small[
 $$
 \tau = \dfrac{\mathbb{Pr}[Y_i(1) = 1]/\mathbb{Pr}[Y_i(1) = 0]}{\mathbb{Pr}[Y_i(0) = 1]/\mathbb{Pr}[Y_i(0) = 0]}.
 $$
 ]
-
-- Obviously these estimands are not identifiable without further assumptions.
-
-
----
-## Assignment mechanism
-
-- The assignment mechanism describes how each individual actually came to receive each treatment level they actually received.
-
---
-
-- Usually, this is the key piece of information that we key; thus, most key identifying assumptions in causal inference are on the assignment mechanism.
-
---
-
-- .hlight[Assignment mechanism]: the probabilistic rule that decides which unit gets assigned to which treatment.
-
---
-
-- In .hlight[randomized experiments], assignment mechanism is usually .hlight[known] and .hlight[controlled] by investigators.
-
---
-
-- In .hlight[observational studies], assignment mechanism is usually .hlight[unknown] and .hlight[uncontrolled].
+]
 
 
 ---
-## Example
+## Estimands
 
-<table>
-  <caption>Medical example with two treatments, four units and SUTVA: Surgery (S) and Drug Treatment (D)</caption>
-  <tr>
-    <th> Unit </th>
-    <th height="30px" colspan="2">Potential Outcomes</th>
-    <th> Causal Effect </th>
-  </tr>
-  <tr>
-    <th> </th>
-    <td height="30px" style="text-align:center" width="150px"> Y<sub>i</sub>(0) </td>
-    <td style="text-align:center" width="150px"> Y<sub>i</sub>(1) </td>
-    <td style="text-align:center" width="250px"> Y<sub>i</sub>(1) - Y<sub>i</sub>(0) </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="130px"> Patient #1 </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> 7 </td>
-    <td style="text-align:center"> 6 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px"> Patient #2 </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> 5 </td>
-    <td style="text-align:center"> -1 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px"> Patient #3 </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> 5 </td>
-    <td style="text-align:center"> 4 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">Patient #4 </td>
-    <td style="text-align:center"> 8 </td>
-    <td style="text-align:center"> 7 </td>
-    <td style="text-align:center"> -1 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px"> </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px"> Average </td>
-    <td style="text-align:center"> 4 </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> 2 </td>
-  </tr>
-</table>
-
-
----
-## Example
-
-<table>
-  <tr>
-    <th> </th>
-    <th height="30px" colspan="2">Potential Outcomes</th>
-    <th> </th>
-    <th height="30px" colspan="3">Observed Data</th>
-  </tr>
-  <tr>
-    <th> </th>
-    <td height="30px" style="text-align:center" width="100px"> Y(0) </td>
-    <td style="text-align:center" width="100px"> Y(1) </td>
-    <td style="text-align:center" width="100px">  </td>
-    <td style="text-align:center" width="100px"> W </td>
-    <td height="30px" style="text-align:center" width="100px"> Y(0) </td>
-    <td style="text-align:center" width="100px"> Y(1) </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 13 </td>
-    <td style="text-align:center"> 14 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> ? </td>
-    <td style="text-align:center"> 14 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> ? </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 4 </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> 4 </td>
-    <td style="text-align:center"> ? </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 5 </td>
-    <td style="text-align:center"> 2 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> 5 </td>
-    <td style="text-align:center"> ? </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> 3 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> ? </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 0 </td>
-    <td style="text-align:center"> 6 </td>
-    <td style="text-align:center"> ? </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 8 </td>
-    <td style="text-align:center"> 10 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> ? </td>
-    <td style="text-align:center"> 10 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px">  </td>
-    <td style="text-align:center"> 8 </td>
-    <td style="text-align:center"> 9 </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 1 </td>
-    <td style="text-align:center"> ? </td>
-    <td style="text-align:center"> 9 </td>
-  </tr>
-  <tr>
-    <td height="30px" style="text-align:center" width="100px"> True averages </td>
-    <td style="text-align:center"> 7 </td>
-    <td style="text-align:center"> 5 </td>
-    <td style="text-align:center"> Observed averages </td>
-    <td style="text-align:center"> </td>
-    <td style="text-align:center"> 5.4 </td>
-    <td style="text-align:center"> 11 </td>
-  </tr>
-</table>
-
-
----
-## Properties of assignment mechanisms
-
-- We will not all the  mathematical details on assignment mechanisms in this course.
+- The relationship between ATE, ATT and ATC is given by
+.block[
+.small[
+$$
+\textrm{ATE} = \mathbb{Pr}[W_i = 1] \cdot \textrm{ATT} + \mathbb{Pr}[W_i = 0] \cdot \textrm{ATC}
+$$
+]
+]
 
 --
 
-- Use bold font to denote the vector of a variable of all sample units, e.g. $\boldsymbol{W} = (W_1, \ldots, W_N)$, $\boldsymbol{Y}(1) = (Y_1(1), \ldots, Y_N(1))$, and so on.
+- In randomized experiments, ATT is equivalent to ATC because treatment and control groups are similar/comparable.
 
 --
 
-- .hlight[Probabilistic assignment]: an assignment mechanism is probabilistic if for all $i$, and all $\boldsymbol{X}$, $\boldsymbol{Y}(0)$ and $\boldsymbol{Y}(1)$, the probability of assignment is strictly between 0 and 1. That is,
+- ATE is then also equivalent to ATT (and ATC).
+
+--
+
+- In observational studies, ATE is usually different from ATT and ATC.
+
+--
+
+- The above relation does not hold for ratio estimands.
+
+
+---
+## Assumptions: unconfoundedness
+
+We will need two major assumptions (in addition to SUTVA). 
+
+--
+
+Assumption 1: .hlight[Unconfoundedness]
+
+.block[
+.small[
+$$
+\{Y_i(0), Y_i(1)\} \perp W_i | X_i,
+$$
+]
+]
+
+  or using the equivalent form from last class,
+.block[
+.small[
+$$
+\mathbb{Pr}[W_i = 1 | X_i, Y_i(0), Y_i(1)] = \mathbb{Pr}[W_i = 1 | X_i]
+$$
+]
+]
+
+--
+
+- Assumes that within subpopulations defined by values of observed covariates, the treatment assignment is random.
+
+--
+
+- Rules out unobserved confounders (assumption of “no unmeasured confounders"). 
+
+--
+
+- Randomized experiments satisfy unconfoundedness. 
+
+--
+
+- Untestable in most observational studies, but sensitivity can be checked.
+
+
+
+---
+## Implications of unconfoundedness
+
+- Under unconfoundedness, it turns out that
+.block[
+.small[
+$$
+\mathbb{Pr}[Y(w) | X] = \mathbb{Pr}[Y^{\text{obs}} | X, W =w] \ \ \ \ w = 0,1.
+$$
+]
+]
+
+--
+
+- That is, the observed distribution of $Y$ in treatment arm $W = w$ equals the distribution of the potential outcomes $Y(w)$.
+
+--
+
+   <div class="question">
+Why does this matter or how does this help us?
+</div>
+
+--
+
+- Well, the causal estimands are essentially expectations and probabilities.
+
+--
+
+- From probability theory, we know that we need to know the distribution of the potential outcomes $Y(w)$ to calculate the estimands.
+
+
+
+---
+## Implications of unconfoundedness
+
+- Under unconfoundedness, we are able to therefore estimate the causal estimands from the observed data.
+  
+--
+
+- Recall again that ATE is
+.block[
+.small[
+$$
+\textrm{ATE} = \mathbb{E}[Y_i(1) - Y_i(0)].
+$$
+]
+]
+  
+--
+
+- ATE can then be estimated from the observed data using
+.block[
+.small[
+$$
+\textrm{ATE} = \mathbb{E}_X\left(\mathbb{E}[Y^{\text{obs}} | X, W =1] - \mathbb{E}[Y^{\text{obs}} | X, W =0]\right).
+$$
+]
+]
+
+--
+
+- Note that we need to average out over the distribution of $X$ since the original formula for ATE does not depend on any $X$.
+
+
+
+---
+## Assumptions: overlap
+
+Assumption 2: .hlight[Overlap (or positivity)]
+
+.block[
+.small[
+$$
+0 < \mathbb{Pr}[W_i = 1 | X_i] < 1, \ \ \ \textrm{for all}\ \ \ i.
+$$
+]
+]
+  
+--
+
+- Notice that this is the probabilistic assignment from last class, that is,
 .block[
 .small[
 $$
@@ -799,168 +308,599 @@ $$
 
 --
 
-- .hlight[Local independence]: assignment probabilities do not depend on pre-treatment variables or potential outcomes for other units, that is, suppose $\boldsymbol{X}^\star = \boldsymbol{X}_{-i}$, $\boldsymbol{Y}^\star(0) = \boldsymbol{Y}_{-i}(0)$, and $\boldsymbol{Y}^\star(1) = \boldsymbol{Y}_{-i}(1)$,
+- However, we can exclude $\{Y_i(0), Y_i(1)\}$ now because of the unconfoundedness assumption.
+
+--
+
+- .block[
+.small[
+$$
+e(x) = \mathbb{Pr}[W_i = 1 | X_i = x]
+$$
+]
+]
+
+  is usually called the .hlight[propensity score].
+
+
+---
+## Implications of overlap
+
+- Overlap implies that, in large samples, for all possible values of the covariates, there are both treated and control units.
+
+--
+
+- This is important within the potential outcomes (or counterfactual) framework both conceptually and operationally (variance inflation).
+
+--
+
+- Unlike unconfoundedness, overlap can be directly checked from the data often using the estimated propensity scores.
+
+--
+
+- Unconfoundedness and positivity jointly define the .hlight[strong ignorability] assumption.
+
+
+---
+class: center, middle
+
+# Regression-based estimation
+
+
+---
+## Estimation: regression-based
+
+- With those assumptions, we can move on to estimation.
+
+--
+
+- Clearly, we need to adjust for any difference in the outcomes due to the differences in pre-treatment characteristics.
+
+--
+
+- Commonly via a regression model for the potential outcome on covariates
+
+--
+
+- However,
+  1. validity of the analysis critically relies on the validity of the unconfoundedness assumption (which, remember is untestable); and
+  2. usually, model parameters do not directly correspond to the causal estimand of interest.
+
+
+---
+## Estimation: regression-based
+
+- For example, consider two regressions, one for each potential outcome. Write the mean functions as
+.block[
+.small[
+$$\mathbb{E}[Y(1) | X=x] = \mu_1(x), \ \ \ \mathbb{E}[Y(0) | X=x] = \mu_0(x).$$
+]
+]
+
+  notice that this need not be two completely separate regressions, but could be a regression with $W$ included as a predictor.
+
+--
+
+- Let $\hat{\mu}_w(X_i)$ denote the fitted potential outcome for $Y_i(w)$ based on the regression models.
+
+--
+
+- For ATE, the covariate-adjusted estimator is then 
+.block[
+.small[
+$$\hat{\tau}_{\textrm{adj}} = \sum^N_{i=1} \dfrac{W_i (Y_i^{\text{obs}} - \hat{\mu}_0(X_i)) + (1-W_i) (\hat{\mu}_1(X_i) - Y_i^{\text{obs}}) }{N}$$
+]
+]
+ 
+--
+ 
+- Unlike randomized experiments, the estimator is .hlight[not consistent] if the linear model is misspecified.
+
+
+---
+## Estimation: regression-based
+
+- Variance can be estimated using bootstrap.
+
+--
+
+- Note that regression itself does not take the lack of overlap into account.
+
+--
+
+- If the imbalance of the covariates between the two groups is large, the model-based results heavily relies on extrapolation in the non-overlap region, which is sensitive to the model specification assumption.
+
+--
+
+- .hlight[Take away]: Regression (or any model) here comes with a package. You need to know and acknowledge what
+assumptions—explicit or implicit—come with that model.
+
+
+
+---
+## Strategies for mitigating model dependence
+
+- To mitigate model dependence in the case of linear regression, there are two general strategies
+  1. Attempt to fix the design - balance covariates
+  2. Use more flexible model for analysis
+  
+--
+
+- Best strategy is to actually use both jointly: first balance covariates in the design stage, then use flexible models in the analysis stage.
+
+--
+
+- However, in this class, we will not cover the kind of flexible models that would help, so we will focus on balancing the predictors/covariates instead.
+
+
+---
+## Strategies for mitigating model dependence
+
+- .hlight[Covariate balance] (our focus)
+  + Stratification
+  + Matching
+  + Propensity score methods
+ 
+--
+ 
+- .hlight[Flexible models] (we won't cover these)
+  + Semiparametric models (e.g., power series)
+  + Machine learning methods (e.g., tree-based methods (CART, random forest), boosting)
+  + Bayesian non-and semi parametric models (e.g., Gaussian Processes, BART, Dirichlet Processes mixtures)
+  
+  
+  
+---
+class: center, middle
+
+# Covariate balance
+
+
+
+---
+## Covariate balance
+
+- Under strong ignorability, valid causal inference can be obtained by comparing the observed distributions of $Y$ under treatment and control if the covariates are "balanced".
+
+--
+
+- Thus, a good practice is always to first check balance. That is, how similar are the two groups?
+
+--
+
+- What metric to use? The most common one is the .hlight[absolute standardized difference (ASD)]:
+.block[
+.small[
+$$\textrm{ASD}_1 = \dfrac{\left| \dfrac{\sum_{i=1}^N X_iW_i}{N_1} - \dfrac{\sum_{i=1}^N X_i(1-W_i)}{N_0}  \right|}{\sqrt{\dfrac{s^2_1}{N_1} + \dfrac{s^2_0}{N_0}}},$$
+]
+]
+
+  where $s^2_w$ is the sample variance of the covariate in group $w$ for $w = 0,1$, $N_1 = \sum_{i=1}^N W_i$, and $N_0 = \sum_{i=1}^N (1-W_i)$.
+
+
+---
+## Covariate balance
+
+- For a continuous covariate, $\textrm{ASD}_1$ is the standard two-sample t-statistic, and the threshold is based on a t- or z- test (e.g. 1.96).
+
+--
+
+- There is some debate on whether $N_1$ and $N_0$ should be in the denominator.
+
+--
+
+- In some disciplines, the ASD is defined as
+.block[
+.small[
+$$\textrm{ASD}_2 = \dfrac{\left| \dfrac{\sum_{i=1}^N X_iW_i}{N_1} - \dfrac{\sum_{i=1}^N X_i(1-W_i)}{N_0}  \right|}{\sqrt{s^2_1 + s^2_0}}.$$
+]
+]
+
+--
+
+- The common threshold is 0.1.
+
+--
+
+- Limitation of ASD: only on the difference in means (1st moments), can not capture difference in higher order moments and interactions.
+
+
+
+---
+## Covariate balance
+
+- More general, multivariate, balance metrics are available.
+
+--
+
+- R package for balance assessment: `cobalt`.
+
+--
+
+- `cobalt` generates customizable balance tables, plots (marginal distribution and Love plots) for covariates, with balance metrics.
+
+--
+
+- Besides checking marginal balance, it is always good to also check higher order terms and interactions.
+
+--
+
+- However, most times ASD is still the only balance metric checked in practice...
+
+
+---
+## The minimum wage analysis
+
+- In 1992, New Jersey decided to raise it’s minimum wage from $4.25 an hour to $5.05 an hour. 
+
+--
+
+- What was the .hlight[causal effect] of this decision on employment in the fast food industry?
+
+--
+
+- To study this, economists from Princeton collected data from fast food restaurants along the New Jersey - Pennsylvania border, with the Pennsylvania restaurants acting as a control group for the New Jersey restaurants.
+
+--
+
+- They also collected data on several covariates for the restaurants. 
+
+--
+
+- The outcome is the employment rate after the minimum wage was raised in New Jersey.
+
+--
+
+- For more information, see the NY Times article [Supersize My Wage](https://www.nytimes.com/2013/12/22/magazine/supersize-my-wage.html?pagewanted=all&_r=0).
+
+
+---
+## The minimum wage analysis
+
+- The data is in the file `MinimumWageData.csv` on Sakai.
+
+  .small[
+Variables    | Description
+:------------- | :------------
+NJ.PA | indicator for which state the restaurant is in (1 if NJ, 0 if PA)
+EmploymentPre | measures employment for each restaurant before the minimum wage raise in NJ
+EmploymentPost | measures employment for each restaurant after the minimum wage raise in NJ
+WagePre | measures the hourly wage for each restaurant before the minimum wage raise
+BurgerKing | indicator for Burger King
+KFC | indicator for KFC
+Roys | indicator for Roys
+Wendys | indicator for Wendys
+]
+
+
+---
+## The minimum wage analysis
+
+```{r}
+MinWage <- read.csv("data/MinimumWageData.csv",header=T,
+                    colClasses=c("factor","numeric","numeric","numeric",
+                                 "factor","factor","factor","factor"))
+str(MinWage)
+head(MinWage)
+```
+
+
+---
+## The minimum wage analysis
+
+```{r}
+summary(MinWage[,c(2:4)])
+summary(MinWage[,-c(2:4)])
+```
+
+
+---
+## The minimum wage analysis
+
+Let's examine covariate balance. First, summarize covariates by NJ and PA.
+```{r}
+summary(MinWage[MinWage$NJ.PA == 0, 3:8]) #first PA
+summary(MinWage[MinWage$NJ.PA == 1, 3:8]) #now NJ
+```
+
+
+---
+## The minimum wage analysis
+
+Using the `bal.tab` function in the `cobalt` package, we have
+```{r}
+bal.tab(list(treat=MinWage$NJ.PA,covs=MinWage[,3:8],estimand="ATE"))
+```
+
+--
+
+The distribution of prior employment is not well balanced across groups; other variables are pretty close, but we might be able to do better.
+
+---
+## The minimum wage analysis
+
+Can also use `love.plot` instead.
+
+```{r fig.height=3.5}
+love.plot(list(treat=MinWage$NJ.PA,covs=MinWage[,3:8],estimand="ATE"),stars = "std")
+```
+
+
+---
+## Balancing covariates: small number of covariates
+
+- When the number of covariates is small, the adjustment can be achieved by exact matching or stratification.
+
+--
+
+- Exact matching: for each treated subject, get a control with the exact same value of the covariates (easier for categorical covariates).
+
+--
+
+- Exact matching ensures distributions of covariates in treatment and control groups are exactly the same, thus eliminating bias due to difference in $X$.
+
+--
+
+- Exact matching is usually unfeasible, even with low dimensional covariates.
+
+
+---
+## Stratification
+
+- Suppose we have a single covariate $X$ with $k$ levels (e.g. race), where $X$ makes the assignment mechanism ignorable.
+
+--
+
+- Even better if we assume unconfoundness. Again, remember that unconfoundness means that
 .block[
 .small[
 $$
-\mathbb{Pr}[W_i = 1 | X_i, Y_i(0), Y_i(1), \boldsymbol{X}^\star,\boldsymbol{Y}^\star(0),\boldsymbol{Y}^\star(1)] = \mathbb{Pr}[W_i = 1 | X_i, Y_i(0), Y_i(1)].
+\{Y_i(0), Y_i(1)\} \perp W_i | X_i.
 $$
+]
+]
+
+--
+
+- Suppose we want to estimate ATE.
+
+--
+
+- Let
+  + $n_k$ be the number of observations with $X_i = k$; and
+  + $\bar{Y}_{k,w}$ be the sample average of all $Y_i$ values among observations in cell $X_i = k$ and $W_i = w$.
+
+--
+
+- Once again, recall that ATE is $\tau = \mathbb{E}[Y_i(1) - Y_i(0)]$.
+
+
+---
+## Stratification
+
+- Then we have
+.block[
+.small[
+$$
+\mathbb{E}[Y_i(1)] = \sum_k \mathbb{E}[Y_i | X_i = k, W_i = 1] \cdot \mathbb{Pr}[X_i = k],
+$$
+]
+]
+
+--
+
+  and
+.block[
+.small[
+$$
+\mathbb{E}[Y_i(0)] = \sum_k \mathbb{E}[Y_i | X_i = k, W_i = 0] \cdot \mathbb{Pr}[X_i = k].
+$$
+]
+]
+
+--
+
+- We can then estimate $\mathbb{E}[Y_i(1)]$ using a consistent estimator $\sum_k \bar{Y}_{k,1} \dfrac{n_k}{N}$. We can use a similar estimand for $\mathbb{E}[Y_i(0)]$.
+
+--
+
+- Therefore, the ATE $\tau$ can be estimated by 
+.block[
+.small[
+$$\hat{\tau} = \sum_k \left(\bar{Y}_{k,1} - \bar{Y}_{k,0} \right) \dfrac{n_k}{N}.$$
 ]
 ]
 
 
 ---
-## Properties of assignment mechanisms
+## Stratification
 
-- .hlight[Ignorable assignment]: an assignment mechanism is ignorable if the assignment mechanism does not depend on the missing outcomes:
+- What if $X$ is continuous?
+
+--
+
+- Stratification (subclassification): split $X$ into $k$ classes.
+
+--
+
+- Then, for class $k$, define $n_k$ and $\bar{Y}_{k,w}$ as before.
+
+--
+
+- An estimator of $\tau$ is then once again
 .block[
 .small[
-$$
-\mathbb{Pr}[W_i = 1 | X_i, Y_i(0), Y_i(1)] = \mathbb{Pr}[W_i = 1 | X_i, Y_i^{\text{obs}}].
-$$
+$$\hat{\tau}^k = \sum_k \left(\bar{Y}_{k,1} - \bar{Y}_{k,0} \right) \dfrac{n_k}{N}.$$
 ]
 ]
 
 --
 
-- .hlight[Unconfounded assignment]: an assignment mechanism is unconfounded if the assignment mechanism does not depend on the potential outcomes:
-.block[
-.small[
-$$
-\mathbb{Pr}[W_i = 1 | X_i, Y_i(0), Y_i(1)] = \mathbb{Pr}[W_i = 1 | X_i].
-$$
-]
-]
-
---
-
-- Note that:
-  + An unconfounded assignment is ignorable
-  
-  + An ignorable assignment may be confounded
+- $\hat{\tau}^k$ is generally biased for $\tau$, however, stratification of over 5 blocks can remove 90% of the bias!
 
 
 ---
-## Classification of assignment mechanisms
+## Nearest-neighbor matching
 
-- .hlight[Randomized experiments]: a randomized experiment is an assignment mechanism such that
-  + the assignment mechanism is ignorable
-  
-  + the assignment mechanism is probabilistic
-  
-  + the assignment mechanism is a known function of its arguments
+- Regression estimators impute the missing potential outcomes using the estimated regression function.
+
+--
+
+- Matching estimators also impute the missing potential outcomes, but do so using only the outcomes of nearest neighbors of the opposite treatment group.
+
+--
+
+- They have often (but not exclusively) been applied in settings where
+  + the interest is in the ATT; and
+  + there is a large reservoir of potential controls. This allows matching each treated unit to one or more distinct controls (matching without replacement).
   
 --
 
-- .hlight[Observational studies]: an assignment mechanism corresponds to an observational study if it is an unknown function of its arguments.
+- More general settings: both treated and control units are (potentially) matched and matching is done with replacement.
 
 
 ---
-## Classification of assignment mechanisms
+## Matching (fixed number of matches)
 
-- .hlight[Regular assignment mechanisms]: an assignment mechanism is regular if
-  + the assignment mechanism is ignorable
-  + the assignment is probabilistic
-  + the assignment mechanism is locally independent
+- Let $\cal{M}_i$ be the set of the indices of $M$ closest matches of unit $i$ using a distance metric that depends on $X$.
 
 --
 
-- .hlight[Irregular assignment mechanisms]: an assignment mechanism is irregular if
-  + instrumental variables (latent regular design)
-  + regression discontinuity (the probabilistic assignment assumption is violated)
-  + before/after control/treatment group designs or difference in differences methods
-
-
----
-## The role of randomization
-
-- In randomized experiments, assignment mechanism is known and controlled by investigators
-
---
-
-- Randomization gives us the following:
-  + balanced observed covariates: $W \perp \!\!\! \perp X$.
-  
-  + balanced unobserved covariates: $W \perp \!\!\! \perp U$.
-  
-  + balanced potential outcomes, i.e. guarantees ignorability or unconfoundedness (Rubin 1978) $W \perp \!\!\! \perp (Y(1),Y(0))$.
-
-  where the $\perp \!\!\! \perp$ symbol represents independence.
-
---
-  
-- In other words, randomization ensures that the treated and control groups are actually similar in both observed and predictors, so that whatever difference we see in their response values can be attributed to the treatment.
-
-
----
-## The role of randomization
-
-- Under randomization, causal effects are (nonparametrically) identified, because we can show
-.block[
-.small[
-$$
-\mathbb{Pr}(Y_i(w)) = \mathbb{Pr}[Y_i^\textrm{obs}|W_i=w], \ \ \ \ w= 0,1.
-$$
-]
-]
-
---
-
-- Thus, under randomization, .hlight[association does imply causation] (of course within the potential outcome framework and with assumptions), for example. 
-.block[
-.small[
-$$
-\textrm{ATE} = \mathbb{E}[Y_i^\textrm{obs}|W_i=1] - \mathbb{E}[Y_i^\textrm{obs}|W_i=0].
-$$
-]
-]
-
---
-
-  since 
+- Let  
 .block[
 .small[
 $$
 \begin{split}
-\textrm{ATE} & = \mathbb{E}[Y_i(1) - Y_i(0)] = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] \\
-& = \mathbb{E}[Y_i^\textrm{obs}|W_i=1] - \mathbb{E}[Y_i^\textrm{obs}|W_i=0],
+\hat{Y}_i(0) & = \sum_{i \in \cal{M}_i} \dfrac{Y_j}{M} \ \ \ \textrm{if} \ \ \ W_i = 1 \ \ \ \textrm{and} \ \ \ \hat{Y}_i(0) = Y_i \ \ \ \textrm{if} \ \ \ W_i = 0; \\
+\hat{Y}_i(1) & = Y_i \ \ \ \textrm{if} \ \ \ W_i = 1 \ \ \ \textrm{and} \ \ \ \hat{Y}_i(1) = \sum_{i \in \cal{M}_i} \dfrac{Y_j}{M} \ \ \ \textrm{if} \ \ \ W_i = 0.
 \end{split}
 $$
 ]
 ]
 
-  using the identification result above.
+--
+
+- Then, the treatment effect within a pair is estimated as the difference in outcomes, and then we can average these within-pair differences.
+
+--
+
+- That is,
+.block[
+.small[
+$$
+\begin{split}
+\hat{\tau}^{\textrm{ATE}} & = \sum_i \dfrac{\hat{Y}_i(1) - \hat{Y}_i(0) }{N}; \\
+\hat{\tau}^{\textrm{ATT}} & = \sum_i \dfrac{\left(Y_i - \hat{Y}_i(0)\right)W_i }{N_i}. \\
+\end{split}
+$$
+]
+]
+
+
+---
+## Matching (fixed number of matches)
+
+- Pros: Matching estimators that ensure good balance in covariates between groups are generally robust.
+
+--
+
+- Cons: With fixed number of matches and matching with replacement, the NN matching estimators are generally biased.
+
+--
+
+- Matching estimators are generally not efficient, estimators combining matching and regression adjustment are usually more efficient.
+
+--
+
+- There can be residual imbalance in matching.
+
+--
+
+- Perform bias correction via regression on the matched sample.
+
+
+---
+## Matching: Tuning
+
+- Matching involves lots of tuning
+  + distance metric
+  + fixed or varying number of matches
+  + for fixed $M$, number of matches
+  + with or without replacement
   
 --
 
-- In randomized experiments, ATE is equivalent to ATT (and ATC) because treatment and control groups are comparable in expectation.
-
----
-## Observational studies
-
-- In observational studies, we do not control or know the assignment mechanism.
-
---
-
-- Presence of measured and unmeasured confounders: unbalanced between groups.
-
---
-
-- Some structural (often untestable) assumptions must be made, e.g. on the treatment assignment, for identifying causal effects.
-
---
-
-- Model assumptions are also made.
-
---
-
-- In observational studies, ATE is usually different from ATT and ATC.
+- Tuning for matching is an art, with some theory and general guidelines available...
 
 
 ---
-## Acknowledgements
+## Matching: Tuning
 
-These slides contain materials adapted from courses taught by Dr. Fan Li.
+- Distance metric: Mahalanobis distance, propensity score, tree-based.
+
+--
+
+- Fixed $M$ or varying $M$? For varying $M$:
+  + Matching with caliper: define a caliper (say 0.1) and all units within that caliper are matches
+  + M increases with sample size.
+  
+--
+
+- For fixed $M$, the choice of $M$ (number of matches per unit) has a bias-variance trade-off: 
+  + smaller $M \Rightarrow$ smaller bias but larger variance
+  + larger $M \Rightarrow$, larger bias but smaller variance.
+  
+--
+
+- Also depends on the proportion of treatment versus control: when there is a much larger control group, we can use one-to-many matching.
+
+
+---
+## Matching: Tuning
+
+- Matching with replacement:
+  + Pros:
+      1. computationally easier
+    
+      2. both controls and treated can be matched, but with high variances
+    
+      3. not order-dependent
+
+  + Cons: some units (especially ones with extreme propensity scores) can be matched many times and thus heavily influence overall estimates.
+ 
+--
+ 
+- What about matching ties? What should we do about them?
+
+--
+
+- Matching is a vast topic and there are so many matching methods.
+
+--
+
+- Implementation in R: `Matchit`, `Matching`, and many more.
+
+
+---
+## Balancing covariates: large number of covariates
+
+- What if we have a large number of covariates? 
+
+--
+
+- With just 20 binary covariates, there are $2^{20}$ or about a million covariate patterns!
+
+--
+
+- Direct matching or stratification is nearly impossible.
+
+--
+
+- Need dimensional reduction: propensity score.
+
+--
+
+- We will focus on .hlight[propensity score methods] in the next class and use them to analyze the minimum wage data.
 
 
 

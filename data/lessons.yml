@@ -159,13 +159,14 @@ lessons:
   - title: "WEEK 11"
 
   - date: "Tue, Nov 5"
-    title: "Observational studies: matching, weighting, regression, and propensity scores methods I"
+    title: "Observational studies: regression, stratification and matching"
+    slides: "lec-slides/19-causal-inference-II.html"
   
   - title: "Final project proposal due"
     #hw: "New-hw-04.html"
     
   - date: "Thur, Nov 7"
-    title: "Observational studies: matching, weighting, regression, and propensity scores methods II"
+    title: "Observational studies: propensity scores methods"
     
   - title: "WEEK 12"
   
