@@ -169,6 +169,7 @@ lessons:
     
   - date: "Thur, Nov 7"
     title: "Observational studies: propensity scores methods"
+    slides: "lec-slides/20-causal-inference-III.html"
     
   - title: "WEEK 12"
   

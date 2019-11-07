@@ -6,8 +6,9 @@
 
 ###### Clear environment and load libraries
 rm(list = ls())
-library(MatchIt)
+library(MatchIt) #for propensity score matching
 library(cobalt)
+library(ggplot2)
 
 
 ###### Load the data
@@ -25,145 +26,158 @@ summary(MinWage)
 #we will want to switch the 0s and 1s later for matching
 
 
-
 ###### Covariate balance
-#First, let's summarize the predictors by NJ and by PA.
+#first, let's summarize the predictors by NJ and by PA.
 summary(MinWage[MinWage$NJ.PA == 0, 3:8]) #first PA
 summary(MinWage[MinWage$NJ.PA == 1, 3:8]) #now NJ
-
 bal.tab(list(treat=MinWage$NJ.PA,covs=MinWage[,3:8],estimand="ATE"))
 love.plot(list(treat=MinWage$NJ.PA,covs=MinWage[,3:8],estimand="ATE"),stars = "std")
-
-
-
-
-#notice that the distributions of prior employment are not well balanced
+#the distributions of prior employment are not well balanced
 #other variables pretty close, but we might be able to do better by matching
 
-#since there are more in PA than NJ, we make PA the treated and NJ the control
+#since there are more in PA than NJ, let's make PA the treated and NJ the control
 #we can do this pretty easily by making a new dummy variable
-
 MinWage$PA.NJ = 0
 MinWage$PA.NJ[MinWage$NJ.PA == 0] = 1
 
-#fit the logit regression for the propensity scores
-pscorereg = glm(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys + Wendys, data = MinWage)
-pscorereg
 
-#oops... we didn't need to include one of the dummy variables due to collinearity. drop Wendys
+###### Propensity scores estimation
+pscorereg <- glm(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys + Wendys, data = MinWage)
+summary(pscorereg)
+#oops... we didn't need to include one of the dummy variables for the restaurants
+#all four dummy variables sum up to the intercept, so that's a problem
+#just like we usually have to make one level of all factor variables the baseline
+#drop Wendys
+pscorereg <- glm(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys, data = MinWage)
+summary(pscorereg)
+#EmploymentPre seems to be the only significant variable
+#Not really a problem since we care about using the model to predict
 
-pscorereg = glm(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys, data = MinWage)
-pscorereg
-
-#propensity scores are the predicted probabilities
-pscores = predict(pscorereg, type = "response")
+#now let's estimate the propensity scores
+pscores <- predict(pscorereg, type = "response")
+#use type="response" since we want probabilities
+head(pscores)
+summary(pscores)
+ggplot(MinWage, aes(pscores)) +
+  geom_histogram(alpha=.6,fill=rainbow(10),bins=10)
+#we don't have probabilities that are either too close to 0 or 1 which is good.
 
 #look at distribution of propensity scores for treateds and controls
-
-boxplot(pscores~MinWage$PA.NJ, xlab = "State (1 = PA, 0 = NJ)", ylab = "Propensity score")
-
-#you also could do this by comparing histograms.  Here is some code to do so
-par(mfcol = c(2,1))
-hist(pscores[MinWage$PA.NJ == 1], xlab = "Propensity Score", main = "Propensity scores for PA after matching")
-hist(pscores[MinWage$PA.NJ == 0], xlab = "Propensity Score", main = "Propensity scores for NJ after matching")
-
+MinWage$state <- "NJ"
+MinWage$state[MinWage$PA.NJ == 1] <- "PA"
+ggplot(MinWage, aes(y=pscores, x=state, fill=state)) +
+  geom_boxplot()
 #we can see clear differences in the distributions of propensity scores
-#thus, a simple comparison of the outcomes would be confounded by differences in the background variables
+#thus, a simple comparison of the outcomes would be confounded
+#by differences in the background variables
 
-#the propensity scores overlap lots, so we can feel good about prospects for matching
-#we will use the package MatchIt to do propensity score matching
-#install.packages("MatchIt")
-library(MatchIt)
+#actually we need to overlay the distributions to see overlap clearly
+ggplot(MinWage, aes(x=pscores, fill=state)) +
+  geom_density(alpha=.3) +
+  xlim(0, 1)
+#the propensity scores overlap very well
+#so we can feel good about prospects for matching
 
+
+###### Propensity scores matching
 #main call-- embed the logistic regression inside the call
 #start with a main effects only regression
-matchesMW = matchit(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys, method = "nearest", distance = "logit", data = MinWage)
-
-#if you are curious, here are the row numbers of the matched controls using built in functions from MatchIt
+matchesMW <- matchit(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys,
+                    method = "nearest", distance = "logit", data = MinWage)
+#Can also do 1-to-n matching
+#matchesMW <- matchit(PA.NJ ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys,
+#                     method = "nearest", distance = "logit", data = MinWage,ratio=4)
+#if you are curious, here are the row numbers of the matched controls
+#using built in functions from MatchIt
 matchesMW$match.matrix
 
-#create the combined dataset using function from MatchIt
-minwagematcheddata = match.data(matchesMW)
+#there are a few more options here
+#we could match with replacement
+#we could also do one to many matching
+#matchesMW <- matchit(NJ.PA ~ EmploymentPre + WagePre + BurgerKing + KFC + Roys,
+#                     method = "nearest", distance = "logit", data = MinWage,
+#                     replace=TRUE,ratio =5)
 
-#let's look at the propensity scores after matching.  the "distance" variable gives scores. 
-boxplot(minwagematcheddata$distance~minwagematcheddata$PA.NJ, xlab = "State (1 = PA, 0 = NJ)", ylab = "Propensity score")
 
+#extract the matched dataset
+minwagematcheddata <- match.data(matchesMW)
+
+#let's look at the propensity scores after matching.  the "distance" variable gives scores.
+ggplot(minwagematcheddata, aes(y=distance, x=state, fill=state)) +
+  geom_boxplot()
 #the distributions are more similar! now let's look at balance post-matching for each covariate.
 #can see results conveniently using the summary command on the MatchIt object
 
 summary(matchesMW)
-
 #for descriptions of all output, see https://r.iq.harvard.edu/docs/matchit/2.4-20/Output_Values2.html 
-#we will focus on the percent balance improvement table.  postive values are good, negative values are bad
-
+#the columns labeled eQQ refer to empirical quantile-quantile plots. 
+#They provide the median, mean, and maximum distance between the 
+#empirical quantile functions of the treated and control groups.
+#we will focus on the percent balance improvement table.
+#postive values are good, negative values are bad
 #generally improved balance!  Not quite balanced for percentage of Roys restaurants
-
 #let's repeat but this time include the outputs for interactions and squared terms
 
-summary(matchesMW, interactions = T)
-
-#looks like quantities involving Roys restaurants got worse after matching.
-#let's see if we can find a better balance using interaction effects...
-
-matchesMWint = matchit(PA.NJ ~ WagePre*(BurgerKing + KFC + Roys) + EmploymentPre*(BurgerKing + KFC + Roys), method = "nearest", distance = "logit", data = MinWage, )
-
-#we will start looking at the results with "interaction" option  in summary() turned off
-
+matchesMWint <- matchit(PA.NJ ~ WagePre*(BurgerKing + KFC + Roys) + 
+                         EmploymentPre*(BurgerKing + KFC + Roys), 
+                       method = "nearest", distance = "logit", data = MinWage)
 summary(matchesMWint)
+#this seems to be an improvement! we have closer balance, 
+#in general and especially for interactions
+#still not good enough though
 
-#this seems to be an improvement! we have closer balance, in general and especially for interactions
-
-#notice that we don't see the balance in the squared terms
-#we need to turn on the interaction option to get results for squared terms
-#but this also produces silly variables (interactions of interactions) that we should ignore
-#so, we turn it on just to look for EmploymentPrexEmplomentPre and WagePrexWagePre
-
-summary(matchesMWint, interactions = T)
-
-#let's see if we can find better balance using interaction effects and quadratic effects...
-
-matchesMWintsq = matchit(PA.NJ ~ (WagePre + I(WagePre^2))*(BurgerKing + KFC + Roys) + (EmploymentPre+ I(EmploymentPre^2))*(BurgerKing + KFC + Roys), method = "nearest", distance = "logit", data = MinWage)
-
-#now we don't need to turn on the interactions option, since we will get all the output
+#let's try squared terms
+matchesMWintsq <- matchit(PA.NJ ~ (WagePre + I(WagePre^2))*(BurgerKing + KFC + Roys) + 
+                           (EmploymentPre+ I(EmploymentPre^2))*(BurgerKing + KFC + Roys), 
+                         method = "nearest", distance = "logit", data = MinWage)
 summary(matchesMWintsq)
+#that didn't really seem to help...  wages are off.  
 
-#that didn't really seem to help...  wages are off.  let's drop interactions for wages
-
-matchesMWintsq1 = matchit(PA.NJ ~ (WagePre + I(WagePre^2))  + (EmploymentPre+ I(EmploymentPre^2))*(BurgerKing + KFC + Roys), method = "nearest", distance = "logit", data = MinWage)
-
+#let's drop interactions for wages
+matchesMWintsq1 <- matchit(PA.NJ ~ (WagePre + I(WagePre^2))+
+                            (EmploymentPre+ I(EmploymentPre^2))*(BurgerKing + KFC + Roys),
+                          method = "nearest", distance = "logit", data = MinWage)
 summary(matchesMWintsq1)
 
-#that looks pretty good.  but let's turn on the interactions option to check the interaction effects for wages
-#here, we are just looking for the two-way interactions with wages and wages^2
 
-summary(matchesMWintsq1, interactions = T)
-
-#let's try removing the quadratic for Wage^2
-
-matchesMWintsq2 = matchit(PA.NJ ~ WagePre  + (EmploymentPre+ I(EmploymentPre^2))*(BurgerKing + KFC + Roys), method = "nearest", distance = "logit", data = MinWage)
+#let's try removing the quadratic for wage^2
+matchesMWintsq2 <- matchit(PA.NJ ~ WagePre+
+                            (EmploymentPre+I(EmploymentPre^2))*(BurgerKing + KFC + Roys), 
+                          method = "nearest", distance = "logit", data = MinWage)
 summary(matchesMWintsq2)
-summary(matchesMWintsq2, interactions  = T)
-#that is even a little better... let's go with this as our final model and matched set
+#A little better... let's go with this as our final model and matched set
 
 #we can create the final matched set
-minwagematcheddata = match.data(matchesMWintsq2)
-
+minwagematcheddata <- match.data(matchesMWintsq2)
 #we can estimate the difference in the outcome variable
-trteffct = mean(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1]) - mean(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==0])
+trteffct <- mean(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1]) - 
+  mean(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==0])
+trteffct
 
 #a problem with this estimator is that there is still imbalance in the treated and 
 #matched control covariate distributions!  So, we really shouldn't use it...
+#also, we did one-to-one matching and we don't have that much data left
+#we are only using 73*2=146 rows from the original data
  
-#but, if you wanted to do so, you can treat the data like two independent samples  
+#but, if you wanted to do so, you can treat the data like two independent samples 
+#se would be 
+se < sqrt(var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1])/73 + 
+            var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==0])/73)
 
-se = sqrt(var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1])/73 + var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==0])/73)
-
-#so confidence intervals would be
+#using the normal approximation, confidence intervals would be
 trteffct - 1.96*se
 trteffct + 1.96*se
+#contains zero so not enough evidence that the treatment effect is in fact different from zero
 
 #given small imbalances remaining, we should do a regression analysis to 
 #control for covariates when estimating the treatment effect.
 #this involves regressing on the relevant covariates and adding a dummy variable
-#for the treatment.  This is a regular regression analysis, so I leave it
-#to you if you want to pursue it further!
+#for the treatment.  This is a regular regression analysis, so I leave the extensive
+#regression analysis to you to pursue further!
+
+regmodel <- lm(EmploymentPost ~ PA.NJ+EmploymentPre+WagePre+BurgerKing+KFC+Roys+distance,
+               data=minwagematcheddata)
+summary(regmodel)
+#the treatment effect is definitely different from what we had before but also not significant
+
+
