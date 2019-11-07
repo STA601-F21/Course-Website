@@ -135,6 +135,7 @@ lessons:
   - date: "Thur, Oct 24"
     title: "Missing data methods I"
     slides: "lec-slides/16-missing-data-I.html"
+    reading: "reading-07.html"
     
   - date: "Fri, Oct 25"
     title: "Instructions for final project proposals"
@@ -151,7 +152,7 @@ lessons:
   - date: "Thur, Oct 31"
     title: "Introduction to causal inference"
     slides: "lec-slides/18-causal-inference-I.html"
-    reading: "reading-07.html"
+    reading: "reading-08.html"
     
   - date: "Fri, Nov 1"
     title: "Lab 5: team project 2 presentations (reports due midnight on Monday Nov 4)"
