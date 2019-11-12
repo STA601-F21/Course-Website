@@ -182,6 +182,9 @@ lessons:
     slides: "lec-slides/21-decision-trees.html"
     reading: "reading-09.html"
     
+  - title: "HW 5"
+    hw: "hw-05.html"
+    
   - title: "PART  VI: TIME SERIES MODELS"
     
   - date: "Thur, Nov 14"

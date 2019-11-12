@@ -161,7 +161,7 @@ trteffct
  
 #but, if you wanted to do so, you can treat the data like two independent samples 
 #se would be 
-se < sqrt(var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1])/73 + 
+se <- sqrt(var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==1])/73 + 
             var(minwagematcheddata$EmploymentPost[minwagematcheddata$PA.NJ==0])/73)
 
 #using the normal approximation, confidence intervals would be
