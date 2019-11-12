@@ -178,8 +178,9 @@ lessons:
     title: "HW4 DUE!"
   
   - date: "Tue, Nov 12"
-    title: " "
-    #hw: "New-hw-05.html"
+    title: "Tree-based methods"
+    #slides: "lec-slides/21-decision-trees.html"
+    reading: "reading-09.html"
     
   - title: "PART  VI: TIME SERIES MODELS"
     
