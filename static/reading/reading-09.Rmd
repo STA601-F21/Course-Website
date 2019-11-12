@@ -1,5 +1,5 @@
 ---
-title: "Readings for tree-based methods"
+title: "Readings for boostrap and tree-based methods"
 output: 
   html_document:
     css: reading.css
