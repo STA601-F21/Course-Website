@@ -189,9 +189,11 @@ lessons:
     
   - date: "Thur, Nov 14"
     title: "Time series models I"
+    reading: "reading-10.html"
     
   - date: "Fri, Nov 15"
-    title: "Lab 6: comparing different causal inference methods"
+    title: "Lab 6: causal inference (right heart catheterization)"
+    #lab: "lab-06-causal-rhc.html"
   
   - title: "WEEK 13"
   

@@ -1806,6 +1806,7 @@ Let <em>pr(Y(w) = 1) = p<sub>w</sub></em> be the fraction of patients who would 
 <li>Center the three variables <code>com_t</code>, <code>pcs_sd</code>, and <code>mcs_sd</code> and use the centered versions for all analyses.</li>
 <li>The data dictionary does not contain enough details about the predictors (for example, there are no names for the levels of the categorical variables in the data). That is fine here! Do not focus on trying to interpret those predictors, just controlling for them. The two most important variables are <code>pg</code> and <code>i.aqoc</code>, and the meaning of both are very clear here.</li>
 <li>Relevel <code>i_sex</code>, <code>i_educ</code> and <code>i_seve</code> by doing <code>Data$i_sex &lt;- relevel(factor(Data$i_sex), ref = 1)</code>, <code>Data$i_educ &lt;- relevel(factor(Data$i_educ), ref = 5)</code>, and <code>Data$i_seve &lt;- relevel(factor(Data$i_seve), ref = 3)</code>.</li>
+<li><em><font color="red">Note that the estimated average causal effect computed on the macthed sample is actually ATT (where the treated group is <code>pg = 1</code>) and not ATE, because we will discard observations in the control group for which we cannot find matches for.</font></em></li>
 </ul></li>
 </ul></li>
 </ol>

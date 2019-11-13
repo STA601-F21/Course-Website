@@ -59,6 +59,7 @@ The data set is from a study to compare the quality of services provided by two 
       + Center the three variables `com_t`, `pcs_sd`, and `mcs_sd` and use the centered versions for all analyses.
       + The data dictionary does not contain enough details about the predictors (for example, there are no names for the levels of the categorical variables in the data). That is fine here! Do not focus on trying to interpret those predictors, just controlling for them. The two most important variables are `pg` and `i.aqoc`, and the meaning of both are very clear here.
       + Relevel `i_sex`, `i_educ` and `i_seve` by doing  `Data$i_sex <- relevel(factor(Data$i_sex), ref = 1)`, `Data$i_educ <- relevel(factor(Data$i_educ), ref = 5)`, and `Data$i_seve <- relevel(factor(Data$i_seve), ref = 3)`.
+      + *<font color="red">Note that the estimated average causal effect computed on the macthed sample is actually ATT (where the treated group is `pg = 1`) and not ATE, because we will discard observations in the control group for which we cannot find matches for.</font>*
 
 
 
