@@ -1,6 +1,6 @@
 ---
 title: "Methods and Data Analysis 5"
-date: "Due: 11:59pm, Tuesday, Nov 19"
+date: "Due: 11:59pm, Wednesday, Nov 20"
 output: 
   html_document: 
     css: hw.css

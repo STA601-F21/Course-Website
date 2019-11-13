@@ -193,7 +193,7 @@ lessons:
     
   - date: "Fri, Nov 15"
     title: "Lab 6: causal inference (right heart catheterization)"
-    #lab: "lab-06-causal-rhc.html"
+    lab: "lab-06-causal-rhc.html"
   
   - title: "WEEK 13"
   
