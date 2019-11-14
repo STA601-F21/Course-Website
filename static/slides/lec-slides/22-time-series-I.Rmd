@@ -157,6 +157,8 @@ ftse100 <- read.csv("data/ftse2018.csv", header = T)
 head(ftse100)
 ```
 
+- Can we forecast closing prices for the next five days from 11/7/2018?
+
 ---
 ## Motivating example: FTSE 100
 
