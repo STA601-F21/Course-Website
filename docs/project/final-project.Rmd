@@ -41,7 +41,7 @@ If you do not have a dataset or an inferential problem in mind that you might be
 
 ## Format
 
-The final report should be concise, well written and must not exceed 3 pages. Your report should be written according to the following outline:
+The final report should be concise, well written and must not exceed 5 pages. Your report should be written according to the following outline:
 
 - ### Summary  
 A few sentences describing the inferential question(s), the method used and the most important results.
