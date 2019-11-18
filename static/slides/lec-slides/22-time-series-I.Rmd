@@ -1,5 +1,5 @@
 ---
-title: "Time series models I"
+title: "Time series models"
 author: "Dr. Olanrewaju Michael Akande"
 date: "Nov 14, 2019"
 output:
@@ -740,6 +740,8 @@ $$y_t = \mu + \sum_{k=1}^{p} \phi_k \epsilon_{t-k} + \epsilon_t; \ \ \epsilon_t 
 --
 
 - Whenever we take differences in $y$ values to ensure stationarity before fitting ARMA models, we have .hlight[ARIMA] models.
+
+
 
 
 

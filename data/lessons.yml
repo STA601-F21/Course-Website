@@ -188,7 +188,7 @@ lessons:
   - title: "PART  VI: TIME SERIES MODELS"
     
   - date: "Thur, Nov 14"
-    title: "Time series models I"
+    title: "Time series models"
     reading: "reading-10.html"
     slides: "lec-slides/22-time-series-I.html"
     
@@ -199,7 +199,8 @@ lessons:
   - title: "WEEK 13"
   
   - date: "Tue, Nov 19"
-    title: "Time series models II"
+    title: "Time series models (cont'd)"
+    slides: "lec-slides/23-time-series-II.html"
     
   - date: "Thur, Nov 21"
     title: "Wrap up (work on final project)"

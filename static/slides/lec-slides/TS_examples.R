@@ -1,203 +1,244 @@
 
-####  Time series modeling of FTSE 100 returns
+
+###########################################################################
+###########################################################################
+########################## Time series analuyses ##########################
+###########################################################################
+###########################################################################
+
+
+############################ Part One #####################################
+###### Time series modeling of FTSE 100 returns
+rm(list = ls())
+library(tseries)
+library(forecast)
+library(ggplot2)
 
 ftse100 <- read.csv("data/ftse2018.csv", header = T)
-
-#notice that the data go from latest to earliest date
-#let's invert the order of the rows to make the time series increasing in date
-
-ftse100 = ftse100[nrow(ftse100):1,]
+#invert the order of the rows to make the time series increasing in date
+ftse100 <- ftse100[nrow(ftse100):1,]
 
 #make a time series object of the closing prices
-tsClose = ts(ftse100$Close)
-ts.plot(tsClose)
+tsClose <- ts(ftse100$Close)
+ts.plot(tsClose,col="red3")
 
-#quite ugly!  hard to tell if this is stationary, and maybe not...
+#hard to tell if this is stationary, and maybe not...
 #let's look at autocorrelations
+acf(tsClose)
+pacf(tsClose)
+#looks like the autocorrelations are strong,
+#but that lag 1 accounts for most of the autocorrelation
 
-acf(ftse100$Close)
-pacf(ftse100$Close)
+#Tests for stationarity
+adf_test <- adf.test(tsClose,alternative = 'stationary')
+print(adf_test)
+#note that the alternative hypothesis here is "stationary"
+#so that low p-values support stationarity
+#looks like the series is not stationary
+kpss_test <- kpss.test(tsClose)
+print(kpss_test)
+#by the way, KPSS stands for Kwiatkowski-Philips-Schmidt-Shin
+#here, the null hypothesis is actually "stationary"
+#so that high p-values support stationarity
+#again, looks like the series is not stationary
 
-#Looks like the autocorrelations are strong, but that lag 1 accounts for most of the autocorrelation
 
-#Often it is better to work with returns for stock data
-ftse100$return = (ftse100$Close - ftse100$Open)/ftse100$Open
-tsReturn = ts(ftse100$return)
-ts.plot(tsReturn)
+#To get around the stationary problem,  
+#People often (for stock data) work with returns instead
+ftse100$return <- (ftse100$Close - ftse100$Open)/ftse100$Open 
+tsReturn <- ts(ftse100$return)
+ts.plot(tsReturn,col="red3")
+acf(tsReturn)
+pacf(tsReturn)
 
-acf(ftse100$return)
-pacf(ftse100$return)
+adf_test_Return <- adf.test(tsReturn,alternative = 'stationary')
+print(adf_test_Return)
+#looks like this is stationary, however,
+#these returns basically have no "strong" time series structure! 
+#let's fit an AR(1) model to the returns anyway
+Model1 <- arima(tsReturn, order = c(1,0,0))
+Model1
 
-#These returns basically have no time series structure! 
-#let's fit an AR(1) model to the returns anyways
+#actually we can use the auto.arima function in R to find the best ARIMA model
+#it uses AIC, AICc (corrected for small samples) and BIC
+auto.arima(tsReturn)
+#again, no time series structure
 
-ftsereturnmodel = arima(ftse100$return, order = c(1,0,0))
-ftsereturnmodel
+#let's try auto.arima on the original closing prices
+auto.arima(tsClose)
+#time series basically taken care off by differencing or using returns instead
 
 #suppose you want to make a prediction of the returns six days ahead
+predict(Model1, n.ahead = 6)
 
-predict(ftsereturnmodel, n.ahead = 6)
+#there are a few different ways of defining returns
+#we can also use log returns for stocks, where they take log(Close/Open) 
+ftse100$logreturn <- log(ftse100$Close/ftse100$Open)
+tsLogreturn <- ts(ftse100$logreturn)
+ts.plot(tsLogreturn,col="red3")
+acf(tsLogreturn)
+pacf(tsLogreturn)
 
-#often people use log returns for stocks, where they take log(Close/Open) 
+#same thing. We have no time series structure.
+#again, let's fit an AR(1) model to the returns
+Model2 <- arima(tsLogreturn, order = c(1,0,0))
+Model2
+
+#also predict the returns six days ahead
+predict(Model2, n.ahead = 6)
 
 
 
 
-
-
-
-
-
-
-
-
-#### Time series regression using AR models 
-
+############################ Part One #####################################
+###### Time series modeling of melanoma data
 cancersun <- read.csv("data/melanoma.csv", header = T)
-
-#change names to get rid of capital letters
 names(cancersun) = c("year", "melanoma", "sunspot")
+str(cancersun)
+head(cancersun)
 
-plot(x=cancersun$sunspot, y = cancersun$melanoma, xlab = "Sunspots", ylab = "Melanoma Incidence Rate")
+ggplot(cancersun, aes(x=sunspot, y=melanoma)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_smooth(method="lm",col="red3") +
+  labs(title="Melanoma Incidence Rate vs Sunspots")
+
+tsMelanoma <- ts(cancersun$melanoma)
+ts.plot(tsMelanoma,col="blue4")
 
 #let's try a linear regression of melanoma on sunspots 
-regmelanoma = lm(melanoma ~ sunspot, data = cancersun)
-
+regmelanoma <- lm(melanoma ~ sunspot, data = cancersun)
 summary(regmelanoma)
-
-plot(regmelanoma$residual, x = cancersun$sunspot, xlab = "Sunspots", ylab = "Residual")
-abline(0,0)
-
+ggplot(cancersun, aes(x=sunspot, y=regmelanoma$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Sunspots")
 #it looks nice... nothing obvious going on.  but these data are ordered in time
+
 #let's look at residuals versus year
+ggplot(cancersun, aes(x=year, y=regmelanoma$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Year")
+#huge trend!  
 
-plot(regmelanoma$residual, x = cancersun$year, xlab = "Year", ylab = "Residual")
-abline(0,0)
-
-#huge trend!  let's compute the autocorrelations to verify
-
-lagcors = acf(regmelanoma$resid)
-lagcors
-
+#let's compute the autocorrelations to verify
+acf(regmelanoma$resid)
+acf(regmelanoma$resid,plot=F)
 #The lag-1 autocorrelation is large: 0.86.  There is evidence of serial correlation.
 #Failing to account for this will result in inaccurate models
 
-#the partial autocorrelation shows you the autocorrelations after removing effects of earlier lags
-partlagcors  = pacf(regmelanoma$resid)
-partlagcors
-
+#let's compute the partial autocorrelations
+pacf(regmelanoma$resid)
+pacf(regmelanoma$resid,plot=F)
 #seems like only the lag 1 correlation matters.  But the residuals are not stationary!  
 
 #Let's fit a model that includes year as a predictor, to try to take care of the non-stationarity
-
-###let's control for year and see what happens...
-
-regmelanoma2 = lm(melanoma ~ sunspot + year, data = cancersun)
-
+regmelanoma2 <- lm(melanoma ~ sunspot + year, data = cancersun)
 summary(regmelanoma2)
+#year is clearly significant
 
-plot(regmelanoma2$residual, x = cancersun$sunspot, xlab = "Sunspots", ylab = "Residual")
-abline(0,0)
+ggplot(cancersun, aes(x=sunspot, y=regmelanoma2$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Sunspots")
 
-plot(regmelanoma2$residual, x = cancersun$year, xlab = "Year", ylab = "Residual")
-abline(0,0)
+ggplot(cancersun, aes(x=year, y=regmelanoma2$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Year")
+#obivously a lot better!
 
-#obivously a lot better! 
-#let's use visualization at time series plot of residuals
-
-tsresidregmelanoma2 = ts(regmelanoma2$residual)
-ts.plot(tsresidregmelanoma2)
-
+#let's do a time series plot of residuals
+tsresidregmelanoma2 <- ts(regmelanoma2$residual)
+ts.plot(tsresidregmelanoma2,col="blue4")
 #seems a lot more reasonable to assume stationarity
+#not so many time periods though
+
 #let's look for autocorrelation in residuals...
-
-acf(regmelanoma2$resid)
-pacf(regmelanoma2$resid)
-
-#.38 lag 1 correlation in residuals.... still a little high. that could distort SE.
-#let's fit an AR(1) model, or possibly an AR(2) model since there might be lag 2 effects
+acf(regmelanoma2$resid); acf(regmelanoma2$resid,plot=F)
+pacf(regmelanoma2$resid); pacf(regmelanoma2$resid,plot=F)
+#.377 lag 1 correlation in residuals.... still a little high. that could distort SE.
+#Since the partial autocorrelations never really go to zero, we might try an MA model
+#but let's fit an AR(1) model first
 
 #AR(1) model
-tsregmelanoma1 = arima(cancersun$melanoma, order = c(1, 0, 0), xreg = cbind(cancersun$sunspot, cancersun$year))
+tsregmelanoma1 <- arima(cancersun$melanoma, order = c(1, 0, 0), xreg = cbind(cancersun$sunspot, cancersun$year))
 tsregmelanoma1
 
 #diagnostics
-plot(y = tsregmelanoma1$residual, x= cancersun$sunspot, ylab = "Residual", xlab = "Sunspots")
-abline(0,0)
-plot(y = tsregmelanoma1$residual, x= cancersun$year, ylab = "Residual", xlab = "Year")
-abline(0,0)
+ggplot(cancersun, aes(x=sunspot, y=tsregmelanoma1$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Sunspots")
 
+ggplot(cancersun, aes(x=year, y=tsregmelanoma1$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Year")
 #residuals show a little bit of a pattern -- more negative than positive values
+#violation of equal variance perhaps??
 
-#let's noodle with the model to see if we can get a better fit
-#maybe we can get a better model by predicting from sunspots the previous year
+acf(tsregmelanoma1$residual)
+pacf(tsregmelanoma1$residual)
+#much lower, pretty much statistically zero
 
-prevsunspot = c(NA, cancersun$sunspot[1:36])
 
-#check to make sure we got it right
-cbind(prevsunspot, cancersun$sunspot)
-
-#add to the data
-cancersun$prevsunspot = prevsunspot
-
-plot(x=cancersun$prevsunspot[2:37], y = cancersun$melanoma[2:37], xlab = "Sunspots Previous Yr", ylab = "Melanoma Incidence Rate")
-
-###let's control for year and see what happens...
-
-# try with previous year
-
-regmelanoma3 = lm(melanoma ~ prevsunspot + year, data = cancersun[2:37,])
-
-summary(regmelanoma3)
-
-plot(regmelanoma3$residual, x = cancersun$prevsunspot[2:37], xlab = "Sunspots Previous Yr", ylab = "Residual")
-abline(0,0)
-
-plot(regmelanoma3$residual, x = cancersun$year[2:37], xlab = "Year", ylab = "Residual")
-abline(0,0)
-
-#much better!  the better fitting model seems to have fixed up the problems!  
-
-tsresidregmelanoma3 = ts(regmelanoma3$residual)
-ts.plot(tsresidregmelanoma3)
-
-#still reasonable to assume stationarity
-#let's look for autocorrelation in residuals...
-
-acf(regmelanoma2$resid)
-pacf(regmelanoma2$resid)
-
-#hardly any....  the better model seems to have reduced the autocorrelation
-
-#let's fit an AR(1) model
-
-tsregmelanoma3 = arima(cancersun$melanoma, order = c(1, 0, 0), xreg = cbind(cancersun$prevsunspot, cancersun$year))
-tsregmelanoma3
+#MA(1) model
+tsregmelanoma2 <- arima(cancersun$melanoma, order = c(0, 0, 1), xreg = cbind(cancersun$sunspot, cancersun$year))
+tsregmelanoma2
 
 #diagnostics
-plot(y = tsregmelanoma3$residual, x= cancersun$prevsunspot, ylab = "Residual", xlab = "Sunspots - Previous Year")
-abline(0,0)
-plot(y = tsregmelanoma3$residual, x= cancersun$year, ylab = "Residual", xlab = "Year")
-abline(0,0)
+ggplot(cancersun, aes(x=sunspot, y=tsregmelanoma2$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Sunspots")
 
-#look at a time series plot of the residuals.  
-tsresidtsregmelanoma3 = ts(tsregmelanoma3$residual)
-ts.plot(tsresidtsregmelanoma3)
+ggplot(cancersun, aes(x=year, y=tsregmelanoma2$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Year")
+#a bit better
 
-#seems reasonable to assume stationarity
-#let's look for autocorrelation in residuals... we have to exclude the first observation since it has a missing residual
+acf(tsregmelanoma2$residual)
+pacf(tsregmelanoma2$residual)
+#also lower
 
-acf(tsregmelanoma3$resid[2:37])
-pacf(tsregmelanoma3$resid[2:37])
 
-#no longer any serious autocorrelation!  We seem to have done a good job with the modeling.
 
-#if you want to fit an AR(2) model, which is not necessary here, the command would be as follows
-#tsregmelanoma4 = arima(cancersun$melanoma, order = c(2, 0, 0), xreg = cbind(cancersun$prevsunspot, cancersun$year))
-#tsregmelanoma4
+#actually let's try something else
+#maybe we can get a better model by predicting from sunspots the previous year
+prevsunspot <- c(NA, cancersun$sunspot[1:36])
+#check to make sure we got it right
+cbind(prevsunspot, cancersun$sunspot)
+#add to the data
+cancersun$prevsunspot <- prevsunspot
 
-#Note: I tried a model with sunspots from 2 years ago, and it didn't seem to be a better fit.
-#commands for making data for sunspots from previous 2 years
-prev2sunspot = c(NA, NA, cancersun$sunspot[1:35])
-cancersun$prev2sunspot = prev2sunspot
-plot(x=cancersun$prev2sunspot[3:37], y = cancersun$melanoma[3:37], xlab = "Sunspots Previous 2 Yr", ylab = "Melanoma Incidence Rate")
+#try the linear model with previous year
+regmelanoma3 <- lm(melanoma ~ prevsunspot + year, data = cancersun[2:37,])
+summary(regmelanoma3)
+#significant coefficient for prevsunspot. recall that sunspot was not significant before
+
+ggplot(cancersun[2:37,], aes(x=prevsunspot, y=regmelanoma3$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Sunspots")
+
+ggplot(cancersun[2:37,], aes(x=year, y=regmelanoma3$residual)) +
+  geom_point(alpha = .5,colour="blue4") +
+  geom_hline(yintercept=0,col="red3") + labs(title="Residuals vs Year")
+#both looks better save for one potential outlier (you should investigate)
+
+#time series plot of residuals
+tsresidregmelanoma3 <- ts(regmelanoma3$residual)
+ts.plot(tsresidregmelanoma3,col="blue4")
+#still reasonable to assume stationarity
+
+#let's look for autocorrelation in residuals...
+acf(regmelanoma3$residual)
+pacf(regmelanoma3$residual)
+#very low
+
+
+
+#lets try using auto.arima
+auto.arima(cancersun$melanoma,xreg = cbind(cancersun$sunspot))
+auto.arima(cancersun$melanoma,xreg = cbind(cancersun$sunspot, cancersun$year))
+auto.arima(cancersun$melanoma,xreg = cbind(cancersun$prevsunspot, cancersun$year))
+#the same conclusions more or less
+
+
+
+
+
+
