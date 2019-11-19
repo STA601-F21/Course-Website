@@ -60,7 +60,7 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 
 - Final project presentations:
-  + Each student will give a brief (5 minute) presentation of their findings in class. Findings can be preliminary for students presenting Tuesday, November 26.
+  + Each student will give a brief (5 minute) presentation of their findings in class. Findings can be (mostly!) preliminary for students presenting Tuesday, November 26.
   
   + Presentations will be graded for:
       - Preparedness
