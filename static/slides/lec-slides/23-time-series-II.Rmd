@@ -48,17 +48,26 @@ knit_hooks$set(small.mar = function(before, options, envir) {
 
 ## Announcements
 
-- Survey on slots for final project presentation out after class.
+- Complete survey on final project presentations: https://duke.qualtrics.com/jfe/form/SV_b7xSx2YahP8o9W5
 
-- I will send out presentation slots on Thursday.
+- You must complete the survey before noon. 
+
+- I will send out presentation slots tomorrow.
+
+
+---
+## Announcements
+
 
 - Final project presentations:
-  + Each student will give a brief (5 minute) presentation of their findings in class.
+  + Each student will give a brief (5 minute) presentation of their findings in class. Findings can be preliminary for students presenting Tuesday, November 26.
+  
   + Presentations will be graded for:
       - Preparedness
       - Clarity
       - Time management
       - Understanding of the data/project
+      
   + Each student's presentation must be submitted on gradescope by 8:00am on the day they present.
 
 
