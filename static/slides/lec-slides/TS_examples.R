@@ -79,6 +79,9 @@ ts.plot(tsLogreturn,col="red3")
 acf(tsLogreturn)
 pacf(tsLogreturn)
 
+adf_test_LogReturn <- adf.test(tsLogreturn,alternative = 'stationary')
+print(adf_test_LogReturn)
+
 #same thing. We have no time series structure.
 #again, let's fit an AR(1) model to the returns
 Model2 <- arima(tsLogreturn, order = c(1,0,0))
@@ -149,6 +152,12 @@ tsresidregmelanoma2 <- ts(regmelanoma2$residual)
 ts.plot(tsresidregmelanoma2,col="blue4")
 #seems a lot more reasonable to assume stationarity
 #not so many time periods though
+
+adf_test_melanoma <- adf.test(tsresidregmelanoma2,alternative = 'stationary')
+print(adf_test_melanoma)
+
+kpss_test <- kpss.test(tsresidregmelanoma2)
+print(kpss_test)
 
 #let's look for autocorrelation in residuals...
 acf(regmelanoma2$resid); acf(regmelanoma2$resid,plot=F)
@@ -222,6 +231,12 @@ ggplot(cancersun[2:37,], aes(x=year, y=regmelanoma3$residual)) +
 #time series plot of residuals
 tsresidregmelanoma3 <- ts(regmelanoma3$residual)
 ts.plot(tsresidregmelanoma3,col="blue4")
+
+adf_test_melanoma <- adf.test(tsresidregmelanoma3,alternative = 'stationary')
+print(adf_test_melanoma)
+
+kpss_test <- kpss.test(tsresidregmelanoma3)
+print(kpss_test)
 #still reasonable to assume stationarity
 
 #let's look for autocorrelation in residuals...

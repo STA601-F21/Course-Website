@@ -35,7 +35,7 @@ love.plot(list(treat=MinWage$NJ.PA,covs=MinWage[,3:8],estimand="ATE"),stars = "s
 #the distributions of prior employment are not well balanced
 #other variables pretty close, but we might be able to do better by matching
 
-#since there are more in PA than NJ, let's make PA the treated and NJ the control
+#since there are more in NJ than PA, let's make PA the treated and NJ the control
 #we can do this pretty easily by making a new dummy variable
 MinWage$PA.NJ = 0
 MinWage$PA.NJ[MinWage$NJ.PA == 0] = 1
