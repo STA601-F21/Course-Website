@@ -1,7 +1,7 @@
 # Website
-Website for the Masters in Interdisciplinary Data Science (MIDS) Course "IDS 702 - Modeling and Representation of Data" at Duke University, for Fall 2019.
+Website for the StaSci Course "STA 602L - Bayesian and Modern Statistics" at Duke University, for Spring 2020.
 
-Course website is at https://ids-702-f19.github.io/Course-Website/
+Course website is at https://sta-602l-s20.github.io/Course-Website/
 
 # Attribution
 

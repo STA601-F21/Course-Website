@@ -1,7 +1,7 @@
 baseurl = "/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "IDS 702: FALL 2019"
+title = "STA 602L: SPRING 2020"
 theme = "material"
 #disqusShortname = ""
 # googleAnalytics = ""
@@ -27,7 +27,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   gravatarEmail = "olanrewaju.akande@duke.edu"
   # Your profile picture
   picture = "img/avatar-icon.jpg"
-  twitter = "Akande_OM"
+  #twitter = "Akande_OM"
  
 # Menu Configuration
 [[menu.main]]
@@ -65,7 +65,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   identifier = "gradescope"
   name = "Gradescope"
   pre = "<i class=\"material-icons\">assignment</i>"
-  url = "https://www.gradescope.com/courses/57701/assignments"
+  url = "https://www.gradescope.com/courses/77790/assignments"
 #[[menu.main]]
 #  weight = 4
 #  identifier = "rstudio"
@@ -83,9 +83,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.footer]]
   weight = 1
   identifier = "Duke"
-  name = "Duke MIDS"
+  name = "Department of Statistical Science, Duke University"
   pre = "<i class=\"button-icon fa fa-2x fa-map-marker\"></i>"
-  url = "https://datascience.duke.edu"
+  url = "https://stat.duke.edu"
 #[[menu.footer]]
 #  weight = 2
 #  name = "RStudio"
@@ -102,5 +102,5 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
   dateFormat = "January 2, 2006"
-  background = "https://akandelanre.github.io./background_image3.png" 
+  background = "https://akandelanre.github.io./img/STA602L_background_image.png" 
   favicon = "https://akandelanre.github.io./mids_duke_logo.png"
