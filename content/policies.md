@@ -25,7 +25,7 @@ Homework and lab exercises (at least one per week) | 20%
 Quiz I (in class) | 12.5%
 Midterm (in class) | 20%
 Quiz II (in class) | 12.5%
-Final Exam (in class?) | 30%
+Final Exam (online or take home?) | 30%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
