@@ -20,12 +20,13 @@ Graded work for the course will consist of homework, lab exercises, quizzes, a m
 {.table .table-condensed .table-striped .text-left}
 Component             | Percentage
 ----------------------|----------------
-Class Participation | 5%
-Homework and lab exercises (at least one per week) | 20%
-Quiz I (in class) | 12.5%
+Final Exam (in-class, online or take home?) | 30%
 Midterm (in class) | 20%
-Quiz II (in class) | 12.5%
-Final Exam (online or take home?) | 30%
+Homework assignments (at least one per week) | 15%
+Quiz I (in class) | 10%
+Quiz II (in class) | 10%
+Lab exercises | 10%
+Class Participation | 5%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
@@ -38,6 +39,8 @@ Grades **may** be curved at the end of the semester. Cumulative averages of 90% 
 Homework assignments will be given on a weekly basis. They will be based on both the lectures and labs and will be announced every Friday at the most – please always check the website! **Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.** For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
 
 Each student MUST write up and turn in her or his own answers. You are encouraged to talk to each other regarding homework problems or to the instructor/TA. However, the write-up, solution, and code must be entirely your own work. The assignments must be submitted on [Gradescope](https://www.gradescope.com/courses/77790/assignments) under ``Assignments''. Note that you will not be able to make online submissions after the due date, so be sure to submit before or by the Gradescope-specified deadline.
+
+Homework solutions will be curated from student solutions with proper attribution. Every week the TAs will select a representative correct solution for the assigned problems and put them together into one solutions set with each answer being attributed to the student who wrote it. **If you would like to OPT OUT of having your homework solutions used for the class solutions, please let the Instructor and TAs know in advance.**
 
 **Finally, your lowest homework score will be dropped!**
 
@@ -53,8 +56,12 @@ If you miss any of the quizzes or midterm, your grade will depend more on the fi
 
 
 ### Late Submission Policy
-- You will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100\% of the total points if you submit later than that.
+- You will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
 - You will lose 100% of the total points on quizzes, midterms and final exams if do not show up to take them or submit later than the due dates.
+
+
+### Auditing
+Students who audit this course will be expected to complete most of the graded work with the goal of getting an overall score of at least 70%; you will only need to complete enough graded work to get to 70%. You are also expected to attend most of the classes and participate like everyone else. There are very limited seats for auditing this course and most students will be expected to take the course for credit, therefore, you must contact the instructor in advance if you wish to audit the course.
 
 
 ### Academic integrity:

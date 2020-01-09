@@ -1,5 +1,5 @@
 ---
-title: "Reading for multiple linear regression"
+title: "Readings for introduction to Bayesian inference"
 output: 
   html_document:
     css: reading.css
@@ -11,11 +11,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
+    + Section 1: Introduction and examples
+    + Section 2: Belief, probability and exchangeability
+
 ## Optional:
 
-- [Data Analysis Using Regression and Multilevel/Hierarchical Models](https://www.amazon.com/gp/product/052168689X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=052168689X&linkCode=as2&tag=andrsblog0f-20&linkId=PX5B5V6ZPCT2UIYV) by Gelman A., and Hill, J.:
-    + Section 3: Linear regression: the basics
-    + Section 4: Linear regression: before and after fitting the model
-
-- [An Introduction to Statistical Learning with Applications in R](http://faculty.marshall.usc.edu/gareth-james/ISL/) by James, G., Witten, D., Hastie, T., and Tibshirani, R.:
-    + Section 3: Linear regression (you can skip section 3.5)
+- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 1: Probability and inference
+    
+- [Bayesian Computation with R (Second Edition)](https://www.amazon.com/Bayesian-Computation-R-Use/dp/0387922970) by Jim Albert:
+    + Section 2: Introduction to Bayesian thinking

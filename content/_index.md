@@ -36,10 +36,14 @@ By the end of this course, students should be able to
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 11:45am - 01:00pm
 
+<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Bai Li](https://stat.duke.edu/people/bai-li)
+
 ##### Section 02:
 <font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Old Chemistry 101
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 01:25pm - 02:40pm
+
+<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
 
 
 ### Teaching Team and Office Hours 
@@ -48,9 +52,9 @@ By the end of this course, students should be able to
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
 Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm (subject to change!) | 256 Gross Hall
-Lead TA           | [Jordan Bryan](https://stat.duke.edu/people/jordan-bryan) (mainly for 360 but also 602L) | <a href="mailto:jordan.bryan@duke.edu" title="email"><i class="fa fa-envelope"></i></a> |  | 
-TAs               | [Zhuoqun Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | TBD | TBD
-                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | TBD | TBD
+Lead TA           | [Jordan Bryan](https://stat.duke.edu/people/jordan-bryan) (mainly for STA 360) | <a href="mailto:jordan.bryan@duke.edu" title="email"><i class="fa fa-envelope"></i></a> |  | 
+TAs               | [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tues 3:00 - 5:00pm | Old Chem 025
+                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wed 3:00 - 5:00pm | Old Chem 025
 
 
 ### Texts

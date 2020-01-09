@@ -6,13 +6,12 @@ markup: "mmark"
 ### Supplementary Textbooks
 
 These textbooks are great resources for some of the topics we will cover. You do not need to buy them, but you may be able to borrow them from Duke library should you need extra reading materials, besides the class slides and main textbooks.
-1. 
-2. 
-3. 
+1. [Albert, J. (2009), "Bayesian Computation with R (Second Edition)."](https://www.amazon.com/Bayesian-Computation-R-Use/dp/0387922970)
+2. [Bolstad, W. M. and Curran, J. M. (2016), "Introduction to Bayesian Statistics (Third Edition)."](https://www.amazon.com/Introduction-Bayesian-Statistics-William-Bolstad/dp/1118091566)
 
 ### R and R Markdown Resources
 
-R Markdown can be used to create high quality reports and presentations with embedded chunks of R code. You are required to use R Markdown to type up your lab reports. R Markdown would also be my personal favorite for typing up your homework assignments and project write-ups for this course, but you are welcome to use any word processor of your choice for those. To learn more about R Markdown and for other resources for programming in R, see the links below. 
+R Markdown can be used to create high quality reports and presentations with embedded chunks of R code. You are required to use R Markdown to type up your lab reports. R Markdown would also be my personal favorite for typing up your homework assignments for this course, but you are welcome to use any word processor of your choice for those. To learn more about R Markdown and for other resources for programming in R, see the links below. 
 
 1. [R for Data Science (by Hadley Wickham & Garrett Grolemund)](https://r4ds.had.co.nz)
 2. [Introduction to R Markdown (Article by Garrett Grolemund)](https://rmarkdown.rstudio.com/articles_intro.html)
@@ -31,7 +30,4 @@ You may also use LaTeX to type up your assignments. You may find it easier to cr
 
 ### Interesting Articles
 
-These are articles I find interesting either as supplementary readings for topics covered in class, or as good sources that cover concepts I think you should know, but which we may not have time to cover. I strongly suggest you find time to (at the very least) take a "quick peek" at each article.
-
-1. 
-2. 
+I will add articles I find interesting below. These are articles I find useful as supplementary readings for topics covered in class, or as good sources that cover concepts I think you should know, but which we may not have time to cover. I strongly suggest you find time to (at the very least) take a "quick peek" at each article.
