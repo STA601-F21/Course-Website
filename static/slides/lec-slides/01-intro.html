@@ -33,10 +33,6 @@ class: center, middle
 
 ## What is this course about?
 
-&lt;i class="fa fa-clock fa-2x"&gt;&lt;/i&gt; We will follow Hoff's book - a chapter a week (give or take).
-
---
-
 &lt;i class="fa fa-book fa-2x"&gt;&lt;/i&gt; Learn the foundations of Bayesian inference.
 
 --
@@ -54,6 +50,10 @@ class: center, middle
 --
 
 &lt;i class="fa fa-refresh fa-spin fa-2x"&gt;&lt;/i&gt; ".hlight[Prior] `\(\rightarrow\)` .hlight[likelihood] `\(\rightarrow\)` .hlight[posterior]" over and over again!
+
+--
+
+&lt;i class="fa fa-clock fa-2x"&gt;&lt;/i&gt; We will follow the Hoff book closely -- roughly one chapter per week.
 
 --
 
@@ -90,17 +90,17 @@ A Bayesian version will usually make things better...
 
 ## TAs
 
-[Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
-
-&lt;i class="fa fa-envelope"&gt;&lt;/i&gt; &amp;nbsp; [zhuoqun.wang@duke.edu](mailto:zhuoqun.wang@duke.edu) &lt;br&gt;
-&lt;i class="fa fa-university"&gt;&lt;/i&gt; &amp;nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) &lt;br&gt;
-&lt;i class="fa fa-calendar"&gt;&lt;/i&gt; &amp;nbsp; Tues 3:00 - 5:00pm
-
 [Bai Li](https://stat.duke.edu/people/bai-li)
 
 &lt;i class="fa fa-envelope"&gt;&lt;/i&gt; &amp;nbsp; [bai.li@duke.edu](mailto:bai.li@duke.edu) &lt;br&gt;
-&lt;i class="fa fa-university"&gt;&lt;/i&gt; &amp;nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) &lt;br&gt;
-&lt;i class="fa fa-calendar"&gt;&lt;/i&gt; &amp;nbsp; Wed 3:00 - 5:00pm
+&lt;i class="fa fa-calendar"&gt;&lt;/i&gt; &amp;nbsp; Wed 3:00 - 5:00pm &lt;br&gt;
+&lt;i class="fa fa-university"&gt;&lt;/i&gt; &amp;nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766)
+
+[Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
+
+&lt;i class="fa fa-envelope"&gt;&lt;/i&gt; &amp;nbsp; [zhuoqun.wang@duke.edu](mailto:zhuoqun.wang@duke.edu) &lt;br&gt;
+&lt;i class="fa fa-calendar"&gt;&lt;/i&gt; &amp;nbsp; Tues 3:00 - 5:00pm &lt;br&gt;
+&lt;i class="fa fa-university"&gt;&lt;/i&gt; &amp;nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766)
 
 
 
@@ -128,9 +128,9 @@ All materials and information will be posted on the course webpage:
 
 - What computing language will we use? R!
 
-&lt;!-- -- --&gt;
+--
 
-&lt;!-- - Why not python? I'll provide answers in class. --&gt;
+- What if I don't know R? This course assumes you already know R but you can still learn on the fly (you must be self-motivated). Here are some resources for you: [https://sta-602l-s20.github.io/Course-Website/resources/](https://sta-602l-s20.github.io/Course-Website/resources/).
 
 
 ---
@@ -163,9 +163,18 @@ class: center, middle
 
 
 ---
-## What topics will we cover?
+## Other details
 
-- Section 9 of the syllabus (here: https://sta-602l-s20.github.io/Course-Website/syllabus_pdf/Syllabus.pdf).
+- What topics will we cover? Refer to Section 9 of the syllabus (here: https://sta-602l-s20.github.io/Course-Website/syllabus_pdf/Syllabus.pdf).
+
+--
+
+- If you are auditing this course, remember to complete the audit form for the graduate school.
+
+--
+
+- Confirm that you have access to Sakai and Gradescope.
+
 
 
 ---
@@ -182,9 +191,9 @@ class: center, middle
 
 - Your full name.
 
-- What name do you prefer to go by?
+- The name you prefer to go by.
 
-- One thing you hope to take away from this class.
+- One goal you hope this course would help you achieve.
 
 
 ---
@@ -237,6 +246,10 @@ and validation.
 --
 
   + `\(\theta\)` be the .hlight[parameter of interest].
+  
+--
+
+- More to come later.
 
 
 ---
@@ -268,13 +281,13 @@ and validation.
 ---
 ## Building blocks of Bayesian inference
 
-- Idealized Bayesian learning:
+- Now, to a slightly more complicated version of Bayes' rule. First,
 
   1. For each `\(\theta \in \Theta\)`, specify a .hlight[prior distribution] `\(p(\theta)\)` or `\(\pi(\theta)\)`, describing our beliefs about `\(\theta\)` being the true population parameter.
 
 --
 
-  2. For each `\(\theta \in \Theta\)` and `\(y \in \mathcal{Y}\)`, specify a .hlight[sampling distribution] `\(p(y|\theta)\)` [which gets us the .hlight[likelihood] `\(L(y;\theta)\)`] , describing our belief that the data we see `\(y\)` is the outcome of a study with true parameter `\(\theta\)`.
+  2. For each `\(\theta \in \Theta\)` and `\(y \in \mathcal{Y}\)`, specify a .hlight[sampling distribution] `\(p(y|\theta)\)`, describing our belief that the data we see `\(y\)` is the outcome of a study with true parameter `\(\theta\)`. `\(p(y|\theta)\)` gets us the .hlight[likelihood] `\(L(y;\theta)\)`
 
 --
 
@@ -282,7 +295,7 @@ and validation.
 
 --
 
-- How do we get from Step 1 to 3? A slightly more complicated version of Bayes' rule!
+- Now, how do we get from Step 1 to 3? .hlight[Bayes' rule]!
 .block[
 .small[
 `$$p(\theta | y) = \frac{p(\theta)L(y;\theta)}{\int_{\Theta}p(\tilde{\theta})L(y; \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{p(\theta)L(y;\theta)}{L(y)}$$`
@@ -308,6 +321,10 @@ Many types of priors may be of interest. These may
 
   + assign probability more or less evenly over a large region of the parameter space.
   
+--
+
+  + and so on...
+  
 
 ---
 ## Notes on prior distributions
@@ -327,7 +344,7 @@ confident about one's beliefs.
 ---
 ## Notes on prior distributions
 
-- The prior quantifies your initial uncertainty in `\(\theta\)` - this may be necessarily subjective &amp; summarize experience in a field or
+- The prior quantifies your initial uncertainty in `\(\theta\)` before you observe new data (new information) - this may be necessarily subjective &amp; summarize experience in a field or
 prior research.
 
 --
@@ -371,18 +388,18 @@ prior research.
 ---
 ## Beta prior densities
 
-- These three priors correspond to beta(1,1) (also, Unif(0,1)), beta(1,11) and beta(2,10) densities.
+- These three priors correspond to beta(1,1) [also, Unif(0,1)], beta(1,11) and beta(2,10) densities.
 
 --
 
-- .hlight[beta(a,b)] is a probability density function on (0,1),
+- .hlight[beta(a,b)] is a probability density function (pdf) on (0,1),
 .block[
 .small[
 `$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1},$$`
 ]
 ]
 
-  where `\(B(a,b)\)` = beta function = normalizing constant ensuring the kernel integrates to one.
+  where `\(B(a,b)\)` = beta function = normalizing constant ensuring the kernel integrates to one. Note: some texts write `\(\textrm{beta}(\alpha,\beta)\)` instead.
   
 --
 

@@ -5,7 +5,7 @@ lessons:
   
   - date: "Fri, Jan 10"
     title: "Course overview and introduction to Bayesian inference"
-    #slides: "lec-slides/01-intro.html"
+    slides: "lec-slides/01-intro.html"
     reading: "reading-01.html"
     #hw: "hw-00.html"
 

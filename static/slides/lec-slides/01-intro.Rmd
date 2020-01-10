@@ -42,10 +42,6 @@ class: center, middle
 
 ## What is this course about?
 
-<i class="fa fa-clock fa-2x"></i> We will follow Hoff's book - a chapter a week (give or take).
-
---
-
 <i class="fa fa-book fa-2x"></i> Learn the foundations of Bayesian inference.
 
 --
@@ -63,6 +59,10 @@ class: center, middle
 --
 
 <i class="fa fa-refresh fa-spin fa-2x"></i> ".hlight[Prior] $\rightarrow$ .hlight[likelihood] $\rightarrow$ .hlight[posterior]" over and over again!
+
+--
+
+<i class="fa fa-clock fa-2x"></i> We will follow the Hoff book closely -- roughly one chapter per week.
 
 --
 
@@ -99,17 +99,17 @@ A Bayesian version will usually make things better...
 
 ## TAs
 
-[Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
-
-<i class="fa fa-envelope"></i> &nbsp; [zhuoqun.wang@duke.edu](mailto:zhuoqun.wang@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Tues 3:00 - 5:00pm
-
 [Bai Li](https://stat.duke.edu/people/bai-li)
 
 <i class="fa fa-envelope"></i> &nbsp; [bai.li@duke.edu](mailto:bai.li@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Wed 3:00 - 5:00pm
+<i class="fa fa-calendar"></i> &nbsp; Wed 3:00 - 5:00pm <br>
+<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766)
+
+[Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
+
+<i class="fa fa-envelope"></i> &nbsp; [zhuoqun.wang@duke.edu](mailto:zhuoqun.wang@duke.edu) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tues 3:00 - 5:00pm <br>
+<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766)
 
 
 
@@ -137,9 +137,9 @@ All materials and information will be posted on the course webpage:
 
 - What computing language will we use? R!
 
-<!-- -- -->
+--
 
-<!-- - Why not python? I'll provide answers in class. -->
+- What if I don't know R? This course assumes you already know R but you can still learn on the fly (you must be self-motivated). Here are some resources for you: [https://sta-602l-s20.github.io/Course-Website/resources/](https://sta-602l-s20.github.io/Course-Website/resources/).
 
 
 ---
@@ -172,9 +172,18 @@ class: center, middle
 
 
 ---
-## What topics will we cover?
+## Other details
 
-- Section 9 of the syllabus (here: https://sta-602l-s20.github.io/Course-Website/syllabus_pdf/Syllabus.pdf).
+- What topics will we cover? Refer to Section 9 of the syllabus (here: https://sta-602l-s20.github.io/Course-Website/syllabus_pdf/Syllabus.pdf).
+
+--
+
+- If you are auditing this course, remember to complete the audit form for the graduate school.
+
+--
+
+- Confirm that you have access to Sakai and Gradescope.
+
 
 
 ---
@@ -191,9 +200,9 @@ class: center, middle
 
 - Your full name.
 
-- What name do you prefer to go by?
+- The name you prefer to go by.
 
-- One thing you hope to take away from this class.
+- One goal you hope this course would help you achieve.
 
 
 ---
@@ -246,6 +255,10 @@ and validation.
 --
 
   + $\theta$ be the .hlight[parameter of interest].
+  
+--
+
+- More to come later.
 
 
 ---
@@ -277,13 +290,13 @@ $\Pr(A)$ = marginal probability of event $A$, $\Pr(B | A)$ = conditional probabi
 ---
 ## Building blocks of Bayesian inference
 
-- Idealized Bayesian learning:
+- Now, to a slightly more complicated version of Bayes' rule. First,
 
   1. For each $\theta \in \Theta$, specify a .hlight[prior distribution] $p(\theta)$ or $\pi(\theta)$, describing our beliefs about $\theta$ being the true population parameter.
 
 --
 
-  2. For each $\theta \in \Theta$ and $y \in \mathcal{Y}$, specify a .hlight[sampling distribution] $p(y|\theta)$ [which gets us the .hlight[likelihood] $L(y;\theta)$] , describing our belief that the data we see $y$ is the outcome of a study with true parameter $\theta$.
+  2. For each $\theta \in \Theta$ and $y \in \mathcal{Y}$, specify a .hlight[sampling distribution] $p(y|\theta)$, describing our belief that the data we see $y$ is the outcome of a study with true parameter $\theta$. $p(y|\theta)$ gets us the .hlight[likelihood] $L(y;\theta)$
 
 --
 
@@ -291,7 +304,7 @@ $\Pr(A)$ = marginal probability of event $A$, $\Pr(B | A)$ = conditional probabi
 
 --
 
-- How do we get from Step 1 to 3? A slightly more complicated version of Bayes' rule!
+- Now, how do we get from Step 1 to 3? .hlight[Bayes' rule]!
 .block[
 .small[
 $$p(\theta | y) = \frac{p(\theta)L(y;\theta)}{\int_{\Theta}p(\tilde{\theta})L(y; \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{p(\theta)L(y;\theta)}{L(y)}$$
@@ -317,6 +330,10 @@ Many types of priors may be of interest. These may
 
   + assign probability more or less evenly over a large region of the parameter space.
   
+--
+
+  + and so on...
+  
 
 ---
 ## Notes on prior distributions
@@ -336,7 +353,7 @@ confident about one's beliefs.
 ---
 ## Notes on prior distributions
 
-- The prior quantifies your initial uncertainty in $\theta$ - this may be necessarily subjective & summarize experience in a field or
+- The prior quantifies your initial uncertainty in $\theta$ before you observe new data (new information) - this may be necessarily subjective & summarize experience in a field or
 prior research.
 
 --
@@ -382,18 +399,18 @@ knitr::include_graphics("img/beta_densities.png")
 ---
 ## Beta prior densities
 
-- These three priors correspond to beta(1,1) (also, Unif(0,1)), beta(1,11) and beta(2,10) densities.
+- These three priors correspond to beta(1,1) [also, Unif(0,1)], beta(1,11) and beta(2,10) densities.
 
 --
 
-- .hlight[beta(a,b)] is a probability density function on (0,1),
+- .hlight[beta(a,b)] is a probability density function (pdf) on (0,1),
 .block[
 .small[
 $$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1},$$
 ]
 ]
 
-  where $B(a,b)$ = beta function = normalizing constant ensuring the kernel integrates to one.
+  where $B(a,b)$ = beta function = normalizing constant ensuring the kernel integrates to one. Note: some texts write $\textrm{beta}(\alpha,\beta)$ instead.
   
 --
 
