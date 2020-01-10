@@ -128,9 +128,9 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     bottom: 5px;
     right: 810px;
     height: 70px;
-    width: 81px;
+    width: 90px;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-image: url("img/class_logo.png");
 }
 

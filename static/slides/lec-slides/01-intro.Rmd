@@ -1,5 +1,5 @@
 ---
-title: "Overview of course and introduction to Bayesian inference"
+title: "Course overview and introduction to Bayesian inference"
 author: "Dr. Olanrewaju Michael Akande"
 date: "Jan 10, 2019"
 output:
@@ -34,7 +34,7 @@ library(rvest)
 
 class: center, middle
 
-# Welcome!
+# Welcome to STA 602L!
 
 
 
@@ -42,32 +42,36 @@ class: center, middle
 
 ## What is this course about?
 
-<i class="fa fa-book fa-2x"></i> Learn the general work flow for building statistical models.
+<i class="fa fa-clock fa-2x"></i> We will follow Hoff's book - a chapter a week (give or take).
 
 --
 
-<i class="fa fa-tasks fa-2x"></i> Use statistical models to answer inferential questions.
+<i class="fa fa-book fa-2x"></i> Learn the foundations of Bayesian inference.
 
 --
 
-<i class="fa fa-database fa-2x"></i> Work with real and messy datasets.
+<i class="fa fa-folder-open fa-2x"></i> Work through the theory of several Bayesian models.
 
 --
 
-<i class="fa fa-group fa-2x"></i> Hone collaborative and presentations skills.
+<i class="fa fa-tasks fa-2x"></i> Use Bayesian models to answer inferential questions.
 
 --
 
-<i class="fa fa-refresh fa-spin fa-2x"></i> Analyze! Analyze!! Analyze!!!
+<i class="fa fa-database fa-2x"></i> Apply the models to several different problem sets.
+
+--
+
+<i class="fa fa-refresh fa-spin fa-2x"></i> ".hlight[Prior] $\rightarrow$ .hlight[likelihood] $\rightarrow$ .hlight[posterior]" over and over again!
 
 --
 
 --- 
 <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
 <i class="fa fa-quote-right fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
-Essentially, all models are wrong, but some are useful.
+A Bayesian version will usually make things better...
 
--- Box, George E. P.
+-- Andrew Gelman.
 
 
 
@@ -75,31 +79,36 @@ Essentially, all models are wrong, but some are useful.
 
 ## Instructor
 
-Dr. Olanrewaju Michael Akande
+[Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.)
 
 <i class="fa fa-envelope"></i> &nbsp; [olanrewaju.akande@duke.edu](mailto:olanrewaju.akande@duke.edu) <br>
 <i class="fa fa-home"></i> &nbsp; [akandelanre.github.io.](https://akandelanre.github.io/IDS702_F19/) <br>
 <i class="fa fa-university"></i> &nbsp; [256 Gross Hall](https://maps.duke.edu/?id=21#!m/6866?s/Gross%20Hall) <br>
-<i class="fa fa-calendar"></i> &nbsp; Mon/Tue 3:00 - 4:00pm
+<i class="fa fa-calendar"></i> &nbsp; Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm (still subject to change!)
 
 
 
 ---
 
+## Lead TA
+
+[Jordan Bryan](https://stat.duke.edu/people/jordan-bryan) (mainly for STA 360)
+
+<i class="fa fa-envelope"></i> &nbsp; [jordan.bryan@duke.edu](mailto:jordan.bryan@duke.edu) <br>
+
+
 ## TAs
 
-[Azucena Morales](https://datascience.duke.edu/lidia-azu-azucena-morales-vasquez)
+[Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0)
 
-<i class="fa fa-envelope"></i> &nbsp; [azucena.morales@duke.edu](mailto:azucena.morales@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [257 Gross Hall](https://maps.duke.edu/?id=21#!m/6866?s/Gross%20Hall) <br>
-<i class="fa fa-calendar"></i> &nbsp; Thur 2:30 - 4:30pm
+<i class="fa fa-envelope"></i> &nbsp; [zhuoqun.wang@duke.edu](mailto:zhuoqun.wang@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tues 3:00 - 5:00pm
 
-<br>
+[Bai Li](https://stat.duke.edu/people/bai-li)
 
-Chenxi Wu
-
-<i class="fa fa-envelope"></i> &nbsp; [chenxi.wu@duke.edu](mailto:chenxi.wu@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [257 Gross Hall](https://maps.duke.edu/?id=21#!m/6866?s/Gross%20Hall) <br>
+<i class="fa fa-envelope"></i> &nbsp; [bai.li@duke.edu](mailto:bai.li@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [Old Chem 025](https://maps.duke.edu/map/?id=21#!s/key=Old%20Chemistry?m/2766) <br>
 <i class="fa fa-calendar"></i> &nbsp; Wed 3:00 - 5:00pm
 
 
@@ -110,52 +119,27 @@ Chenxi Wu
 
 All materials and information will be posted on the course webpage:
 
-[akandelanre.github.io/IDS702_F19/](https://akandelanre.github.io/IDS702_F19/)
+[https://sta-602l-s20.github.io/Course-Website/](https://sta-602l-s20.github.io/Course-Website/)
 
 --
 
-- Will we cover statistical theory? Yes, but for the most part, we will prioritize data analysis over rigorous theory.
+- How much theory will this class cover? A lot! Make sure you are especially comfortable working with probability distributions.
 
 --
 
-- Am I prepared to take this course? Yes, if you are familiar with the topics covered in the MIDS summer statistics review.
+- Am I prepared to take this course? Yes, if you are familiar with the topics covered in the course prerequisites.
 
 --
 
-- Will we be doing "very heavy" computing? Not exactly. We will mostly work with popular statistical packages.
+- Will we be doing "very heavy" computing? Not too heavy but yes, a good amount. You will be expected to be able to write your own MCMC sampler later on.
 
 --
 
-- What computing language will we use? R.
+- What computing language will we use? R!
 
---
+<!-- -- -->
 
-- Why not python? I'll provide answers in class.
-
-
-
----
-
-class: center, middle
-
-# Your turn!
-
-
-
----
-
-## Introductions
-
-- Your name.
-
-- Where you are from.
-
-- Your educational background.
-
-- One interesting fact other students don't already know about you.
-
-- One thing you hope to take away from this class.
-
+<!-- - Why not python? I'll provide answers in class. -->
 
 
 ---
@@ -165,237 +149,12 @@ class: center, middle
 # Course structure and policies
 
 
-
 ---
+## Course structure and policies
 
-## Prerequisites
-
-- Students are expected to know all topics covered in the MIDS summer course review and boot camp. These include
-
---
-
-  + Basic probability (including conditional probability, expectations and common probability distributions).
+- All on the website (here: [https://sta-602l-s20.github.io/Course-Website/policies/](https://sta-602l-s20.github.io/Course-Website/policies/))
 
 --
-
-  + Basic statistical inference (including hypothesis testing, confidence intervals, linear regression with one predictor, and exploratory data analysis). 
-
---
-
-  + Familiarity with R/Rstudio. 
-
---
-
-- Due to space constraints, the course is open only to students in the MIDS program.
-
---
-
-- Students outside the MIDS program should come talk to me after class.
-
-
-
----
-
-## Class meetings
-
-- Class attendance is compulsory! We will often engage in discussions outside/beyond (but related to) the contents of the lecture slides.
-
---
-
-- Class meetings are designed to be interactive; try to engage and don't be shy.
-
---
-
-- The methods we will cover are best learned by practical data analysis, so, there will be lots of "learn-by-doing".
-
---
-
-- Always revisit in-class examples and rerun the R codes to be sure you understand each topic. 
-
---
-
-- No need to print the course slides; let's keep the class green when possible. 
-
---
-
-- Bring your charged laptop to class every day.
-
---
-
-- Free free to ask me as many questions as possible during and outside classes; THERE ARE NO STUPID QUESTIONS!
-
-
-
----
-
-## Grading
-
-Component             | Percentage
-----------------------|----------------
-Methods and Data Analysis Assignments | 30%
-Final Project | 30%
-Team Project 1 | 15%
-Team Project 2 | 15%
-Lab Assignments | 10%
-
---
-
-- Although class attendance does not contribute directly to your final grades, attendance remains a firm expectation!
-
---
-
-- There are no make-ups for assignments or the projects except for medical or familial emergencies or for reasons approved by the instructor before the due date.
-
---
-
-- Exact ranges for letter grades will be curved and cutoffs will be determined after the final exam.
-
-
----
-
-## Methods and data analysis assignments
-
-- Assignments are posted on the course website. 
-
---
-
-- Turn in your assignments at the beginning of class on the due date. 
-
---
-
-- You can work with others on the assignments, but each person must write up and turn in her or his own answers. 
-
---
-
-- Assignments include questions on the computational and the mathematical aspects of the methods that we will learn during the semester, and questions that ask students to apply the modeling skills discussed during the semester. 
-
---
-
-- The assignments must be typed up using R Markdown, LaTeX or another word processor, and submitted on [Gradescope](https://www.gradescope.com/courses/57701/assignments) under Assignments.
-
-
-
----
-
-## Lab assignments
-
-- Lab assignments are meant to give you more hands-on experience with data analysis using R. 
-
---
-
-- Labs times also gives you an additional platform to ask for help for your team and individual projects.
-
---
-
-- Attendance is not mandatory, however, each lab assignment should be submitted in timely fashion on the due date.
-
---
-
-- You are REQUIRED to use R Markdown to type up your lab reports.
-
-
-
----
-
-## Team projects
-
-- Students work in teams to analyze data selected by the instructor. 
-
---
-
-- You will work within your preassigned MIDS groups for the team projects.
-
---
-
-- Each group must write ONE team report with their data analysis findings. 
-
---
-
-- Each group will also have the opportunity to present their results to the rest of the class.
-
---
-
-- Detailed instructions will be made available later.
-
-
-
----
-
-## Final project
-
-- Each student will analyze a data-based research question of their choosing, subject to approval. 
-
---
-
-- The data should comprise several variables amenable to statistical analyses via modeling. 
-
---
-
-- You can bring in their own research data sets, or you can ask me for assistance with identifying appropriate data. 
-
---
-
-- All students present their results in a class at the end of the semester. 
-
---
-
-- Detailed instructions will be made available later.
-
-
----
-
-## Academic integrity:
-
-- Remember the Duke Community Standard that you have agreed to abide by:
-
-  .large[
-  > To uphold the Duke Community Standard:
-
-  > - I will not lie, cheat, or steal in my academic endeavors;
-  > - I will conduct myself honorably in all my endeavors; and
-  > - I will act if the Standard is compromised.
-  ]
-
---
-
-- Cheating on exams or plagiarism on homework assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the <a href="http://www.studentaffairs.duke.edu/conduct/resources/dcs">Duke Community Standard</a>, and will not be tolerated.
-
---
-
-- Please review the Academic Dishonesty policies <a href="https://studentaffairs.duke.edu/conduct">here</a>.
-
-
-
----
-
-## Diversity & inclusiveness:
-
-- This course is designed so that students from all backgrounds and perspectives all feel welcome both in and out of class. 
-
---
-
-- Please feel free to talk to me (in person or via email) if you do not feel well-served by any aspect of this class, or if some aspect of class is not welcoming or accessible to you.
-
---
-
-- My goal is for you to succeed in this course, therefore, please let me know immediately if you feel you are struggling with any part of the course more than you know how to manage. 
-
---
-
-- Doing so will not affect your grades, but it will allow me to provide the resources to help you succeed in the course.
-
-
-
----
-
-## Disability statement
-
-- Students with disabilities who believe that they may need accommodations in the class are encouraged to contact the <a href="https://access.duke.edu/students/staff.php">Student Disabilities Access Office</a> at 919-668-1267 or <a href="mailto:disabilities@aas.duke.edu">disabilities@aas.duke.edu</a> as soon as possible to better ensure that such accommodations are implemented in a timely fashion.
-
-
-
----
-## Final Notes
 
 - Make use of the teaching team's office hours, we're here to help!
 
@@ -411,17 +170,236 @@ Lab Assignments | 10%
 
 - Please refrain from texting or using your computer for anything other than coursework during class.
 
---
 
-- You must be in class on a day when you're scheduled to present, there are no make ups for presentations.
+---
+## What topics will we cover?
+
+- Section 9 of the syllabus (here: https://sta-602l-s20.github.io/Course-Website/syllabus_pdf/Syllabus.pdf).
 
 
 ---
-## Final notes
 
-- Split into groups of fours: just find the three closest students to you.
+class: center, middle
 
-- Open the assessment key. On the website, just go back to the class schedule, refresh the page, and click the same HW link. 
+# Your turn!
 
-- Discuss the responses for in 10 minutes. Which questions did you get wrong and why?
+
+
+---
+
+## Introductions
+
+- Your full name.
+
+- What name do you prefer to go by?
+
+- One thing you hope to take away from this class.
+
+
+---
+
+class: center, middle
+
+# Introduction to Bayesian inference
+
+
+---
+## What are Bayesian methods?
+
+- .hlight[Bayesian methods] are data analysis tools derived from the principles of Bayesian inference and provide
+
+--
+
+  + parameter estimates with good statistical properties;
+  
+--
+
+  + parsimonious descriptions of observed data;
+  
+--
+
+  + predictions for missing data and forecasts of future data; and
+  
+--
+
+  + a computational framework for model estimation, selection,
+and validation.
+
+
+---
+## Building blocks of Bayesian inference
+
+- Generally (unless otherwise stated), in this course, we will use the following notation. Let
+
+--
+
+  + $\mathcal{Y}$ be the .hlight[sample space];
+
+--
+
+  + $y$ be the .hlight[observed data];
+
+--
+
+  + $\Theta$ be the .hlight[parameter space]; and
+
+--
+
+  + $\theta$ be the .hlight[parameter of interest].
+
+
+---
+## Bayes' theorem - basic conditional probability
+
+- Let's take a step back and quickly review the basic form of Bayes' theorem.
+
+--
+
+- Suppose there are some events $A$ and B having probabilities $\Pr(A)$ and $\Pr(B)$.
+
+--
+
+- Bayes' rule gives the relationship between the marginal probabilities of A and B and the conditional probabilities.
+
+--
+
+- In particular, the basic form of .hlight[Bayes' rule] or .hlight[Bayes' theorem] is
+.block[
+.small[
+$$\Pr(A | B) = \frac{\Pr(A \ \textrm{and} \ B)}{\Pr(B)} = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
+]
+]
+
+--
+$\Pr(A)$ = marginal probability of event $A$, $\Pr(B | A)$ = conditional probability of event $B$ given event $A$, and so on.
+
+
+---
+## Building blocks of Bayesian inference
+
+- Idealized Bayesian learning:
+
+  1. For each $\theta \in \Theta$, specify a .hlight[prior distribution] $p(\theta)$ or $\pi(\theta)$, describing our beliefs about $\theta$ being the true population parameter.
+
+--
+
+  2. For each $\theta \in \Theta$ and $y \in \mathcal{Y}$, specify a .hlight[sampling distribution] $p(y|\theta)$ [which gets us the .hlight[likelihood] $L(y;\theta)$] , describing our belief that the data we see $y$ is the outcome of a study with true parameter $\theta$.
+
+--
+
+  3. After observing the data $y$, for each $\theta \in \Theta$, update the prior distribution to a .hlight[posterior distribution] $p(\theta | y)$, describing our "updated" belief about $\theta$ being the true population parameter.
+
+--
+
+- How do we get from Step 1 to 3? A slightly more complicated version of Bayes' rule!
+.block[
+.small[
+$$p(\theta | y) = \frac{p(\theta)L(y;\theta)}{\int_{\Theta}p(\tilde{\theta})L(y; \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{p(\theta)L(y;\theta)}{L(y)}$$
+]
+]
+
+  We will use this over and over throughout the course!
+
+  
+  
+---
+## Notes on prior distributions
+
+Many types of priors may be of interest. These may
+
+  + represent our own beliefs; 
+
+--
+
+  + represent beliefs of a variety of people with differing prior opinions; or
+
+--
+
+  + assign probability more or less evenly over a large region of the parameter space.
+  
+
+---
+## Notes on prior distributions
+
+- .hlight[Subjective Bayes]: a prior should accurately quantify some individual's beliefs about $\theta$.
+
+--
+
+- .hlight[Objective Bayes]: the prior should be chosen to produce a procedure with "good" operating characteristics without including subjective prior knowledge.
+
+--
+
+- .hlight[Weakly informative]: prior centered in a plausible region but not overly-informative, as there is a tendency to be over
+confident about one's beliefs.
+
+
+---
+## Notes on prior distributions
+
+- The prior quantifies your initial uncertainty in $\theta$ - this may be necessarily subjective & summarize experience in a field or
+prior research.
+
+--
+
+- Even if the prior is not "perfect", placing higher probability in a ballpark of the truth leads to better performance.
+
+--
+
+- Hence, it is very seldom the case that a weakly informative prior is not preferred over no prior.
+
+--
+
+- One (very important) role of the prior is to stabilize estimates in the presence of limited data.
+
+  
+  
+---
+## Simple example - estimating a population proportion
+
+- Suppose $\theta \in (0,1)$ is the population proportion of individuals with diabetes in the US.
+
+--
+
+- A prior distribution for $\theta$ would correspond to some distribution that distributes probability across $(0, 1)$.
+
+--
+
+- A very precise prior corresponding to abundant prior knowledge would be concentrated tightly in a small sub-interval of $(0, 1)$.
+
+--
+
+- A vague prior may be distributed widely across $(0, 1)$ - e.g., a uniform distribution would be the common choice here.
+
+
+---
+## Some possible prior densities
+
+```{r echo=FALSE, out.height="500px"}
+knitr::include_graphics("img/beta_densities.png")
+```
+
+
+---
+## Beta prior densities
+
+- These three priors correspond to beta(1,1) (also, Unif(0,1)), beta(1,11) and beta(2,10) densities.
+
+--
+
+- .hlight[beta(a,b)] is a probability density function on (0,1),
+.block[
+.small[
+$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1},$$
+]
+]
+
+  where $B(a,b)$ = beta function = normalizing constant ensuring the kernel integrates to one.
+  
+--
+
+- The beta(a,b) distribution has expectation $\mathbb{E} = a/(a+b)$ and the density becomes more and more concentrated as $a + b$ = prior "sample size" increases.
+
+--
+
+- We will look more carefully into the beta-binomial model next week but for now, I'll illustrate how this prior gets updated as data becomes available.
 

@@ -11,11 +11,11 @@ ALL students are expected to be familiar with all the topics covered within the 
 
 ### Class
 
-Class time is designed to be as interactive as possible. My role as instructor is to introduce you to Bayesian methods, but it is up to you to take them and make use of them. The techniques we will cover are best learned by regular homework assignments and practical data analysis, so you will be working on various homeworks and models as much as possible, through a variety of tasks and activities throughout each class. Ask as many questions as possible during and outside classes; there are no stupid questions. 
+Class time is designed to be as interactive as possible. My role as instructor is to introduce you to Bayesian methods, but it is up to you to take them and make use of them. The techniques we will cover are best learned by regular homework assignments and practical data analysis, so you will be working on various homework assignments and models as much as possible, through a variety of tasks and activities throughout each class. Ask as many questions as possible during and outside classes; there are no stupid questions. 
 
 ### Graded Work
 
-Graded work for the course will consist of homework, lab exercises, quizzes, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released!
+Graded work for the course will consist of homework, lab exercises, quizzes, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released! **Always write in complete sentences and show all of your steps.**
 
 {.table .table-condensed .table-striped .text-left}
 Component             | Percentage
@@ -35,7 +35,7 @@ Grades **may** be curved at the end of the semester. Cumulative averages of 90% 
 
 ### Descriptions of graded work
 
-#### Homework and lab exercises
+#### Homework exercises
 Homework assignments will be given on a weekly basis. They will be based on both the lectures and labs and will be announced every Friday at the most – please always check the website! **Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.** For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
 
 Each student MUST write up and turn in her or his own answers. You are encouraged to talk to each other regarding homework problems or to the instructor/TA. However, the write-up, solution, and code must be entirely your own work. The assignments must be submitted on [Gradescope](https://www.gradescope.com/courses/77790/assignments) under ``Assignments''. Note that you will not be able to make online submissions after the due date, so be sure to submit before or by the Gradescope-specified deadline.
@@ -44,6 +44,8 @@ Homework solutions will be curated from student solutions with proper attributio
 
 **Finally, your lowest homework score will be dropped!**
 
+#### Lab exercises
+The objective of the lab assignments is to give you more hands-on experience with Bayesian data analysis.zhuoqun.wang@duke.edu Come learn a concept or two and some R from the TAs and then work on the computational part of the homework assignments. Lab attendance is not mandatory, however, each lab assignment should be submitted in timely fashion on the due date. You are REQUIRED to use R Markdown to type up your lab reports.
 
 #### Quizzes
 Two quizzes will be administered through the semester, one before the midterm (sometime in February) and the other after the midterm (sometime early April). The exact dates will be announced later. There will be no make-ups for quizzes so make sure to be in class on the dates to take them.
@@ -91,7 +93,7 @@ Students with disabilities who believe that they may need accommodations in the 
 
 
 ### Other Information
-It can be a lot more pleasant oftentimes to get in-person answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to come to my office during office hours or by appointment to discuss a homework problem or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily.
+It can be a lot more pleasant oftentimes to get in-person answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to come to my office during office hours or by appointment to discuss a homework problem or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily. Also, take advantage of **Piazza** and post your questions there!
 
 
 

@@ -4,12 +4,10 @@ lessons:
   - title: "WEEK 1"
   
   - date: "Fri, Jan 10"
-    title: "Overview of course and introduction to Bayesian inference"
+    title: "Course overview and introduction to Bayesian inference"
     #slides: "lec-slides/01-intro.html"
     reading: "reading-01.html"
     #hw: "hw-00.html"
-    
-  #- title: "PART I: MULTIPLE LINEAR REGRESSION"
-  #  reading: "reading-01.html"
+
     
  
