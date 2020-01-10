@@ -1,7 +1,7 @@
 ---
 title: "Course overview and introduction to Bayesian inference"
 author: "Dr. Olanrewaju Michael Akande"
-date: "Jan 10, 2019"
+date: "Jan 10, 2020"
 output:
   xaringan::moon_reader:
     css: "slides.css"

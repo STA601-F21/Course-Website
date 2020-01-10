@@ -8,7 +8,7 @@ PlotPriorPlusPosterior <- function(a,b,ones,zeros){
 }
 #PlotPriorPlusPosterior(a=1,b=1,ones=5,zeros=18)
 
-n <- 1000
+n <- 30
 theta_true <- 0.25
 y <- rbinom(n,1,theta_true)
 mean(y)
@@ -18,5 +18,5 @@ for(i in 1:n){
   if(y[i]==1){
     ones <- ones + 1
   } else {zeros <- zeros + 1}
-  PlotPriorPlusPosterior(a=1,b=1,ones,zeros); Sys.sleep(0.5)
+  PlotPriorPlusPosterior(a=1,b=1,ones,zeros); Sys.sleep(1)
 }

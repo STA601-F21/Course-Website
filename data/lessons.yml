@@ -1,13 +1,171 @@
 lessons:
   - title: "PART I: INTRODUCTION TO BAYESIAN INFERENCE"
+    reading: "reading-01.html"
   
   - title: "WEEK 1"
   
   - date: "Fri, Jan 10"
     title: "Course overview and introduction to Bayesian inference"
     slides: "lec-slides/01-intro.html"
-    reading: "reading-01.html"
     #hw: "hw-00.html"
 
+  - title: "WEEK 2"
+  
+  - date: "Mon, Jan 13"
+    title: "Lab 1: R review"
+    #lab: "lab-01-r-review.html"
+    
+  - date: "Wed, Jan 15"
+  
+  - date: "Fri, Jan 17"
+  
+  - title: "WEEK 3"
+  
+  - date: "Mon, Jan 20"
+    title: "No lab: Martin Luther King Jr. Day"
+    
+  - date: "Wed, Jan 22"
+    title: "Drop/add ends"
+  
+  - date: "Fri, Jan 24"
+  
+  - title: "WEEK 4"
+  
+  - date: "Mon, Jan 27"
+    title: "Lab 2: The Beta-Binomial model"
+  
+  - date: "Wed, Jan 29"
+  
+  - date: "Fri, Jan 31"
+  
+  - title: "WEEK 5"
+  
+  - date: "Mon, Feb 3"
+    title: "Lab 3: The Poisson model and posterior predictive checks"
+  
+  - date: "Wed, Feb 5"
+  
+  - date: "Fri, Feb 7"
+  
+  - title: "WEEK 6"
+  
+  - date: "Mon, Feb 10"
+    title: "Lab 4: Prior selection and model reparameterization"
+  
+  - date: "Wed, Feb 12"
+  
+  - date: "Fri, Feb 14"
+  
+  - title: "WEEK 7"
+  
+  - date: "Mon, Feb 17"
+    title: "Lab 5: Truncated data and modeling"
+  
+  - date: "Wed, Feb 19"
+  
+  - date: "Fri, Feb 21"
+  
+  - title: "WEEK 8"
+  
+  - date: "Mon, Feb 24"
+    title: "Lab 6: Inference in Gaussian models"
+  
+  - date: "Wed, Feb 26"
+  
+  - date: "Fri, Feb 28"
+  
+  - title: "WEEK 9"
+  
+  - date: "Mon, Mar 2"
+    title: "Lab 7: Missing data and imputation"
+  
+  - date: "Wed, Mar 4"
+  
+  - date: "Fri, Mar 6"
+    title: "Spring break begins 7:00pm"
+  
+  - title: "WEEK 10"
+  
+  - date: "Mon, Mar 9"
+    title: "No lab: spring break"
+    
+  - date: "Wed, Mar 11"
+    title: "No class: spring break"
+    
+  - date: "Fri, Mar 13"
+    title: "No class: spring break"
+    
+  - title: "WEEK 11"
+  
+  - date: "Mon, Mar 16"
+    title: "Lab 8: Introduction to Hamiltonian Monte Carlo"
+  
+  - date: "Wed, Mar 18"
+  
+  - date: "Fri, Mar 20"
+  
+  - title: "WEEK 12"
+  
+  - date: "Mon, Mar 23"
+    title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
+  
+  - date: "Wed, Mar 25"
+  
+  - date: "Fri, Mar 27"
+  
+  - title: "WEEK 13"
+  
+  - date: "Mon, Mar 30"
+    title: "Lab 10: Metropolis-Hastings"
+  
+  - date: "Wed, Apr 1"
+  
+  - date: "Fri, Apr 3"
+  
+  - title: "WEEK 14"
+  
+  - date: "Mon, Apr 6"
+    title: "Lab 11: Multilevel modeling"
+  
+  - date: "Wed, Apr 8"
+  
+  - date: "Fri, Apr 10"
+  
+  - title: "WEEK 15"
+  
+  - date: "Mon, Apr 13"
+    title: "No class: maybe review session??"
+  
+  - date: "Wed, Apr 15"
+    title: "Graduate classes end"
+    
+  - date: "Fri, Apr 17"
+    title: "No class: reading period"
+  
+  - date: "Mon, Apr 20"
+    title: "No lab: reading period"
+    
+  - date: "Wed, Apr 22"
+    title: "No class: reading period"
+    
+  - date: "Fri, Apr 24"
+    title: "No class: reading period"
+    
+  - date: "Mon, Apr 27"
+    title: "No lab: reading period"
+    
+  - date: "Wed, Apr 29"
+    title: "No class: reading period"
+    
+  - date: "Fri, May 1"
+    title: "No class: reading period"
+    
+  - date: "Sat, May 2"
+    title: "Final exam"
+    
+    
+    
+    
+    
     
  
