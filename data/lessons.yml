@@ -13,7 +13,7 @@ lessons:
   
   - date: "Mon, Jan 13"
     title: "Lab 1: R review"
-    #lab: "lab-01-r-review.html"
+    lab: "lab-01-r-review-blank.html"
     
   - date: "Wed, Jan 15"
   
