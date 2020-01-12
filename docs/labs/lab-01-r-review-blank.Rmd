@@ -62,7 +62,7 @@ You will notice we successfully loaded the data (you should see it in the Enviro
 ***
 ### Exercise
 
-Create a code chunk and set the header parameter to TRUE and print out the top rows of the table with `head()` as above.
+1. Create a code chunk and set the header parameter to TRUE and print out the top rows of the table with `head()` as above.
 
 ***
  
@@ -100,7 +100,7 @@ seq1
 ***
 ### Exercise
 
-Generate a sequence of $100$ equispaced real numbers from $0$ to $1$ and store it in a variable called `seq2`.
+2. Generate a sequence of $100$ equispaced real numbers from $0$ to $1$ and store it in a variable called `seq2`.
 
 ***
 
@@ -142,7 +142,7 @@ is.na(sqrt(seq3))
 ***
 ### Exercise
 
-Sort the entries in `seq3` from greatest to least.
+3. Sort the entries in `seq3` from greatest to least.
 
 ***
 
@@ -197,7 +197,7 @@ apply(X = mat5, MARGIN = 2, FUN = mean)
 ***
 ### Exercise
 
-Find the variance of each row of `mat5`
+4. Find the variance of each row of `mat5`
 
 ***
 
@@ -263,7 +263,7 @@ Be sure to check the function documentation (with `?rnorm` or a similar command)
 ***
 ### Exercise
 
-Generate $500$ samples from a Beta distribution with shape parameter $[a, b] = [0.5, 0.5]$ and store the samples in a variable called `W`
+5. Generate $500$ samples from a Beta distribution with shape parameter $[a, b] = [0.5, 0.5]$ and store the samples in a variable called `W`
 
 ***
 
@@ -313,7 +313,7 @@ norm_samples %>%
 ***
 ### Exercise
 
-Browse online resources (some below), or use code from above to make a few plots of your own.
+6. Browse online resources (some below), or use code from above to make a few plots of your own.
 
 ***
 
@@ -327,6 +327,10 @@ For more information on the R programming language please refer to some or all o
 
 - [ColorBrewer](http://colorbrewer2.org)
 
+
+# Grading
+
+10 points: 1 point each for exercises 1-5, 2 points for exercise 6, 3 points for attempting the lab.
 
 
 # Acknowledgement

@@ -494,6 +494,7 @@ background-color: #bf4f22;
 <li><a href="#exercise-5">Exercise</a></li>
 </ul></li>
 <li><a href="#r-tutorials-and-resources">R tutorials and resources</a></li>
+<li><a href="#grading">Grading</a></li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 </ul>
 </div>
@@ -518,7 +519,9 @@ background-color: #bf4f22;
 <hr />
 <div id="exercise" class="section level3">
 <h3>Exercise</h3>
-<p>Create a code chunk and set the header parameter to TRUE and print out the top rows of the table with <code>head()</code> as above.</p>
+<ol style="list-style-type: decimal">
+<li>Create a code chunk and set the header parameter to TRUE and print out the top rows of the table with <code>head()</code> as above.</li>
+</ol>
 <hr />
 </div>
 </div>
@@ -547,7 +550,9 @@ background-color: #bf4f22;
 <hr />
 <div id="exercise-1" class="section level3">
 <h3>Exercise</h3>
-<p>Generate a sequence of <span class="math inline">\(100\)</span> equispaced real numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> and store it in a variable called <code>seq2</code>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Generate a sequence of <span class="math inline">\(100\)</span> equispaced real numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> and store it in a variable called <code>seq2</code>.</li>
+</ol>
 <hr />
 <p>Let’s say we want to retrieve the i-th element in a vector. This is called indexing, and we do so using bracket notation. For example, if we want to retrieve the tenth element from seq1, then i=10:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">seq1[<span class="dv">10</span>]</a></code></pre></div>
@@ -572,7 +577,9 @@ background-color: #bf4f22;
 </div>
 <div id="exercise-2" class="section level3">
 <h3>Exercise</h3>
-<p>Sort the entries in <code>seq3</code> from greatest to least.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Sort the entries in <code>seq3</code> from greatest to least.</li>
+</ol>
 <hr />
 </div>
 </div>
@@ -616,7 +623,9 @@ background-color: #bf4f22;
 <hr />
 <div id="exercise-3" class="section level3">
 <h3>Exercise</h3>
-<p>Find the variance of each row of <code>mat5</code></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Find the variance of each row of <code>mat5</code></li>
+</ol>
 <hr />
 <p>You can define your own functions and pass them into the FUN argument as well. For example, suppose we want to calculate the natural logarithm of the maximum element in a row/column. We can write a function which takes in a vector and returns the range. We then feed that function in as an argument into <code>apply()</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># create a function to calculate log of maximum for arbitrary x, and returns the value stored in ret</span></a>
@@ -659,7 +668,9 @@ background-color: #bf4f22;
 <hr />
 <div id="exercise-4" class="section level3">
 <h3>Exercise</h3>
-<p>Generate <span class="math inline">\(500\)</span> samples from a Beta distribution with shape parameter <span class="math inline">\([a, b] = [0.5, 0.5]\)</span> and store the samples in a variable called <code>W</code></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Generate <span class="math inline">\(500\)</span> samples from a Beta distribution with shape parameter <span class="math inline">\([a, b] = [0.5, 0.5]\)</span> and store the samples in a variable called <code>W</code></li>
+</ol>
 <hr />
 </div>
 </div>
@@ -700,7 +711,9 @@ background-color: #bf4f22;
 <hr />
 <div id="exercise-5" class="section level3">
 <h3>Exercise</h3>
-<p>Browse online resources (some below), or use code from above to make a few plots of your own.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Browse online resources (some below), or use code from above to make a few plots of your own.</li>
+</ol>
 <hr />
 </div>
 </div>
@@ -712,6 +725,10 @@ background-color: #bf4f22;
 <li><p><a href="https://ggplot2.tidyverse.org">ggplot2</a></p></li>
 <li><p><a href="http://colorbrewer2.org">ColorBrewer</a></p></li>
 </ul>
+</div>
+<div id="grading" class="section level1">
+<h1>Grading</h1>
+<p>10 points: 1 point each for exercises 1-5, 2 points for exercise 6, 3 points for attempting the lab.</p>
 </div>
 <div id="acknowledgement" class="section level1">
 <h1>Acknowledgement</h1>
