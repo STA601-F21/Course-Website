@@ -1,5 +1,5 @@
 ---
-title: "Readings for introduction to Bayesian inference"
+title: "Readings for Probability review and one parameter models"
 output: 
   html_document:
     css: reading.css
@@ -14,15 +14,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Required:
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
-    + Section 1: Introduction and examples
+    + Section 2: Belief, probability and exchangeability
+    + Section 3.1: The binomial model
 
 ## Optional:
 
 - [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
-    + Section 1.1: The three steps of Bayesian data analysis
-    + Section 1.2: General notation for statistical inference
-    + Section 1.3: Bayesian inference
-    + Section 1.10: Bayesian inference in applied statistics
+    + Section 1.4: Discrete probability examples: genetics and spell checking
+    + Section 1.5: Probability as a measure of uncertainty
+    + Section 1.8: Some useful results from probability theory
+    + Section 2.1: Estimating a probability from binomial data
+    + Section 2.2: Posterior as compromise between data and prior information
+    + Section 2.3: Summarizing posterior inference
+    + Section 2.4: Informative prior distributions
     
 - [Bayesian Computation with R (Second Edition)](https://www.amazon.com/Bayesian-Computation-R-Use/dp/0387922970) by Jim Albert:
     + Section 2: Introduction to Bayesian thinking

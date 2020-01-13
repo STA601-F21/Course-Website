@@ -1,12 +1,12 @@
 lessons:
   - title: "PART I: INTRODUCTION TO BAYESIAN INFERENCE"
-    reading: "reading-01.html"
   
   - title: "WEEK 1"
   
   - date: "Fri, Jan 10"
     title: "Course overview and introduction to Bayesian inference"
     slides: "lec-slides/01-intro.html"
+    reading: "reading-01.html"
     #hw: "hw-00.html"
 
   - title: "WEEK 2"
@@ -16,6 +16,8 @@ lessons:
     lab: "lab-01-r-review-blank.html"
     
   - date: "Wed, Jan 15"
+    title: "Probability review and one parameter models"
+    reading: "reading-02.html"
   
   - date: "Fri, Jan 17"
   
