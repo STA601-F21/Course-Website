@@ -1,18 +1,12 @@
 ---
 title: 'STA 602L Homework and Lab Template'
 author: "Student"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "13 January, 2020"
 output:
   pdf_document: default
 ---
 
-```{r setup, message=F, warning=F, echo=F}
-library(tidyverse)
-require(magrittr)
-require(plyr)
-ggplot2::theme_set(ggplot2::theme_bw())
-knitr::opts_chunk$set(fig.align = 'center')
-```
+
 
 Visit [this site](https://rmarkdown.rstudio.com/lesson-1.html) for more information on R Markdown.
 
@@ -36,11 +30,19 @@ $$
 
 Finally, some code:
 
-```{r}
+
+```r
 x <- rnorm(1000, 0, 1)
 x %>% data.frame() %>% ggplot2::ggplot() + geom_histogram(aes(x = x))
-  
 ```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+
+
+\begin{center}\includegraphics{LabReport_files/figure-latex/unnamed-chunk-1-1} \end{center}
 
 ## Exercise 2
 

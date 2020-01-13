@@ -1,11 +1,9 @@
 ---
-title: 'STA 602L Homework Template'
+title: 'STA 602L Homework and Lab Template'
 author: "Student"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
-  html_document:
-    theme: cerulean
-    highlight: tango
+output:
+  pdf_document: default
 ---
 
 ```{r setup, message=F, warning=F, echo=F}

@@ -27,7 +27,19 @@ knitr::opts_chunk$set(eval = FALSE)
 **Due:** 11:59pm, Jan 13, 2020
 
 
+# Housekeeping
 
+## R/RStudio
+
+You all should have R and RStudio installed on your computers by now. If you do not, first install the latest version of R here: https://cran.rstudio.com (remember to select the right installer for your operating system). Next, install the latest version of RStudio here: https://www.rstudio.com/products/rstudio/download/. Scroll down to the "Installers for Supported Platforms" section and find the right installer for your operating system.
+
+## R Markdown
+
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+
+## Gradescope
+
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/77790/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
 
 # Getting started
 
