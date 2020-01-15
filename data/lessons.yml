@@ -23,6 +23,8 @@ lessons:
     slidespdf: "lec-slides/02-one-parameter-models-I.pdf"
     
   - date: "Fri, Jan 17"
+    title: "One parameter models cont'd"
+    reading: "reading-03.html"
   
   - title: "WEEK 3"
   
