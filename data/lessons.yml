@@ -6,6 +6,7 @@ lessons:
   - date: "Fri, Jan 10"
     title: "Course overview and introduction to Bayesian inference"
     slides: "lec-slides/01-intro.html"
+    slidespdf: "lec-slides/01-intro.pdf"
     reading: "reading-01.html"
     #hw: "hw-00.html"
 
@@ -19,6 +20,7 @@ lessons:
     title: "Probability review and one parameter models"
     reading: "reading-02.html"
     slides: "lec-slides/02-one-parameter-models-I.html"
+    slidespdf: "lec-slides/02-one-parameter-models-I.pdf"
     
   - date: "Fri, Jan 17"
   
