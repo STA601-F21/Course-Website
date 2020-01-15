@@ -295,7 +295,7 @@ Why?
 - An alternative for $y \in \mathcal{Y}$ is the .hlight[beta density], written as $Y \sim \textrm{Beta}(a,b)$, with
 .block[
 .small[
-$$f(y) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1}; \ \ \ y  \in (0,1), \ a > 0, \ b > 0.$$
+$$f(y) = \frac{1}{B(a,b)} y^{a-1} (1-y)^{b-1}; \ \ \ y  \in (0,1), \ a > 0, \ b > 0.$$
 ]
 ]
 
@@ -795,7 +795,7 @@ We will explore another example soon but first, how should we approach data anal
 --
 
 - .hlight[Step 3]. Explore the data:
-  + Let Y denote the unknown number of infected individuals in the sample.
+  + Let $Y$ denote the unknown number of infected individuals in the sample.
 
 
 

@@ -23,7 +23,7 @@ Please type your solutions using R Markdown, LaTeX or any other word processor b
 
 ## Questions
 
-1. Show that the posterior variance of the beta-binomial model is
+1. Show that the posterior variance of the beta-binomial model can be written as
 .block[
 .small[
 $$\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)}{a+b+n+1}.$$
