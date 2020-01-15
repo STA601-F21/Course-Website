@@ -388,11 +388,11 @@ prior research.
 ---
 ## Beta prior densities
 
-- These three priors correspond to beta(1,1) [also, Unif(0,1)], beta(1,11) and beta(2,10) densities.
+- These three priors correspond to Beta(1,1) [also, Unif(0,1)], Beta(1,11) and Beta(2,10) densities.
 
 --
 
-- .hlight[beta(a,b)] is a probability density function (pdf) on (0,1),
+- .hlight[Beta(a,b)] is a probability density function (pdf) on (0,1),
 .block[
 .small[
 `$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1},$$`
@@ -404,6 +404,10 @@ prior research.
 --
 
 - The beta(a,b) distribution has expectation `\(\mathbb{E} = a/(a+b)\)` and the density becomes more and more concentrated as `\(a + b\)` = prior "sample size" increases.
+
+--
+
+- The variance is `\(ab/[(a+b)^2(a+b+1)]\)`.
 
 --
 

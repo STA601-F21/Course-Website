@@ -18,7 +18,8 @@ lessons:
   - date: "Wed, Jan 15"
     title: "Probability review and one parameter models"
     reading: "reading-02.html"
-  
+    slides: "lec-slides/02-one-parameter-models-I.html"
+    
   - date: "Fri, Jan 17"
   
   - title: "WEEK 3"
