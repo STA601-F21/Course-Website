@@ -34,7 +34,7 @@ $$\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)
     
 5. Hoff 3.2. 
 
-    <font color="red">*Refer back to the section on sensitivity analysis on pages 5 to 7 of the Hoff book if you are not sure what to do.*</font>
+    <font color="red">*Refer back to pages 5 to 7 of the Hoff book (the section on sensitivity analysis) if you are not sure what to do.*</font>
 
 6. <font color="blue">Continuation of the "new agent" example from class</font>. For each of the priors (that is, <font color="red">Beta(1,666)</font>, <font color="red">Beta(0.05,33.33)</font>, <font color="red">Beta(1.6, 407.4)</font>, <font color="red">Beta(1.05, 497)</font>, and <font color="red">Unif(0,0.1)</font>), how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? That is, what value of $n$ is required to ensure that $\Pr(\theta_N \leq 0.0015| y) = 0.95$?
 
