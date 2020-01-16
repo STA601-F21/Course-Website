@@ -8,7 +8,6 @@ lessons:
     slides: "lec-slides/01-intro.html"
     slidespdf: "lec-slides/01-intro.pdf"
     reading: "reading-01.html"
-    #hw: "hw-00.html"
 
   - title: "WEEK 2"
   
@@ -25,6 +24,7 @@ lessons:
   - date: "Fri, Jan 17"
     title: "One parameter models cont'd"
     reading: "reading-03.html"
+    #hw: "hw-01.html"
   
   - title: "WEEK 3"
   
@@ -60,6 +60,7 @@ lessons:
     title: "Lab 4: Prior selection and model reparameterization"
   
   - date: "Wed, Feb 12"
+    title: "Tentative date for quiz II"
   
   - date: "Fri, Feb 14"
   
@@ -89,7 +90,7 @@ lessons:
   - date: "Wed, Mar 4"
   
   - date: "Fri, Mar 6"
-    title: "Spring break begins 7:00pm"
+    title: "Tentative date for midterm exam; Spring break begins 7:00pm"
   
   - title: "WEEK 10"
   
@@ -126,6 +127,7 @@ lessons:
     title: "Lab 10: Metropolis-Hastings"
   
   - date: "Wed, Apr 1"
+    title: "Tentative date for quiz II"
   
   - date: "Fri, Apr 3"
   

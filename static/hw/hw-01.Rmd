@@ -31,6 +31,20 @@ $$\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)
 ]
 
 
+There is a review sheet on Sakai. As many of you know, there has been some changing of pre-requisites for the class and so we are working hard to calibrate the course! Please take an hour (and not more) to do as many of the problems on this sheet without any external sources (like books, notes and other people). This part of the homework only will be graded for whether or not you attempted it.
+
+2. Hoff 2.3
+3. There are three coins in a bag; two fair coins (probability of heads = probability of tails) and one fake coin (probability of heads = 1). 
+    a. You reach in and select one coin at random and throw it in the air. What is the probability that it lands on heads?
+    b. You reach in and select one coin at random and throw it in the air and get heads. What is the probability that it is the fake coin?
+4. Monty Hall Problem! There are three doors on stage and a host hides a prize behind one of the doors and goats behind the other two doors. A contestant picks one of the three doors (say door 1) and then the game show host opens one of the remaining two doors (say door 3), making sure to reveal a goat. Should the contestant switch to door 2?
+    Prior knowledge: The prize originally had 1/3 probability of being behind any of the three doors.
+    The host's model: he knows which door has the prize. If he has to choose between a door with a goat and one with a prize, he chooses the one with the goat. If he has to choose between two doors with goats, he picks one of the doors with probability 1/2. 
+5*. Read Why Isn't Everyone a Bayesian?
+
+Hoff 3.1
+2. Hoff 3.2
+
 
 
 
