@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>One parameter models cont’d</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# One parameter models cont’d
+### Dr. Olanrewaju Michael Akande
+### Jan 17, 2020
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- Tentative dates for quizzes:
+  + Quiz I: Wed, Feb 12
+  + Quiz II: Wed, Apr 1
+
+- 
+
+
+---
+## Outline
+
+- Probability review
+  + Random variables
+  + Joint distributions
+  + Independence and exchangeability
+
+- Introduction to Bayesian Inference (Cont'd)
+  + Conjugacy
+  + Kernels
+  + Bernoulli and binomial data
+  + Selecting priors
+  + Truncated priors
+
+
+---
+class: center, middle
+
+# Beta-binomial model cont'd
+
+
+
+---
+## Beta-binomial recap
+
+- Suppose the likelihood of the data is
+.block[
+.small[
+`$$L(y; \theta) = {n \choose y} \theta^y(1-\theta)^{n-y}.$$`
+]
+]
+
+
+--
+
+- Suppose also that we have a `\(\textrm{Beta}(a,b)\)` prior on the probability `\(\theta\)`.
+
+--
+
+- Then the posterior density then has the beta form
+.block[
+.small[
+`$$(\theta | y) = \textrm{beta}(a+y,b+n-y).$$`
+]
+]
+
+--
+
+- The posterior has expectation
+.block[
+.small[
+`$$\mathbb{E}(\theta | y) = \dfrac{a+y}{a+b+n} = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}.$$`
+]
+]
+
+--
+
+- For this specification, sometimes `\(a\)` and `\(b\)` are interpreted as "prior data" with a interpreted as the prior number of 1's, `\(b\)` as the prior number of 0's, and `\(a + b\)` as the prior sample size.
+
+--
+
+- As we get more and more data, the majority of our information about `\(\theta\)` comes from the data as opposed to the prior.
+
+
+
+---
+## Binomial data
+
+- For example, suppose you want to find the Bayesian estimate of the probability `\(\theta\)` that a coin comes up heads.
+
+--
+
+- Before you see the data, you express your uncertainty about `\(\theta\)` through the prior `\(p(\theta) = \textrm{Beta}(2,2)\)`
+
+--
+
+- Now suppose you observe 10 tosses, of which only 1 was heads.
+
+--
+
+- Then, the posterior density `\(p(\theta \,|\, y, n)\)` is `\(\mbox{Beta}(3, 11)\)`.
+
+
+
+---
+## Binomial data
+
+- Recall that the mean of `\(\mbox{Beta}(a,b)\)` is `\(a/(a+b)\)`.
+
+--
+
+- That means, before you saw the data, you thought the mean for `\(\theta\)` was 2/(2+2) = 0.5. 
+
+--
+
+- However, after seeing the data, you believe it is 3/(3+11) = 0.214.
+
+--
+
+- The variance of `\(\mbox{Beta}(a,b)\)` is `\(ab/[(a+b)^2(a+b+1)]\)`.
+
+--
+
+- So before you saw data, your uncertainty about `\(\theta\)` (i.e., your standard deviation) was `\(\sqrt{4/[4^2 \times 5]} = 0.22\)`. 
+
+--
+
+- However, after seeing 1 Heads in 10 tosses, your uncertainty is 0.106.
+
+--
+
+- Clearly, as the number of tosses goes to infinity, your uncertainty goes to zero.
+
+
+---
+## Operationalizing data analysis
+
+We will explore another example soon but first, how should we approach data analysis in general?
+
+--
+
+- .hlight[Step 1]. State the question.
+
+--
+
+- .hlight[Step 2]. Collect the data.
+
+--
+
+- .hlight[Step 3]. Explore the data.
+
+--
+
+- .hlight[Step 4]. Formulate and state a modeling framework. 
+
+--
+
+- .hlight[Step 5]. Check your models.
+
+--
+
+- .hlight[Step 6]. Answer the question.
+
+
+---
+## Example: rare events
+
+- .hlight[Step 1]. State the question:
+  + What is the prevalence of an infectious disease in a small city?
+  + Why? High prevalence means more public health precautions are recommended.
+  
+--
+
+- .hlight[Step 2]. Collect the data:
+  + Suppose you collect a small random sample of 20 individuals.
+  
+--
+
+- .hlight[Step 3]. Explore the data:
+  + Let `\(Y\)` denote the unknown number of infected individuals in the sample.
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Parameter of interest: `\(\theta\)` is the fraction of infected individuals in the city.
+  + Sampling model: a reasonable model for `\(Y\)` can be `\(\textrm{Bin}(20,\theta)\)`
+  
+&lt;img src="img/binomial_histograms.png" height="370px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Prior specification: information from previous studies — infection rate in “comparable cities” ranges from 0.05 to
+0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
+  + What is a good prior? The **expected value** of `\(\theta\)` close to 0.10 and the **variance** close to 0.05.
+  + Possible option: `\(\mbox{Beta}(3.5,31.5)\)` or maybe even `\(\mbox{Beta}(3,32)\)`?
+  &lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Under `\(\mbox{Beta}(3,32)\)`, `\(\Pr(\theta &lt; 0.1) \approx 0.67\)`.
+  + Posterior distribution for the model: `\((\theta | Y=y) = \textrm{beta}(a+y,b+n-y)\)`
+  + Suppose `\(Y=0\)`. Then, `\((\theta | Y=y) = \textrm{beta}(3,32+20)\)`
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 5]. Check your models:
+  + Compare performance of posterior mean and posterior probability that `\(\theta &lt; 0.1\)`.
+  + Under `\(\mbox{Beta}(3,52)\)`, 
+      - `\(\Pr(\theta &lt; 0.1 | Y=y) \approx 0.92\)`. More confidence in low values of `\(\theta\)`.
+      - For `\(\mathbb{E}(\theta | Y=y)\)`, we have
+.block[
+.small[
+$$
+`\begin{split}
+\mathbb{E}(\theta | y) &amp; = \dfrac{a+y}{a+b+n} = \dfrac{3}{52} = 0.058.\\
+\end{split}`
+$$
+]
+]
+      - Recall that the prior mean is `\(a/(a+b)=0.09\)`. Thus, we can see how that contributes to the prior mean.
+.block[
+.small[
+$$
+`\begin{split}
+\mathbb{E}(\theta | y) &amp; = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}\\
+&amp; = \dfrac{a+b}{a+b+n} \times \dfrac{a}{a+b} + \dfrac{n}{a+b+n} \times \dfrac{y}{n}\\
+&amp; = \dfrac{35}{52} \times \dfrac{3}{35} + \dfrac{20}{52} \times \dfrac{0}{n} = \dfrac{3}{52} = 0.058.\\
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 6]. Answer the question:
+  + People with low prior expectations are generally at least `\(90\%\)` certain that the infection rate is below 0.10.
+  + `\(\pi(\theta | Y)\)` is to the left of `\(\pi(\theta)\)` because the observation `\(Y=0\)` provides evidence of a low value of `\(\theta\)`.
+  + `\(\pi(\theta | Y)\)` is more peaked than `\(\pi(\theta)\)` because it combines information and so contains more information than `\(\pi(\theta)\)` alone.
+  + The posterior expectation is 0.058.
+  + The posterior mode is 0.04.
+      - Note, for `\(\mbox{Beta}(a,b)\)`, the mode is `\((a-1)/(a+b-2)\)`.
+  + The posterior probability that `\(\theta &lt; 0.1\)` is 0.92.
+
+
+---
+## Priors with restricted support
+
+- As we have seen, when dealing with rare events, we might expect the true proportion to be very small. 
+
+--
+
+- In that case, we might want to try a restricted prior, e.g. Unif(0,0.1).
+
+--
+
+- Even when we don't have rare events, we might still desire truncation if we are certain the true proportion lies within `\((a,b)\)` with `\(0 &lt; a &lt; b &lt; 1\)`.
+
+--
+
+- It is therefore often really useful to incorporate truncation.
+
+--
+
+- Let `\(\theta =\)` probability of a randomly-selected student making an `\(A\)` in this course.
+
+--
+
+- You may want to rule out very low &amp; very high values -- perhaps `\(\theta \in [0.35, 0.6]\)` with probability one.
+
+--
+
+- How to choose a prior restricted to this interval?
+
+
+
+---
+## Uniform priors
+
+- One possibility is to just choose a uniform prior.
+
+--
+
+- When the parameter `\(\theta\)` is a probability, the typical uniform prior would correspond to beta(1,1).
+
+--
+
+- This is uniform on the entire (0,1) interval.
+
+--
+
+- However, we can just as easily choose a uniform prior on a narrower interval Unif(a,b) with `\(0 &lt; a &lt; b &lt; 1\)`.
+
+--
+
+- Perhaps not flexible enough.
+
+
+
+---
+## Truncated random variables
+
+- Suppose we have some arbitrary random variable `\(\theta \sim f\)` with support `\(\Theta\)`.
+
+--
+
+- For example, `\(\theta \sim \textrm{Beta}(a,b)\)` has support on (0,1).
+
+--
+
+- Then, we can modify the density `\(f(\theta)\)` to have support on a sub-interval `\([a,b] \in \Theta\)`.
+
+--
+
+- The density `\(f(\theta)\)` **truncated** to `\([a,b]\)` is
+.block[
+.small[
+`$$f_{[a,b]}(\theta) = \dfrac{f(\theta)\mathbb{1}[\theta \in [a,b]]}{\int^b_a f(\theta^\star)\textrm{d}\theta^\star},$$`
+]
+]
+
+  with `\(\mathbb{1}[A]\)` being the indicator function that returns 1 if A is true &amp; 0 otherwise.
+
+
+
+---
+## Truncated beta density
+
+- Suppose to characterize the prior probability of earning an A, you poll a sample of students from a former STA 602
+course and find that 10 earned an A and 10 earned a B (or lower). 
+
+--
+
+- Therefore, you go with a beta(10,10) prior truncated to [0.35, 0.6]. 
+
+--
+
+- In R we can calculate the truncated beta density at p via
+  
+  ```r
+  p &lt;- seq(0,1,length=1000)
+  f1 &lt;- dbeta(p,10,10)
+  f2 &lt;- dbeta(p,10,10)*as.numeric(p&gt;0.35 &amp; p&lt;0.6)/(pbeta(0.6,10,10) - pbeta(0.3,10,10))
+  f3 &lt;- dunif(p,0.35,.6)
+  plot(p,f2,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
+      ylim=c(0,6))
+  lines(p,f1,type='l',col='blue')
+  lines(p,f3,type='l',col='red4')
+  labels &lt;- c("beta(10,10)", "truncated beta","unif(0.35,.6)")
+  legend("topright", inset=.05, labels, lwd=2, lty=c(1,1,1), col=c('blue4','green4','blue4'))
+  ```
+
+
+
+---
+## Truncated beta density
+
+What would that look like?
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Truncated beta density
+
+The truncated density by itself would look like
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## The inverse cdf method
+
+- How to sample truncated random variables?
+
+--
+
+- First start with the pdf for an untruncated distribution such as `\(\theta \sim \textrm{Beta}(c,d)\)`.
+
+--
+
+- Suppose we then want to sample `\(\theta \sim \textrm{Beta}_{[a,b]}(c,d)\)`. How can we do that? One popular method is the .hlight[inverse-cdf method].
+
+--
+
+- The inverse cdf is generally useful for generating random variables. However, it is particularly useful for generating truncated random variables.
+
+--
+
+- Suppose we have `\(\theta \sim f\)`, for some arbitrary continuous density `\(f\)`.
+
+--
+
+- According to probability integral transform, for any continuous random variable `\(X\)`, the random variable `\(Y = F_X(X)\)` has a Unif(0,1) distribution. 
+
+--
+
+- Thus, to use the inverse-cdf method to sample `\(\theta \sim f\)`, first sample `\(u \sim \textrm{Unif}(0,1)\)`, then set `\(\theta = F^{-1}(u)\)`.
+
+
+
+---
+## The inverse cdf method
+
+- As an example, suppose we want to sample `\(\theta \sim \textrm{Beta}(c,d)\)` through the inverse cdf method. 
+
+--
+
+- Very easy. Just do the following in R.
+  
+  ```r
+  u &lt;- runif (1, 0, 1)
+  theta &lt;- qbeta(u,c,d)
+  ```
+
+--
+
+- That is, first sample from a uniform distribution.
+
+--
+
+- Then, transform it using the inverse cdf of the `\(\textrm{Beta}(c,d)\)` distribution.
+
+--
+
+- Viola!
+
+
+
+---
+## The inverse cdf method
+
+- Back to the original problem: how to sample `\(\theta \sim \textrm{Beta}_{[a,b]}(c,d)\)`?
+
+--
+
+- If we had the inverse cdf of `\(\textrm{Beta}(c,d)\)`  truncated to `\([a, b]\)`, then we could use the inverse cdf method. Easy enough! Let's find that inverse cdf.
+
+--
+
+- Let `\(f\)`, `\(F\)` and `\(F^{-1}\)` denote the pdf, cdf and inverse-cdf without truncation and let `\(A=[a,b]\)`.
+
+--
+
+- Recall that the density `\(f(\theta)\)` **truncated** to `\([a,b]\)` is
+.block[
+.small[
+`$$f_{A}(\theta) = f_{[a,b]}(\theta) = \dfrac{f(\theta)\mathbb{1}[\theta \in [a,b]]}{\int^b_a f(\theta^\star)\textrm{d}\theta^\star} = \dfrac{f(\theta)\mathbb{1}[\theta \in [a,b]]}{F(b) - F(a)}.$$`
+]
+]
+
+--
+
+- Therefore, the truncated cdf
+.block[
+.small[
+`$$F_{A}(z) = \Pr[\theta \leq z] = \dfrac{F(z) - F(a)}{F(b) - F(a)}.$$`
+]
+]
+
+--
+
+- That's enough though. We need the truncated inverse cdf.
+
+
+
+---
+## The inverse cdf method
+
+- To find the inverse cdf `\(F^{-1}_A(p)\)`, let `\(F_{A}(z) = p\)`. That is, set
+.block[
+.small[
+`$$p = F_{A}(z) = \dfrac{F(z) - F(a)}{F(b) - F(a)}$$`
+]
+]
+
+  and solve for `\(z\)` as a function of `\(p\)`.
+  
+--
+
+- Re-expressing as a function of `\(F(z)\)`,
+.block[
+.small[
+`$$F(z) = \{F(b) - F(a)\}p + F(a).$$`
+]
+]
+
+--
+
+- Applying the untruncated inverse cdf `\(F^{-1}\)`  to both sides, we have
+.block[
+.small[
+`$$z = F^{-1}[\{F(b) - F(a)\}p + F(a)] = F^{-1}(p) = F^{-1}_A(p).$$`
+]
+]
+
+
+
+---
+## The inverse cdf method
+
+- We now have all the pieces to use the inverse-cdf method to sample `\(\theta \sim f_A\)`, that is, `\(f\)` truncated to A.
+
+--
+
+- First draw a `\(\textrm{Unif}(0,1)\)` random variable
+  
+  ```r
+  u &lt;- runif (1, 0, 1)
+  ```
+
+--
+
+- Next, apply the linear transformation:
+.block[
+.small[
+`$$u^\star = \{F(b) - F(a)\}u + F(a).$$`
+]
+]
+
+--
+
+- Finally, plug `\(u^\star\)` into the untruncated cdf `\(\theta = F^{-1}(u^\star)\)`.
+
+--
+
+- Note we can equivalently sample `\(u^\star \sim runif(1,F(a),F(b))\)`.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

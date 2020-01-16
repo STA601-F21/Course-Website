@@ -79,8 +79,10 @@ Lecture notes and slides, lab exercises and other reading resources will be post
 Fri, January 10 | First class for STA 602L (not January 8!!!)
 Mon, January 20 | Martin Luther King Jr. Day; no classes!
 Wed, January 22 | Drop/add ends
+Wed, February 12 | Tentative date for quiz I
 Fri, March 6 | Tentative date for midterm exam; <br /> Spring break begins 7:00pm
 Mon, March 16 | Spring break ends; classes resume 8:30am
+Wed, April 1 | Tentative date for quiz II
 Wed, April 15 | Graduate classes end
 Sat, May 2 | Final exam
 

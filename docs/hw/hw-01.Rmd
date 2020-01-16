@@ -1,6 +1,6 @@
 ---
-title: "Methods and Data Analysis 5"
-date: "Due: 11:59pm, Wednesday, Nov 20"
+title: "Homework 1"
+date: "Due: 11:59pm, Thursday, Jan 23"
 output: 
   html_document: 
     css: hw.css
@@ -12,14 +12,9 @@ output:
       smooth_scroll: true
 ---
 
-<br/><br/>
-<font color="blue">**THIS IS AN OPTIONAL HOMEWORK. IF YOU CHOOSE TO SUBMIT IT, THE SCORE WILL REPLACE THE LOWEST SCORE OUT OF THE FOUR PREVIOUS METHODS AND DATA ANALYSIS ASSIGNMENTS, AS LONG AS IT EXCEEDS AT LEAST ONE OF THE SCORES FROM THOSE PREVIOUS ASSIGNMENTS.**</font>
-
 ## Instructions
 
-This assignment involves causal inference. Note that this is an individual assignment, so you must work alone. You can discuss basic details with classmates but your final work must be yours alone!
-<!-- The datasets (for question 2) can be found on Sakai: go to Resources $\rightarrow$ Datasets $\rightarrow$ Homework Datasets $\rightarrow$ Methods and Data Analysis 2.  -->
-Please type your solutions using R Markdown, LaTeX or any other word processor but be sure to knit or convert the final output file to ".pdf". Submissions should be made on gradescope: go to Assignments $\rightarrow$ Methods and Data Analysis 5.
+This assignment involves multiple linear regression. The datasets (for question 2) can be found on Sakai: go to Resources $\rightarrow$ Datasets $\rightarrow$ Homework Datasets $\rightarrow$ Methods and Data Analysis 2. Please type your solutions using R Markdown, LaTeX or any other word processor but be sure to knit or convert the final output file to ".pdf". Submissions should be made on gradescope: go to Assignments $\rightarrow$ Methods and Data Analysis 2.
 
 ## Questions
 
