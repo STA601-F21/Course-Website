@@ -1,5 +1,6 @@
 
 ######## Simulation Exercise
+rm(list = ls())
 PlotPriorPlusPosterior <- function(a,b,ones,zeros){
   curve(dbeta(x,a+ones,b+zeros),col="green4",xlab=expression(theta),ylab="density",lwd=1,ylim=c(0,20))
   curve(dbeta(x,a,b),col="red3",add=TRUE,lwd=1)
@@ -26,7 +27,4 @@ for(i in 1:n){
   } else {zeros <- zeros + 1}
   PlotPriorPlusPosterior(a=3,b=32,ones,zeros); Sys.sleep(1.5)
 }
-
-
-
 

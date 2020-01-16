@@ -30,152 +30,65 @@ class: center, middle, inverse, title-slide
   + Quiz I: Wed, Feb 12
   + Quiz II: Wed, Apr 1
 
-- 
+- Homework 1 now online, due Thursday, Jan 23.
 
 
 ---
 ## Outline
 
-- Probability review
-  + Random variables
-  + Joint distributions
-  + Independence and exchangeability
-
-- Introduction to Bayesian Inference (Cont'd)
-  + Conjugacy
-  + Kernels
-  + Bernoulli and binomial data
-  + Selecting priors
+- Beta-binomial (cont'd)
+  + Example
+  + Marginal likelihood
+  + Posterior predictive distribution
   + Truncated priors
+  + Cautionary tale: parameters at the boundary
+  
+- Introduction to the Poisson-Gamma model
 
 
 ---
 class: center, middle
 
-# Beta-binomial model cont'd
+# Beta-binomial cont'd
 
 
 
 ---
 ## Beta-binomial recap
 
-- Suppose the likelihood of the data is
+Binomial likelihood:
 .block[
 .small[
-`$$L(y; \theta) = {n \choose y} \theta^y(1-\theta)^{n-y}.$$`
+`$$L(y; \theta) = {n \choose y} \theta^y(1-\theta)^{n-y}$$`
 ]
 ]
 
 
 --
 
-- Suppose also that we have a `\(\textrm{Beta}(a,b)\)` prior on the probability `\(\theta\)`.
-
---
-
-- Then the posterior density then has the beta form
+`\(+\)` Beta Prior:
 .block[
 .small[
-`$$(\theta | y) = \textrm{beta}(a+y,b+n-y).$$`
+`$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1} = \textrm{beta}(a,b)$$`
 ]
 ]
 
 --
 
-- The posterior has expectation
+`\(\Rightarrow\)` Beta posterior:
 .block[
 .small[
-`$$\mathbb{E}(\theta | y) = \dfrac{a+y}{a+b+n} = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}.$$`
+`$$\pi(\theta | y) = \frac{1}{B(a+y,b+n-y)} \theta^{a+y-1} (1-\theta)^{b+n-y-1} = \textrm{beta}(a+y,b+n-y).$$`
 ]
 ]
 
 --
 
-- For this specification, sometimes `\(a\)` and `\(b\)` are interpreted as "prior data" with a interpreted as the prior number of 1's, `\(b\)` as the prior number of 0's, and `\(a + b\)` as the prior sample size.
-
---
-
-- As we get more and more data, the majority of our information about `\(\theta\)` comes from the data as opposed to the prior.
+- Recall: for `\(\textrm{Beta}(a,b)\)`,
+  + `\(\mathbb{E}[Y] = \dfrac{a}{a+b}\)`
+  + `\(\mathbb{V}[Y] = \dfrac{ab}{(a+b)^2(a+b+1)}\)`
 
 
-
----
-## Binomial data
-
-- For example, suppose you want to find the Bayesian estimate of the probability `\(\theta\)` that a coin comes up heads.
-
---
-
-- Before you see the data, you express your uncertainty about `\(\theta\)` through the prior `\(p(\theta) = \textrm{Beta}(2,2)\)`
-
---
-
-- Now suppose you observe 10 tosses, of which only 1 was heads.
-
---
-
-- Then, the posterior density `\(p(\theta \,|\, y, n)\)` is `\(\mbox{Beta}(3, 11)\)`.
-
-
-
----
-## Binomial data
-
-- Recall that the mean of `\(\mbox{Beta}(a,b)\)` is `\(a/(a+b)\)`.
-
---
-
-- That means, before you saw the data, you thought the mean for `\(\theta\)` was 2/(2+2) = 0.5. 
-
---
-
-- However, after seeing the data, you believe it is 3/(3+11) = 0.214.
-
---
-
-- The variance of `\(\mbox{Beta}(a,b)\)` is `\(ab/[(a+b)^2(a+b+1)]\)`.
-
---
-
-- So before you saw data, your uncertainty about `\(\theta\)` (i.e., your standard deviation) was `\(\sqrt{4/[4^2 \times 5]} = 0.22\)`. 
-
---
-
-- However, after seeing 1 Heads in 10 tosses, your uncertainty is 0.106.
-
---
-
-- Clearly, as the number of tosses goes to infinity, your uncertainty goes to zero.
-
-
----
-## Operationalizing data analysis
-
-We will explore another example soon but first, how should we approach data analysis in general?
-
---
-
-- .hlight[Step 1]. State the question.
-
---
-
-- .hlight[Step 2]. Collect the data.
-
---
-
-- .hlight[Step 3]. Explore the data.
-
---
-
-- .hlight[Step 4]. Formulate and state a modeling framework. 
-
---
-
-- .hlight[Step 5]. Check your models.
-
---
-
-- .hlight[Step 6]. Answer the question.
 
 
 ---
@@ -193,7 +106,8 @@ We will explore another example soon but first, how should we approach data anal
 --
 
 - .hlight[Step 3]. Explore the data:
-  + Let `\(Y\)` denote the unknown number of infected individuals in the sample.
+  + Count the number of infected individuals in the sample.
+  + Let `\(Y\)` be the corresponding random variable.
 
 
 
@@ -272,6 +186,150 @@ $$
   + The posterior mode is 0.04.
       - Note, for `\(\mbox{Beta}(a,b)\)`, the mode is `\((a-1)/(a+b-2)\)`.
   + The posterior probability that `\(\theta &lt; 0.1\)` is 0.92.
+  
+  
+---
+## Cautionary tale: parameters at the boundary
+
+- Tuyl et al. (2008) discuss potential dangers of using priors that have `\(a &lt; 1\)` with data that are all 0's (or `\(b &lt; 1\)` with all 1's). They consider data on adverse reactions to a new radiological contrast agent.
+
+--
+
+- Let `\(\theta_N\)`: probability of a bad reaction using the new agent
+
+--
+
+- Current standard agent causes bad reactions about 15 times in 10000, so one might think 0.0015 is a good guess for `\(\theta_N\)`.
+
+--
+
+- How do we choose a prior distribution?
+
+
+---
+## Potential prior distributions
+
+- One might consider a variety of choices centered on `\(15/10000 = 0.0015\)`:
+  + Prior 1: Beta(1,666) (mean 0.0015; 1 prior bad reaction in 667 administrations)
+  
+  + Prior 2: Beta(0.05,33.33) (mean 0.0015; 0.05 prior bad reactions in 33.38 administrations)
+  
+  + Prior 3: Beta(1.6, 407.4) (mode 0.0015; 409 prior administrations)
+  
+  + Prior 4: Beta(1.05, 497) (median 0.0015; 498.05 prior administrations)
+
+--
+
+- Does it matter which one we choose?
+  
+  
+  
+---
+## Potential prior distributions
+
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Potential prior distributions
+
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Potential prior distributions
+
+- Let's take a closer look at properties of these four prior distributions, concentrating on the probability that `\(\theta_N\)`.
+
+--
+
+- That is, new agent not more dangerous than old agent.
+
+&lt;br /&gt;       |  Be(1,666) | Be(0.05,33.33) | Be(1.6,407.4) | Be(1.05,497)
+:----------- | :---------: |:---------: |:---------: |:---------: |
+Prior prob | 0.632 | 0.882 | 0.222 | 0.500
+Post prob (0 events) | 0.683 | 0.939 | 0.289 | 0.568
+Post prob (1 event) | 0.319 | 0.162 | 0.074 | 0.213
+
+--
+
+- Suppose we have a single arm study of 100 subjects.
+
+--
+
+- Consider the two most likely potential outcomes:
+  + 0 adverse outcomes observed
+  + 1 adverse outcome observed
+  
+  
+  
+---
+## Problems with the priors
+
+- After just 100 trials with no bad reactions, the low weight (33.38 prior observations) prior indicates one should be 94% sure the new agent is equally safe as (or safer than) the old one. 
+
+--
+
+- Is this the behavior we want?
+
+--
+
+- Take home message: be very careful with priors that have `\(a &lt; 1\)` with data that are all 0's (or `\(b &lt; 1\)` with all 1's).
+
+--
+
+- Given that we know the adverse event rate should be small, we might try a restricted prior e.g. Unif(0,0.1).
+
+--
+
+- In all cases, how how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? (Homework question!)
+
+
+
+---
+## Marginal likelihood
+
+- Recall that the .hlight[marginal likelihood] is
+.block[
+.small[
+`$$L(y) = \int L(y; \theta)p(\theta)\textrm{d}\theta.$$`
+]
+]
+
+- What is the marginal likelihood for the Beta-binomial?
+
+--
+
+- We have
+.block[
+.small[
+$$
+`\begin{aligned}
+L(y) &amp; = \int L(y; \theta)p(\theta)\textrm{d}\theta \\
+&amp; = \int_0^1 {n \choose y} \theta^y(1-\theta)^{n-y} \frac{1}{B(a,b)}\theta^{a-1}(1-\theta)^{b-1} d\theta\\
+&amp; = {n \choose y} \frac{B\big(a + y,\, b + n-y\big)}{B(a,b)},
+\end{aligned}`
+$$
+]
+]
+
+  by the integral definition of the Beta function.
+  
+--
+
+- Deriving the marginal likelihood for conjugate distributions is often relatively straightforward.
+  
+  
+
+---
+## Posterior predictive distribution
+
+- It is also often useful to derive posterior predictive distributions for 
+
+
+
+
 
 
 ---
@@ -387,14 +445,14 @@ course and find that 10 earned an A and 10 earned a B (or lower).
 ## Truncated beta density
 
 What would that look like?
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 ## Truncated beta density
 
 The truncated density by itself would look like
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 
 

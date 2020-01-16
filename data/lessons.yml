@@ -24,7 +24,7 @@ lessons:
   - date: "Fri, Jan 17"
     title: "One parameter models cont'd"
     reading: "reading-03.html"
-    #hw: "hw-01.html"
+    hw: "hw-01.html"
     #slides: "lec-slides/02-one-parameter-models-II.html"
     #slidespdf: "lec-slides/02-one-parameter-models-II.pdf"
   
