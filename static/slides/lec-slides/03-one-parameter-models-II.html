@@ -32,18 +32,23 @@ class: center, middle, inverse, title-slide
 
 - Homework 1 now online, due Thursday, Jan 23.
 
+- My office hours are confirmed:
+  + Wed 9:00 - 10:00am
+  + Thur 11:45 - 12:45pm
+
 
 ---
 ## Outline
 
 - Beta-binomial (cont'd)
   + Example
-  + Marginal likelihood
-  + Posterior predictive distribution
-  + Truncated priors
   + Cautionary tale: parameters at the boundary
+  + Marginal likelihood
+  + Posterior prediction
+  + Truncated priors
   
 - Introduction to the Poisson-Gamma model
+  + Conjugacy
 
 
 ---
@@ -69,7 +74,7 @@ Binomial likelihood:
 `\(+\)` Beta Prior:
 .block[
 .small[
-`$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1} = \textrm{beta}(a,b)$$`
+`$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1} = \textrm{Beta}(a,b)$$`
 ]
 ]
 
@@ -78,7 +83,7 @@ Binomial likelihood:
 `\(\Rightarrow\)` Beta posterior:
 .block[
 .small[
-`$$\pi(\theta | y) = \frac{1}{B(a+y,b+n-y)} \theta^{a+y-1} (1-\theta)^{b+n-y-1} = \textrm{beta}(a+y,b+n-y).$$`
+`$$\pi(\theta | y) = \frac{1}{B(a+y,b+n-y)} \theta^{a+y-1} (1-\theta)^{b+n-y-1} = \textrm{Beta}(a+y,b+n-y).$$`
 ]
 ]
 
@@ -129,7 +134,7 @@ Binomial likelihood:
 0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
   + What is a good prior? The **expected value** of `\(\theta\)` close to 0.10 and the **variance** close to 0.05.
   + Possible option: `\(\mbox{Beta}(3.5,31.5)\)` or maybe even `\(\mbox{Beta}(3,32)\)`?
-  &lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+  &lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -137,9 +142,9 @@ Binomial likelihood:
 
 - .hlight[Step 4]. Formulate and state a modeling framework:
   + Under `\(\mbox{Beta}(3,32)\)`, `\(\Pr(\theta &lt; 0.1) \approx 0.67\)`.
-  + Posterior distribution for the model: `\((\theta | Y=y) = \textrm{beta}(a+y,b+n-y)\)`
-  + Suppose `\(Y=0\)`. Then, `\((\theta | Y=y) = \textrm{beta}(3,32+20)\)`
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+  + Posterior distribution for the model: `\((\theta | Y=y) = \textrm{Beta}(a+y,b+n-y)\)`
+  + Suppose `\(Y=0\)`. Then, `\((\theta | Y=y) = \textrm{Beta}(3,32+20)\)`
+&lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -147,7 +152,7 @@ Binomial likelihood:
 ## Example: rare events
 
 - .hlight[Step 5]. Check your models:
-  + Compare performance of posterior mean and posterior probability that `\(\theta &lt; 0.1\)`.
+  + Compare performance of posterior mean and posterior probability that `\(\theta &lt; 0.1\)`. .hlight[See pages 5 to 7 of the Hoff book (the section on sensitivity analysis)].
   + Under `\(\mbox{Beta}(3,52)\)`, 
       - `\(\Pr(\theta &lt; 0.1 | Y=y) \approx 0.92\)`. More confidence in low values of `\(\theta\)`.
       - For `\(\mathbb{E}(\theta | Y=y)\)`, we have
@@ -179,12 +184,12 @@ $$
 ## Example: rare events
 
 - .hlight[Step 6]. Answer the question:
-  + People with low prior expectations are generally at least `\(90\%\)` certain that the infection rate is below 0.10.
+  + People with low prior expectations are generally at least `\(90\%\)` certain that the infection rate is below 0.10. Again, .hlight[see pages 5 to 7 of the Hoff book].
   + `\(\pi(\theta | Y)\)` is to the left of `\(\pi(\theta)\)` because the observation `\(Y=0\)` provides evidence of a low value of `\(\theta\)`.
   + `\(\pi(\theta | Y)\)` is more peaked than `\(\pi(\theta)\)` because it combines information and so contains more information than `\(\pi(\theta)\)` alone.
   + The posterior expectation is 0.058.
   + The posterior mode is 0.04.
-      - Note, for `\(\mbox{Beta}(a,b)\)`, the mode is `\((a-1)/(a+b-2)\)`.
+      - Note, for `\(\mbox{Beta}(a,b)\)`, the mode is `\(\dfrac{a-1}{a+b-2}\)`.
   + The posterior probability that `\(\theta &lt; 0.1\)` is 0.92.
   
   
@@ -195,7 +200,7 @@ $$
 
 --
 
-- Let `\(\theta_N\)`: probability of a bad reaction using the new agent
+- Let `\(\theta_N\)`: probability of a bad reaction using the new agent.
 
 --
 
@@ -210,13 +215,13 @@ $$
 ## Potential prior distributions
 
 - One might consider a variety of choices centered on `\(15/10000 = 0.0015\)`:
-  + Prior 1: Beta(1,666) (mean 0.0015; 1 prior bad reaction in 667 administrations)
+  + Prior 1: .hlight[Beta(1,666)] (mean 0.0015; 1 prior bad reaction in 667 administrations)
   
-  + Prior 2: Beta(0.05,33.33) (mean 0.0015; 0.05 prior bad reactions in 33.38 administrations)
+  + Prior 2: .hlight[Beta(0.05,33.33)] (mean 0.0015; 0.05 prior bad reactions in 33.38 administrations)
   
-  + Prior 3: Beta(1.6, 407.4) (mode 0.0015; 409 prior administrations)
+  + Prior 3: .hlight[Beta(1.6, 407.4)] (mode 0.0015; 409 prior administrations)
   
-  + Prior 4: Beta(1.05, 497) (median 0.0015; 498.05 prior administrations)
+  + Prior 4: .hlight[Beta(1.05, 497)] (median 0.0015; 498.05 prior administrations)
 
 --
 
@@ -227,20 +232,20 @@ $$
 ---
 ## Potential prior distributions
 
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 ## Potential prior distributions
 
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 ## Potential prior distributions
 
-- Let's take a closer look at properties of these four prior distributions, concentrating on the probability that `\(\theta_N\)`.
+- Let's take a closer look at properties of these four prior distributions, concentrating on the probability that `\(\theta_N &lt; 0.0015\)`.
 
 --
 
@@ -271,6 +276,10 @@ Post prob (1 event) | 0.319 | 0.162 | 0.074 | 0.213
 
 --
 
+- The low weight prior largely assumes the conclusion we actually hope for (that the new agent is safer), thus it takes very little confirmatory data to reach that conclusion.
+
+--
+
 - Is this the behavior we want?
 
 --
@@ -283,7 +292,7 @@ Post prob (1 event) | 0.319 | 0.162 | 0.074 | 0.213
 
 --
 
-- In all cases, how how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? (Homework question!)
+- In all cases, how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? (Homework question!)
 
 
 
@@ -308,7 +317,7 @@ $$
 `\begin{aligned}
 L(y) &amp; = \int L(y; \theta)p(\theta)\textrm{d}\theta \\
 &amp; = \int_0^1 {n \choose y} \theta^y(1-\theta)^{n-y} \frac{1}{B(a,b)}\theta^{a-1}(1-\theta)^{b-1} d\theta\\
-&amp; = {n \choose y} \frac{B\big(a + y,\, b + n-y\big)}{B(a,b)},
+&amp; = {n \choose y} \frac{B(a + y,\, b + n-y)}{B(a,b)},
 \end{aligned}`
 $$
 ]
@@ -325,9 +334,80 @@ $$
 ---
 ## Posterior predictive distribution
 
-- It is also often useful to derive posterior predictive distributions for 
+- Let's go back to Bernoulli data. Suppose `\(y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Bernoulli}(\theta)\)`.
+
+--
+
+- We may wish to predict a new data point `\(y_{n+1}\)`.
+
+--
+
+- We can do so using the posterior predictive distribution `\(p(y_{n+1}|y_{1:n})\)`.
+
+--
+
+- &lt;div class="question"&gt;
+Why are we not including the parameter in the posterior predictive distribution?
+&lt;/div&gt;
+
+--
+
+- Recall that we have conditional independence of the `\(y\)`'s given `\(\theta\)`.
+
+--
+
+- Generally,
+.block[
+.small[
+$$
+`\begin{aligned}
+p(y_{n+1}|y_{1:n}) &amp;= \int p(y_{n+1},\theta|y_{1:n})\,d\theta\\
+&amp;= \int p(y_{n+1}|\theta,y_{1:n}) p(\theta|y_{1:n})\,d\theta\\
+&amp; = \int p(y_{n+1}|\theta) p(\theta|y_{1:n})\,d\theta.
+\end{aligned}`
+$$
+]
+]
 
 
+---
+## Posterior predictive distribution
+
+- When we talk about the posterior predictive distribution for Bernoulli data, we are really referring to `\(p(y_{n+1} = 1|y_{1:n})\)` and `\(p(y_{n+1} = 0|y_{1:n})\)`.
+
+--
+
+- Then,
+.block[
+.small[
+$$
+`\begin{aligned}
+p(y_{n+1}=1|y_{1:n}) &amp;= \int p(y_{n+1}= 1|\theta) p(\theta|y_{1:n})\,d\theta \\
+&amp;= ... \\
+&amp;= ...
+\end{aligned}`
+$$
+]
+]
+
+  &lt;div class="question"&gt;
+which simplifies to what? In class!
+&lt;/div&gt;
+  
+--
+
+- What then is `\(p(y_{n+1} = 0|y_{1:n})\)`?
+
+--
+
+- Posterior predictive pmf therefore takes the form
+.block[
+.small[
+`$$p(y_{n+1}|y_{1:n}) = \dfrac{a_n^{y_{n+1}} b_n^{1-y_{n+1}}}{a_n + b_n}; \ \ \ y_{n+1}=0,1.$$`
+]
+]
+
+- What are `\(a_n\)` and `\(b_n\)`?
 
 
 
@@ -384,6 +464,10 @@ $$
 
 - Perhaps not flexible enough.
 
+--
+
+- Would be nice if we could pick a flexible beta density and then truncate it to `\((a,b)\)`.
+
 
 
 ---
@@ -393,7 +477,7 @@ $$
 
 --
 
-- For example, `\(\theta \sim \textrm{Beta}(a,b)\)` has support on (0,1).
+- For example, `\(\theta \sim \textrm{Beta}(c,d)\)` has support on (0,1).
 
 --
 
@@ -436,7 +520,7 @@ course and find that 10 earned an A and 10 earned a B (or lower).
   lines(p,f1,type='l',col='blue')
   lines(p,f3,type='l',col='red4')
   labels &lt;- c("beta(10,10)", "truncated beta","unif(0.35,.6)")
-  legend("topright", inset=.05, labels, lwd=2, lty=c(1,1,1), col=c('blue4','green4','blue4'))
+  legend("topright", inset=.05, labels, lwd=2, lty=c(1,1,1), col=c('blue4','green4','red4'))
   ```
 
 
@@ -445,14 +529,14 @@ course and find that 10 earned an A and 10 earned a B (or lower).
 ## Truncated beta density
 
 What would that look like?
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 ## Truncated beta density
 
 The truncated density by itself would look like
-&lt;img src="02-one-parameter-models-II_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03-one-parameter-models-II_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -471,7 +555,7 @@ The truncated density by itself would look like
 
 --
 
-- The inverse cdf is generally useful for generating random variables. However, it is particularly useful for generating truncated random variables.
+- The inverse cdf is useful for generating random variables in general, especially for generating truncated random variables.
 
 --
 
@@ -479,7 +563,7 @@ The truncated density by itself would look like
 
 --
 
-- According to probability integral transform, for any continuous random variable `\(X\)`, the random variable `\(Y = F_X(X)\)` has a Unif(0,1) distribution. 
+- According to probability integral transform, for any continuous random variable `\(\theta\)`, the random variable `\(U = F(\theta)\)` has a Unif(0,1) distribution. Note that `\(F\)` is the cdf.
 
 --
 
@@ -548,28 +632,28 @@ The truncated density by itself would look like
 
 --
 
-- That's enough though. We need the truncated inverse cdf.
+- Not enough though. We need the truncated inverse cdf.
 
 
 
 ---
 ## The inverse cdf method
 
-- To find the inverse cdf `\(F^{-1}_A(p)\)`, let `\(F_{A}(z) = p\)`. That is, set
+- To find the inverse cdf `\(F^{-1}_A(u)\)`, let `\(F_{A}(z) = u\)`. That is, set
 .block[
 .small[
-`$$p = F_{A}(z) = \dfrac{F(z) - F(a)}{F(b) - F(a)}$$`
+`$$u = F_{A}(z) = \dfrac{F(z) - F(a)}{F(b) - F(a)}$$`
 ]
 ]
 
-  and solve for `\(z\)` as a function of `\(p\)`.
+  and solve for `\(z\)` as a function of `\(u\)`.
   
 --
 
 - Re-expressing as a function of `\(F(z)\)`,
 .block[
 .small[
-`$$F(z) = \{F(b) - F(a)\}p + F(a).$$`
+`$$F(z) = \{F(b) - F(a)\}u + F(a).$$`
 ]
 ]
 
@@ -578,7 +662,7 @@ The truncated density by itself would look like
 - Applying the untruncated inverse cdf `\(F^{-1}\)`  to both sides, we have
 .block[
 .small[
-`$$z = F^{-1}[\{F(b) - F(a)\}p + F(a)] = F^{-1}(p) = F^{-1}_A(p).$$`
+`$$z = F^{-1}[\{F(b) - F(a)\}u + F(a)] = F^{-1}_A(u).$$`
 ]
 ]
 
@@ -613,6 +697,107 @@ The truncated density by itself would look like
 --
 
 - Note we can equivalently sample `\(u^\star \sim runif(1,F(a),F(b))\)`.
+
+
+
+---
+class: center, middle
+
+# Intro to the Poisson-Gamma model
+
+
+
+---
+## Poisson distribution recap
+
+- `\(Y \sim \textrm{Po}(\theta)\)` denotes that `\(Y\)` is a .hlight[Poisson random variable].
+
+--
+
+- The Poisson distribution is commonly used to model count data consisting of the number of events in a given time interval.
+
+--
+
+- The Poisson distribution is parameterized by `\(\theta\)` and the pmf is given by
+.block[
+.small[
+`$$\Pr[Y = y | \theta] = \dfrac{\theta^y e^{-\theta}}{y!}; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ \theta &gt; 0.$$`
+]
+]
+
+--
+
+- Also,
+.block[
+.small[
+`$$\mathbb{E}[Y] = \mathbb{V}[Y] = \theta.$$`
+]
+]
+
+--
+
+- Suppose `\(y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)\)`.
+  &lt;div class="question"&gt;
+What is the best guess (MLE) for the Poisson parameter?
+&lt;/div&gt;
+
+
+
+---
+## Gamma density recap
+
+- The .hlight[gamma density] will be useful as a prior for parameters that are strictly positive.
+
+--
+
+- If `\(\theta \sim \textrm{Ga}(a,b)\)`, we have the pdf
+.block[
+.small[
+`$$f(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1}e^{-b\theta}.$$`
+]
+]
+
+--
+
+- Properties:
+.block[
+.small[
+`$$\mathbb{E}[\theta] = \dfrac{a}{b}; \ \ \mathbb{V}[\theta] = \dfrac{a}{b^2}.$$`
+]
+]
+
+
+---
+## Poisson-Gamma model
+
+- Generally, it turns out that if 
+  + `\(f(y_i; \theta): y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)\)`, and
+  + `\(\pi(\theta): \theta \sim \textrm{Ga}(a,b)\)`,
+  
+  then the posterior distribution is also a gamma distribution.
+  
+--
+
+- &lt;div class="question"&gt;
+Can we derive the posterior distribution and its parameters? Let's do some work on the board!
+&lt;/div&gt;
+
+--
+
+- Updating a gamma prior with a Poisson likelihood leads to a gamma posterior - we once again have conjugacy!
+
+--
+
+- Specifically, we have.
+.block[
+.small[
+`$$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$`
+]
+]
+
+--
+
+- This is the .hlight[Poisson-Gamma model]. We will dive deeper with examples next time.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
