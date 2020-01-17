@@ -38,12 +38,25 @@ library(rvest)
 - Tentative dates for quizzes:
   + Quiz I: Wed, Feb 12
   + Quiz II: Wed, Apr 1
+--
 
 - Homework 1 now online, due Thursday, Jan 23.
 
+--
+
 - My office hours are confirmed:
-  + Wed 9:00 - 10:00am
-  + Thur 11:45 - 12:45pm
+  + Wed 9:00 - 10:00am and Thur 11:45 - 12:45pm
+
+--
+
+- No lab on Monday; MLK day.
+
+--
+
+- Occasional short (timed) "participation" quizzes from next week.
+  + Will usually be available on Sakai under "Tests & Quizzes"
+  + Must take at the beginning of class if present
+  + Must take between 11:45am and 1:00pm if absent
 
 
 ---
@@ -57,6 +70,7 @@ library(rvest)
   + Truncated priors
   
 - Introduction to the Poisson-Gamma model
+  + Recap of the distributions
   + Conjugacy
 
 
