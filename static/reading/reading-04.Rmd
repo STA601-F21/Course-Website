@@ -1,5 +1,5 @@
 ---
-title: "Readings for one parameter models cont'd"
+title: "Readings for one parameter models cont'd; Loss functions and Bayes risk"
 output: 
   html_document:
     css: reading.css
@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Required:
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
-    + Section 3.1: The binomial model
+    + Section 3.1.2: Confidence regions
+    + Section 3.2: The Poisson model
+    + Section 3.3: Exponential families and conjugate priors
     + Section 3.4: Discussion and further references
 
 ## Optional:
