@@ -866,7 +866,7 @@ $$\Pr[Y = y | r, p] = {y + r - 1 \choose y} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; 
 - Starting with this, the distribution can be extended to allow $r \in (0,\infty)$ as
 .block[
 .small[
-$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ r > 0; \ \ \ p \in [0,1].$$
+$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$
 ]
 ]
 
@@ -964,8 +964,9 @@ legend("topright",c("No Bachelors","Bachelors"),bty="n", fill=c("orange3","green
 
 --
 
-- Using R, $\Pr(\tilde{y}_1 > \tilde{y}_2) = 0.49$ and $\Pr(\tilde{y}_1 > \tilde{y}_2) = 0.22$.
+- Using R, $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.48$ and $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.22$.
     ```{r fig.height=4}
+    set.seed(01222020)
 a=2; b=1; #prior
 n1=111; sumy1=217; n2=44; sumy2=66 #data
 mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) >

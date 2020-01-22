@@ -839,7 +839,7 @@ $$
 - Starting with this, the distribution can be extended to allow `\(r \in (0,\infty)\)` as
 .block[
 .small[
-`$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ r &gt; 0; \ \ \ p \in [0,1].$$`
+`$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$`
 ]
 ]
 
@@ -927,9 +927,10 @@ What does over-dispersion mean?
 
 --
 
-- Using R, `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) = 0.49\)` and `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) = 0.22\)`.
+- Using R, `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) \approx 0.48\)` and `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) \approx 0.22\)`.
     
     ```r
+    set.seed(01222020)
     a=2; b=1; #prior
     n1=111; sumy1=217; n2=44; sumy2=66 #data
     mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) &gt;
@@ -937,7 +938,7 @@ What does over-dispersion mean?
     ```
     
     ```
-    ## [1] 0.47977
+    ## [1] 0.48218
     ```
     
     ```r
@@ -946,7 +947,7 @@ What does over-dispersion mean?
     ```
     
     ```
-    ## [1] 0.21746
+    ## [1] 0.21799
     ```
 
 --
