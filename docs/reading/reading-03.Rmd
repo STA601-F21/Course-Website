@@ -1,5 +1,5 @@
 ---
-title: "Readings for one parameter models cont'd"
+title: "One parameter models cont'd"
 output: 
   html_document:
     css: reading.css

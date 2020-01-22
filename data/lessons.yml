@@ -56,6 +56,8 @@ lessons:
     title: "Lab 2: The Beta-Binomial model"
   
   - date: "Wed, Jan 29"
+    title: "Introduction to the normal model; noninformative and improper priors"
+    reading: "reading-06.html"
   
   - date: "Fri, Jan 31"
   
