@@ -174,7 +174,7 @@ To be continued on the board!
 - Well that's great! The posterior mean is often very easy to calculate in most cases. In the beta-binomial case, we have
 .block[
 .small[
-$$\hat{\theta} = \frac{a+y}{b+n-y}.$$
+$$\hat{\theta} = \frac{a+y}{a+b+n}.$$
 ]
 ]
 
@@ -428,7 +428,7 @@ $$\Pr[l(y) < \theta < u(y) | \theta] = 0.95.$$
 
 --
 
-- You just know that either the interval covers the data, or it doesn't (useful, but not too helpful clearly). There is NOT a 95% chance your interval covers the true parameter once you have collected the data.
+- You just know that either the interval covers the parameter, or it doesn't (useful, but not too helpful clearly). There is NOT a 95% chance your interval covers the true parameter once you have collected the data.
 
 --
 
