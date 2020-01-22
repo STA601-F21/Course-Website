@@ -1,5 +1,5 @@
 ---
-title: "Readings for one parameter models cont'd; Loss functions and Bayes risk"
+title: "Readings for one parameter models cont'd, Loss functions and Bayes risk"
 output: 
   html_document:
     css: reading.css

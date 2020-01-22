@@ -44,9 +44,13 @@ lessons:
   - title: "Drop/add ends"
   
   - date: "Fri, Jan 24"
+    title: "Monte Carlo approximation and sampling"
+    reading: "reading-05.html"
     #hw: "hw-02.html"
   
   - title: "WEEK 4"
+  
+  - title: "PART III: MULTIPARAMETER MODELS AND GIBBS SAMPLING"
   
   - date: "Mon, Jan 27"
     title: "Lab 2: The Beta-Binomial model"
@@ -70,7 +74,7 @@ lessons:
     title: "Lab 4: Prior selection and model reparameterization"
   
   - date: "Wed, Feb 12"
-    title: "Tentative date for quiz II"
+    title: "Tentative date for quiz I"
   
   - date: "Fri, Feb 14"
   
