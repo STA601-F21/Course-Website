@@ -157,7 +157,7 @@ knitr::include_graphics("img/binomial_histograms.png")
 - .hlight[Step 4]. Formulate and state a modeling framework:
   + Prior specification: information from previous studies — infection rate in “comparable cities” ranges from 0.05 to
 0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
-  + What is a good prior? The **expected value** of $\theta$ close to 0.10 and the **variance** close to 0.05.
+  + What is a good prior? The **expected value** of $\theta$ close to 0.10 and the **variance** close to 0.05^2.
   + Possible option: $\mbox{Beta}(3.5,31.5)$ or maybe even $\mbox{Beta}(3,32)$?
   ```{r fig.height=3.7, echo=F}
 curve(dbeta(x,3,32),ylim=c(0,10),col="green4",xlab=expression(theta),ylab="density",lwd=1)
@@ -390,7 +390,7 @@ $$
 ---
 ## Posterior predictive distribution
 
-- Let's go back to Bernoulli data. Suppose $y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Bernoulli}(\theta)$.
+- Let's go back to Bernoulli data. Suppose $y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Bernoulli}(\theta)$.
 
 --
 
@@ -763,110 +763,6 @@ $$u^\star = \{F(b) - F(a)\}u + F(a).$$
 --
 
 - Note we can equivalently sample $u^\star \sim runif(1,F(a),F(b))$.
-
-
-
----
-class: center, middle
-
-# Intro to the Poisson-Gamma model
-
-
-
----
-## Poisson distribution recap
-
-- $Y \sim \textrm{Po}(\theta)$ denotes that $Y$ is a .hlight[Poisson random variable].
-
---
-
-- The Poisson distribution is commonly used to model count data consisting of the number of events in a given time interval.
-
---
-
-- The Poisson distribution is parameterized by $\theta$ and the pmf is given by
-.block[
-.small[
-$$\Pr[Y = y | \theta] = \dfrac{\theta^y e^{-\theta}}{y!}; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ \theta > 0.$$
-]
-]
-
---
-
-- Also,
-.block[
-.small[
-$$\mathbb{E}[Y] = \mathbb{V}[Y] = \theta.$$
-]
-]
-
---
-
-- Suppose $y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)$.
-  <div class="question">
-What is the best guess (MLE) for the Poisson parameter?
-</div>
-
-
-
----
-## Gamma density recap
-
-- The .hlight[gamma density] will be useful as a prior for parameters that are strictly positive.
-
---
-
-- If $\theta \sim \textrm{Ga}(a,b)$, we have the pdf
-.block[
-.small[
-$$f(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1}e^{-b\theta}.$$
-]
-]
-
---
-
-- Properties:
-.block[
-.small[
-$$\mathbb{E}[\theta] = \dfrac{a}{b}; \ \ \mathbb{V}[\theta] = \dfrac{a}{b^2}.$$
-]
-]
-
-
----
-## Poisson-Gamma model
-
-- Generally, it turns out that if 
-  + $f(y_i; \theta): y_i,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)$, and
-  + $\pi(\theta): \theta \sim \textrm{Ga}(a,b)$,
-  
-  then the posterior distribution is also a gamma distribution.
-  
---
-
-- <div class="question">
-Can we derive the posterior distribution and its parameters? Let's do some work on the board!
-</div>
-
---
-
-- Updating a gamma prior with a Poisson likelihood leads to a gamma posterior - we once again have conjugacy!
-
---
-
-- Specifically, we have.
-.block[
-.small[
-$$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$
-]
-]
-
---
-
-- This is the .hlight[Poisson-Gamma model]. We will dive deeper with examples next time.
-
-
-
 
 
 

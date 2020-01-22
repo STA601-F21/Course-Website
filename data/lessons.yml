@@ -38,10 +38,13 @@ lessons:
   - date: "Wed, Jan 22"
     title: "One parameter models cont'd; Loss functions and Bayes risk"
     reading: "reading-04.html"
+    slides: "lec-slides/04-one-parameter-models-III.html"
+    slidespdf: "lec-slides/04-one-parameter-models-III.pdf"
     
   - title: "Drop/add ends"
   
   - date: "Fri, Jan 24"
+    #hw: "hw-02.html"
   
   - title: "WEEK 4"
   

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>One parameter models cont’d; Loss functions and Bayes risk</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# One parameter models cont’d; Loss functions and Bayes risk
+### Dr. Olanrewaju Michael Akande
+### Jan 22, 2020
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- Add/drop today
+
+- HW1 due tomorrow
+
+- Take the participation quiz for today on Sakai
+  
+
+---
+## Outline
+
+- Loss functions and Bayes risk
+
+- Frequentist vs Bayesian intervals
+
+- Poisson-Gamma model
+  + Recap of the distributions
+  + Conjugacy
+  + Example
+  + Posterior prediction
+  + Other parameterizations
+  
+
+
+---
+class: center, middle
+
+# Loss functions and Bayes risk
+
+
+---
+## Bayes estimate
+
+- As we've seen by now, having posterior distributions instead of one-number summaries is great for capturing uncertainty.
+
+--
+
+- That said, it is still very appealing to have simple summaries, especially when dealing with clients or collaborators from other fields, who desire one.
+
+--
+
+- Can we obtain a single estimate of `\(\theta\)` based on the posterior? Sure!
+
+--
+
+- .hlight[Bayes estimate] is the value `\(\hat{\theta}\)`, that minimizes the Bayes risk.
+
+--
+
+- .hlight[Bayes risk] is defined as the expected loss averaged over the posterior distribution.
+
+--
+
+- Put differently, a .hlight[Bayes estimate] `\(\hat{\theta}\)` has the lowest posterior expected loss.
+
+--
+
+- &lt;div class="question"&gt;
+That's fine, but what does expected loss mean?
+&lt;/div&gt;
+
+--
+
+- .hlight[Frequentist risk] also exists but we won't go into that here.
+
+
+
+---
+## Loss functions
+
+- A .hlight[loss function] `\(L(\theta,\delta(y))\)` is a function of a parameter `\(\theta\)`, where `\(\delta(y)\)` is some .hlight[decision] about `\(\theta\)`, based on just the data `\(y\)`.
+
+--
+
+- For example, `\(\delta(y) = \bar{y}\)` can be the decision to use the sample mean to estimate `\(\theta\)`, the true population mean.
+
+--
+
+- `\(L(\theta,\delta(y))\)` determines the penalty for making the decision `\(\delta(y)\)`, if `\(\theta\)` is the true parameter; `\(L(\theta,\delta(y))\)` characterizes the price paid for errors.
+
+--
+
+- A common choice for example, when dealing with point estimation, is the .hlight[squared error loss], which has
+.block[
+.small[
+`$$L(\theta,\delta(y)) = (\theta - \delta(y))^2.$$`
+]
+]
+
+--
+
+- Bayes risk is thus
+.block[
+.small[
+`$$\rho(\theta,\delta) = \mathbb{E}\left[\ L(\theta,\delta(y)) | \ y\right] = \int L(\theta,\delta(y)) \ p(\theta|y) \ d\theta,$$`
+]
+]
+
+  and we proceed to find the value `\(\hat{\theta}\)`, that is, the decision `\(\delta(y)\)`, that minimizes the Bayes risk.
+
+
+
+---
+## Bayes estimator under squared error loss
+
+- Turns out that, under squared error loss, the decision `\(\delta(y)\)` that minimizes the posterior risk is the posterior mean.
+
+--
+
+- Proof: Let `\(L(\theta,\delta(y)) = (\theta - \delta(y))^2\)`. Then,
+.block[
+.small[
+$$
+`\begin{aligned}
+\rho(\theta,\delta) &amp; = \int L(\theta,\delta(y)) \ p(\theta|y) \ d\theta.\\
+&amp; = \int (\theta - \delta(y))^2 \ p(\theta|y) \ d\theta.\\
+\end{aligned}`
+$$
+]
+]
+
+--
+
+- Expand, then take the partial derivative of `\(\rho(\theta,\delta)\)` with respect to `\(\delta(y)\)`.
+
+--
+
+- &lt;div class="question"&gt;
+To be continued on the board!
+&lt;/div&gt;
+
+--
+
+- Easy to see then that `\(\delta(y) = \mathbb{E}[\theta | x]\)` is the minimizer.
+
+--
+
+- Well that's great! The posterior mean is often very easy to calculate in most cases. In the beta-binomial case, we have
+.block[
+.small[
+`$$\hat{\theta} = \frac{a+y}{b+n-y}.$$`
+]
+]
+
+
+
+---
+## What about other loss functions?
+
+- Clearly, squared error is only one possible loss function. An alternative is .hlight[absolute loss], which has
+.block[
+.small[
+`$$L(\theta,\delta(y)) = |\theta - \delta(y)|.$$`
+]
+]
+
+--
+
+- Absolute loss places less of a penalty on large deviations &amp; the resulting Bayes estimate is **posterior median**.
+
+--
+
+- Median is actually relatively easy to estimate.
+
+--
+
+- Recall that for a continuous random variable `\(Y\)` with cdf `\(F\)`, the median of the distribution is the value `\(z\)`, which satisfies
+.block[
+.small[
+`$$F(z) = \Pr(Y\leq z) = \dfrac{1}{2}= \Pr(Y\geq z) = 1-F(z).$$`
+]
+]
+
+--
+
+- As long as we know how to evaluate the CDF of the distribution we have, we can solve for `\(z\)`. 
+
+--
+
+- Think R!
+
+
+
+---
+## What about other loss functions?
+
+- For the beta-binomial model, the CDF of the beta posterior can be written as
+.block[
+.small[
+`$$F(z) = \Pr(\theta\leq z | y) = \int^z_0 \textrm{beta}(\theta; a+y, b+n-y) d\theta.$$`
+]
+]
+
+--
+
+- Then, if `\(\hat{\theta}\)` is the median, we have that `\(F(\hat{\theta}) = 0.5\)`.
+
+--
+
+- To solve for `\(\hat{\theta}\)`, apply the inverse CDF `\(\hat{\theta} = F^{-1}(0.5)\)`.
+
+--
+
+- In R, that's simply
+    
+    ```r
+    qbeta(0.5,a+y,b+n-y)
+    ```
+
+--
+
+- For other popular distributions, switch out the beta.
+
+
+
+---
+## Loss functions and decisions
+
+- Loss functions are not specific to estimation problems but are a critical part of decision making.
+
+--
+
+- For example, suppose you are deciding how much money to bet ($A) on Duke in the first UNC-Duke men's basketball game this year (next month).
+
+--
+
+- Suppose, if Duke
+  + loses (y = 0), you lose the amount you bet ($A)
+  + wins (y = 1), you gain B per $1 bet
+  
+--
+
+- &lt;div class="question"&gt;
+What is a good sampling distribution for y here?
+&lt;/div&gt;
+  
+--
+
+- Then, the loss function can be characterized as
+.block[
+.small[
+`$$L(A,y) = A(1-y) - y(BA),$$`
+]
+]
+  
+  with your action being the amount bet A.
+  
+--
+
+- &lt;div class="question"&gt;
+When will your bet be "rational"?
+&lt;/div&gt;
+
+
+
+---
+## How much to bet on Duke?
+
+- `\(y\)` is an unknown state, but we can think of it as a new prediction `\(y_{n+1}\)` given that we have data from win-loss records `\((y_{1:n})\)` that can be converted into a Bayesian posterior,
+.block[
+.small[
+`$$\theta \sim \textrm{beta}(a_n,b_n),$$`
+]
+]
+
+--
+  with this posterior concentrated slightly to the left of 0.5, if we only use data on UNC-Duke games (UNC men lead Duke 139-112 all time).
+  
+--
+
+- Actually, it might make more sense to focus on more recent head-to-head data and not the all time record.
+
+--
+
+- In fact, we might want to build a model that predicts the outcome of the game using historical data &amp; predictors (current team rankings, injuries, etc).
+
+--
+
+- However, to keep it simple for this illustration, go with the posterior above.
+
+
+
+---
+## How much to bet on Duke?
+
+- The Bayes risk for action A is then the expectation of the loss function,
+.block[
+.small[
+`$$\rho(A) = \mathbb{E}\left[\ L(A,y) | \ y_{1:n}\right].$$`
+]
+]
+
+--
+
+- To calculate this as a function of `\(A\)` and find the optimal `\(A\)`, we need to marginalize over the **posterior predictive distribution** for `\(y\)`.
+
+--
+
+- &lt;div class="question"&gt;
+Why are we using the posterior predictive distribution here instead of the posterior distribution?
+&lt;/div&gt;
+
+--
+
+- Recall from the last class that
+.block[
+.small[
+`$$p(y_{n+1}|y_{1:n}) = \dfrac{a_n^{y_{n+1}} b_n^{1-y_{n+1}}}{a_n + b_n}; \ \ \ y_{n+1}=0,1.$$`
+]
+]
+
+--
+
+- Specifically, that the posterior predictive distribution here is `\(\textrm{Bernoulli}(\hat{\theta})\)`, with
+.block[
+.small[
+`$$\hat{\theta} = \dfrac{a_n}{a_n + b_n}$$`
+]
+]
+
+--
+
+- By the way, what do `\(a_n\)` and `\(b_n\)` represent?
+
+
+
+---
+## How much to bet on Duke?
+
+- With the loss function `\(L(A,y) = A(1-y) - y(BA)\)`, and using the notation `\(y_{n+1}\)` instead of `\(y\)` (to make it obvious the game has not been played), the Bayes risk (expected loss) for bet `\(A\)` is
+.block[
+.small[
+$$
+`\begin{split}
+\rho(A) &amp; = \mathbb{E}\left[\ L(A,y_{n+1}) | \ y_{1:n}\right] = \mathbb{E}\left[A(1-y_{n+1}) - y_{n+1}(BA) | \ y_{1:n}\right]\\
+&amp; = A \ \mathbb{E}\left[1-y_{n+1} | \ y_{1:n}\right]  - (BA) \ \mathbb{E}\left[y_{n+1} | \ y_{1:n}\right]\\
+&amp; = A \ \left(1 -  \mathbb{E}\left[y_{n+1} | \ y_{1:n}\right] \right)  - (BA) \ \mathbb{E}\left[y_{n+1} | \ y_{1:n}\right]\\
+&amp; = A \ \left(1 -\mathbb{E}\left[y_{n+1} | \ y_{1:n}\right](1+B) \right).
+\end{split}`
+$$
+]
+]
+
+--
+
+- Hence, your bet is rational as long as
+.block[
+.small[
+`$$\mathbb{E}\left[y_{n+1} | \ y_{1:n}\right](1+B) &gt; 1.$$`
+]
+]
+
+--
+
+- Clearly, there is no limit to the amount you should bet if this condition is satisfied (the loss function is clearly too simple).
+
+--
+
+- Loss function needs to be carefully chosen to lead to a good decision - finite resources, diminishing returns, limits on donations, etc.
+
+--
+
+- &lt;div class="question"&gt;
+Want more on loss functions, expected loss/utility, or decision problems in general? Consider taking a course on decision theory (STA623?).
+&lt;/div&gt;
+
+
+
+---
+class: center, middle
+
+# Frequentist vs Bayesian intervals
+
+
+
+---
+## Frequentist confidence intervals
+
+- Recall that a frequentist confidence interval  `\([l(y); u(y)]\)` has 95% frequentist coverage for a population parameter `\(\theta\)` if, before we collect the data,
+.block[
+.small[
+`$$\Pr[l(y) &lt; \theta &lt; u(y) | \theta] = 0.95.$$`
+]
+]
+
+--
+
+- This means that 95% of the time, our constructed interval will cover the true parameter, and 5% of the time it won't.
+
+--
+
+- In any given sample, you don't know whether you're in the lucky 95% or the unlucky 5%.
+
+--
+
+- You just know that either the interval covers the data, or it doesn't (useful, but not too helpful clearly). There is NOT a 95% chance your interval covers the true parameter once you have collected the data.
+
+--
+
+- Asking about the definition of a confidence interval is tricky, even for those who know what they're doing.
+
+
+
+---
+## Bayesian intervals
+
+- An interval `\([l(y); u(y)]\)` has 95% Bayesian coverage for `\(\theta\)` if
+.block[
+.small[
+`$$\Pr[l(y) &lt; \theta &lt; u(y) | Y=y] = 0.95.$$`
+]
+]
+
+--
+
+- This describes our information about where `\(\theta\)` lies _after_ we observe the data.
+
+--
+
+- Fantastic!
+
+--
+
+- This is actually the interpretation people want to give to the frequentist confidence interval.
+
+--
+
+- Bayesian interval estimates are often generally called .hlight[credible intervals].
+
+
+
+---
+## Bayesian quantile-based interval
+
+- The easiest way to obtain a Bayesian interval estimate is to use posterior quantiles.
+
+--
+
+- Easy since we either know the posterior densities exactly or can sample from the distributions.
+
+--
+
+- To make a `\(100 \times (1-\alpha)%\)` quantile-based credible interval, find numbers (quantiles) `\(\theta_{\alpha/2} &lt; \theta_{1-\alpha/2}\)` such that
+
+  1. `\(\Pr(\theta &lt; \theta_{\alpha/2} | Y=y) = \dfrac{\alpha}{2}\)`; and
+  
+  2. `\(\Pr(\theta &gt; \theta_{1-\alpha/2} | Y=y) = \dfrac{\alpha}{2}\)`.
+  
+--
+
+- This is an .hlight[equal-tailed interval]. Often when researchers refer to a credible interval, this is what they mean.
+
+
+
+---
+## Equal-tailed quantile-based interval
+
+&lt;img src="img/hpd.png" height="370px" style="display: block; margin: auto;" /&gt;
+
+- This is Figure 3.6 from the Hoff book. Focus on the quantile-based credible interval for now.
+
+--
+
+- Note that there are values of `\(\theta\)` outside the quantile-based credible interval, with higher density than some values inside the interval. This suggests that we can do better with interval estimation.
+
+
+
+---
+## HPD region
+
+- A `\(100 \times (1-\alpha)%\)` highest posterior density (HPD) region is a subset `\(s(y)\)` of the parameter space `\(\Theta\)` such that
+
+  1. `\(\Pr(\theta \in s(y) | Y=y) = 1-\alpha\)`; and
+  
+  2. If `\(\theta_a \in s(y)\)` and `\(\theta_b \notin s(y)\)`, then `\(\Pr(\theta_a | Y=y) &gt; \Pr(\theta_b | Y=y)\)`.
+
+--
+
+- `\(\Rightarrow\)` **All** points in a HPD region have higher posterior density than points outside the region. 
+
+  *Note this region is not necessarily a single interval (e.g., in the case of a multimodal posterior).*
+  
+--
+
+- The basic idea is to gradually move a horizontal line down across the density, including in the HPD region all values of `\(\theta\)` with a density above the horizontal line.
+
+--
+
+- Stop moving the line down when the posterior probability of the values of `\(\theta\)` in the region reaches `\(1-\alpha\)`.
+
+
+
+---
+## HPD region
+
+Hoff Figure 3.6 shows how to construct an HPD region.
+
+&lt;img src="img/hpd.png" height="450px" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+
+---
+class: center, middle
+
+# Poisson-gamma model
+
+
+
+---
+## Poisson distribution recap
+
+- `\(Y_1,\ldots,Y_n \overset{iid}{\sim} \textrm{Po}(\theta)\)` denotes that each `\(Y_i\)` is a .hlight[Poisson random variable].
+
+--
+
+- The Poisson distribution is commonly used to model count data consisting of the number of events in a given time interval.
+
+--
+
+- Some examples: # children, # lifetime romantic partners, # songs on iPhone, # tumors on mouse, etc.
+
+--
+
+- The Poisson distribution is parameterized by `\(\theta\)` and the pmf is given by
+.block[
+.small[
+`$$\Pr[Y_i = y_i | \theta] = \dfrac{\theta^y_i e^{-\theta}}{y_i!}; \ \ \ \ y_i=0,1,2,\ldots; \ \ \ \ \theta &gt; 0.$$`
+]
+]
+
+  where
+.block[
+.small[
+`$$\mathbb{E}[Y_i] = \mathbb{V}[Y_i] = \theta.$$`
+]
+]
+
+--
+
+- &lt;div class="question"&gt;
+What is the joint likelihood? What is the best guess (MLE) for the Poisson parameter? What is the sufficient statistic for the Poisson parameter?
+&lt;/div&gt;
+
+
+
+---
+## Gamma density recap
+
+- The .hlight[gamma density] will be useful as a prior for parameters that are strictly positive.
+
+--
+
+- If `\(\theta \sim \textrm{Ga}(a,b)\)`, we have the pdf
+.block[
+.small[
+`$$f(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1}e^{-b\theta}.$$`
+]
+]
+
+  where `\(a\)` is known as the .hlight[shape parameter] and `\(b\)`, the .hlight[rate parameter]. 
+  
+--
+
+- Another parameterization uses the .hlight[scale parameter] `\(\phi = 1/b\)` instead of `\(b\)`.
+
+--
+
+- Some properties:
+
+  + `\(\mathbb{E}[\theta] = \dfrac{a}{b}\)`
+  
+  + `\(\mathbb{V}[\theta] = \dfrac{a}{b^2}\)`
+  
+  + `\(\textrm{Mode}[\theta] = \dfrac{a-1}{b} \ \ \textrm{for} \ \ a \geq 1\)`
+
+
+
+
+---
+## Gamma density
+
+- If our prior guess of the expected count is `\(\mu\)` &amp; we have a prior "scale" `\(\phi\)`, we can let
+.block[
+.small[
+`$$\mathbb{E}[\theta] = \mu = \dfrac{a}{b}; \ \ \mathbb{V}[\theta] = \mu \phi = \dfrac{a}{b^2},$$`
+]
+]
+
+  and solve for `\(a\)`, `\(b\)`. We can play the same game if we have a prior variance or standard deviation.
+  
+  
+--
+
+- More properties:
+
+  + If `\(\theta_1,\ldots,\theta_p \overset{ind}{\sim} \textrm{Ga}(a_i,b)\)`, then `\(\sum_i \theta_i \sim \textrm{Ga}(\sum_i a_i,b)\)`.
+
+--
+  + If `\(\theta \sim \textrm{Ga}(a,b)\)`, then for any `\(c &gt; 0\)`, `\(c\theta \sim \textrm{Ga}(a,b/c)\)`.
+
+--
+  + If `\(\theta \sim \textrm{Ga}(a,b)\)`, then `\(1/\theta\)` has an .hlight[Inverse-Gamma distribution]. 
+  
+--
+  *We'll take advantage of these soon!*
+  
+  
+  
+---
+## Example gamma distributions
+
+&lt;img src="04-one-parameter-models-III_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+*R has the option to specify either the rate or scale parameter so always make sure to specify correctly when using "dgamma","rgamma",etc!*.
+
+
+
+---
+## Poisson-Gamma model
+
+- Generally, it turns out that if 
+  + `\(f(y_i; \theta): y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)\)`, and
+  + `\(\pi(\theta): \theta \sim \textrm{Ga}(a,b)\)`,
+  
+  then the posterior distribution is also a gamma distribution.
+  
+--
+
+- &lt;div class="question"&gt;
+Can we derive the posterior distribution and its parameters? Of course....let's do some work on the board!
+&lt;/div&gt;
+
+--
+
+- Updating a gamma prior with a Poisson likelihood leads to a gamma posterior - we once again have conjugacy!
+
+--
+
+- Specifically, we have.
+.block[
+.small[
+`$$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$`
+]
+]
+
+--
+
+- &lt;div class="question"&gt;
+What is the posterior mean? How about the posterior variance?
+&lt;/div&gt;
+
+
+
+---
+## Hoff example: birth rates
+
+- Survey data on educational attainment and number of children of 155 forty-year-old women during the 1990's.
+
+--
+
+- These women were in their 20s during the 1970s, a period of historically low fertility rates in the US.
+
+--
+
+- **Goal**: compare birth rate `\(\theta_1\)` for women with bachelor's degrees to the rate `\(\theta_2\)` for women without.
+
+--
+
+- **Data**:
+  + 111 women without a bachelor's degree had 217 children: `\((\bar{y}_1 = 1.95)\)`
+  + 44 women with bachelor's degrees had 66 children: `\((\bar{y}_2 = 1.50)\)`
+  
+--
+
+- Based on the data alone, looks like `\(\theta_1\)` should be greater than `\(\theta_2\)`. But...how sure are we?
+  
+--
+
+- **Priors**: `\(\theta_1, \theta_2 \sim \textrm{Ga}(2,1)\)` (not much prior information; equivalent to 1 prior woman with 2 children). Posterior means will be close to the MLEs.
+
+
+
+---
+## Hoff example: birth rates
+
+- Then,
+  + `\(\theta_1 | \{n_1=111, \sum y_{i,1}=217\} \sim \textrm{Ga}(2+217,1+111) = \textrm{Ga}(219,112).\)`
+  
+  + `\(\theta_1 | \{n_1=44, \sum y_{i,1}=66\} \sim \textrm{Ga}(2+66,1+44) = \textrm{Ga}(68,45).\)`
+  
+--
+
+- We can then use R to calculate posterior means, modes, and 95% credible intervals for `\(\theta_1\)` and `\(\theta_2\)`.
+    
+    ```r
+    a=2; b=1; #prior
+    n1=111; sumy1=217; n2=44; sumy2=66 #data
+    (a+sumy1)/(b+n1); (a+sumy2)/(b+n2); #post means
+    qgamma(c(0.025, 0.975),a+sumy1,b+n1) #95\% ci 1
+    qgamma(c(0.025, 0.975),a+sumy2,b+n2) #95\% ci 2
+    ```
+
+--
+
+- Posterior means: `\(\mathbb{E}[\theta_1 | \{y_{i,1}\}] = 1.955\)` and `\(\mathbb{E}[\theta_2 | \{y_{i,2}\}] = 1.511\)`.
+  
+--
+
+- 95% credible intervals
+  + `\(\theta_1\)`: [1.71, 2.22].
+  + `\(\theta_2\)`: [1.17, 1.89].
+  
+
+
+---
+## Hoff example: birth rates
+
+Prior and posteriors:
+
+&lt;img src="04-one-parameter-models-III_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+## Hoff example: birth rates
+
+- Posteriors indicate considerable evidence birth rates are higher among women without bachelor's degrees.
+
+--
+
+- Confirms what we observed.
+
+--
+
+- Using sampling we can quickly calculate `\(\Pr(\theta_1 &gt; \theta_2 | \textrm{data})\)`.
+    
+    ```r
+    mean(rgamma(10000,219,112)&gt;rgamma(10000,68,45))
+    ```
+
+  We have `\(\Pr(\theta_1 &gt; \theta_2 | \textrm{data}) = 0.97\)`.
+  
+--
+
+- Why/how does it work?
+
+--
+
+- .hlight[Monte Carlo approximation] coming soon!
+
+--
+
+- Clearly, that probability will change with different priors.
+
+
+
+---
+## Posterior predictive distribution
+
+- &lt;div class="question"&gt;
+What is the posterior predictive distribution for the Poisson-gamma model?
+&lt;/div&gt;
+
+--
+
+- Let `\(a_n = a+\sum y_i\)` and `\(b_n = b+n\)`.
+
+--
+
+- We have
+.block[
+.small[
+$$
+`\begin{aligned}
+f(y_{n+1}|y_{1:n}) &amp;= \int f(y_{n+1}|\theta) \pi(\theta|y_{1:n})\,d\theta \\
+&amp;= \int \textrm{Po}(y_{n+1}; \theta)  \textrm{Ga}(\theta; a_n,b_n)\,d\theta \\
+&amp;= ... \\
+&amp;= ... \\
+&amp;= \dfrac{\Gamma(a_n + y_{n+1})}{\Gamma(a_n)\Gamma(y_{n+1}+1)} \ \left(\dfrac{b_n}{b_n + 1} \right)^{a_n} \ \left(\dfrac{1}{b_n + 1} \right)^{y_{n+1}}
+\end{aligned}`
+$$
+]
+]
+
+  which is the .hlight[negative binomial distribution], `\(\textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)\)`.
+  
+--
+
+- The .hlight[prior predictive distribution] takes a similar form.
+
+
+
+---
+## Negative binomial distribution
+
+- Originally derived as the number of successes in a sequence of independent `\(\textrm{Bernoulli}(p)\)` trials before `\(r\)` failures occur.
+
+--
+
+- The negative binomial distribution `\(\textrm{Neg-binomial}\left(r,p\right)\)` is parameterized by `\(r\)` and `\(p\)` and the pmf is given by
+.block[
+.small[
+`$$\Pr[Y = y | r, p] = {y + r - 1 \choose y} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$`
+]
+]
+
+- Starting with this, the distribution can be extended to allow `\(r \in (0,\infty)\)` as
+.block[
+.small[
+`$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ r &gt; 0; \ \ \ p \in [0,1].$$`
+]
+]
+
+--
+
+- Some properties:
+
+  + `\(\mathbb{E}[\theta] = \dfrac{pr}{1-p}\)`
+  
+  + `\(\mathbb{V}[\theta] = \dfrac{pr}{(1-p)^2}\)`
+
+
+
+
+---
+## Posterior predictive distribution
+
+- The negative binomial distribution is an over-dispersed generalization of the Poisson.
+
+--
+
+- &lt;div class="question"&gt;
+What does over-dispersion mean?
+&lt;/div&gt;
+
+--
+
+- In marginalizing `\(\theta\)` out of the Poisson likelihood, over a gamma distribution, we obtain a negative-binomial.
+
+--
+
+- For `\((y_{n+1}|y_{1:n}) \sim \textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)\)`, we have
+
+  + `\(\mathbb{E}[y_{n+1}|y_{1:n}] = \dfrac{a_n}{b_n} = \mathbb{E}[\theta|y_{1:n}] =\)` posterior mean, and
+  
+  + `\(\mathbb{V}[y_{n+1}|y_{1:n}] = \dfrac{a_n(b_n+1)}{b_n^2} = \mathbb{E}[\theta|y_{1:n}] \left(\dfrac{b_n+1}{b_n}\right)\)`,
+  
+    so that variance is larger than the mean by an amount determined by `\(b_n\)`, which takes the over-dispersion into account.
+
+
+
+---
+## Predictive uncertainty
+
+- Note that as the sample size `\(n\)` increases, the posterior density for `\(\theta\)` becomes more and more concentrated.
+.block[
+.small[
+`$$\mathbb{E}[\theta | y_{1:n}] = \dfrac{a_n}{b_n^2} = \dfrac{a + \sum_i y_i}{(b + n)^2} \approx \dfrac{\bar{y}}{n} \rightarrow 0.$$`
+]
+]
+
+--
+
+- Also, recall that `\(\mathbb{V}[y_{n+1}|y_{1:n}] = \mathbb{E}[\theta] \left(\dfrac{b_n+1}{b_n}\right)\)`.
+
+--
+
+- As we have less uncertainty about `\(\theta\)`, the inflation factor
+.block[
+.small[
+`$$\dfrac{b_n+1}{b_n} = \dfrac{b + n+1}{b + n} \rightarrow 1$$`
+]
+]
+
+  and the predictive density `\(f(y_{n+1}|y_{1:n}) \rightarrow \textrm{Po}(\bar{y})\)`.
+  
+--
+
+- Of course, in smaller samples, it is important to inflate our predictive intervals to account for uncertainty in `\(\theta\)`.
+
+
+
+---
+## Back to birth rates
+
+- Let's compare the posterior predictive distributions for the two groups of women.
+&lt;img src="04-one-parameter-models-III_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Back to birth rates
+
+- Suppose we randomly sample two women, one with degree and one without. To what extent do we expect the one without the degree to have more kids than the other, e.g. `\(\tilde{y}_1 &gt; \tilde{y}_2\)`?
+
+--
+
+- Using R, `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) = 0.49\)` and `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2) = 0.22\)`.
+    
+    ```r
+    a=2; b=1; #prior
+    n1=111; sumy1=217; n2=44; sumy2=66 #data
+    mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) &gt;
+    rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
+    ```
+    
+    ```
+    ## [1] 0.47977
+    ```
+    
+    ```r
+    mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1))==
+    rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
+    ```
+    
+    ```
+    ## [1] 0.21746
+    ```
+
+--
+
+- Strong evidence of difference between two populations does not really imply the difference in predictions is large.
+
+
+---
+## Poisson model in terms of rate
+
+- In many applications, it is often convenient to parameterize the Poisson model a bit differently. One option takes the form
+.block[
+.small[
+`$$y_1,\ldots,y_n \sim \textrm{Po}(x_i\theta)$$`
+]
+]
+
+  where `\(x_i\)` represents an explanatory variable and `\(\theta\)` is once again the population parameter of interest. The model is not exchangeable in the `\(y_i\)`'s but is exchangeable in the pairs `\((x,y)_i\)`.
+  
+--
+
+- In epidemiology, `\(\theta\)` is often called the population "rate" and `\(x_i\)` is called the "exposure" of unit `\(i\)`.
+
+--
+
+- When dealing with mortality rates in different counties for example, `\(x_i\)` can be the population `\(n_i\)` in county `\(i\)`, with `\(\theta =\)` the overall mortality rate.
+
+--
+
+- The gamma distribution is still conjugate for `\(\theta\)`, with the resulting posterior taking the form
+.block[
+.small[
+`$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i).$$`
+]
+]
+
+--
+
+- We will look at an example in the next class.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
