@@ -827,7 +827,7 @@ for(i in 1:m){
   }
 }
 }
-#How many rejections in all, to generate m samples?
+#How many rejections in all, to generate m=10000 samples?
 TotalRejects
 ```
 
@@ -837,8 +837,131 @@ Clearly less efficient than inverse-CDF method which we already know we can use 
 ---
 ## Example
 
-How does our sample compare to the true truncated density?
+How does our sample compare to the true truncated density? $m = 100$
 ```{r fig.height=5, echo=F}
+set.seed(12345)
+m <- 100; THETA <- rep(0,m)
+TotalRejects <- 0; Rejections <- NULL
+for(i in 1:m){
+  t <- 0
+  while(t < 1){
+    theta <- rbeta(1,10,10)
+    if(theta > 0.35 & theta < 0.6){
+      THETA[i] <- theta
+      t <- 1
+    } else {
+    TotalRejects <- TotalRejects + 1
+    Rejections <- rbind(Rejections,theta)
+  }
+}
+}
+
+p <- seq(0,1,length=10000)
+f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
+plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
+     ylim=c(0,6),lty=1.5)
+lines(density(THETA),type='l',col='blue4',lty=1.5)
+points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
+labels <- c("True Density", "Accepted Samples","Rejects")
+legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+       col=c('green4','blue4',"red2"))
+```
+
+
+
+---
+## Example
+
+How does our sample compare to the true truncated density? $m = 1000$
+```{r fig.height=5, echo=F}
+set.seed(12345)
+m <- 1000; THETA <- rep(0,m)
+TotalRejects <- 0; Rejections <- NULL
+for(i in 1:m){
+  t <- 0
+  while(t < 1){
+    theta <- rbeta(1,10,10)
+    if(theta > 0.35 & theta < 0.6){
+      THETA[i] <- theta
+      t <- 1
+    } else {
+    TotalRejects <- TotalRejects + 1
+    Rejections <- rbind(Rejections,theta)
+  }
+}
+}
+
+p <- seq(0,1,length=10000)
+f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
+plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
+     ylim=c(0,6),lty=1.5)
+lines(density(THETA),type='l',col='blue4',lty=1.5)
+points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
+labels <- c("True Density", "Accepted Samples","Rejects")
+legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+       col=c('green4','blue4',"red2"))
+```
+
+
+
+
+---
+## Example
+
+How does our sample compare to the true truncated density? $m = 10000$
+```{r fig.height=5, echo=F}
+set.seed(12345)
+m <- 10000; THETA <- rep(0,m)
+TotalRejects <- 0; Rejections <- NULL
+for(i in 1:m){
+  t <- 0
+  while(t < 1){
+    theta <- rbeta(1,10,10)
+    if(theta > 0.35 & theta < 0.6){
+      THETA[i] <- theta
+      t <- 1
+    } else {
+    TotalRejects <- TotalRejects + 1
+    Rejections <- rbind(Rejections,theta)
+  }
+}
+}
+
+p <- seq(0,1,length=10000)
+f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
+plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
+     ylim=c(0,6),lty=1.5)
+lines(density(THETA),type='l',col='blue4',lty=1.5)
+points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
+labels <- c("True Density", "Accepted Samples","Rejects")
+legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+       col=c('green4','blue4',"red2"))
+```
+
+
+
+---
+## Example
+
+How does our sample compare to the true truncated density? $m = 100000$
+```{r fig.height=5, echo=F}
+set.seed(12345)
+m <- 100000; THETA <- rep(0,m)
+TotalRejects <- 0; Rejections <- NULL
+for(i in 1:m){
+  t <- 0
+  while(t < 1){
+    theta <- rbeta(1,10,10)
+    if(theta > 0.35 & theta < 0.6){
+      THETA[i] <- theta
+      t <- 1
+    } else {
+    TotalRejects <- TotalRejects + 1
+    Rejections <- rbind(Rejections,theta)
+  }
+}
+}
+
 p <- seq(0,1,length=10000)
 f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
 plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
