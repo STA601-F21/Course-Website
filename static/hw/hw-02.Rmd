@@ -18,20 +18,20 @@ This assignment involves one parameter models and Monte Carlo approximations. Pl
 
 ## Questions
 
-<!-- 1. Using the inverse cdf method, generate 1,000 random realizations from the Beta(5,10) distribution truncated to the interval (0.4,0.75).  -->
-<!--     + What is the mean of your random draws (rounded to 2 decimal places)? -->
-<!--     + What is the variance of your random draws (rounded to 2 decimal places)? -->
+1. Using the inverse cdf method, generate 1,000 random realizations from the Beta(5,10) distribution truncated to the interval (0.4,0.75).
+    + What is the mean of your random draws (rounded to 2 decimal places)?
+    + What is the variance of your random draws (rounded to 2 decimal places)?
 
-1. Let $$y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)$$ where _a_ is known (so we only wish to infer _b_).
-    + Find the conjugate family of priors for $b$.
+2. Let $$y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)$$ where _a_ is known (so we only wish to infer _b_).
+    + Find the conjugate family of priors for _b_.
     + Find the corresponding posterior given the prior you identified in the previous part.
     + Give an interpretation of the prior parameters as things like "prior mean", "prior variance", "prior sample size", etc.
 
-2. Hoff 3.3
+3. Hoff 3.3
 
-3. Hoff 4.1
+4. Hoff 4.1
 
-4. <font color="blue">**How many samples is enough?**</font> Recall the birth rates example from the slides.
+5. <font color="blue">**How many samples is enough?**</font> Recall the birth rates example from the slides.
     + Sample from the posterior distribution for women who are college educated using $m$ = 10, 100, and 1000 Monte Carlo samples. For each $m$, make a plot of the random draws and on the same plot, mark the points corresponding to the posterior mean and the 95% equal-tailed credible interval (quantile-based). How do those compare to the true posterior mean and 95% quantile-based CI?
     
     +  In addition, calculate the posterior probability that $\theta_2 < 1.5$ in each case.
@@ -40,7 +40,7 @@ This assignment involves one parameter models and Monte Carlo approximations. Pl
 
 <!-- 3. Hoff 4.3 -->
 
-5. Hoff 4.8
+6. Hoff 4.8
 
     <font color="red">*You can find the data mentioned in the question here: http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/. Clearly, you don't need to download and load the data, you can just enter it manually in R.* </font>
 
