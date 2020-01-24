@@ -26,57 +26,58 @@ class: center, middle, inverse, title-slide
 
 ## Announcements
 
-- Add/drop today
+- HW1 due midnight
 
-- HW1 due tomorrow
-
-- Take the participation quiz for today on Sakai
+- HW2 now online, due next Thursday.
   
 
 ---
 ## Outline
 
-- Loss functions and Bayes risk
-
-- Frequentist vs Bayesian intervals
-
-- Poisson-Gamma model
-  + Recap of the distributions
-  + Conjugacy
+- Poisson model (wrap-up)
   + Example
   + Posterior prediction
   + Other parameterizations
+  
+- Finding conjugate distributions
+
+- Monte Carlo approximation
+
+- Sampling methods
+  + Importance sampling
+  + Simple accept/reject
   
 
 
 ---
 class: center, middle
 
-# Loss functions and Bayes risk
+# Poisson model (wrap-up)
 
 
 ---
-## Poisson model (wrap-up)
+## Poisson-Gamma recap
 
-- Generally, it turns out that if 
-  + `\(f(y_i; \theta): y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)\)`, and
-  + `\(\pi(\theta): \theta \sim \textrm{Ga}(a,b)\)`,
-  
-  then the posterior distribution is also a gamma distribution.
-  
---
+Poisson data:
+.block[
+.small[
+`$$f(y_i; \theta): y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)$$`
+]
+]
 
-- &lt;div class="question"&gt;
-Can we derive the posterior distribution and its parameters? Of course....let's do some work on the board!
-&lt;/div&gt;
 
 --
 
-- Updating a gamma prior with a Poisson likelihood leads to a gamma posterior - we once again have conjugacy!
+`\(+\)` Gamma Prior:
+.block[
+.small[
+`$$\pi(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1}e^{-b\theta} = \textrm{Ga}(a,b)$$`
+]
+]
 
 --
 
-- Specifically, we have.
+`\(\Rightarrow\)` Gamma posterior:
 .block[
 .small[
 `$$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$`
@@ -85,10 +86,10 @@ Can we derive the posterior distribution and its parameters? Of course....let's 
 
 --
 
-- &lt;div class="question"&gt;
-What is the posterior mean? How about the posterior variance?
-&lt;/div&gt;
-
+- Recall: for `\(\textrm{Gamma}(a,b)\)`,
+  + `\(\mathbb{E}[\theta] = \dfrac{a}{b}\)`
+  + `\(\mathbb{V}[\theta] = \dfrac{a}{b^2}\)`
+  + `\(\textrm{Mode}[\theta] = \dfrac{a-1}{b} \ \ \textrm{for} \ \ a \geq 1\)`
 
 
 ---
@@ -370,7 +371,7 @@ What does over-dispersion mean?
 - In many applications, it is often convenient to parameterize the Poisson model a bit differently. One option takes the form
 .block[
 .small[
-`$$y_1,\ldots,y_n \sim \textrm{Po}(x_i\theta)$$`
+`$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$`
 ]
 ]
 
@@ -393,9 +394,560 @@ What does over-dispersion mean?
 ]
 ]
 
+
+
+---
+## BDA example: asthma mortality rate
+
+- Consider an example on estimating asthma mortality rates for cities in the US.
+
 --
 
-- We will look at an example in the next class.
+- Since actual mortality rates can be small on the raw scale, they are often commonly estimated per 100,000 or even per one million. 
+
+--
+
+- To keep it simple, let's use "per 100,000" for this example.
+
+--
+
+- For inference, ideally, we collect data which should basically count the number of asthma-related deaths per county.
+
+--
+
+- Note that inference is by county here, so county is indexes observations in the sample.
+
+--
+
+- Since we basically have count data, a Poisson model would be reasonable here.
+
+
+
+---
+## Asthma mortality rate
+
+- Since each city would be expected to have different populations, we might consider the sampling model:
+.block[
+.small[
+`$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$`
+]
+]
+
+  where 
+    + `\(x_i\)` is the "exposure" for county `\(i\)`, that is, population of county `\(i\)` is `\(x_i \times 100,000\)`; and
+    + `\(\theta\)` is the unknown "true" city mortality rate per 100,000.
+
+- Suppose 
+  + we pick a city in the US with population of 200,000;
+
+--
+  + we find that 3 people died of asthma, i.e., roughly 1.5 cases per 100,000.
+
+--
+
+- Thus, we have one single observation with `\(x_i = 2\)` for this city.
+
+
+
+---
+## Asthma mortality rate
+
+- Next, we need to specify a prior. What is a sensible prior here?
+
+--
+
+- Perhaps we should look at mortality rates around the world or in similar countries.
+
+--
+
+- Suppose reviews of asthma mortality rates around the world suggest rates above 1.5 per 100,000 are rare in Western countries, with typical rates around 0.6 per 100,000.
+
+--
+
+- Let's try a gamma distribution with `\(\mathbb{E}[\theta] = 0.6\)` and `\(\Pr[\theta \geq 1.5]\)` very low!
+
+--
+
+- A few options here, but let's go with `\(\textrm{Ga}(3,5)\)`.
+
+--
+
+- Using trial-and error, explore more options in R!
+
+
+
+---
+## Asthma mortality rate
+
+- Therefore, our posterior takes the form
+.block[
+.small[
+`$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i)$$`
+]
+]
+
+  which is actually
+.block[
+.small[
+`$$\pi(\theta | x,y) = \textrm{Ga}(a+y,b+x) = \textrm{Ga}(3+3,5+2) = \textrm{Ga}(6,7).$$`
+]
+]
+
+--
+
+- `\(\mathbb{E}[\theta | x,y] = 6/7=0.86\)` so that we expect less than 1 (0.86 to be exact) asthma-related deaths per 100,000 people in this city.
+  
+--
+
+- In fact, the posterior probability that the long term death rate from asthma in this city is more than 1 per 100,000, `\(\Pr[\theta &gt; 1| x,y]\)`, is 0.3.
+
+--
+
+- In fact, `\(\Pr[\theta \geq 2 | x,y] = 0.99\)`, so that there is very little chance that we see more than 2 asthma-related deaths per 100,000 people in this city.
+
+--
+
+- Use `pgamma` in R to compute the probabilities.
+
+
+
+---
+## Prior vs posterior
+
+&lt;img src="05-Monte-Carlo_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+Posterior is to the right of the prior since the data suggests higher mortality rates are more likely than the prior suggests.
+
+
+
+---
+class: center, middle
+
+# Finding conjugate distributions
+
+
+
+---
+## Finding conjugate distributions
+
+- In the conjugate examples we have looked at so far, how did we know the prior distributions we chose would result in conjugacy?
+
+--
+
+- &lt;div class="question"&gt;
+Can we figure out the family of distributions that would be conjugate for this density?
+&lt;/div&gt;
+
+--
+
+- Let's explore this using the .hlight[exponential distribution]. The exponential distribution is often used to model "waiting times" or other random variables `\((\in (0,\infty) )\)` often measured on a time scale.
+
+--
+
+- If `\(y \sim \textrm{Exp}(\theta)\)`, we have the pdf
+.block[
+.small[
+`$$f(y) = \theta e^{-y\theta}; \ \ \ y &gt; 0.$$`
+]
+]
+
+  where `\(\theta\)`, the .hlight[rate parameter], and `\(\mathbb{E}[y] = 1/\theta\)`.
+  
+--
+
+- Recall, if `\(Y \sim \textrm{Ga}(1,\theta)\)`, then `\(Y \sim \textrm{Exp}(\theta)\)`. What is `\(\mathbb{V}[y]\)` then?
+
+--
+
+- Let's figure out what the conjugate prior for this density would look like (to be done in class).
+
+
+
+---
+class: center, middle
+
+# Monte Carlo approximation
+
+
+---
+## Monte Carlo approximation
+
+- Monte Carlo integration is very key for Bayesian computation and using simulations in general.
+
+--
+
+- While we will focus on use Monte Carlo integration for Bayesian inference, the development is general and applies to any pdf/pmf `\(p(\theta)\)`.
+
+--
+
+- For our purposes, we will want to evaluate expectations of the form
+.block[
+.small[
+`$$H = \int h(\theta) p(\theta) d\theta,$$`
+]
+]
+
+  for many different functions `\(h(.)\)` (usually scalar for us).
+  
+--
+
+- Procedure:
+  1. Generate a random sample `\(\theta_1, \ldots, \theta_m \overset{ind}{\sim} p(\theta)\)`.
+  
+--
+  2. Estimate `\(H\)` using
+.block[
+.small[
+`$$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m h(\theta_i).$$`
+]
+]
+  
+
+---
+## Monte Carlo approximation
+
+- We have `\(\mathbb{E}[h(\theta_i)] = H\)`.
+
+--
+
+- Assuming `\(\mathbb{E}[h^2(\theta_i)] &lt; \infty\)`, so that the variance of each `\(h(\theta_i)\)` is finite, we have
+
+  1. .hlight[LLN]: `\(\bar{h} \overset{a.s.}{\rightarrow} H\)`.
+  
+--
+  2. .hlight[CLT]: `\(\bar{h} - H\)` is is asymptotically normal, with asymptotic variance
+.block[
+.small[
+`$$\dfrac{1}{m} \int (h(\theta)-H)^2 p(\theta) d\theta,$$`
+]
+]
+
+      which can be approximated by
+.block[
+.small[
+`$$v_m = \dfrac{1}{m^2} \sum_{i=1}^m (h(\theta_i)-\bar{h})^2.$$`
+]
+]
+
+      `\(\sqrt{v_m}\)` is often called the .hlight[Monte Carlo standard error].
+
+
+---
+## Monte Carlo approximation
+
+- That is, generally, taking large Monte Carlo sample sizes `\(m\)` (in the thousands or tens of thousands) can yield very precise, and cheaply computed, numerical approximations to mathematically difficult integrals.
+
+--
+
+- .hlight[What this means for us]: we can approximate just about any aspect of the posterior distribution with a large enough Monte Carlo sample.
+
+--
+
+- For samples `\(\theta_1, \ldots, \theta_m\)` drawn iid from `\(p(\theta|y)\)`, as `\(m \rightarrow \infty\)`, we have
+
+--
+  + `\(\bar{\theta} = \dfrac{1}{m} \sum\limits_{i=1}^m \theta_i \rightarrow \mathbb{E}[\theta | y]\)`
+  
+--
+  + `\(\hat{\sigma}_{\theta} = \dfrac{1}{m-1} \sum\limits_{i=1}^m (\theta_i - \bar{\theta})^2 \rightarrow \mathbb{V}[\theta | y]\)`
+
+--
+  + `\(\dfrac{1}{m} \sum\limits_{i=1}^m \mathbb{1}[\theta_i \leq c] = \dfrac{\# \theta_i \leq c}{m} \rightarrow \Pr[\theta \leq c| y]\)`
+  
+--
+  + `\([\dfrac{\alpha}{2}\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m), (1-\dfrac{\alpha}{2})\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m)]\)` `\(\rightarrow\)` `\(100 \times (1-\alpha)%\)` quantile-based credible interval.
+
+
+
+
+
+---
+## Monte Carlo approximation
+
+- This general idea of using samples to "approximate" averages (expectations) is also useful when trying to approximate posterior predictive distributions.
+
+
+
+---
+class: center, middle
+
+# Sampling methods
+
+
+
+---
+## Importance sampling
+
+- .hlight[Importance sampling] is one of the first steps into Monte Carlo analysis, in which simulated values from one distribution are used to explore another.
+
+--
+
+- Simulation from the "wrong distribution" can be incredibly useful as we will see later in this course.
+
+--
+
+- Not used as often anymore but still of practical interest in
+  + fairly small problems, in terms of dimension, 
+  
+--
+  + in which the density of the distribution of interest can be easily evaluated, but when it is difficult to sample from directly, and
+  
+--
+  + when it is relatively easy to identify and simulate from distributions that approximate the distribution of interest.
+
+
+
+---
+## Importance sampling
+
+- Setup:
+  + `\(p(\theta)\)` is the density we are interested in sampling from;
+  
+  + `\(p(\theta)\)` is tough to sample from but we are able to evaluate `\(p(\theta)\)`) as a function at any point; and
+  
+  + `\(g(\theta)\)` is an .hlight[importance sampling distribution] that is easier to sample from.
+
+--
+
+- Two key requirements:
+  + `\(g(\theta)\)` is easy to sample from, and
+  
+  + `\(g(\theta)\)` is easy to evaluate at any point as for `\(p(\theta)\)`.
+  
+--
+
+- Usually, the context is one in which `\(g(\theta)\)` has been derived as an analytic approximation to `\(p(\theta)\)`); and the closer the approximation, the more accurate the resulting importance sampling MC analysis will be.
+
+
+
+---
+## Importance sampling
+
+- Interest lies in expectations of the form
+.block[
+.small[
+`$$H = \int h(\theta) p(\theta) d\theta,$$`
+]
+]
+
+- Write
+.block[
+.small[
+`$$H = \int h(\theta) w(\theta) g(\theta) d\theta \ \ \ \textrm{with} \ \ \ w(\theta) = p(\theta)/g(\theta)$$`
+]
+]
+
+  that is, `\(\mathbb{E}[h(\theta)]\)` under `\(p(\theta)\)` is just `\(\mathbb{E}[h(\theta) w(\theta)]\)` under `\(g(\theta)\)`.
+  
+- Using direct Monte Carlo integration
+.block[
+.small[
+`$$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m w(\theta_i) h(\theta_i).$$`
+]
+]
+
+  where `\(\theta_1, \ldots, \theta_m \overset{ind}{\sim} g(\theta)\)`. We are sampling from the "wrong" distribution.
+
+
+
+---
+## Importance sampling
+
+- The measure "how wrong" at each simulated `\(\theta_m\)` value is the .hlight[importance weight]
+.block[
+.small[
+`$$w(\theta_i) = p(\theta_i)/g(\theta_i).$$`
+]
+]
+
+  These ratios weight the sample estimates `\(h(\theta_i)\)` to "correct" for the fact that we sampled the wrong distribution.
+  
+- See [Lopes &amp; Gamerman (Ch 3.4)](https://www.amazon.com/Markov-Chain-Monte-Carlo-Statistical/dp/1584885874) and [Robert and Casella (Ch. 3.3)](https://www.amazon.com/Monte-Statistical-Methods-Springer-Statistics/dp/1441919392) for discussion of convergence and optimality.
+
+--
+
+- Clearly, the closer `\(g\)` is to `\(p\)`, the better the results.
+
+
+
+---
+## Importance sampling
+
+- Key considerations:
+  + MC estimate `\(\bar{h}\)` has the expectation `\(H\)`; and is generally almost surely convergent to `\(H\)` (under certain conditions of course but we will not dive into those).
+  
+--
+  + `\(\mathbb{V}[\bar{h}]\)` is often going to be finite in cases in which, generally, `\(w(\theta) = p(\theta)/g(\theta)\)` is bounded and decays rapidly in the tails of `\(p(\theta)\)`.
+  
+--
+  + Thus, superior MC approximations, are achieved for choices of `\(g(\theta)\)` whose tails dominate those of the target `\(p(\theta)\)`.
+  
+--
+  + That is, importance sampling distributions should be chosen to have tails at least as fat as the target (think normal distribution vs t-distribution).
+  
+--
+  + Obviously require the support of `\(g(\theta)\)` to be the same as, or contain, that of `\(p(\theta)\)`.
+  
+  
+  
+---
+## Importance sampling
+
+- Problems in which `\(w(\theta) = p(\theta)/g(\theta)\)` can be computed are actually rare.
+
+--
+
+- As you will see when we move away from conjugate distributions, we usually only know `\(p(\theta)\)` up to a normalizing constant.
+
+--
+
+- When this is the case, simply "re-normalize" the importance weights, so that
+.block[
+.small[
+`$$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m w_i h(\theta_i) \ \ \ \textrm{where} \ \ \ w_i = \dfrac{w(\theta_i)}{\sum^m_{i=1}w(\theta_i)}.$$`
+]
+]
+
+--
+
+- Generally, in importance sampling, weights that are close to uniform are desirable, and very unevenly distributed weights are not.
+
+
+
+---
+## Rejection sampling (simple accept/reject)
+
+- .hlight[Rejection sampling] utilizes the same importance ratio ideas, but leads to exact corrections and so exact samples from `\(p(\theta)\)`.
+
+--
+
+- Procedure:
+
+  1. Let `\(p(\theta)\)`, `\(g(\theta)\)` and `\(w(\theta)\)` all be defined as before.
+  
+--
+  2. Assume that `\(w(\theta) = p(\theta)/g(\theta) &lt; M\)` for some constant M. If `\(g(\theta)\)` represents a good approximation to `\(p(\theta)\)`, then M should not be too far from 1.
+
+--
+  3. Generate a _candidate_ value `\(\theta \sim g(\theta)\)` and accept with probability `\(w(\theta)/M\)`: if accepted, `\(\theta\)` is a draw from `\(p(\theta)\)`; otherwise **reject** and try again.
+  
+--
+      Equivalently, generate `\(u \sim U(0,1)\)` independently of `\(\theta\)`. Then **accept** `\(\theta\)` as a draw from `\(p(\theta)\)` if, and only if, `\(u &lt; w(\theta)/M\)`.
+
+--
+
+- For those interested, the proof that all accepted `\(\theta\)` values are indeed from `\(p(\theta)\)` is on the last slide.
+
+
+
+---
+## Rejection sampling for truncated densities
+
+- The inverse CDF method works well for truncated densities but what happens when we can not write down the truncated CDF?
+
+--
+
+- Suppose we want to sample from `\(f_{[a,b]}(\theta)\)`, that is, a known standard pdf `\(f(\theta)\)` truncated to `\([a,b]\)`.
+
+  + Recall that `\(f_{[a,b]}(\theta) \propto f(\theta)\mathbb{1}[\theta \in [a,b]]\)`. Using the notation for rejection sampling, `\(p(\theta) = f_{[a,b]}(\theta)\)` and `\(g(\theta) = f(\theta)\)`.
+  
+--
+  + Set `\(1/M = \int^b_a f(\theta^\star)\textrm{d}\theta^\star\)`, so that `\(M\)` is a constant. Then, `\(w(\theta) = p(\theta)/g(\theta) = M \mathbb{1}[\theta \in [a,b]] \leq M\)` as required.
+
+--
+
+- We can then use the procedure on the previous page to generate the required samples. Specifically,
+  + For each `\(i=1,\ldots,m\)`, generate `\(\theta_i \sim f\)`. If `\(\theta_i \in [a,b]\)`, accept `\(\theta_i\)`, otherwise **reject** and try again. 
+  + Easy to show that this is equivalent to accepting each `\(\theta_i\)` with probability `\(w(\theta)/M\)`.
+
+
+
+---
+## Example
+
+
+```r
+#Simple code for using rejection sampling to generate m samples
+#from the Beta[10,10] density truncated to (0.35,0.6).
+set.seed(12345)
+#NOTE: there are more efficient ways to write this code!
+
+#set sample size and reate vector to store sample
+m &lt;- 10000; THETA &lt;- rep(0,m)
+#keep track of rejects
+TotalRejects &lt;- 0
+#now the 'for loop'
+for(i in 1:m){
+  t &lt;- 0
+  while(t &lt; 1){
+    theta &lt;- rbeta(1,10,10)
+    if(theta &gt; 0.35 &amp; theta &lt; 0.6){
+      THETA[i] &lt;- theta
+      t &lt;- 1
+    } else {
+    TotalRejects &lt;- TotalRejects + 1
+  }
+}
+}
+#How many rejections in all, to generate m samples?
+TotalRejects
+```
+
+```
+## [1] 3740
+```
+
+Clearly less efficient than inverse-CDF method which we already know we can use for this exercise. Acceptance rate `\(\approx 0.726\)`.
+
+
+---
+## Example
+
+How does our sample compare to the true truncated density?
+&lt;img src="05-Monte-Carlo_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Proof for simple accept/reject
+
+- We need to show that all accepted `\(\theta\)` values are indeed from `\(p(\theta)\)`. Equivalently, show that `\(f(\theta | u &lt; w(\theta)/M) = p(\theta)\)`.
+
+--
+
+- By Bayes' theorem,
+.block[
+.small[
+`$$f(\theta | u &lt; w(\theta)/M) = \dfrac{\Pr(\theta \textrm{ and } u &lt; w(\theta)/M)}{\Pr(u &lt; w(\theta)/M)} = \dfrac{\Pr(u &lt; w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u &lt; w(\theta)/M)}.$$`
+]
+]
+
+--
+
+- But,
+  + `\(\Pr(u &lt; w(\theta)/M \ | \ \theta) = w(\theta)/M\)` since `\(u \sim U(0,1)\)`, and
+  
+--
+  + 
+.block[
+.small[
+$$
+`\begin{split}
+\Pr(u &lt; w(\theta)/M) &amp; = \int \Pr(u &lt; w(\theta)/M \ | \ \theta) g(\theta) d\theta\\
+&amp; = \int w(\theta)/M g(\theta) d\theta = 1/M \int w(\theta) g(\theta) d\theta = 1/M \int p(\theta) d\theta = 1/M.
+\end{split}`
+$$
+]
+]
+
+--
+
+- Therefore,
+.block[
+.small[
+`$$f(\theta | u &lt; w(\theta)/M) = \dfrac{\Pr(u &lt; w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u &lt; w(\theta)/M)} = \dfrac{w(\theta)/M g(\theta)}{1/M} = w(\theta) g(\theta) = p(\theta).$$`
+]
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

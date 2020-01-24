@@ -48,7 +48,7 @@ lessons:
     reading: "reading-05.html"
     #slides: "lec-slides/05-Monte-Carlo.html"
     #slidespdf: "lec-slides/05-Monte-Carlo.pdf"
-    #hw: "hw-02.html"
+    hw: "hw-02.html"
   
   - title: "WEEK 4"
   
