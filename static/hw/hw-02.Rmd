@@ -18,7 +18,7 @@ This assignment involves one parameter models and Monte Carlo approximations. Pl
 
 ## Questions
 
-1. Let $y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)$ with $a$ known (so we only wish to infer $b$).
+1. Let $$y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)$$ with $a$ known (so we only wish to infer $b$).
     + Find the conjugate family of priors for $b$.
     + Find the corresponding posterior given the prior you identified in the previous part.
     + Give an interpretation of the prior parameters as things like "prior mean", "prior variance", "prior sample size", etc.
