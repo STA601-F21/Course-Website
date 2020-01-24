@@ -1724,12 +1724,17 @@ div.tocify {
 
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
-<p>This assignment involves one parameter models and Monte Carlo approximations. Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 2.</p>
+<p>This assignment involves one parameter models and Monte Carlo approximations. Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises MUST be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 2.</p>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
 <ol style="list-style-type: decimal">
-<li>Let <span class="math display">\[y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)\]</span> with <span class="math inline">\(a\)</span> known (so we only wish to infer <span class="math inline">\(b\)</span>).
+<li>Using the inverse cdf method, generate 1,000 random realizations from the Beta(5,10) distribution truncated to the interval (0.4,0.75).
+<ul>
+<li>What is the mean of your random draws (rounded to 2 decimal places)?</li>
+<li>What is the variance of your random draws (rounded to 2 decimal places)?</li>
+</ul></li>
+<li>Let <span class="math display">\[y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Ga}(a,b)\]</span> where <em>a</em> is known (so we only wish to infer <em>b</em>).
 <ul>
 <li>Find the conjugate family of priors for <span class="math inline">\(b\)</span>.</li>
 <li>Find the corresponding posterior given the prior you identified in the previous part.</li>
@@ -1745,7 +1750,7 @@ div.tocify {
 </ul></li>
 </ol>
 <!-- 3. Hoff 4.3 -->
-<ol start="5" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
 <li><p>Hoff 4.8</p>
 <p><font color="red"><em>You can find the data mentioned in the question here: <a href="http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/" class="uri">http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/</a>. Clearly, you don’t need to download and load the data, you can just enter it manually in R.</em> </font></p></li>
 </ol>
