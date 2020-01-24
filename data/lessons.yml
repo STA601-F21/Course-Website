@@ -46,8 +46,8 @@ lessons:
   - date: "Fri, Jan 24"
     title: "Poisson model (wrap-up); Monte Carlo approximation and sampling"
     reading: "reading-05.html"
-    #slides: "lec-slides/05-Monte-Carlo.html"
-    #slidespdf: "lec-slides/05-Monte-Carlo.pdf"
+    slides: "lec-slides/05-Monte-Carlo.html"
+    slidespdf: "lec-slides/05-Monte-Carlo.pdf"
     hw: "hw-02.html"
   
   - title: "WEEK 4"

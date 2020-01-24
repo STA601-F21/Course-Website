@@ -38,6 +38,8 @@ library(rvest)
 - HW1 due midnight
 
 - HW2 now online, due next Thursday.
+  + There should be six questions.
+  + If you only see five questions, refresh your browser.
   
 
 ---
@@ -53,8 +55,8 @@ library(rvest)
 - Monte Carlo approximation
 
 - Sampling methods
-  + Importance sampling
   + Simple accept/reject
+  + Importance sampling
   
 
 
@@ -136,11 +138,11 @@ $$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$
 - Then,
   + $\theta_1 | \{n_1=111, \sum y_{i,1}=217\} \sim \textrm{Ga}(2+217,1+111) = \textrm{Ga}(219,112).$
   
-  + $\theta_1 | \{n_1=44, \sum y_{i,1}=66\} \sim \textrm{Ga}(2+66,1+44) = \textrm{Ga}(68,45).$
+  + $\theta_2 | \{n_2=44, \sum y_{i,2}=66\} \sim \textrm{Ga}(2+66,1+44) = \textrm{Ga}(68,45).$
   
 --
 
-- We can then use R to calculate posterior means, modes, and 95% credible intervals for $\theta_1$ and $\theta_2$.
+- Use R to calculate posterior means and 95% CIs for $\theta_1$ and $\theta_2$.
     ```{r eval=F}
 a=2; b=1; #prior
 n1=111; sumy1=217; n2=44; sumy2=66 #data
@@ -243,7 +245,7 @@ $$
   
 --
 
-- The .hlight[prior predictive distribution] takes a similar form.
+- The .hlight[prior predictive distribution] $f(y_{n+1}; a,b)$  takes a similar form.
 
 
 
@@ -312,7 +314,7 @@ What does over-dispersion mean?
 - Note that as the sample size $n$ increases, the posterior density for $\theta$ becomes more and more concentrated.
 .block[
 .small[
-$$\mathbb{E}[\theta | y_{1:n}] = \dfrac{a_n}{b_n^2} = \dfrac{a + \sum_i y_i}{(b + n)^2} \approx \dfrac{\bar{y}}{n} \rightarrow 0.$$
+$$\mathbb{V}[\theta | y_{1:n}] = \dfrac{a_n}{b_n^2} = \dfrac{a + \sum_i y_i}{(b + n)^2} \approx \dfrac{\bar{y}}{n} \rightarrow 0.$$
 ]
 ]
 
@@ -353,29 +355,6 @@ barplot(rbind(ltbach,bach),xlab="Children",
 legend("topright",c("No Bachelors","Bachelors"),bty="n", fill=c("orange3","green3"))
 ```
 
-
-
----
-## Back to birth rates
-
-- Suppose we randomly sample two women, one with degree and one without. To what extent do we expect the one without the degree to have more kids than the other, e.g. $\tilde{y}_1 > \tilde{y}_2$?
-
---
-
-- Using R, $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.48$ and $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.22$.
-    ```{r fig.height=4}
-    set.seed(01222020)
-a=2; b=1; #prior
-n1=111; sumy1=217; n2=44; sumy2=66 #data
-mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) >
-rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
-mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1))==
-rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
-```
-
---
-
-- Strong evidence of difference between two populations does not really imply the difference in predictions is large.
 
 
 ---
@@ -458,7 +437,7 @@ $$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
 
 --
 
-- Thus, we have one single observation with $x_i = 2$ for this city.
+- Thus, we have one single observation with $x_i = 2$ and $y_i = 3$ for this city.
 
 
 
@@ -473,7 +452,7 @@ $$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
 
 --
 
-- Suppose reviews of asthma mortality rates around the world suggest rates above 1.5 per 100,000 are rare in Western countries, with typical rates around 0.6 per 100,000.
+- Suppose reviews of asthma mortality rates around the world suggest rates above 1.5 per 100,000 are very rare in Western countries, with typical rates around 0.6 per 100,000.
 
 --
 
@@ -481,7 +460,7 @@ $$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
 
 --
 
-- A few options here, but let's go with $\textrm{Ga}(3,5)$.
+- A few options here, but let's go with $\textrm{Ga}(3,5)$, which has $\mathbb{E}[\theta] = 0.6$ and $\Pr[\theta \geq 1.5] \approx 0.02$.
 
 --
 
@@ -516,7 +495,7 @@ $$\pi(\theta | x,y) = \textrm{Ga}(a+y,b+x) = \textrm{Ga}(3+3,5+2) = \textrm{Ga}(
 
 --
 
-- In fact, $\Pr[\theta \geq 2 | x,y] = 0.99$, so that there is very little chance that we see more than 2 asthma-related deaths per 100,000 people in this city.
+- Also, $\Pr[\theta \geq 2 | x,y] = 0.99$, so that there is very little chance that we see more than 2 asthma-related deaths per 100,000 people in this city.
 
 --
 
@@ -527,7 +506,7 @@ $$\pi(\theta | x,y) = \textrm{Ga}(a+y,b+x) = \textrm{Ga}(3+3,5+2) = \textrm{Ga}(
 ---
 ## Prior vs posterior
 
-```{r fig.height=4.3, echo=F}
+```{r fig.height=4.2, echo=F}
 x <- seq(0,3,by=0.00001)
 plot(x,dgamma(x,shape=3,rate=5),xlim=c(0,3),ylim=c(0,2),lwd=1.5,type="l",
       col="orange3",xlab=expression(theta),ylab="density")
@@ -536,7 +515,7 @@ legend("topright", legend=c("Prior","Posterior"),
        col=c("orange3","red3"), lwd=2, cex=1)
 ```
 
-Posterior is to the right of the prior since the data suggests higher mortality rates are more likely than the prior suggests.
+Posterior is to the right of the prior since the data suggests higher mortality rates are more likely than the prior suggests. However, we only have one data point!
 
 
 
@@ -555,12 +534,12 @@ class: center, middle
 --
 
 - <div class="question">
-Can we figure out the family of distributions that would be conjugate for this density?
+Can we figure out the family of distributions that would be conjugate for arbitrary densities?
 </div>
 
 --
 
-- Let's explore this using the .hlight[exponential distribution]. The exponential distribution is often used to model "waiting times" or other random variables $(\in (0,\infty) )$ often measured on a time scale.
+- Let's explore this using the .hlight[exponential distribution]. The exponential distribution is often used to model "waiting times" or other random variables (with support $(0,\infty)$) often measured on a time scale.
 
 --
 
@@ -571,7 +550,7 @@ $$f(y) = \theta e^{-y\theta}; \ \ \ y > 0.$$
 ]
 ]
 
-  where $\theta$, the .hlight[rate parameter], and $\mathbb{E}[y] = 1/\theta$.
+  where $\theta$ is the .hlight[rate parameter], and $\mathbb{E}[y] = 1/\theta$.
   
 --
 
@@ -596,7 +575,7 @@ class: center, middle
 
 --
 
-- While we will focus on use Monte Carlo integration for Bayesian inference, the development is general and applies to any pdf/pmf $p(\theta)$.
+- While we will focus on using Monte Carlo integration for Bayesian inference, the development is general and applies to any pdf/pmf $p(\theta)$.
 
 --
 
@@ -649,7 +628,9 @@ $$v_m = \dfrac{1}{m^2} \sum_{i=1}^m (h(\theta_i)-\bar{h})^2.$$
 ]
 ]
 
-      $\sqrt{v_m}$ is often called the .hlight[Monte Carlo standard error].
+--
+
+- $\sqrt{v_m}$ is often called the .hlight[Monte Carlo standard error].
 
 
 ---
@@ -679,12 +660,65 @@ $$v_m = \dfrac{1}{m^2} \sum_{i=1}^m (h(\theta_i)-\bar{h})^2.$$
 
 
 
+---
+## Back to birth rates
+
+- Suppose we randomly sample two women, one with degree and one without. To what extent do we expect the one without the degree to have more kids than the other, e.g. $\tilde{y}_1 > \tilde{y}_2$?
+
+--
+
+- Using R, 
+    ```{r fig.height=4}
+    set.seed(01222020)
+a=2; b=1; #prior
+n1=111; sumy1=217; n2=44; sumy2=66 #data
+mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) >
+rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
+mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1))==
+rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
+```
+
+- That is, $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.48$ and $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.22$.
+
+--
+
+- Strong evidence of difference between two populations does not really imply the difference in predictions is large.
+
+
 
 
 ---
 ## Monte Carlo approximation
 
 - This general idea of using samples to "approximate" averages (expectations) is also useful when trying to approximate posterior predictive distributions.
+
+--
+
+- Quite often, we are able to sample from $f(y_i; \theta)$ and $\pi(\theta | \{y_i\})$ but not from $f(y_{n+1}|y_{1:n})$ directly.
+
+--
+
+- We can do so indirectly using the following Monte Carlo procedure:
+.block[
+.small[
+$$
+\begin{split}
+\textrm{sample } \theta^{(1)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(1)} \sim f(y_{n+1}; \theta^{(1)})\\
+\textrm{sample } \theta^{(2)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(2)} \sim f(y_{n+1}; \theta^{(2)})\\
+& \ \ \vdots \hspace{133pt} \vdots \\
+\textrm{sample } \theta^{(m)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(m)} \sim f(y_{n+1}; \theta^{(m)}).\\
+\end{split}
+$$
+]
+]
+
+--
+
+- The sequence $\{(\theta, y_{n+1})^{(1)}, \ldots, (\theta, y_{n+1})^{(m)}\}$ constitutes $m$ independent samples from the joint posterior of $(\theta, Y_{n+1})$.
+
+--
+
+- In fact, $\{ y_{n+1}^{(1)}, \ldots, y_{n+1}^{(m)}\}$ are independent draws from the posterior predictive distribution we care about.
 
 
 
@@ -696,13 +730,136 @@ class: center, middle
 
 
 ---
-## Importance sampling
+## Rejection sampling (simple accept/reject)
 
-- .hlight[Importance sampling] is one of the first steps into Monte Carlo analysis, in which simulated values from one distribution are used to explore another.
+- Setup:
+  + $p(\theta)$ is some density we are interested in sampling from;
+  
+  + $p(\theta)$ is tough to sample from but we are able to evaluate $p(\theta)$ as a function at any point; and
+  
+  + $g(\theta)$ is some .hlight[proposal distribution] or .hlight[importance sampling distribution] that is easier to sample from.
 
 --
 
-- Simulation from the "wrong distribution" can be incredibly useful as we will see later in this course.
+- Two key requirements:
+  + $g(\theta)$ is easy to sample from, and
+  
+  + $g(\theta)$ is easy to evaluate at any point as for $p(\theta)$.
+  
+--
+
+- Usually, the context is one in which $g(\theta)$ has been derived as an analytic approximation to $p(\theta)$; and the closer the approximation, the more accurate the resulting Monte Carlo analysis will be.
+
+
+
+---
+## Rejection sampling (simple accept/reject)
+
+- Procedure:
+
+  1. Define $w(\theta) = p(\theta)/g(\theta)$.
+  
+--
+  2. Assume that $w(\theta) = p(\theta)/g(\theta) < M$ for some constant M. If $g(\theta)$ represents a good approximation to $p(\theta)$, then M should not be too far from 1.
+
+--
+  3. Generate a _candidate_ value $\theta \sim g(\theta)$ and **accept** with probability $w(\theta)/M$: if accepted, $\theta$ is a draw from $p(\theta)$; otherwise **reject** and try again.
+  
+--
+      Equivalently, generate $u \sim U(0,1)$ independently of $\theta$. Then **accept** $\theta$ as a draw from $p(\theta)$ if, and only if, $u < w(\theta)/M$.
+
+--
+
+- For those interested, the proof that all accepted $\theta$ values are indeed from $p(\theta)$ is on the last slide.
+
+--
+
+- **Drawback**: we need $M$ for this to work. However, in the case of truncated densities, we actually have $M$.
+
+
+
+---
+## Rejection sampling for truncated densities
+
+- The inverse CDF method works well for truncated densities but what happens when we can not write down the truncated CDF?
+
+--
+
+- Suppose we want to sample from $f_{[a,b]}(\theta)$, that is, a known pdf $f(\theta)$ truncated to $[a,b]$.
+
+  + Recall that $f_{[a,b]}(\theta) \propto f(\theta)\mathbb{1}[\theta \in [a,b]]$. Using the notation for rejection sampling, $p(\theta) = f_{[a,b]}(\theta)$ and $g(\theta) = f(\theta)$.
+  
+--
+  + Set $1/M = \int^b_a f(\theta^\star)\textrm{d}\theta^\star$, so that $M$ is a constant. Then, $w(\theta) = p(\theta)/g(\theta) = M \mathbb{1}[\theta \in [a,b]] \leq M$ as required.
+
+--
+
+- We can then use the procedure on the previous page to generate the required samples. Specifically,
+  + For each $i=1,\ldots,m$, generate $\theta_i \sim f$. If $\theta_i \in [a,b]$, accept $\theta_i$, otherwise **reject** and try again. 
+  + Easy to show that this is equivalent to accepting each $\theta_i$ with probability $w(\theta)/M$.
+
+
+
+---
+## Example
+
+```{r}
+#Simple code for using rejection sampling to generate m samples
+#from the Beta[10,10] density truncated to (0.35,0.6).
+set.seed(12345)
+#NOTE: there are more efficient ways to write this code!
+
+#set sample size and reate vector to store sample
+m <- 10000; THETA <- rep(0,m)
+#keep track of rejects
+TotalRejects <- 0; Rejections <- NULL
+#now the 'for loop'
+for(i in 1:m){
+  t <- 0
+  while(t < 1){
+    theta <- rbeta(1,10,10)
+    if(theta > 0.35 & theta < 0.6){
+      THETA[i] <- theta
+      t <- 1
+    } else {
+    TotalRejects <- TotalRejects + 1
+    Rejections <- rbind(Rejections,theta)
+  }
+}
+}
+#How many rejections in all, to generate m samples?
+TotalRejects
+```
+
+Clearly less efficient than inverse-CDF method which we already know we can use for this exercise. Acceptance rate $\approx 0.726$.
+
+
+---
+## Example
+
+How does our sample compare to the true truncated density?
+```{r fig.height=5, echo=F}
+p <- seq(0,1,length=10000)
+f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
+plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
+     ylim=c(0,6),lty=1.5)
+lines(density(THETA),type='l',col='blue4',lty=1.5)
+points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
+labels <- c("True Density", "Accepted Samples","Rejects")
+legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+       col=c('green4','blue4',"red2"))
+```
+
+
+
+---
+## Importance sampling
+
+- .hlight[Importance sampling] is actually one of the first steps into Monte Carlo analysis, in which simulated values from one distribution are used to explore another.
+
+--
+
+- Simulation from the "wrong distribution" can be incredibly useful as we have seen with rejection sampling and will also see later in this course.
 
 --
 
@@ -714,36 +871,17 @@ class: center, middle
   
 --
   + when it is relatively easy to identify and simulate from distributions that approximate the distribution of interest.
+  
+--
+
+- Importance sampling and Rejection sampling use the same importance ratio ideas, but the latter leads to exact corrections and so exact samples from $p(\theta)$.
 
 
 
 ---
 ## Importance sampling
 
-- Setup:
-  + $p(\theta)$ is the density we are interested in sampling from;
-  
-  + $p(\theta)$ is tough to sample from but we are able to evaluate $p(\theta)$) as a function at any point; and
-  
-  + $g(\theta)$ is an .hlight[importance sampling distribution] that is easier to sample from.
-
---
-
-- Two key requirements:
-  + $g(\theta)$ is easy to sample from, and
-  
-  + $g(\theta)$ is easy to evaluate at any point as for $p(\theta)$.
-  
---
-
-- Usually, the context is one in which $g(\theta)$ has been derived as an analytic approximation to $p(\theta)$); and the closer the approximation, the more accurate the resulting importance sampling MC analysis will be.
-
-
-
----
-## Importance sampling
-
-- Interest lies in expectations of the form
+- Interest lies in expectations of the form (instead of the actual samples)
 .block[
 .small[
 $$H = \int h(\theta) p(\theta) d\theta,$$
@@ -773,7 +911,7 @@ $$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m w(\theta_i) h(\theta_i).$$
 ---
 ## Importance sampling
 
-- The measure "how wrong" at each simulated $\theta_m$ value is the .hlight[importance weight]
+- The measure of "how wrong" we are at each simulated $\theta_m$ value is the .hlight[importance weight]
 .block[
 .small[
 $$w(\theta_i) = p(\theta_i)/g(\theta_i).$$
@@ -786,7 +924,7 @@ $$w(\theta_i) = p(\theta_i)/g(\theta_i).$$
 
 --
 
-- Clearly, the closer $g$ is to $p$, the better the results.
+- Clearly, the closer $g$ is to $p$, the better the results, just as we had with rejection sampling.
 
 
 
@@ -807,6 +945,10 @@ $$w(\theta_i) = p(\theta_i)/g(\theta_i).$$
   
 --
   + Obviously require the support of $g(\theta)$ to be the same as, or contain, that of $p(\theta)$.
+  
+--
+
+- These also clearly apply to rejection sampling too.
   
   
   
@@ -831,103 +973,6 @@ $$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m w_i h(\theta_i) \ \ \ \textrm{where} \ \ \
 --
 
 - Generally, in importance sampling, weights that are close to uniform are desirable, and very unevenly distributed weights are not.
-
-
-
----
-## Rejection sampling (simple accept/reject)
-
-- .hlight[Rejection sampling] utilizes the same importance ratio ideas, but leads to exact corrections and so exact samples from $p(\theta)$.
-
---
-
-- Procedure:
-
-  1. Let $p(\theta)$, $g(\theta)$ and $w(\theta)$ all be defined as before.
-  
---
-  2. Assume that $w(\theta) = p(\theta)/g(\theta) < M$ for some constant M. If $g(\theta)$ represents a good approximation to $p(\theta)$, then M should not be too far from 1.
-
---
-  3. Generate a _candidate_ value $\theta \sim g(\theta)$ and accept with probability $w(\theta)/M$: if accepted, $\theta$ is a draw from $p(\theta)$; otherwise **reject** and try again.
-  
---
-      Equivalently, generate $u \sim U(0,1)$ independently of $\theta$. Then **accept** $\theta$ as a draw from $p(\theta)$ if, and only if, $u < w(\theta)/M$.
-
---
-
-- For those interested, the proof that all accepted $\theta$ values are indeed from $p(\theta)$ is on the last slide.
-
-
-
----
-## Rejection sampling for truncated densities
-
-- The inverse CDF method works well for truncated densities but what happens when we can not write down the truncated CDF?
-
---
-
-- Suppose we want to sample from $f_{[a,b]}(\theta)$, that is, a known standard pdf $f(\theta)$ truncated to $[a,b]$.
-
-  + Recall that $f_{[a,b]}(\theta) \propto f(\theta)\mathbb{1}[\theta \in [a,b]]$. Using the notation for rejection sampling, $p(\theta) = f_{[a,b]}(\theta)$ and $g(\theta) = f(\theta)$.
-  
---
-  + Set $1/M = \int^b_a f(\theta^\star)\textrm{d}\theta^\star$, so that $M$ is a constant. Then, $w(\theta) = p(\theta)/g(\theta) = M \mathbb{1}[\theta \in [a,b]] \leq M$ as required.
-
---
-
-- We can then use the procedure on the previous page to generate the required samples. Specifically,
-  + For each $i=1,\ldots,m$, generate $\theta_i \sim f$. If $\theta_i \in [a,b]$, accept $\theta_i$, otherwise **reject** and try again. 
-  + Easy to show that this is equivalent to accepting each $\theta_i$ with probability $w(\theta)/M$.
-
-
-
----
-## Example
-
-```{r}
-#Simple code for using rejection sampling to generate m samples
-#from the Beta[10,10] density truncated to (0.35,0.6).
-set.seed(12345)
-#NOTE: there are more efficient ways to write this code!
-
-#set sample size and reate vector to store sample
-m <- 10000; THETA <- rep(0,m)
-#keep track of rejects
-TotalRejects <- 0
-#now the 'for loop'
-for(i in 1:m){
-  t <- 0
-  while(t < 1){
-    theta <- rbeta(1,10,10)
-    if(theta > 0.35 & theta < 0.6){
-      THETA[i] <- theta
-      t <- 1
-    } else {
-    TotalRejects <- TotalRejects + 1
-  }
-}
-}
-#How many rejections in all, to generate m samples?
-TotalRejects
-```
-
-Clearly less efficient than inverse-CDF method which we already know we can use for this exercise. Acceptance rate $\approx 0.726$.
-
-
----
-## Example
-
-How does our sample compare to the true truncated density?
-```{r fig.height=5, echo=F}
-p <- seq(0,1,length=10000)
-f1 <- dbeta(p,10,10)*as.numeric(p>0.35 & p<0.6)/ (pbeta(0.6,10,10) - pbeta(0.3,10,10) )
-plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(theta),
-     ylim=c(0,6),lty=1.5)
-lines(density(THETA),type='l',col='red4',lty=1.5)
-labels <- c("True Density", "Samples (Rej. Samp.)")
-legend("topright", inset=.05, labels, lwd=2, lty=1.5, col=c('green4','red4'))
-```
 
 
 
@@ -971,10 +1016,6 @@ $$
 $$f(\theta | u < w(\theta)/M) = \dfrac{\Pr(u < w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u < w(\theta)/M)} = \dfrac{w(\theta)/M g(\theta)}{1/M} = w(\theta) g(\theta) = p(\theta).$$
 ]
 ]
-
-
-
-
 
 
 
