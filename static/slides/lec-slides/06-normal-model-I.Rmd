@@ -1,7 +1,7 @@
 ---
-title: "Poisson model (wrap-up); Monte Carlo approximation and sampling"
+title: "Rejection sampling; introduction to the normal model"
 author: "Dr. Olanrewaju Michael Akande"
-date: "Jan 24, 2020"
+date: "Jan 29, 2020"
 output:
   xaringan::moon_reader:
     css: "slides.css"
@@ -28,698 +28,28 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(rvest)
+#library(tidyverse)
+#library(rvest)
 ```
 
 
-## Announcements
+<!-- ## Announcements -->
 
-- HW1 due midnight
-
-- HW2 now online, due next Thursday.
-  + There should be six questions.
-  + If you only see five questions, refresh your browser.
-  
-
----
 ## Outline
 
-- Poisson model (wrap-up)
-  + Example
-  + Posterior prediction
-  + Other parameterizations
-  
-- Finding conjugate distributions
-
-- Monte Carlo approximation
-
 - Sampling methods
-  + Simple accept/reject
+  + Rejection sampling
   + Importance sampling
   
-
-
----
-class: center, middle
-
-# Poisson model (wrap-up)
-
-
----
-## Poisson-Gamma recap
-
-Poisson data:
-.block[
-.small[
-$$f(y_i; \theta): y_1,\ldots,y_n \overset{iid}{\sim} \textrm{Po}(\theta)$$
-]
-]
-
-
---
-
-$+$ Gamma Prior:
-.block[
-.small[
-$$\pi(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1}e^{-b\theta} = \textrm{Ga}(a,b)$$
-]
-]
-
---
-
-$\Rightarrow$ Gamma posterior:
-.block[
-.small[
-$$\pi(\theta | \{y_i\}): \theta | \{y_i\} \sim \textrm{Ga}(a+\sum y_i,b+n).$$
-]
-]
-
---
-
-- Recall: for $\textrm{Gamma}(a,b)$,
-  + $\mathbb{E}[\theta] = \dfrac{a}{b}$
-  + $\mathbb{V}[\theta] = \dfrac{a}{b^2}$
-  + $\textrm{Mode}[\theta] = \dfrac{a-1}{b} \ \ \textrm{for} \ \ a \geq 1$
-
-
----
-## Hoff example: birth rates
-
-- Survey data on educational attainment and number of children of 155 forty-year-old women during the 1990's.
-
---
-
-- These women were in their 20s during the 1970s, a period of historically low fertility rates in the US.
-
---
-
-- **Goal**: compare birth rate $\theta_1$ for women with bachelor's degrees to the rate $\theta_2$ for women without.
-
---
-
-- **Data**:
-  + 111 women without a bachelor's degree had 217 children: $(\bar{y}_1 = 1.95)$
-  + 44 women with bachelor's degrees had 66 children: $(\bar{y}_2 = 1.50)$
+- The univariate normal model
+  + Motivating example
+  + The normal distribution
+      - Properties
+      - Likelihood
+  + Inference for mean, conditional on variance
+  + Conjugacy
+  + Noninformative and improper priors
   
---
-
-- Based on the data alone, looks like $\theta_1$ should be greater than $\theta_2$. But...how sure are we?
-  
---
-
-- **Priors**: $\theta_1, \theta_2 \sim \textrm{Ga}(2,1)$ (not much prior information; equivalent to 1 prior woman with 2 children). Posterior means will be close to the MLEs.
-
-
-
----
-## Hoff example: birth rates
-
-- Then,
-  + $\theta_1 | \{n_1=111, \sum y_{i,1}=217\} \sim \textrm{Ga}(2+217,1+111) = \textrm{Ga}(219,112).$
-  
-  + $\theta_2 | \{n_2=44, \sum y_{i,2}=66\} \sim \textrm{Ga}(2+66,1+44) = \textrm{Ga}(68,45).$
-  
---
-
-- Use R to calculate posterior means and 95% CIs for $\theta_1$ and $\theta_2$.
-    ```{r eval=F}
-a=2; b=1; #prior
-n1=111; sumy1=217; n2=44; sumy2=66 #data
-(a+sumy1)/(b+n1); (a+sumy2)/(b+n2); #post means
-qgamma(c(0.025, 0.975),a+sumy1,b+n1) #95\% ci 1
-qgamma(c(0.025, 0.975),a+sumy2,b+n2) #95\% ci 2
-```
-
---
-
-- Posterior means: $\mathbb{E}[\theta_1 | \{y_{i,1}\}] = 1.955$ and $\mathbb{E}[\theta_2 | \{y_{i,2}\}] = 1.511$.
-  
---
-
-- 95% credible intervals
-  + $\theta_1$: [1.71, 2.22].
-  + $\theta_2$: [1.17, 1.89].
-  
-
-
----
-## Hoff example: birth rates
-
-Prior and posteriors:
-
-```{r fig.height=5, echo=F}
-x <- seq(0,6,by=0.00001)
-plot(x,dgamma(x,shape=2,rate=1),xlim=c(0,6),ylim=c(0,3),lwd=1.5,type="l",
-      col="green3",xlab=expression(theta),ylab="density")
-lines(x,dgamma(x,shape=219,rate=112),col="red2",lwd=1.5,type="l")
-lines(x,dgamma(x,shape=68,rate=45),col="blue2",lwd=1.5,type="l")
-legend("topright", legend=c("Prior","Post. (No Bach)","Post. (Bach)"),
-       col=c("green3","red2","blue2"), lwd=2, cex=1)
-```
-
-
-
-
----
-## Hoff example: birth rates
-
-- Posteriors indicate considerable evidence birth rates are higher among women without bachelor's degrees.
-
---
-
-- Confirms what we observed.
-
---
-
-- Using sampling we can quickly calculate $\Pr(\theta_1 > \theta_2 | \textrm{data})$.
-    ```{r eval=F}
-mean(rgamma(10000,219,112)>rgamma(10000,68,45))
-```
-
-  We have $\Pr(\theta_1 > \theta_2 | \textrm{data}) = 0.97$.
-  
---
-
-- Why/how does it work?
-
---
-
-- .hlight[Monte Carlo approximation] coming soon!
-
---
-
-- Clearly, that probability will change with different priors.
-
-
-
----
-## Posterior predictive distribution
-
-- <div class="question">
-What is the posterior predictive distribution for the Poisson-gamma model?
-</div>
-
---
-
-- Let $a_n = a+\sum y_i$ and $b_n = b+n$.
-
---
-
-- We have
-.block[
-.small[
-$$
-\begin{aligned}
-f(y_{n+1}|y_{1:n}) &= \int f(y_{n+1}|\theta) \pi(\theta|y_{1:n})\,d\theta \\
-&= \int \textrm{Po}(y_{n+1}; \theta)  \textrm{Ga}(\theta; a_n,b_n)\,d\theta \\
-&= ... \\
-&= ... \\
-&= \dfrac{\Gamma(a_n + y_{n+1})}{\Gamma(a_n)\Gamma(y_{n+1}+1)} \ \left(\dfrac{b_n}{b_n + 1} \right)^{a_n} \ \left(\dfrac{1}{b_n + 1} \right)^{y_{n+1}}
-\end{aligned}
-$$
-]
-]
-
-  which is the .hlight[negative binomial distribution], $\textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)$.
-  
---
-
-- The .hlight[prior predictive distribution] $f(y_{n+1}; a,b)$  takes a similar form.
-
-
-
----
-## Negative binomial distribution
-
-- Originally derived as the number of successes in a sequence of independent $\textrm{Bernoulli}(p)$ trials before $r$ failures occur.
-
---
-
-- The negative binomial distribution $\textrm{Neg-binomial}\left(r,p\right)$ is parameterized by $r$ and $p$ and the pmf is given by
-.block[
-.small[
-$$\Pr[Y = y | r, p] = {y + r - 1 \choose y} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$
-]
-]
-
-- Starting with this, the distribution can be extended to allow $r \in (0,\infty)$ as
-.block[
-.small[
-$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$
-]
-]
-
---
-
-- Some properties:
-
-  + $\mathbb{E}[\theta] = \dfrac{pr}{1-p}$
-  
-  + $\mathbb{V}[\theta] = \dfrac{pr}{(1-p)^2}$
-
-
-
-
----
-## Posterior predictive distribution
-
-- The negative binomial distribution is an over-dispersed generalization of the Poisson.
-
---
-
-- <div class="question">
-What does over-dispersion mean?
-</div>
-
---
-
-- In marginalizing $\theta$ out of the Poisson likelihood, over a gamma distribution, we obtain a negative-binomial.
-
---
-
-- For $(y_{n+1}|y_{1:n}) \sim \textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)$, we have
-
-  + $\mathbb{E}[y_{n+1}|y_{1:n}] = \dfrac{a_n}{b_n} = \mathbb{E}[\theta|y_{1:n}] =$ posterior mean, and
-  
-  + $\mathbb{V}[y_{n+1}|y_{1:n}] = \dfrac{a_n(b_n+1)}{b_n^2} = \mathbb{E}[\theta|y_{1:n}] \left(\dfrac{b_n+1}{b_n}\right)$,
-  
-    so that variance is larger than the mean by an amount determined by $b_n$, which takes the over-dispersion into account.
-
-
-
----
-## Predictive uncertainty
-
-- Note that as the sample size $n$ increases, the posterior density for $\theta$ becomes more and more concentrated.
-.block[
-.small[
-$$\mathbb{V}[\theta | y_{1:n}] = \dfrac{a_n}{b_n^2} = \dfrac{a + \sum_i y_i}{(b + n)^2} \approx \dfrac{\bar{y}}{n} \rightarrow 0.$$
-]
-]
-
---
-
-- Also, recall that $\mathbb{V}[y_{n+1}|y_{1:n}] = \mathbb{E}[\theta|y_{1:n}] \left(\dfrac{b_n+1}{b_n}\right)$.
-
---
-
-- As we have less uncertainty about $\theta$, the inflation factor
-.block[
-.small[
-$$\dfrac{b_n+1}{b_n} = \dfrac{b + n+1}{b + n} \rightarrow 1$$
-]
-]
-
-  and the predictive density $f(y_{n+1}|y_{1:n}) \rightarrow \textrm{Po}(\bar{y})$.
-  
---
-
-- Of course, in smaller samples, it is important to inflate our predictive intervals to account for uncertainty in $\theta$.
-
-
-
----
-## Back to birth rates
-
-- Let's compare the posterior predictive distributions for the two groups of women.
-```{r fig.height=4.9, echo=F}
-a=2; b=1; #prior
-n1=111; sumy1=217; n2=44; sumy2=66 #data
-y=0:10
-ltbach=dnbinom(y,size=(a+sumy1),mu=(a+sumy1)/(b+n1))
-bach=dnbinom(y,size=(a+sumy2),mu=(a+sumy2)/(b+n2))
-barplot(rbind(ltbach,bach),xlab="Children", 
-        names.arg=c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
-        col=c("orange3","green3"),beside=TRUE, main="Posterior predictive distributions")
-legend("topright",c("No Bachelors","Bachelors"),bty="n", fill=c("orange3","green3"))
-```
-
-
-
----
-## Poisson model in terms of rate
-
-- In many applications, it is often convenient to parameterize the Poisson model a bit differently. One option takes the form
-.block[
-.small[
-$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
-]
-]
-
-  where $x_i$ represents an explanatory variable and $\theta$ is once again the population parameter of interest. The model is not exchangeable in the $y_i$'s but is exchangeable in the pairs $(x,y)_i$.
-  
---
-
-- In epidemiology, $\theta$ is often called the population "rate" and $x_i$ is called the "exposure" of unit $i$.
-
---
-
-- When dealing with mortality rates in different counties for example, $x_i$ can be the population $n_i$ in county $i$, with $\theta =$ the overall mortality rate.
-
---
-
-- The gamma distribution is still conjugate for $\theta$, with the resulting posterior taking the form
-.block[
-.small[
-$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i).$$
-]
-]
-
-
-
----
-## BDA example: asthma mortality rate
-
-- Consider an example on estimating asthma mortality rates for cities in the US.
-
---
-
-- Since actual mortality rates can be small on the raw scale, they are often commonly estimated per 100,000 or even per one million. 
-
---
-
-- To keep it simple, let's use "per 100,000" for this example.
-
---
-
-- For inference, ideally, we collect data which should basically count the number of asthma-related deaths per county.
-
---
-
-- Note that inference is by county here, so county is indexes observations in the sample.
-
---
-
-- Since we basically have count data, a Poisson model would be reasonable here.
-
-
-
----
-## Asthma mortality rate
-
-- Since each city would be expected to have different populations, we might consider the sampling model:
-.block[
-.small[
-$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
-]
-]
-
-  where 
-    + $x_i$ is the "exposure" for county $i$, that is, population of county $i$ is $x_i \times 100,000$; and
-    + $\theta$ is the unknown "true" city mortality rate per 100,000.
-
-- Suppose 
-  + we pick a city in the US with population of 200,000;
-
---
-  + we find that 3 people died of asthma, i.e., roughly 1.5 cases per 100,000.
-
---
-
-- Thus, we have one single observation with $x_i = 2$ and $y_i = 3$ for this city.
-
-
-
----
-## Asthma mortality rate
-
-- Next, we need to specify a prior. What is a sensible prior here?
-
---
-
-- Perhaps we should look at mortality rates around the world or in similar countries.
-
---
-
-- Suppose reviews of asthma mortality rates around the world suggest rates above 1.5 per 100,000 are very rare in Western countries, with typical rates around 0.6 per 100,000.
-
---
-
-- Let's try a gamma distribution with $\mathbb{E}[\theta] = 0.6$ and $\Pr[\theta \geq 1.5]$ very low!
-
---
-
-- A few options here, but let's go with $\textrm{Ga}(3,5)$, which has $\mathbb{E}[\theta] = 0.6$ and $\Pr[\theta \geq 1.5] \approx 0.02$.
-
---
-
-- Using trial-and error, explore more options in R!
-
-
-
----
-## Asthma mortality rate
-
-- Therefore, our posterior takes the form
-.block[
-.small[
-$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i)$$
-]
-]
-
-  which is actually
-.block[
-.small[
-$$\pi(\theta | x,y) = \textrm{Ga}(a+y,b+x) = \textrm{Ga}(3+3,5+2) = \textrm{Ga}(6,7).$$
-]
-]
-
---
-
-- $\mathbb{E}[\theta | x,y] = 6/7=0.86$ so that we expect less than 1 (0.86 to be exact) asthma-related deaths per 100,000 people in this city.
-  
---
-
-- In fact, the posterior probability that the long term death rate from asthma in this city is more than 1 per 100,000, $\Pr[\theta > 1| x,y]$, is 0.3.
-
---
-
-- Also, $\Pr[\theta \leq 2 | x,y] = 0.99$, so that there is very little chance that we see more than 2 asthma-related deaths per 100,000 people in this city.
-
---
-
-- Use `pgamma` in R to compute the probabilities.
-
-
-
----
-## Prior vs posterior
-
-```{r fig.height=4.2, echo=F}
-x <- seq(0,3,by=0.00001)
-plot(x,dgamma(x,shape=3,rate=5),xlim=c(0,3),ylim=c(0,2),lwd=1.5,type="l",
-      col="orange3",xlab=expression(theta),ylab="density")
-lines(x,dgamma(x,shape=6,rate=7),col="red3",lwd=1.5,type="l")
-legend("topright", legend=c("Prior","Posterior"),
-       col=c("orange3","red3"), lwd=2, cex=1)
-```
-
-Posterior is to the right of the prior since the data suggests higher mortality rates are more likely than the prior suggests. However, we only have one data point!
-
-
-
----
-class: center, middle
-
-# Finding conjugate distributions
-
-
-
----
-## Finding conjugate distributions
-
-- In the conjugate examples we have looked at so far, how did we know the prior distributions we chose would result in conjugacy?
-
---
-
-- <div class="question">
-Can we figure out the family of distributions that would be conjugate for arbitrary densities?
-</div>
-
---
-
-- Let's explore this using the .hlight[exponential distribution]. The exponential distribution is often used to model "waiting times" or other random variables (with support $(0,\infty)$) often measured on a time scale.
-
---
-
-- If $y \sim \textrm{Exp}(\theta)$, we have the pdf
-.block[
-.small[
-$$f(y) = \theta e^{-y\theta}; \ \ \ y > 0.$$
-]
-]
-
-  where $\theta$ is the .hlight[rate parameter], and $\mathbb{E}[y] = 1/\theta$.
-  
---
-
-- Recall, if $Y \sim \textrm{Ga}(1,\theta)$, then $Y \sim \textrm{Exp}(\theta)$. What is $\mathbb{V}[y]$ then?
-
---
-
-- Let's figure out what the conjugate prior for this density would look like (to be done in class).
-
-
-
----
-class: center, middle
-
-# Monte Carlo approximation
-
-
----
-## Monte Carlo approximation
-
-- Monte Carlo integration is very key for Bayesian computation and using simulations in general.
-
---
-
-- While we will focus on using Monte Carlo integration for Bayesian inference, the development is general and applies to any pdf/pmf $p(\theta)$.
-
---
-
-- For our purposes, we will want to evaluate expectations of the form
-.block[
-.small[
-$$H = \int h(\theta) p(\theta) d\theta,$$
-]
-]
-
-  for many different functions $h(.)$ (usually scalar for us).
-  
---
-
-- Procedure:
-  1. Generate a random sample $\theta_1, \ldots, \theta_m \overset{ind}{\sim} p(\theta)$.
-  
---
-  2. Estimate $H$ using
-.block[
-.small[
-$$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m h(\theta_i).$$
-]
-]
-  
-
----
-## Monte Carlo approximation
-
-- We have $\mathbb{E}[h(\theta_i)] = H$.
-
---
-
-- Assuming $\mathbb{E}[h^2(\theta_i)] < \infty$, so that the variance of each $h(\theta_i)$ is finite, we have
-
-  1. .hlight[LLN]: $\bar{h} \overset{a.s.}{\rightarrow} H$.
-  
---
-  2. .hlight[CLT]: $\bar{h} - H$ is is asymptotically normal, with asymptotic variance
-.block[
-.small[
-$$\dfrac{1}{m} \int (h(\theta)-H)^2 p(\theta) d\theta,$$
-]
-]
-
-      which can be approximated by
-.block[
-.small[
-$$v_m = \dfrac{1}{m^2} \sum_{i=1}^m (h(\theta_i)-\bar{h})^2.$$
-]
-]
-
---
-
-- $\sqrt{v_m}$ is often called the .hlight[Monte Carlo standard error].
-
-
----
-## Monte Carlo approximation
-
-- That is, generally, taking large Monte Carlo sample sizes $m$ (in the thousands or tens of thousands) can yield very precise, and cheaply computed, numerical approximations to mathematically difficult integrals.
-
---
-
-- .hlight[What this means for us]: we can approximate just about any aspect of the posterior distribution with a large enough Monte Carlo sample.
-
---
-
-- For samples $\theta_1, \ldots, \theta_m$ drawn iid from $p(\theta|y)$, as $m \rightarrow \infty$, we have
-
---
-  + $\bar{\theta} = \dfrac{1}{m} \sum\limits_{i=1}^m \theta_i \rightarrow \mathbb{E}[\theta | y]$
-  
---
-  + $\hat{\sigma}_{\theta} = \dfrac{1}{m-1} \sum\limits_{i=1}^m (\theta_i - \bar{\theta})^2 \rightarrow \mathbb{V}[\theta | y]$
-
---
-  + $\dfrac{1}{m} \sum\limits_{i=1}^m \mathbb{1}[\theta_i \leq c] = \dfrac{\# \theta_i \leq c}{m} \rightarrow \Pr[\theta \leq c| y]$
-  
---
-  + $[\dfrac{\alpha}{2}\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m), (1-\dfrac{\alpha}{2})\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m)]$ $\rightarrow$ $100 \times (1-\alpha)%$ quantile-based credible interval.
-
-
-
----
-## Back to birth rates
-
-- Suppose we randomly sample two women, one with degree and one without. To what extent do we expect the one without the degree to have more kids than the other, e.g. $\tilde{y}_1 > \tilde{y}_2$?
-
---
-
-- Using R, 
-    ```{r fig.height=4}
-    set.seed(01222020)
-a=2; b=1; #prior
-n1=111; sumy1=217; n2=44; sumy2=66 #data
-mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1)) >
-rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
-mean(rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1))==
-rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2)))
-```
-
-- That is, $\Pr(\tilde{y}_1 > \tilde{y}_2) \approx 0.48$ and $\Pr(\tilde{y}_1 = \tilde{y}_2) \approx 0.22$.
-
---
-
-- Strong evidence of difference between two populations does not really imply the difference in predictions is large.
-
-
-
-
----
-## Monte Carlo approximation
-
-- This general idea of using samples to "approximate" averages (expectations) is also useful when trying to approximate posterior predictive distributions.
-
---
-
-- Quite often, we are able to sample from $f(y_i; \theta)$ and $\pi(\theta | \{y_i\})$ but not from $f(y_{n+1}|y_{1:n})$ directly.
-
---
-
-- We can do so indirectly using the following Monte Carlo procedure:
-.block[
-.small[
-$$
-\begin{split}
-\textrm{sample } \theta^{(1)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(1)} \sim f(y_{n+1}; \theta^{(1)})\\
-\textrm{sample } \theta^{(2)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(2)} \sim f(y_{n+1}; \theta^{(2)})\\
-& \ \ \vdots \hspace{133pt} \vdots \\
-\textrm{sample } \theta^{(m)} & \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(m)} \sim f(y_{n+1}; \theta^{(m)}).\\
-\end{split}
-$$
-]
-]
-
---
-
-- The sequence $\{(\theta, y_{n+1})^{(1)}, \ldots, (\theta, y_{n+1})^{(m)}\}$ constitutes $m$ independent samples from the joint posterior of $(\theta, Y_{n+1})$.
-
---
-
-- In fact, $\{ y_{n+1}^{(1)}, \ldots, y_{n+1}^{(m)}\}$ are independent draws from the posterior predictive distribution we care about.
-
 
 
 ---
@@ -730,7 +60,7 @@ class: center, middle
 
 
 ---
-## Rejection sampling (simple accept/reject)
+## Rejection sampling
 
 - Setup:
   + $p(\theta)$ is some density we are interested in sampling from;
@@ -753,7 +83,7 @@ class: center, middle
 
 
 ---
-## Rejection sampling (simple accept/reject)
+## Rejection sampling
 
 - Procedure:
 
@@ -763,18 +93,55 @@ class: center, middle
   2. Assume that $w(\theta) = p(\theta)/g(\theta) < M$ for some constant M. If $g(\theta)$ represents a good approximation to $p(\theta)$, then M should not be too far from 1.
 
 --
-  3. Generate a _candidate_ value $\theta \sim g(\theta)$ and **accept** with probability $w(\theta)/M$: if accepted, $\theta$ is a draw from $p(\theta)$; otherwise **reject** and try again.
+  3. Generate a _candidate_ value $\theta \sim g(\theta)$ and **accept** with probability $w(\theta)/M$: if accepted, $\theta$ is a draw from $p(\theta)$; otherwise **reject** and try again.  
   
 --
       Equivalently, generate $u \sim U(0,1)$ independently of $\theta$. Then **accept** $\theta$ as a draw from $p(\theta)$ if, and only if, $u < w(\theta)/M$.
 
 --
 
-- For those interested, the proof that all accepted $\theta$ values are indeed from $p(\theta)$ is on the last slide.
+- For those interested, the proof that all accepted $\theta$ values are indeed from $p(\theta)$ is on the next slide. We will not spend time on it.
 
 --
 
-- **Drawback**: we need $M$ for this to work. However, in the case of truncated densities, we actually have $M$.
+- Clearly, we need $M$ for this to work. However, in the case of truncated densities, we actually have $M$.
+
+
+
+---
+## Proof for simple accept/reject
+
+- We need to show that all accepted $\theta$ values are indeed from $p(\theta)$. Equivalently, show that $f(\theta | u < w(\theta)/M) = p(\theta)$.
+
+- By Bayes' theorem,
+.block[
+.small[
+$$f(\theta | u < w(\theta)/M) = \dfrac{\Pr(\theta \textrm{ and } u < w(\theta)/M)}{\Pr(u < w(\theta)/M)} = \dfrac{\Pr(u < w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u < w(\theta)/M)}.$$
+]
+]
+
+- But,
+  + $\Pr(u < w(\theta)/M \ | \ \theta) = w(\theta)/M$ since $u \sim U(0,1)$, and
+  
+  + 
+.block[
+.small[
+$$
+\begin{split}
+\Pr(u < w(\theta)/M) & = \int \Pr(u < w(\theta)/M \ | \ \theta) g(\theta) d\theta\\
+& = \int w(\theta)/M g(\theta) d\theta = 1/M \int w(\theta) g(\theta) d\theta = 1/M \int p(\theta) d\theta = 1/M.
+\end{split}
+$$
+]
+]
+
+
+- Therefore,
+.block[
+.small[
+$$f(\theta | u < w(\theta)/M) = \dfrac{\Pr(u < w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u < w(\theta)/M)} = \dfrac{w(\theta)/M g(\theta)}{1/M} = w(\theta) g(\theta) = p(\theta).$$
+]
+]
 
 
 
@@ -790,13 +157,31 @@ class: center, middle
   + Recall that $f_{[a,b]}(\theta) \propto f(\theta)\mathbb{1}[\theta \in [a,b]]$. Using the notation for rejection sampling, $p(\theta) = f_{[a,b]}(\theta)$ and $g(\theta) = f(\theta)$.
   
 --
-  + Set $1/M = \int^b_a f(\theta^\star)\textrm{d}\theta^\star$, so that $M$ is a constant. Then, $w(\theta) = p(\theta)/g(\theta) = M \mathbb{1}[\theta \in [a,b]] \leq M$ as required.
+
+  + Set $1/M = \int^b_a f(\theta^\star)\textrm{d}\theta^\star$, so that $M$ is the normalizing constant of the truncated density.
+  
+--
+
+  + Then, $w(\theta) = p(\theta)/g(\theta) = M \mathbb{1}[\theta \in [a,b]] \leq M$ as required.
+  
+  
+  
+---
+## Rejection sampling for truncated densities
+
+- We can then use the procedure on page 5 to generate the required samples. 
 
 --
 
-- We can then use the procedure on the previous page to generate the required samples. Specifically,
+- Specifically,
+
+--
   + For each $i=1,\ldots,m$, generate $\theta_i \sim f$. If $\theta_i \in [a,b]$, accept $\theta_i$, otherwise **reject** and try again. 
+  
+--
   + Easy to show that this is equivalent to accepting each $\theta_i$ with probability $w(\theta)/M$.
+
+
 
 
 
@@ -831,7 +216,7 @@ for(i in 1:m){
 TotalRejects
 ```
 
-Clearly less efficient than inverse-CDF method which we already know we can use for this exercise. Acceptance rate $\approx 0.726$.
+Acceptance rate $\approx 0.726$.
 
 
 ---
@@ -863,7 +248,7 @@ plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(thet
 lines(density(THETA),type='l',col='blue4',lty=1.5)
 points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
 labels <- c("True Density", "Accepted Samples","Rejects")
-legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+legend("topright", labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
        col=c('green4','blue4',"red2"))
 ```
 
@@ -898,7 +283,7 @@ plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(thet
 lines(density(THETA),type='l',col='blue4',lty=1.5)
 points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
 labels <- c("True Density", "Accepted Samples","Rejects")
-legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+legend("topright", labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
        col=c('green4','blue4',"red2"))
 ```
 
@@ -909,7 +294,7 @@ legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,N
 ## Example
 
 How does our sample compare to the true truncated density? $m = 10000$
-```{r fig.height=5, echo=F}
+```{r fig.height=5, echo=F, cache=T}
 set.seed(12345)
 m <- 10000; THETA <- rep(0,m)
 TotalRejects <- 0; Rejections <- NULL
@@ -934,7 +319,7 @@ plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(thet
 lines(density(THETA),type='l',col='blue4',lty=1.5)
 points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
 labels <- c("True Density", "Accepted Samples","Rejects")
-legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+legend("topright", labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
        col=c('green4','blue4',"red2"))
 ```
 
@@ -944,7 +329,7 @@ legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,N
 ## Example
 
 How does our sample compare to the true truncated density? $m = 100000$
-```{r fig.height=5, echo=F}
+```{r fig.height=5, echo=F, cache=T}
 set.seed(12345)
 m <- 100000; THETA <- rep(0,m)
 TotalRejects <- 0; Rejections <- NULL
@@ -969,9 +354,35 @@ plot(p,f1,type='l',col='green4',xlim=c(0,1),ylab='Density', xlab=expression(thet
 lines(density(THETA),type='l',col='blue4',lty=1.5)
 points(c(Rejections),rep(0,TotalRejects),type='p',col="red2",pch=4)
 labels <- c("True Density", "Accepted Samples","Rejects")
-legend("topright", inset=.05, labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
+legend("topright", labels, lwd=c(2,2,2), lty=c(1.5,1.5,NA),pch=c(NA,NA,4),
        col=c('green4','blue4',"red2"))
 ```
+
+
+
+---
+## Comments
+
+- Clearly less efficient than the inverse CDF method, which we already know how to use for this particular problem.
+
+--
+
+- When you can write down the truncated CDF, use the inverse CDF method instead.
+
+--
+
+- When you cannot, rejection sampling can be a possible alternative, as are many more sampling methods which we will not cover in this course.
+
+--
+
+- Anyway, generally, rejection sampling can still be very useful.
+
+--
+
+- Importance sampling is another related sampling method but we will not spend time on it. If you are interested, take a look at the next few slides. If not, feel free to skip to the normal model.
+
+
+
 
 
 
@@ -1099,33 +510,511 @@ $$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m w_i h(\theta_i) \ \ \ \textrm{where} \ \ \
 
 
 
+
+
 ---
-## Proof for simple accept/reject
+class: center, middle
 
-- We need to show that all accepted $\theta$ values are indeed from $p(\theta)$. Equivalently, show that $f(\theta | u < w(\theta)/M) = p(\theta)$.
+# Introduction to the univariate normal model
+
+
+
+
+---
+## Motivating example: job training
+
+- In the 1970s, researchers in the U.S. ran several randomized experiments intended to evaluate public policy programs. 
 
 --
 
-- By Bayes' theorem,
-.block[
-.small[
-$$f(\theta | u < w(\theta)/M) = \dfrac{\Pr(\theta \textrm{ and } u < w(\theta)/M)}{\Pr(u < w(\theta)/M)} = \dfrac{\Pr(u < w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u < w(\theta)/M)}.$$
-]
-]
+- One of the most famous experiments is the National Supported Work (NSW) Demonstration, in which researchers wanted to assess whether or not job training for disadvantaged workers had an effect on their wages. 
 
 --
 
-- But,
-  + $\Pr(u < w(\theta)/M \ | \ \theta) = w(\theta)/M$ since $u \sim U(0,1)$, and
+- Eligible workers were randomly assigned either to receive job training or not to receive job training. 
+
+--
+
+- Candidates eligible for the NSW were randomized into the program between March 1975 and July 1977.
+
+--
+
+- For more details, read Lalonde, R. J. (1986) and Dehejia, R., and Wahba, S. (1999).
+
+
+
+---
+## Motivating example: job training
+
+- Setup:
+  + **Pre-training wages**: real annual earnings in 1974 before training.
   
 --
-  + 
+  + Two groups: some participants received job training and the rest did not.
+  
+--
+  + **Post-training wages**: real annual earnings in 1978 upon completion of training.
+  
+--
+
+- <div class="question">
+Question of interest: is there evidence that workers who receive job training tend to earn higher wages than workers who do not receive job training?
+</div>
+
+--
+
+- The original study really is a causal inference setup, but the data used in this example only uses a subset of the data.
+
+--
+
+- The data is richer than what we will use it for (i.e., there are covariates we can control for) but we will only focus on the pre and post wages for the two groups.
+
+
+
+
+---
+## Job training: the data
+
+- Data:
+  
+  + No training group (N): sample size $n_N = 429$.
+  
+  + Training group (T): sample size $n_A = 185$.
+  
+  + **Diff wages**: Post-training wages -- Pre-training wages.
+
+--
+
+- Summary statistics for change in annual earnings:
+  
+  + $\bar{y}_N = 1364.93$; $\sigma_N = 7460.05$
+  
+  + $\bar{y}_T = 4253.57$; $\sigma_T = 8926.99$
+
+--
+
+- Wages/income are well known to be approximately normally distributed. Let's look at the distribution of "change in annual earnings" for the two groups.
+
+
+
+---
+## Job training: the data
+
+```{r fig.height=4.2, echo=F}
+Data <- read.csv("data/lalondedata.txt",header=T)
+Data$Diff <- Data$re78 - Data$re74
+plot(density(Data$Diff[Data$treat==0]),lwd=1.5,type="l",
+     col="green4",xlab="Diff wages",ylab="Density",main="Change in real annual earnings for the two groups")
+lines(density(Data$Diff[Data$treat==1]),col="orange3",lwd=1.5,type="l")
+legend("topright",legend=c("did not receive job training","received job training"),
+       col=c("green4","orange3"), lwd=2, cex=1)
+```
+
+Not completely normal but not too far off either. Lots of overlap between the two groups.
+
+
+---
+## Model for changes in earnings
+
+- $$y_i^{(T)} \sim \mathcal{N}(\mu_T,\sigma^2_T)$$
+  $$y_i^{(N)} \sim \mathcal{N}(\mu_N,\sigma^2_N)$$
+
+--
+
+- Want posterior distribution of $\mu_T - \mu_N$. Specifically, we would like to compute $\Pr[\mu_T > \mu_N | Y_T, Y_N)$ or equivalently, $\Pr[\mu_T - \mu_N > 0 | Y_T, Y_N)$.
+
+--
+
+- Inference for $\mu_T - \mu_N$ can be complicated in frequentist paradigm when $\sigma^2_T \neq \sigma^2_N$.
+
+--
+
+- Use approximate $t$-distributions based on the Welch-Satterthwaite degrees of freedom.
+
+--
+
+- Trivial with Bayesian inference
+
+--
+
+- By the way, also trivial to compute $\Pr[\sigma^2_T > \sigma^2_N | Y_T, Y_N)$ with Bayesian inference, which we will do later.
+
+--
+
+- How to do posterior inference for such normal models?
+
+
+
+---
+## Normal distribution
+
+- A random variable $Y$ has a .hlight[normal distribution], written as $Y \sim \mathcal{N}(\mu, \sigma^2)$, if the pdf is
+.block[
+.small[
+$$p(y; \mu,\sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \ e^{-\dfrac{(y-\mu)^2}{2\sigma^2}}; \ \ \ y \in (-\infty,\infty), \ \ \mu \in (-\infty,\infty), \ \ \sigma \in (0,\infty).$$
+]
+]
+
+  where $\mu$ is the mean and $\sigma^2$ is the variance.
+
+--
+
+- It is also common (and would often be more convenient for our purposes) to write the pdf in terms of .hlight[precision], $\tau$, where $\tau = 1/\sigma^2$.
+
+--
+
+- In that case, the pdf is instead
+.block[
+.large[
+$$p(y; \mu,\sigma^2) = \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ e^{-\frac{1}{2} \tau (y-\mu)^2}; \ \ \ y \in (-\infty,\infty), \ \ \mu \in (-\infty,\infty), \ \ \tau \in (0,\infty).$$
+]
+]
+
+
+
+---
+## Example normal distributions
+
+```{r fig.height=5.3, echo=F}
+x <- seq(-6,6,by=0.0001)
+plot(x,dnorm(x,0,1),xlim=c(-6,6),ylim=c(0,2),lwd=1.5,type="l",
+      col="green4",xlab="y",ylab="Density")
+lines(x,dnorm(x,0,2),col="red3",lwd=1.5,type="l")
+lines(x,dnorm(x,-1,0.5),col="blue3",lwd=1.5,type="l")
+lines(x,dnorm(x,2,0.2),col="orange3",lwd=1.5,type="l")
+legend("topleft",
+       legend=c(expression(paste(N,"(",y,"| ",mu,"=0, ",sigma^2,"=1)")),
+                expression(paste(N,"(",y,"| ",mu,"=0, ",sigma^2,"=",2^2,")")),
+                expression(paste(N,"(",y,"| ",mu,"=-1, ",sigma^2,"=",0.5^2,")")),
+                expression(paste(N,"(",y,"| ",mu,"=2, ",sigma^2,"=",0.2^2,")"))),
+       col=c("green4","red3","blue3","orange3"), lwd=2, cex=1)
+```
+
+
+
+---
+## Comments on the normal distribution
+
+- It is amazing how often real data are close to normally distributed.
+
+--
+
+- Likely a consequence of CLT -- sums and means of independent random variables tend to be approximately normally distributed.
+
+--
+
+- Occurs under very general conditions.
+
+--
+
+- Normality?
+  + Height, weight and other body measurements,
+  + Income\wages\earnings,
+  + Cumulative hydrologic measures such as annual rainfall or monthly river discharge,
+  + Errors in astronomical or physical observations,
+  + Many more examples!
+
+
+
+---
+## Properties of the normal distribution
+
+- Mean, median and mode are all the same $(\mu)$.
+
+--
+
+- Symmetric about the mean $\mu$.
+
+--
+
+- 95% of the density (95% probability) within $\pm1.96\sigma$ (approximately two standard deviations) of the mean.
+
+--
+
+- If $X \sim \mathcal{N}(\theta,s^2)$ and $Y \sim \mathcal{N}(\mu, \sigma^2)$ with $X \perp Y$, then
+.block[
+.small[
+$$aX + bY \sim \mathcal{N}(a\theta + b\mu,a^2s^2+b^2\sigma^2),$$
+]
+]
+
+  for constants $a$ and $b$.
+  
+--
+
+- When independence does not hold, the sum of two normally distributed random variables is still normally distributed.
+
+--
+
+- However, when that is the case, we must account for the correlation in the variance term.
+
+
+
+---
+## Notes on normal distribution in R
+
+- `rnorm`, `dnorm`, `pnorm`, `qnorm` in R take mean and **standard deviation** $\sigma$ as arguments.
+
+- If you use the variance $\sigma^2$ instead you will get wrong answers!
+
+- For example, `rnorm(n,m,s)` generates $n$ normal random variables with mean $m$ and standard deviation $s$, that is, $\mathcal{N}(m,s^2)$.
+
+
+
+---
+## Normal model
+
+- Suppose we have independent observations $Y = (y_1,y_2,\ldots,y_n)$, where each $y_i \sim \mathcal{N}(\mu, \sigma^2)$ or $y_i \sim \mathcal{N}(\mu, \tau^{-1})$, with unknown parameters $\mu$ and $\sigma^2$ (or $\tau$).
+
+--
+
+- Then, the likelihood is
 .block[
 .small[
 $$
 \begin{split}
-\Pr(u < w(\theta)/M) & = \int \Pr(u < w(\theta)/M \ | \ \theta) g(\theta) d\theta\\
-& = \int w(\theta)/M g(\theta) d\theta = 1/M \int w(\theta) g(\theta) d\theta = 1/M \int p(\theta) d\theta = 1/M.
+L(Y; \mu,\sigma^2) & = \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau (y_i-\mu)^2\right\}\\
+& \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n (y_i-\mu)^2\right\}\\
+& \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n \left[ (y_i-\bar{y}) - (\mu - \bar{y}) \right]^2 \right\}\\
+& \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \left[ \sum_{i=1}^n (y_i-\bar{y})^2 - \sum_{i=1}^n(\mu - \bar{y})^2 \right] \right\}\\
+& \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \left[ \sum_{i=1}^n (y_i-\bar{y})^2 - n(\mu - \bar{y})^2 \right] \right\}\\
+& \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.\\
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Likelihood for normal model
+
+- Likelihood:
+.block[
+.large[
+$$L(Y; \mu,\sigma^2) \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
+]
+]
+
+  where
+  + $\bar{y} =\sum_{i=1}^n y_i$ is the sample mean; and
+  + $s^2 = \sum_{i=1}^n (y_i-\bar{y})^2/(n-1)$ is the sample variance.
+
+- Sufficient statistics:
+  + Sample mean $\bar{y}$; and
+  + Sample sum of squares $SS = s^2(n-1) = \sum_{i=1}^n (y_i-\bar{y})^2$.
+
+--
+
+- MLEs:
+  + $\hat{\mu} = \bar{y}$.
+  + $\hat{\tau} = n/SS$, and $\hat{\sigma}^2 = SS/n$.
+
+
+
+---
+## Inference for mean, conditional on variance
+
+- We can break down inference problem for this two-parameter model into two one-parameter problems.
+
+--
+
+- First start by developing inference on $\mu$ when $\sigma^2$ is known. Turns out we can use a conjugate prior for $\pi(\mu|\sigma^2)$. We will get to unknown $\sigma^2$ in the next class.
+
+--
+
+- For $\sigma^2$ known, the normal likelihood further simplifies to
+.block[
+.small[
+$$\propto \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
+]
+]
+
+  leaving out everything else that does not depend on $\mu$.
+  
+--
+
+- For $\pi(\mu|\sigma^2)$, we consider $\mathcal{N}(\mu_0, \sigma_0^2)$, i.e., $\mathcal{N}(\mu_0, \tau_0^{-1})$, where $\tau_0^{-1} = \sigma_0^2$.
+
+--
+
+- Let's derive the posterior $\pi(\mu|Y,\sigma^2)$.
+
+
+
+---
+## Inference for mean, conditional on variance
+
+- Posterior:
+.block[
+.small[
+$$\pi(\mu|Y,\sigma^2) \ \propto \ \pi(\mu|\sigma^2) L(Y; \mu,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu - \mu_0)^2 \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}$$
+]
+]
+
+--
+
+- Expanding out squared terms
+.block[
+.small[
+$$\Rightarrow \pi(\mu|Y,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu^2 - 2\mu\mu_0 + \mu_0^2) \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu^2 - 2\mu\bar{y} + \bar{y}^2) \right\}$$
+]
+]
+
+--
+
+- Ignoring terms not containing $\mu$
+.block[
+.small[
+$$
+\begin{split}
+\Rightarrow \pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu^2 - 2\mu\mu_0) \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu^2 - 2\mu\bar{y}) \right\}\\
+& \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[\tau_0 (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\}\\
+& \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right] \right\}.\\
+\end{split}
+$$
+]
+]
+
+
+
+
+---
+## Inference for mean, conditional on variance
+
+- Notice that $\left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right]$ is essentially a quadratic equation of the form $a^\star\mu^2 - 2b^\star\mu + c^\star$, where
+
+--
+  + $a^\star = \tau n + \tau_0$,
+  
+--
+  + $b^\star = \tau n\bar{y} + \tau_0\mu_0$, and
+  
+--
+  + $c^\star$ does not depend on $\mu$.
+  
+      _Note that $c^\star$ contains some of the terms we ignored on the previous slide but we need not know its exact form here._
+  
+--
+
+- .hlight[Goal]: Turn this quadratic equation into an expression of the form $m(\mu - r)^2$, for some $m$ and $r$, so that we have something that resembles the kernel of a normal density.
+
+--
+
+- <div class="question">
+How? Complete the square!
+</div>
+
+
+
+---
+## Inference for mean, conditional on variance
+
+- Recall how to complete the square. Specifically, we can write
+.block[
+.small[
+$$a\mu^2 + b\mu + c$$
+]
+]
+
+  as
+.block[
+.small[
+$$a(\mu + d)^2 + e,$$
+]
+]
+
+  where
+  + $d = \dfrac{b}{2a}$, and
+  
+  + $e = c - \dfrac{b^2}{4a}$.
+
+
+
+
+---
+## Inference for mean, conditional on variance
+
+- Completing the square and rearranging (where $a^\star = \tau n + \tau_0$ and $b^\star = \tau n\bar{y} + \tau_0\mu_0$),
+.block[
+.small[
+$$
+\begin{split}
+\Rightarrow \pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[ a^\star\mu^2- 2b^\star\mu\right] \right\}\\
+& = \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu^2- \dfrac{2b^\star}{a^\star}\mu\right] \right\}\\
+& = \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu^2- \dfrac{2b^\star}{a^\star}\mu + \dfrac{(b^\star)^2}{(a^\star)^2} \right] + \dfrac{(b^\star)^2}{2a^\star} \right\}\\
+& \propto \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu^2- \dfrac{b^\star}{a^\star} \right]^2 \right\},\\
+\end{split}
+$$
+]
+]
+
+  which is the kernel of a normal distribution with
+    + mean $\dfrac{b^\star}{a^\star}$, and
+    + precision $a^\star$ or variance $(a^\star)^{-1}$.
+
+
+
+---
+## Posterior with precision terms
+
+- In terms of precision, we have
+.block[
+.large[
+$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \tau_n^{-1})$$
+]
+]
+
+  where
+.block[
+.small[
+$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}$$
+]
+]
+
+  and
+.block[
+.small[
+$$\tau_n = a^\star = \tau n + \tau_0.$$
+]
+]
+
+
+
+---
+## Posterior with precision terms
+
+- As mentioned before, Bayesians often prefer to talk about precision instead of variance.
+
+--
+
+- We have
+  + $\tau$ as the sampling precision (how close the $y_i$'s are to $\mu$).
+  
+  + $\tau_0$ as the prior precision (our prior belief about the uncertainty about $\mu$ around our prior guess $\mu_0$).
+  
+  + $\tau_n$ as the posterior precision
+
+--
+
+- As we have on the previous slide, _the posterior precision equals the prior precision plus the data precision_.
+
+--
+
+- That is, we see that the posterior information is a sum of the prior information and the information from the data.
+
+
+
+---
+## Posterior with precision terms: combining information
+
+- Posterior mean is weighted sum of prior information plus data information:
+.block[
+.small[
+$$
+\begin{split}
+\mu_n & = \dfrac{n\tau\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}\\
+& = \dfrac{\tau_0}{\tau_0 + \tau n} \mu_0 + \dfrac{n\tau}{\tau_0 + \tau n} \bar{y}
 \end{split}
 $$
 ]
@@ -1133,12 +1022,198 @@ $$
 
 --
 
-- Therefore,
+- Recall that $\sigma^2$ (and thus $\tau$) is known for now. 
+
+--
+
+- If we think of the prior mean as being based on $\kappa_0$ prior observations from a similar population as $y_1,y_2,\ldots,y_n$, then we might set $\sigma_0^2 = \frac{\sigma^2}{\kappa_0}$, which implies $\tau_0 = \kappa_0 \tau$, and then the posterior mean is given by
 .block[
 .small[
-$$f(\theta | u < w(\theta)/M) = \dfrac{\Pr(u < w(\theta)/M \ | \ \theta) g(\theta)}{\Pr(u < w(\theta)/M)} = \dfrac{w(\theta)/M g(\theta)}{1/M} = w(\theta) g(\theta) = p(\theta).$$
+$$
+\begin{split}
+\mu_n & = \dfrac{\kappa_0}{\kappa_0 + n} \mu_0 + \dfrac{n}{\kappa_0 + n} \bar{y}.
+\end{split}
+$$
 ]
 ]
+
+
+---
+## Posterior with variance terms
+
+- In terms of variances, we have
+.block[
+.large[
+$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \sigma_n^2)$$
+]
+]
+
+  where
+.block[
+.l.small[
+$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{ \dfrac{n}{\sigma^2}\bar{y} + \dfrac{1}{\sigma^2_0} \mu_0}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}$$
+]
+]
+
+  and
+.block[
+.small[
+$$\sigma^2_n = \dfrac{1}{a^\star} = \dfrac{1}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}.$$
+]
+]
+
+--
+
+- It is still easy to see that we can re-express the posterior information as a sum of the prior information and the information from the data.
+
+
+---
+## Noninformative and improper priors
+
+- Clearly, we need to specify both $\mu_0$ and $\tau_0$ to do inference here.
+
+--
+
+- When prior distributions have no population basis, that is, there is no justification of the prior as "prior data", prior distributions can be difficult to construct.
+
+--
+
+- To that end, there is often the desire to construct .hlight[noninformative priors], with the rationale being _"to let the data speak for themselves"_.
+
+--
+
+- For example, we could instead assume a uniform prior on $\mu$ that is constant over the real line, i.e., $\pi(\mu) \propto 1$ $\Rightarrow$ all values on the real line are equally likely apriori.
+
+--
+
+- Clearly, this is not a valid pdf since it will not integrate to 1 over the real line. Such priors are known as .hlight[improper priors].
+
+--
+
+- An improper prior can still be very useful, we just need to ensure it results in a .hlight[proper posterior].
+
+
+
+---
+## Jeffreys' prior
+
+- Question: is there a prior pdf (for a given model) that would be universally accepted as a noninformative prior?
+
+--
+
+- Laplace proposed the uniform distribution.  His proposal is not universally accepted because it lacks invariance under monotone transformations of the parameter.
+
+--
+
+- For example, a uniform prior on the binomial proportion parameter $\theta$ is not the same as a uniform prior on the odds parameter $\phi = \frac{\theta}{1-\theta}$, which is not ideal.
+
+--
+
+- A more acceptable approach was introduced by Jeffreys. For single parameter models, the .hlight[Jeffreys' prior] defines a noninformative prior density of a parameter $\theta$ as
+.block[
+.small[
+$$\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$$
+]
+]
+
+  where $\mathcal{I}(\theta)$ is the .hlight[Fisher information] for $\theta$.
+
+
+
+---
+## Jeffreys' prior
+
+- The Fisher information gives a way to measure the amount of information a random variable $Y$ carries about an unknown parameter $\theta$ of a distribution that describes $Y$.
+
+--
+
+- Formally, $\mathcal{I}(\theta)$ is defined as
+.block[
+.small[
+$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 f(y; \theta) dy.$$
+]
+]
+
+--
+
+- Alternatively,
+.block[
+.small[
+$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \right) f(y; \theta) dy.$$
+]
+]
+
+--
+
+- Turns out that the Jeffreys' prior for $\mu$ under the normal model, when $\sigma^2$ is known, is
+.block[
+.small[
+$$\pi(\mu) \propto 1,$$
+]
+]
+
+  the uniform prior over the real line. You should try to derive this.
+  
+  
+
+---
+## Inference for mean, conditional on variance using Jeffreys' prior
+
+- Recall that for $\sigma^2$ known, the normal likelihood simplifies to
+.block[
+.small[
+$$\propto \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
+]
+]
+
+  ignoring everything else that does not depend on $\mu$.
+  
+- With the Jeffreys' prior $\pi(\mu) \propto 1$, can we derive the posterior distribution?
+
+
+
+
+---
+## Inference for mean, conditional on variance using Jeffreys' prior
+
+- Posterior:
+.block[
+.small[
+$$
+\begin{split}
+\pi(\mu|Y,\sigma^2) \ & \propto \  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\} \pi(\mu)\\
+& \propto \  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.\\
+\end{split}
+$$
+]
+]
+
+--
+
+- This is the kernel of a normal distribution with
+    + mean $\bar{y}$, and
+    + precision $n\tau$ or variance $\frac{1}{n\tau} = \frac{\sigma^2}{n}$.
+
+--
+
+- Written differently, we have $\mu|Y,\sigma^2 \sim \mathcal{N}(\bar{y},\frac{\sigma^2}{n})$
+
+--
+
+- <div class="question">
+This should look familiar to you. Does it?
+</div>
+
+--
+
+- To get back to our example, we need to extend inference to unknown $\sigma^2$. We'll start there in the next class.
+
+
+
+
+
+
+
 
 
 

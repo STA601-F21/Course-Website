@@ -28,3 +28,43 @@ for(i in 1:n){
   PlotPriorPlusPosterior(a=3,b=32,ones,zeros); Sys.sleep(1.5)
 }
 
+
+#####
+Data <- read.csv("data/lalondedata.txt",header=T)
+Data$Diff <- Data$re78 - Data$re74
+head(Data)
+summary(Data)
+round(by(Data[,c("Diff")],Data[,"treat"], mean),2)
+round(by(Data[,c("Diff")],Data[,"treat"], sd),2)
+
+plot(density(Data$Diff[Data$treat==0]),lwd=1.5,type="l",
+     col="green4",xlab="Diff wages",ylab="Density",main="Change in real annual earnings for the two groups")
+lines(density(Data$Diff[Data$treat==1]),col="orange3",lwd=1.5,type="l")
+legend("topright",legend=c("did not receive job training","received job training"),
+       col=c("green4","orange3"), lwd=2, cex=1)
+
+
+hist(Data$Diff[Data$treat==0],col="green4",xlab="Diff wages",
+     main="Change in real annual earnings for the two groups")
+hist(Data$Diff[Data$treat==1],col="orange3",add=T)
+legend("topright",legend=c("did not receive job training","received job training"),
+       col=c("green4","orange3"), lwd=2, cex=1)
+
+
+####
+u_star <- runif(1000,pbeta(0.4,5,10),pbeta(0.75,5,10))
+theta <- qbeta(u_star,5,10)
+mean(theta)
+var(theta)
+
+#0.47|0.49
+#0.003|0.005
+
+###
+n = 1000
+while((1.96*((sd(rgamma(n,68,45)))/sqrt(n)))>0.001){
+  n = n+10
+}
+n
+
+
