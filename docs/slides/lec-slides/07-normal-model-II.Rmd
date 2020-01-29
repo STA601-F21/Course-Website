@@ -1,7 +1,7 @@
 ---
-title: "Rejection sampling; introduction to the normal model"
+title: "Normal model cont'd"
 author: "Dr. Olanrewaju Michael Akande"
-date: "Jan 29, 2020"
+date: "Jan 31, 2020"
 output:
   xaringan::moon_reader:
     css: "slides.css"
@@ -645,86 +645,6 @@ Not completely normal but not too far off either. Lots of overlap between the tw
 --
 
 - How to do posterior inference for such normal models?
-
-
-
----
-## Another example: Pygmalion study
-
-- Pygmalion effect is a phenomenon where expectation affects performance.
-
---
-
-- <div class="question">
-Question of interest: do teachers' expectations impact academic development of children?
-</div>
-
---
-
-- Setup:
-  + Researchers gave IQ test to elementary school children.
-  
---
-  + Randomly picked six children & told teachers that the test predicts them to **have high potential for accelerated growth**.
-  
---
-  + They randomly picked six children and told teachers that the test predicts them to have **NO potential for growth**.
-  
---
-  + At end of school year, they gave IQ test again to all students.
-  
---
-  + They recorded the change in IQ scores of each student.
-
-
-
----
-## Another example: Pygmalion study
-
-- Data:
-  
-  + Accelerated group (A): 20, 10, 19, 15, 9, 18.
-  
-  + No growth group (N): 3, 2, 6, 10, 11, 5.
---
-
-- Summary statistics:
-  
-  + $\bar{y}_A = 15.2$; $\sigma_A = 4.7$.
-  
-  + $\bar{y}_N = 6.2$; $\sigma_N = 3.6$.
-  
---
-
-- IQ test scores are also well known to be approximately normally distributed.
-
---
-
-- Can't really check this assumption with only $n = 6$ observations.
-
-
-
----
-## Model for changes in scores
-
-- $$y_i^{(A)} \sim \mathcal{N}(\mu_A,\sigma^2_A)$$
-  $$y_i^{(N)} \sim \mathcal{N}(\mu_N,\sigma^2_N)$$
-
---
-
-- Once again, we want posterior distribution of $\mu_A - \mu_N$. 
-
---
-
-- As before, we would like to compute $\Pr[\mu_A > \mu_N | Y_A, Y_N) \equiv \Pr[\mu_A - \mu_N > 0 | Y_A, Y_N)$.
-
---
-
-- We would also like to compute $\Pr[\sigma^2_A > \sigma^2_N | Y_A, Y_N)$.
-
---
-
-- To answer both questions, let's learn the Bayesian normal model.
 
 
 

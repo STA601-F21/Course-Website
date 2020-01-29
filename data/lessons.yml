@@ -66,6 +66,9 @@ lessons:
   
   - date: "Fri, Jan 31"
     title: "Normal model cont'd"
+    reading: "reading-07.html"
+    #slides: "lec-slides/07-normal-model-II.html"
+    #slidespdf: "lec-slides/07-normal-model-II.pdf"
   
   - title: "WEEK 5"
   
@@ -73,6 +76,8 @@ lessons:
     title: "Lab 3: The Poisson model and posterior predictive checks"
   
   - date: "Wed, Feb 5"
+    title: "Gibbs sampling"
+    reading: "reading-08.html"
   
   - date: "Fri, Feb 7"
   

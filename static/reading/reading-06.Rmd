@@ -23,5 +23,5 @@ knitr::opts_chunk$set(echo = TRUE)
     + Section 2.5: Estimating a normal mean with known variance
     + Section 2.8: Noninformative prior distributions
     + Section 3.1: Averaging over 'nuisance' parameters
-    + Section 3.3: Normal data with noninformative prior distribution
+    + Section 3.2: Normal data with noninformative prior distribution
     

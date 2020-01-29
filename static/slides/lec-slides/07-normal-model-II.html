@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Rejection sampling; introduction to the normal model</title>
+    <title>Normal model cont’d</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Olanrewaju Michael Akande" />
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
@@ -12,9 +12,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Rejection sampling; introduction to the normal model
+# Normal model cont’d
 ### Dr. Olanrewaju Michael Akande
-### Jan 29, 2020
+### Jan 31, 2020
 
 ---
 
@@ -222,7 +222,7 @@ Acceptance rate `\(\approx 0.726\)`.
 ## Example
 
 How does our sample compare to the true truncated density? `\(m = 100\)`
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -230,7 +230,7 @@ How does our sample compare to the true truncated density? `\(m = 100\)`
 ## Example
 
 How does our sample compare to the true truncated density? `\(m = 1000\)`
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -239,7 +239,7 @@ How does our sample compare to the true truncated density? `\(m = 1000\)`
 ## Example
 
 How does our sample compare to the true truncated density? `\(m = 10000\)`
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -247,7 +247,7 @@ How does our sample compare to the true truncated density? `\(m = 10000\)`
 ## Example
 
 How does our sample compare to the true truncated density? `\(m = 100000\)`
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -491,7 +491,7 @@ Question of interest: is there evidence that workers who receive job training te
 ---
 ## Job training: the data
 
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
 Not completely normal but not too far off either. Lots of overlap between the two groups.
 
@@ -529,86 +529,6 @@ Not completely normal but not too far off either. Lots of overlap between the tw
 
 
 ---
-## Another example: Pygmalion study
-
-- Pygmalion effect is a phenomenon where expectation affects performance.
-
---
-
-- &lt;div class="question"&gt;
-Question of interest: do teachers' expectations impact academic development of children?
-&lt;/div&gt;
-
---
-
-- Setup:
-  + Researchers gave IQ test to elementary school children.
-  
---
-  + Randomly picked six children &amp; told teachers that the test predicts them to **have high potential for accelerated growth**.
-  
---
-  + They randomly picked six children and told teachers that the test predicts them to have **NO potential for growth**.
-  
---
-  + At end of school year, they gave IQ test again to all students.
-  
---
-  + They recorded the change in IQ scores of each student.
-
-
-
----
-## Another example: Pygmalion study
-
-- Data:
-  
-  + Accelerated group (A): 20, 10, 19, 15, 9, 18.
-  
-  + No growth group (N): 3, 2, 6, 10, 11, 5.
---
-
-- Summary statistics:
-  
-  + `\(\bar{y}_A = 15.2\)`; `\(\sigma_A = 4.7\)`.
-  
-  + `\(\bar{y}_N = 6.2\)`; `\(\sigma_N = 3.6\)`.
-  
---
-
-- IQ test scores are also well known to be approximately normally distributed.
-
---
-
-- Can't really check this assumption with only `\(n = 6\)` observations.
-
-
-
----
-## Model for changes in scores
-
-- `$$y_i^{(A)} \sim \mathcal{N}(\mu_A,\sigma^2_A)$$`
-  `$$y_i^{(N)} \sim \mathcal{N}(\mu_N,\sigma^2_N)$$`
-
---
-
-- Once again, we want posterior distribution of `\(\mu_A - \mu_N\)`. 
-
---
-
-- As before, we would like to compute `\(\Pr[\mu_A &gt; \mu_N | Y_A, Y_N) \equiv \Pr[\mu_A - \mu_N &gt; 0 | Y_A, Y_N)\)`.
-
---
-
-- We would also like to compute `\(\Pr[\sigma^2_A &gt; \sigma^2_N | Y_A, Y_N)\)`.
-
---
-
-- To answer both questions, let's learn the Bayesian normal model.
-
-
-
----
 ## Normal distribution
 
 - A random variable `\(Y\)` has a .hlight[normal distribution], written as `\(Y \sim \mathcal{N}(\mu, \sigma^2)\)`, if the pdf is
@@ -638,7 +558,7 @@ Question of interest: do teachers' expectations impact academic development of c
 ---
 ## Example normal distributions
 
-&lt;img src="06-normal-model-I_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-normal-model-II_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
