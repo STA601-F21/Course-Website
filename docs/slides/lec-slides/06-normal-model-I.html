@@ -902,6 +902,119 @@ $$
   which is the kernel of a normal distribution with
     + mean `\(\dfrac{b^\star}{a^\star}\)`, and
     + precision `\(a^\star\)` or variance `\((a^\star)^{-1}\)`.
+
+
+
+---
+## Posterior with precision terms
+
+- In terms of precision, we have
+.block[
+.large[
+`$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \tau_n^{-1})$$`
+]
+]
+
+  where
+.block[
+.small[
+`$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}$$`
+]
+]
+
+  and
+.block[
+.small[
+`$$\tau_n = a^\star = \tau n + \tau_0.$$`
+]
+]
+
+
+
+---
+## Posterior with precision terms
+
+- As mentioned before, Bayesians often prefer to talk about precision instead of variance.
+
+--
+
+- We have
+  + `\(\tau\)` as the sampling precision (how close the `\(y_i\)`'s are to `\(\mu\)`).
+  
+  + `\(\tau_0\)` as the prior precision (our prior belief about the uncertainty about `\(\mu\)` around our prior guess `\(\mu_0\)`).
+  
+  + `\(\tau_n\)` as the posterior precision
+
+--
+
+- As we have on the previous slide, _the posterior precision equals the prior precision plus the data precision_.
+
+--
+
+- That is, we see that the posterior information is a sum of the prior information and the information from the data.
+
+
+
+---
+## Posterior with precision terms: combining information
+
+- Posterior mean is weighted sum of prior information plus data information:
+.block[
+.small[
+$$
+`\begin{split}
+\mu_n &amp; = \dfrac{n\tau\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}\\
+&amp; = \dfrac{\tau_0}{\tau_0 + \tau n} \mu_0 + \dfrac{n\tau}{\tau_0 + \tau n} \bar{y}
+\end{split}`
+$$
+]
+]
+
+--
+
+- Recall that `\(\sigma^2\)` (and thus `\(\tau\)`) is known for now. 
+
+--
+
+- If we think of the prior mean as being based on `\(\kappa_0\)` prior observations from a similar population as `\(y_1,y_2,\ldots,y_n\)`, then we might set `\(\sigma_0^2 = \frac{\sigma^2}{\kappa_0}\)`, which implies `\(\tau_0 = \kappa_0 \tau\)`, and then the posterior mean is given by
+.block[
+.small[
+$$
+`\begin{split}
+\mu_n &amp; = \dfrac{\kappa_0}{\kappa_0 + n} \mu_0 + \dfrac{n}{\kappa_0 + n} \bar{y}.
+\end{split}`
+$$
+]
+]
+
+
+---
+## Posterior with variance terms
+
+- In terms of variances, we have
+.block[
+.large[
+`$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \sigma_n^2)$$`
+]
+]
+
+  where
+.block[
+.l.small[
+`$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{ \dfrac{n}{\sigma^2}\bar{y} + \dfrac{1}{\sigma^2_0} \mu_0}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}$$`
+]
+]
+
+  and
+.block[
+.small[
+`$$\sigma^2_n = \dfrac{1}{a^\star} = \dfrac{1}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}.$$`
+]
+]
+
+--
+
+- It is still easy to see that we can re-express the posterior information as a sum of the prior information and the information from the data.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
