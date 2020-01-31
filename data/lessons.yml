@@ -67,8 +67,8 @@ lessons:
   - date: "Fri, Jan 31"
     title: "Normal model cont'd"
     reading: "reading-07.html"
-    #slides: "lec-slides/07-normal-model-II.html"
-    #slidespdf: "lec-slides/07-normal-model-II.pdf"
+    slides: "lec-slides/07-normal-model-II.html"
+    slidespdf: "lec-slides/07-normal-model-II.pdf"
     hw: "hw-03.html"
   
   - title: "WEEK 5"
