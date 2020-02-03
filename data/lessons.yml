@@ -75,6 +75,7 @@ lessons:
   
   - date: "Mon, Feb 3"
     title: "Lab 3: The Poisson model and posterior predictive checks"
+    lab: "lab-03-poisson-blank.html"
   
   - date: "Wed, Feb 5"
     title: "Gibbs sampling"
