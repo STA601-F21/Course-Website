@@ -80,8 +80,15 @@ lessons:
   - date: "Wed, Feb 5"
     title: "Gibbs sampling"
     reading: "reading-08.html"
+    #slides: "lec-slides/08-Gibbs-sampling-I.html"
+    #slidespdf: "lec-slides/08-Gibbs-sampling-I.pdf"
   
   - date: "Fri, Feb 7"
+    title: "Gibbs sampling cont'd"
+    reading: "reading-09.html"
+    #slides: "lec-slides/09-Gibbs-sampling-I.html"
+    #slidespdf: "lec-slides/09-Gibbs-sampling-I.pdf"
+    #hw: "hw-04.html"
   
   - title: "WEEK 6"
   

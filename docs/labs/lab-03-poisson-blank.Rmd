@@ -176,7 +176,7 @@ We can compare the density estimate of $y$ to the density estimates for several 
 ppc_dens_overlay(y, y_rep[1:60, ])
 ```
 
-In our first histogram of the data, we noticed the high number of 0 counts. Let us calculate the proportion of zeros in $y$, and compare that to the propotion of zeros in all of the posterior predictive samples.
+In our first histogram of the data, we noticed the high number of 0 counts. Let us calculate the proportion of zeros in $y$, and compare that to the proportion of zeros in all of the posterior predictive samples.
 
 ```{r}
 prop_zero <- function(x){
@@ -201,7 +201,7 @@ ppc_error_hist(y, y_rep[1:4, ], binwidth = 1) + xlim(-15, 15)
 
 # Poisson Hurdle Model
 
-How should we account for the high frequency of zeros? As it turns out, there is a lot of literature on how to work with this sort of data. We can fit a zero-inflated Poisson model, where the data is modelled as a mixture of a Poisson distribution with a point mass at zero. Here, we fit a hurdle model: $y_i = 0$ with probability $\theta$, and $y_i > 0$ with probability $1-\theta$. Conditional on having observed $y_i$ nonzero, we model $y_i$ with a Poisson distribution which is truncated from below with a lower bound of 1. For the truncated Poisson, we use the same $Gamma(10,2)$ prior as in the simple Poisson model above.
+How should we account for the high frequency of zeros? As it turns out, there is a lot of literature on how to work with this sort of data. We can fit a zero-inflated Poisson model, where the data is modeled as a mixture of a Poisson distribution with a point mass at zero. Here, we fit a hurdle model: $y_i = 0$ with probability $\theta$, and $y_i > 0$ with probability $1-\theta$. Conditional on having observed $y_i$ nonzero, we model $y_i$ with a Poisson distribution which is truncated from below with a lower bound of 1. For the truncated Poisson, we use the same $Gamma(10,2)$ prior as in the simple Poisson model above.
 
 ***
 
