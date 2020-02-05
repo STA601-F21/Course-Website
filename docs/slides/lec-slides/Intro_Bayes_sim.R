@@ -96,24 +96,30 @@ for (i in 1:100) {
 }
 
 #wireframe(z~x+y,data=data.frame(x=x.points,y=rep(y.points, each=length(x.points)), z=z),
-#          xlab=expression(theta[2]),ylab=expression(theta[1]),zlab="Density",
+#          xlab=expression(theta[1]),ylab=expression(theta[2]),zlab="Density",
 #          col="orange4",main=expression(paste(rho," = 0")))
 #sampmat_direct <- rmvnorm(100000, mean = Mu,sigma = Sigma)
 #sampmat_direct.kde <- kde2d(sampmat_direct[,1], sampmat_direct[,2], n = 50)
 #image(sampmat_direct.kde,main=expression(paste(rho," = 0")))
 #contour(sampmat_direct.kde, add = T)
 
-contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),col="orange2")
-S <- 250
+contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),col="orange2",
+        xlab=expression(theta[1]),ylab=expression(theta[2]))
+S <- 50
 sampmat <- matrix(0,nrow=S,ncol=2)
 samp <- c(10,10)
-points(x=samp[1],y=samp[2],col="red3",pch=17)
+points(x=samp[1],y=samp[2],col="black",pch=2)
 for (s in 1:S) {
   samp[1] <- rnorm(1,rho*samp[2],sqrt(1-rho^2))
   samp[2] <- rnorm(1,rho*samp[1],sqrt(1-rho^2))
   sampmat[s,] <- samp
-  points(x=samp[1],y=samp[2],col="blue4",pch=16)
-  Sys.sleep(0.1)
+  if(s < 20){
+    points(x=samp[1],y=samp[2],col="red4",pch=16)
+    Sys.sleep(1)
+  } else {
+    points(x=samp[1],y=samp[2],col="green4",pch=16)
+    Sys.sleep(0.1)
+  }
 }
 #plot(sampmat)
 

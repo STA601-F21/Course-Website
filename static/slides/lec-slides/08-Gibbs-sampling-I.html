@@ -433,7 +433,7 @@ distributions given current values of other parameters.
 
 --
 
-- We want to have our MCMC sample size, `\(S\)`, big enough so that we can
+- We want to have our MCMC sample size, `\(T\)`, big enough so that we can
 
   + Move out of areas of low probability into regions of high probability (convergence)
   
@@ -661,7 +661,7 @@ First, a few examples of the bivariate normal distribution.
   
   ```r
   rho &lt;- #set correlation
-  S &lt;- #set number of MCMC sample
+  S &lt;- #set number of MCMC samples
   thetamat &lt;- matrix(0,nrow=S,ncol=2)
   theta &lt;- c(10,10) #initialize values of theta
   for (s in 1:S) {
@@ -677,7 +677,7 @@ First, a few examples of the bivariate normal distribution.
   ```r
   library(mvtnorm)
   rho &lt;- #set correlation; no need to set again once you've used previous code
-  S &lt;- #set number of MCMC sample; no need to set again once you've used previous code
+  S &lt;- #set number of MCMC samples; no need to set again once you've used previous code
   Mu &lt;- c(0,0)
   Sigma &lt;- matrix(c(1,rho,rho,1),ncol=2)
   thetamat_direct &lt;- rmvnorm(S, mean = Mu,sigma = Sigma)
@@ -685,56 +685,58 @@ First, a few examples of the bivariate normal distribution.
 
 
 
-&lt;!-- --- --&gt;
-&lt;!-- ## Participation exercise --&gt;
+---
+## Participation exercise
 
-&lt;!-- - You will work in groups of three. Work with the three students closest to you. --&gt;
+- You will work in groups of three. Work with the three students closest to you.
 
-&lt;!-- - For `\(S \in \{50,250,500\}\)` and `\(\rho \in \{0.1,0.5,0.95\}\)`, do the following: --&gt;
-&lt;!--   1. Generate `\(S\)` samples using the two methods. --&gt;
-&lt;!--   2. Make a scatter plot of the samples from each method (plot the samples from the Gibbs sampler first) and compare them. --&gt;
-&lt;!--   &lt;!-- 3. Overlay the samples from the Gibbs sampler alone on the true bivariate density. **See code on next slide!** --&gt; --&gt;
+- For `\(S \in \{50,250,500\}\)` and `\(\rho \in \{0.1,0.5,0.95\}\)`, do the following:
+  1. Generate `\(S\)` samples using the two methods.
+  2. Make a scatter plot of the samples from each method (plot the samples from the Gibbs sampler first) and compare them.
+  &lt;!-- 3. Overlay the samples from the Gibbs sampler alone on the true bivariate density. **See code on next slide!** --&gt;
 
-&lt;!-- - How do the results differ between the two methods for the different combinations of `\(S\)` and `\(\rho\)`? --&gt;
+- How do the results differ between the two methods for the different combinations of `\(S\)` and `\(\rho\)`?
 
-&lt;!-- - Discuss within your teams, document your team findings and submit. --&gt;
+- Discuss within your teams, document your team findings and submit.
 
-&lt;!-- - You can have one person document the findings but make sure to write the name of all three members at the top of the sheet. --&gt;
+- You can have one person document the findings but make sure to write the name of all three members at the top of the sheet.
 
 
 
-&lt;!-- --- --&gt;
-&lt;!-- ## More code --&gt;
+---
+## More code
 
-&lt;!-- To see how the chain actually evolves with an overlay on the true density, consider using this code: --&gt;
-&lt;!-- ```{r eval=F} --&gt;
-&lt;!-- rho &lt;- #set correlation --&gt;
-&lt;!-- Sigma &lt;- matrix(c(1,rho,rho,1),ncol=2) --&gt;
-&lt;!-- Mu &lt;- c(0,0) --&gt;
+See how the chain actually evolves with an overlay on the true density,:
 
-&lt;!-- x.points &lt;- seq(-3,3,length.out=100) --&gt;
-&lt;!-- y.points &lt;- x.points --&gt;
-&lt;!-- z &lt;- matrix(0,nrow=100,ncol=100) --&gt;
+```r
+rho &lt;- #set correlation
+Sigma &lt;- matrix(c(1,rho,rho,1),ncol=2); Mu &lt;- c(0,0)
+x.points &lt;- seq(-3,3,length.out=100)
+y.points &lt;- x.points
+z &lt;- matrix(0,nrow=100,ncol=100)
+for (i in 1:100) {
+  for (j in 1:100) {
+    z[i,j] &lt;- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
+  }
+}
+contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),"orange2",
+        xlab=expression(theta[1]),ylab=expression(theta[2]))
 
-&lt;!-- for (i in 1:100) { --&gt;
-&lt;!--   for (j in 1:100) { --&gt;
-&lt;!--     z[i,j] &lt;- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma) --&gt;
-&lt;!--   }  --&gt;
-&lt;!-- } --&gt;
-
-&lt;!-- contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),orange2) --&gt;
-&lt;!-- S &lt;- #set number of MCMC sample; --&gt;
-&lt;!-- thetamat &lt;- matrix(0,nrow=S,ncol=2) --&gt;
-&lt;!-- theta &lt;- c(10,10) --&gt;
-&lt;!-- points(x=theta[1],y=theta[2],col="red3",pch=17) --&gt;
-&lt;!-- for (s in 1:S) { --&gt;
-&lt;!--   theta[1] &lt;- rnorm(1,rho*theta[2],sqrt(1-rho^2)) --&gt;
-&lt;!--   theta[2] &lt;- rnorm(1,rho*theta[1],sqrt(1-rho^2)) --&gt;
-&lt;!--   sampmat[s,] &lt;- theta --&gt;
-&lt;!--   points(x=theta[1],y=theta[2],col="blue4",pch=16) --&gt;
-&lt;!--   Sys.sleep(0.1) --&gt;
-&lt;!-- } --&gt;
-&lt;!-- ``` --&gt;
+S &lt;- #set number of MCMC samples;
+thetamat &lt;- matrix(0,nrow=S,ncol=2)
+theta &lt;- c(10,10)
+points(x=theta[1],y=theta[2],col="black",pch=2)
+for (s in 1:S) {
+  theta[1] &lt;- rnorm(1,rho*theta[2],sqrt(1-rho^2))
+  theta[2] &lt;- rnorm(1,rho*theta[1],sqrt(1-rho^2))
+  thetamat[s,] &lt;- theta
+  if(s &lt; 20){
+    points(x=theta[1],y=theta[2],col="red4",pch=16); Sys.sleep(1)
+  } else {
+    points(x=theta[1],y=theta[2],col="green4",pch=16); Sys.sleep(0.1)
+  }
+}
+```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
