@@ -36,7 +36,7 @@ library(lattice)
 
 ## Announcements
 
-- Homework 4 due tomorrow.
+- Homework 3 due tomorrow.
 
 --
 
@@ -780,7 +780,7 @@ thetamat_direct <- rmvnorm(S, mean = Mu,sigma = Sigma)
 ---
 ## More code
 
-See how the chain actually evolves with an overlay on the true density,:
+See how the chain actually evolves with an overlay on the true density:
 ```{r eval=F}
 rho <- #set correlation
 Sigma <- matrix(c(1,rho,rho,1),ncol=2); Mu <- c(0,0)
