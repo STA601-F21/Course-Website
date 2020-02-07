@@ -98,11 +98,12 @@ lessons:
   - date: "Wed, Feb 12"
     title: "Quiz I"
     
-  - title: "The multivariate normal density"
+  - title: "The multinomial model"
+    reading: "reading-10.html"
   
   - date: "Fri, Feb 14"
     title: "Multivariate normal model"
-    reading: "reading-10.html"
+    reading: "reading-11.html"
   
   - title: "WEEK 7"
   
@@ -110,8 +111,8 @@ lessons:
     title: "Lab 5: Truncated data and modeling"
   
   - date: "Wed, Feb 19"
-    title: "Multivariate normal model cont'd; the multinomial model"
-    reading: "reading-11.html"
+    title: "Multivariate normal model cont'd"
+    reading: "reading-12.html"
   
   - date: "Fri, Feb 21"
   
