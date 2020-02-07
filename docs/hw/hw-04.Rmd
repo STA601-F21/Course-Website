@@ -1,0 +1,46 @@
+---
+title: "Homework 4"
+date: "Due: 11:59pm, Thursday, Feb 13"
+output: 
+  html_document: 
+    css: hw.css
+    theme: yeti
+    toc: true
+    fig_caption: false
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+---
+
+## Instructions
+
+Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises MUST be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments $\rightarrow$ Homework 4.
+
+## Questions
+
+1. Hoff problem 6.1
+
+2. <font color="blue">**Continuation of question 4 from homework 3.**</font> Suppose we have count data $y_i$ with $(i = 1,\ldots, n)$, where $x_i = 0$ for control subjects and $x_i = 1$ for treated subjects. Consider the following model for the data: $$y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),$$ where $\lambda = \mathbb{E}[y_i | x_i = 0]$ and $\gamma$ is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters $\lambda$ and $\gamma$, $$\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).$$
+You should already have the correct posterior density from homework 3.
+    + Show the exact steps involved in an algorithm for sampling from the posterior distribution for $\lambda$ and $\gamma$.
+    + Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.
+    + Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?
+    + Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?
+
+<!-- 3. <font color="blue">**Rejection sampling.**</font> Recall from class that the idea of rejection sampling is to create an importance/proposal/envelope function which is greater than or equal to the distribution we wish to sample from at all points, and which we can sample from easily. Suppose we end up with the following form for our posterior: $$f(\theta) \propto sin^2(\pi \theta), \ \ \ \theta \in [0,1],$$ where $\pi = 3.141593$. -->
+<!-- This density looks like: -->
+<!-- ```{r fig.height=5.5, echo=F} -->
+<!-- curve(sin(x*pi)^2,col="red3", -->
+<!--       xlab=expression(theta),ylab=expression(paste("sin(",pi,"",theta,")"^2))) -->
+<!-- ``` -->
+<!--     + Implement a rejection sampler in R to sample from this density using a Unif(0,1) density as your proposal function, since it is greater than or equal to the given density (up to proportionality) at all points and is easy to sample from. -->
+<!--     + Propose a different envelope function and implement a rejection sampler for it in R. -->
+<!--     + How does the efficiency of your envelope function compare to the uniform envelope function? -->
+<!--     + Provide plots (histograms or density estimates) of the samples from the two approaches. -->
+  
+  
+  
+## Grading
+
+15 points.
+  

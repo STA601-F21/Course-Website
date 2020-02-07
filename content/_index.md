@@ -94,5 +94,5 @@ This course has achieved Duke’s Green Classroom Certification. The certificati
 
 ### Acknowledgement
 
-This web page contains materials such as lecture slides, homework assignments, and datasets developed or adapted by [Dr. Alexander Volfovsky](https://stat.duke.edu/people/alexander-volfovsky).
+This web page contains materials such as lecture slides, homework assignments, and datasets developed or adapted by [Dr. Alexander Volfovsky](https://stat.duke.edu/people/alexander-volfovsky), [Dr. David B. Dunson](https://stat.duke.edu/people/david-b-dunson) and [Dr. Rebecca Carter Steorts](https://stat.duke.edu/people/rebecca-carter-steorts).
 

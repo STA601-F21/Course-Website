@@ -86,9 +86,9 @@ lessons:
   - date: "Fri, Feb 7"
     title: "Gibbs sampling cont'd"
     reading: "reading-09.html"
-    #slides: "lec-slides/09-Gibbs-sampling-I.html"
-    #slidespdf: "lec-slides/09-Gibbs-sampling-I.pdf"
-    #hw: "hw-04.html"
+    slides: "lec-slides/09-Gibbs-sampling-II.html"
+    slidespdf: "lec-slides/09-Gibbs-sampling-II.pdf"
+    hw: "hw-04.html"
   
   - title: "WEEK 6"
   
@@ -96,9 +96,10 @@ lessons:
     title: "Lab 4: Prior selection and model reparameterization"
   
   - date: "Wed, Feb 12"
-    title: "Tentative date for quiz I"
+    title: "Quiz I"
   
   - date: "Fri, Feb 14"
+    title: "The multivariate normal model"
   
   - title: "WEEK 7"
   
