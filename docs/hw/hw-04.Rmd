@@ -22,10 +22,10 @@ Please make sure your final output file is a pdf document. You can submit handwr
 
 2. <font color="blue">**Continuation of question 4 from homework 3.**</font> Suppose we have count data $y_i$ with $(i = 1,\ldots, n)$, where $x_i = 0$ for control subjects and $x_i = 1$ for treated subjects. Consider the following model for the data: $$y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),$$ where $\lambda = \mathbb{E}[y_i | x_i = 0]$ and $\gamma$ is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters $\lambda$ and $\gamma$, $$\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).$$
 You should already have the correct posterior density from homework 3.
-    + Show the exact steps involved in an algorithm for sampling from the posterior distribution for $\lambda$ and $\gamma$.
-    + Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.
-    + Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?
-    + Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?
+    + <font color="green">**Part (a):**</font> Show the exact steps involved in an algorithm for sampling from the posterior distribution for $\lambda$ and $\gamma$.
+    + <font color="green">**Part (b):**</font> Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.
+    + <font color="green">**Part (c):**</font> Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?
+    + <font color="green">**Part (d):**</font> Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?
 
 <!-- 3. <font color="blue">**Rejection sampling.**</font> Recall from class that the idea of rejection sampling is to create an importance/proposal/envelope function which is greater than or equal to the distribution we wish to sample from at all points, and which we can sample from easily. Suppose we end up with the following form for our posterior: $$f(\theta) \propto sin^2(\pi \theta), \ \ \ \theta \in [0,1],$$ where $\pi = 3.141593$. -->
 <!-- This density looks like: -->
