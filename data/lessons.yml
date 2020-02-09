@@ -94,6 +94,7 @@ lessons:
   
   - date: "Mon, Feb 10"
     title: "Lab 4: Prior selection and model reparameterization"
+    lab: "lab-04-model-reparameterization-blank.html"
   
   - date: "Wed, Feb 12"
     title: "Quiz I"
