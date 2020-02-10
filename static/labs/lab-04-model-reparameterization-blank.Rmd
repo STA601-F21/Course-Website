@@ -85,7 +85,7 @@ $$
 $$
 
 Let's simulate data (with very small sample size) under this model.
-```{r functions, echo = F}
+```{r functions}
 create_df <- function(post_draws, prior_draws){
   post_draws <- data.frame(post_draws)
   post_draws$distribution <- "posterior"
