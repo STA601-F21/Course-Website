@@ -101,6 +101,8 @@ lessons:
     
   - title: "The multinomial model"
     reading: "reading-10.html"
+    slides: "lec-slides/10-multinomial-model.html"
+    slidespdf: "lec-slides/10-multinomial-model.pdf"
   
   - date: "Fri, Feb 14"
     title: "Multivariate normal model"

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>The multinomial model</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# The multinomial model
+### Dr. Olanrewaju Michael Akande
+### Feb 12, 2020
+
+---
+
+
+
+
+
+
+
+
+## Announcements
+
+&lt;!-- - Take Survey I. --&gt;
+
+- Homework 4 due tomorrow.
+
+--
+
+## Outline
+
+- Categorical data
+
+- Dirichlet distribution
+
+- Conjugacy
+
+
+
+---
+## Categorical data (univariate)
+
+- Suppose
+
+  + `\(Y \in \{1,\ldots, d\}\)`;
+  
+  + `\(\Pr(Y = j) = \theta_j\)` for each `\(j = 1,\ldots, d\)`; and
+  
+  + `\(\boldsymbol{\theta} = (\theta_1,\ldots,\theta_d)\)`.
+  
+- Then the pmf of `\(Y\)` is
+.block[
+.small[
+`$$\Pr[Y = j| \boldsymbol{\theta}] = \prod_{j=1}^d \theta_j^{\mathbb{1}[Y = j]}.$$`
+]
+]
+
+--
+
+- We say `\(Y\)` has a .hlight[multinomial distribution] with sample size 1, or a .hlight[categorical distribution].
+
+--
+
+- Write as `\(Y | \boldsymbol{\theta} \sim \textrm{Multinomial}(1,\boldsymbol{\theta})\)` or `\(Y | \boldsymbol{\theta} \sim \textrm{Categorical}(\boldsymbol{\theta})\)`.
+
+--
+
+- Clearly, this is just an extension of the Bernoulli distribution.
+
+
+
+
+---
+## Dirichlet distribution
+
+- Since the elements of the probability vector `\(\boldsymbol{\theta}\)` must always sum to one, the support is often called a .hlight[simplex].
+
+--
+
+- A conjugate prior for categorical/multinomial data is the .hlight[Dirichlet distribution].
+
+--
+
+- A random variable `\(\boldsymbol{\theta}\)` has a .hlight[Dirichlet distribution] with parameter `\(\boldsymbol{\alpha}\)`, if
+.block[
+.small[
+`$$p[\boldsymbol{\theta} | \boldsymbol{\alpha}] = \dfrac{\Gamma\left(\sum_{j=1}^d \alpha_j\right)}{\prod_{j=1}^d \Gamma(\alpha_j)} \prod_{j=1}^d \theta_j^{\alpha_j-1}, \ \ \ \alpha_j &gt; 0 \ \textrm{ for all } \ j = 1,\ldots, d.$$`
+]
+]
+
+  where `\(\boldsymbol{\alpha} = (\alpha_1,\ldots,\alpha_d)\)`, and
+.block[
+.small[
+`$$\sum_{j=1}^d \theta_j = 1, \ \ \theta_j \geq 0 \ \textrm{ for all } \ j = 1,\ldots, d.$$`
+]
+]
+
+--
+
+- We write this as `\(\boldsymbol{\theta} \sim \textrm{Dirichlet}(\boldsymbol{\alpha}) = \textrm{Dirichlet}(\alpha_1,\ldots,\alpha_d)\)`.
+
+--
+
+- The Dirichlet distribution is a multivariate generalization of the .hlight[beta distribution].
+
+
+
+---
+## Dirichlet distribution
+
+- Write
+.block[
+.small[
+`$$\alpha_0 = \sum_{j=1}^d \alpha_j \ \ \ \textrm{and} \ \ \ \alpha_j^\star = \dfrac{\alpha_j}{\alpha_0}.$$`
+]
+]
+
+--
+
+- Then we can re-write the pdf slightly as
+.block[
+.small[
+`$$p[\boldsymbol{\theta} | \boldsymbol{\alpha}] = \dfrac{\Gamma\left(\alpha_0\right)}{\prod_{j=1}^d \Gamma(\alpha_j)} \prod_{j=1}^d \theta_j^{\alpha_j-1}, \ \ \ \alpha_j &gt; 0 \ \textrm{ for all } \ j = 1,\ldots, d.$$`
+]
+]
+  
+--
+
+- Properties:
+
+  - 
+.block[
+.small[
+`$$\mathbb{E}[\theta_j] = \alpha_j^\star;$$`
+]
+]
+
+--
+
+  - 
+.block[
+.small[
+`$$\textrm{Mode}[\theta_j] = \dfrac{\alpha_j - 1}{\alpha_0 - d};$$`
+]
+]
+
+--
+  
+  - 
+.block[
+.small[
+`$$\mathbb{Var}[\theta_j] = \dfrac{\alpha_j^\star(1-\alpha_j^\star)}{\alpha_0 + 1} = \dfrac{\mathbb{E}[\theta_j](1-\mathbb{E}[\theta_j])}{\alpha_0 + 1};$$`
+]
+]
+  
+--
+
+  - 
+.block[
+.small[
+`$$\mathbb{Cov}[\theta_j,\theta_k] = \dfrac{\alpha_j^\star\alpha_k^\star}{\alpha_0 + 1} = \dfrac{\mathbb{E}[\theta_j]\mathbb{E}[\theta_k]}{\alpha_0 + 1}.$$`
+]
+]
+
+
+
+
+
+---
+## Dirichlet examples
+
+`\(\textrm{Dirichlet}(1,1,1)\)`
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Dirichlet examples
+
+`\(\textrm{Dirichlet}(10,10,10)\)`
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Dirichlet examples
+
+`\(\textrm{Dirichlet}(10,10,10)\)`
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Dirichlet examples
+
+`\(\textrm{Dirichlet}(1,10,1)\)`
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+## Dirichlet examples
+
+`\(\textrm{Dirichlet}(50,100,10)\)`
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+## Likelihood
+
+- Let `\(Y_i, \ldots, Y_n | \boldsymbol{\theta} \sim \textrm{Categorical}(\boldsymbol{\theta})\)`.
+
+--
+
+- Recall
+.block[
+.small[
+`$$\Pr[Y_i = j| \boldsymbol{\theta}] = \prod_{j=1}^d \theta_j^{\mathbb{1}[Y_i = j]}.$$`
+]
+]
+
+--
+
+- Then,
+.block[
+.small[
+$$
+`\begin{split}
+L[Y; \boldsymbol{\theta}] &amp; = \prod_{i=1}^n \prod_{j=1}^d \theta_j^{\mathbb{1}[Y_i = j]} = \prod_{j=1}^d  \theta_j^{\sum_{i=1}^n \mathbb{1}[Y_i = j]} = \prod_{j=1}^d  \theta_j^{n_j}
+\end{split}`
+$$
+]
+]
+
+  where `\(n_j\)` is just the number of individuals in category `\(j\)`.
+
+--
+
+- Maximum likelihood estimate of `\(\theta_j\)` is
+.block[
+.small[
+`$$\hat{\theta}_j = \dfrac{n_j}{n}, \ \ j = 1,\ldots, d$$`
+]
+]
+
+
+
+---
+## Posterior
+
+- Set `\(\pi(\boldsymbol{\theta}) = \textrm{Dirichlet}(\alpha_1,\ldots,\alpha_d)\)`.
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\boldsymbol{\theta} | Y) &amp; \propto L[Y; \boldsymbol{\theta}] \pi[\boldsymbol{\theta}]\\
+&amp; \propto \prod_{j=1}^d  \theta_j^{n_j} \prod_{j=1}^d \theta_j^{\alpha_j-1} \\
+&amp; \propto \prod_{j=1}^d  \theta_j^{\alpha_j + n_j - 1}\\
+&amp; = \textrm{Dirichlet}(\alpha_1 + n_1,\ldots,\alpha_d + n_d)
+\end{split}`
+$$
+]
+]
+
+--
+
+- Posterior expectation:
+.block[
+.small[
+`$$\mathbb{E}[\theta_j | Y] = \dfrac{\alpha_j + n_j}{\sum_{l=1}^d (\alpha_l + n_l)}.$$`
+]
+]
+
+
+
+---
+## Combining information
+
+- For the prior, we have
+.block[
+.small[
+`$$\mathbb{E}[\theta_j] = \dfrac{\alpha_j}{\sum_{j=1}^d \alpha_j}$$`
+]
+]
+
+--
+
+- We can think of 
+
+  + `\(\theta_{0j} = \mathbb{E}[\theta_j]\)` as being our **"prior guess"** about `\(\theta_j\)`, and
+  
+  + `\(n_0 = \sum_{j=1}^d \alpha_j\)` as being our **"prior sample size"**.
+  
+  
+
+--
+
+- We can then rewrite the prior as `\(\pi(\boldsymbol{\theta}) = \textrm{Dirichlet}(n_0\theta_{01},\ldots,n_0\theta_{0d})\)`.
+
+
+
+
+---
+## Combining information
+
+- We can write the posterior expectation as:
+.block[
+.small[
+$$
+`\begin{split}
+\mathbb{E}[\theta_j | Y] &amp; = \dfrac{\alpha_j + n_j}{\sum_{l=1}^d (\alpha_l + n_l)}\\
+&amp; = \dfrac{\alpha_j}{\sum_{l=1}^d \alpha_l + \sum_{l=1}^d n_l} + \dfrac{n_j}{\sum_{l=1}^d \alpha_l + \sum_{l=1}^d n_l}\\
+&amp; = \dfrac{n_0\theta_{0j}}{n_0 + n} + \dfrac{n \hat{\theta}_j}{n_0 + n}\\
+&amp; = \dfrac{n_0}{n_0 + n} \theta_{0j} + \dfrac{n}{n_0 + n} \hat{\theta}_j.
+\end{split}`
+$$
+]
+]
+
+  since
+MLE is
+.block[
+.small[
+`$$\hat{\theta}_j = \dfrac{n_j}{n}$$`
+]
+]
+
+--
+
+- Once again, we can express our posterior expectation as a weighted average of the prior expectation and MLE.
+
+--
+
+- &lt;div class="question"&gt;
+We can also extend the Dirichlet-multinomial model to more variables (contingency tables).
+&lt;/div&gt;
+
+
+
+
+---
+## Example: pre-election polling
+
+- Fox News Nov 3-6 pre-election survey of 1295 likely voters for the 2016 election.
+
+--
+
+- For those interested, [FiveThirtyEight](https://projects.fivethirtyeight.com/) is an interesting source for pre-election polls.
+
+--
+
+- Out of 1295 respondents, 622 indicated support for Clinton, 570 for Trump, and the remaining 103 for other candidates or no opinion.
+
+--
+
+- Drawing inference from pre-election polls is way more complicated and nuanced that this. We only use the data here for this simple illustration.
+
+--
+
+- Assuming no other information on the respondents, we can assume simple random sampling and use a multinomial distribution with parameter `\(\boldsymbol{\theta} = (\theta_1,\theta_2,\theta_3)\)`, the proportion, in the survey population, of Clinton supporters, Trump supporters and other candidates or no opinion.
+
+
+
+---
+## Example: pre-election polling
+
+- With a noninformative uniform prior, we have `\(\pi(\boldsymbol{\theta}) = \textrm{Dirichlet}(1,1,1)\)`.
+
+--
+
+- The resulting posterior is `\(\textrm{Dirichlet}(1 + n_1,1 + n_2,1 + n_3) = \textrm{Dirichlet}(623,571,104)\)`.
+
+--
+
+- Suppose we wish to compare the proportion of people who would vote for Trump versus Clinton, we could examine the posterior distribution of `\(\theta_1-\theta_2\)`.
+
+--
+
+- We can even compute the probability `\(\Pr(\theta_1 &gt; \theta_2 | Y)\)`.
+
+
+---
+## Example: pre-election polling
+
+
+```r
+#library(gtools)
+PostSamples &lt;- rdirichlet(10000, alpha=c(623,571,104))
+#dim(PostSamples)
+hist((PostSamples[,1] - PostSamples[,2]),col=rainbow(20),xlab=expression(theta[1]-theta[2]),
+     ylab="Posterior Density",freq=F,breaks=50,
+     main=expression(paste("Posterior density of ",theta[1]-theta[2])))
+```
+
+&lt;img src="10-multinomial-model_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Example: pre-election polling
+
+- Posterior probability that Clinton had more support than Trump in the survey population, that is, `\(\Pr(\theta_1 &gt; \theta_2 | Y)\)`, is
+
+  
+  ```r
+  #library(gtools)
+  mean(PostSamples[,1] &gt; PostSamples[,2])
+  ```
+  
+  ```
+  ## [1] 0.9345
+  ```
+
+--
+
+- Once again, this is just a simple illustration with a very small subset of the 2016 pre-election polling data.
+
+--
+
+- Inference for pre-election polls is way more complex and nuanced that this.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
