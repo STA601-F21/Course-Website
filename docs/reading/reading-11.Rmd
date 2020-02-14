@@ -15,12 +15,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
     + Section 7.1: The multivariate normal density
-    + Section 7.2: A semiconjugate prior distribution for the mean
-    + Section 7.3: The inverse-Wishart distribution
-
-## Optional:
-
-- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
-    + Section 3.5: Multivariate normal model with known variance
-    + Section 3.6: Multivariate normal with unknown mean and variance
     

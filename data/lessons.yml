@@ -105,24 +105,30 @@ lessons:
     slidespdf: "lec-slides/10-multinomial-model.pdf"
   
   - date: "Fri, Feb 14"
-    title: "Multivariate normal model"
+    title: "In-class exercise; introduction to multivariate normal"
+    slides: "lec-slides/11-introduction-to-multivariate-normal.html"
+    slidespdf: "lec-slides/11-introduction-to-multivariate-normal.pdf"
     reading: "reading-11.html"
-  
+    
   - title: "WEEK 7"
   
   - date: "Mon, Feb 17"
-    title: "Lab 5: Truncated data and modeling"
+    title: "Lab 5: Inference in Gaussian models"
   
   - date: "Wed, Feb 19"
-    title: "Multivariate normal model cont'd"
+    title: "Multivariate normal model"
+    #slides: "lec-slides/12-multivariate-normal-model-I.html"
+    #slidespdf: "lec-slides/12-multivariate-normal-model-I.pdf"
     reading: "reading-12.html"
   
   - date: "Fri, Feb 21"
+    title: "Multivariate normal model cont'd"
+    reading: "reading-13.html"
   
   - title: "WEEK 8"
   
   - date: "Mon, Feb 24"
-    title: "Lab 6: Inference in Gaussian models"
+    title: "Lab 6: Missing data and imputation"
   
   - date: "Wed, Feb 26"
   
@@ -131,7 +137,7 @@ lessons:
   - title: "WEEK 9"
   
   - date: "Mon, Mar 2"
-    title: "Lab 7: Missing data and imputation"
+    title: "Lab 7: Truncated data and modeling"
   
   - date: "Wed, Mar 4"
   
