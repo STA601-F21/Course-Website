@@ -113,7 +113,8 @@ lessons:
   - title: "WEEK 7"
   
   - date: "Mon, Feb 17"
-    title: "Lab 5: Inference in Gaussian models"
+    title: "Lab 5: Truncated data"
+    lab: "lab-05-truncated-data-blank.html"
   
   - date: "Wed, Feb 19"
     title: "Multivariate normal model"
@@ -128,7 +129,7 @@ lessons:
   - title: "WEEK 8"
   
   - date: "Mon, Feb 24"
-    title: "Lab 6: Missing data and imputation"
+    title: "Lab 6: Inference in Gaussian models"
   
   - date: "Wed, Feb 26"
   
@@ -137,7 +138,7 @@ lessons:
   - title: "WEEK 9"
   
   - date: "Mon, Mar 2"
-    title: "Lab 7: Truncated data and modeling"
+    title: "Lab 7: Missing data and imputation"
   
   - date: "Wed, Mar 4"
   
