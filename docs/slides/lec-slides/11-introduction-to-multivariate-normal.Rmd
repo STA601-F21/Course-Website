@@ -151,10 +151,10 @@ What model can we use to do inference here?
 ## Multivariate normal distribution
 
 
-- $\boldsymbol{Y}$ follows a multivariate normal distribution, that is, $\boldsymbol{Y} \sim \mathcal{N}(\boldsymbol{\mu}, \Sigma)$, if
+- $\boldsymbol{Y}$ follows a multivariate normal distribution, that is, $\boldsymbol{Y} \sim \mathcal{N}_p(\boldsymbol{\mu}, \Sigma)$, if
 .block[
 .small[
-$$f(\boldsymbol{y}) = \dfrac{1}{\sqrt{2\pi}} \left|\Sigma\right|^{-1/2} \ \textrm{exp} \left\{-\dfrac{1}{2} (\boldsymbol{y} - \boldsymbol{\mu})^T \Sigma^{-1} (\boldsymbol{y} - \boldsymbol{\mu})\right\},$$
+$$f(\boldsymbol{y}) = (2\pi)^{-\frac{p}{2}} \left|\Sigma\right|^{-\frac{1}{2}} \ \textrm{exp} \left\{-\dfrac{1}{2} (\boldsymbol{y} - \boldsymbol{\mu})^T \Sigma^{-1} (\boldsymbol{y} - \boldsymbol{\mu})\right\},$$
 ]
 ]
 
@@ -166,7 +166,7 @@ $$f(\boldsymbol{y}) = \dfrac{1}{\sqrt{2\pi}} \left|\Sigma\right|^{-1/2} \ \textr
 
 --
 
-- $\Sigma$ is the $p \times p$ **positive semi-definite** covariance matrix, that is, $\Sigma = \{\sigma_{jk}\}$, where $\sigma_{jk}$ denotes the covariance between $Y_j$ and $Y_k$.
+- $\Sigma$ is the $p \times p$ **positive definite and symmetric** covariance matrix, that is, $\Sigma = \{\sigma_{jk}\}$, where $\sigma_{jk}$ denotes the covariance between $Y_j$ and $Y_k$.
   
 --
 
@@ -188,7 +188,7 @@ $$f(\boldsymbol{y}) = \dfrac{1}{\sqrt{2\pi}} \left|\Sigma\right|^{-1/2} \ \textr
 \boldsymbol{Y} =
 \begin{pmatrix}Y_1\\
 Y_2
-\end{pmatrix} & \sim & \mathcal{N}\left[\mu = \left(\begin{array}{c}
+\end{pmatrix} & \sim & \mathcal{N}_2\left[\mu = \left(\begin{array}{c}
 \mu_1\\
 \mu_2
 \end{array}\right),\Sigma = \left(\begin{array}{cc}
@@ -239,10 +239,10 @@ $$\rho_{1,2} = \dfrac{\mathbb{Cov}[Y_1,Y_2]}{\sqrt{\mathbb{Var}[Y_1]}\sqrt{\math
 
 --
 
-- If $\boldsymbol{\epsilon} = (\epsilon_1, \ldots, \epsilon_p) \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{I}_p)$, that is, $\epsilon_1, \ldots, \epsilon_p \overset{iid}{\sim} \mathcal{N}(0,1)$, then
+- If $\boldsymbol{\epsilon} = (\epsilon_1, \ldots, \epsilon_p) \sim \mathcal{N}_p(\boldsymbol{0}, \boldsymbol{I}_p)$, that is, $\epsilon_1, \ldots, \epsilon_p \overset{iid}{\sim} \mathcal{N}(0,1)$, then
 .block[
 .small[
-$$\boldsymbol{Y} = \boldsymbol{\mu} + A\boldsymbol{\epsilon} \Rightarrow \ \boldsymbol{Y} \sim \mathcal{N}(\boldsymbol{\mu}, \Sigma)$$
+$$\boldsymbol{Y} = \boldsymbol{\mu} + A\boldsymbol{\epsilon} \Rightarrow \ \boldsymbol{Y} \sim \mathcal{N}_p(\boldsymbol{\mu}, \Sigma)$$
 ]
 ]
 
@@ -260,7 +260,7 @@ $$\boldsymbol{Y} = \boldsymbol{\mu} + A\boldsymbol{\epsilon} \Rightarrow \ \bold
 \boldsymbol{Y} =
 \begin{pmatrix}\boldsymbol{Y}_1\\
 \boldsymbol{Y}_2
-\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+\end{pmatrix} & \sim & \mathcal{N}_p\left[\left(\begin{array}{c}
 \boldsymbol{\mu}_1\\
 \boldsymbol{\mu}_2
 \end{array}\right),\left(\begin{array}{cc}
@@ -279,7 +279,7 @@ $$\boldsymbol{Y} = \boldsymbol{\mu} + A\boldsymbol{\epsilon} \Rightarrow \ \bold
 
 - Then, it turns out that
 .block[
-$$\boldsymbol{Y}_1 | \boldsymbol{Y}_2 = \boldsymbol{y}_2 \sim \mathcal{N}\left(\boldsymbol{\mu}_1 + \Sigma_{12}\Sigma_{22}^{-1}  (\boldsymbol{y}_2-\boldsymbol{\mu}_2), \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}\right).$$
+$$\boldsymbol{Y}_1 | \boldsymbol{Y}_2 = \boldsymbol{y}_2 \sim \mathcal{N}_q\left(\boldsymbol{\mu}_1 + \Sigma_{12}\Sigma_{22}^{-1}  (\boldsymbol{y}_2-\boldsymbol{\mu}_2), \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}\right).$$
 ]
 
 --
@@ -291,7 +291,7 @@ $$\boldsymbol{Y}_1 | \boldsymbol{Y}_2 = \boldsymbol{y}_2 \sim \mathcal{N}\left(\
 - Marginal distributions are once again normal, that is,
 .block[
 .small[
-$$\boldsymbol{Y}_1  \sim \mathcal{N}\left(\boldsymbol{\mu}_1, \Sigma_{11}\right); \ \ \ \boldsymbol{Y}_2  \sim \mathcal{N}\left(\boldsymbol{\mu}_2, \Sigma_{22}\right).$$
+$$\boldsymbol{Y}_1  \sim \mathcal{N}_q\left(\boldsymbol{\mu}_1, \Sigma_{11}\right); \ \ \ \boldsymbol{Y}_2  \sim \mathcal{N}_{p-q}\left(\boldsymbol{\mu}_2, \Sigma_{22}\right).$$
 ]
 ]
 
@@ -308,7 +308,7 @@ $$\boldsymbol{Y}_1  \sim \mathcal{N}\left(\boldsymbol{\mu}_1, \Sigma_{11}\right)
 \boldsymbol{Y} =
 \begin{pmatrix}Y_1\\
 Y_2
-\end{pmatrix} & \sim & \mathcal{N}\left[\mu = \left(\begin{array}{c}
+\end{pmatrix} & \sim & \mathcal{N}_2\left[\mu = \left(\begin{array}{c}
 \mu_1\\
 \mu_2
 \end{array}\right),\Sigma = \left(\begin{array}{cc}

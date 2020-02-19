@@ -115,11 +115,13 @@ lessons:
   - date: "Mon, Feb 17"
     title: "Lab 5: Truncated data"
     lab: "lab-05-truncated-data-blank.html"
+    
+  - title: "PART IV: MULTIVARIATE DATA"
   
   - date: "Wed, Feb 19"
     title: "Multivariate normal model"
-    #slides: "lec-slides/12-multivariate-normal-model-I.html"
-    #slidespdf: "lec-slides/12-multivariate-normal-model-I.pdf"
+    slides: "lec-slides/12-multivariate-normal-model-I.html"
+    slidespdf: "lec-slides/12-multivariate-normal-model-I.pdf"
     reading: "reading-12.html"
   
   - date: "Fri, Feb 21"
@@ -130,6 +132,8 @@ lessons:
   
   - date: "Mon, Feb 24"
     title: "Lab 6: Inference in Gaussian models"
+    
+  - title: "PART V: MULTILEVEL MODELS"
   
   - date: "Wed, Feb 26"
   
@@ -139,6 +143,8 @@ lessons:
   
   - date: "Mon, Mar 2"
     title: "Lab 7: Missing data and imputation"
+    
+  - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
   - date: "Wed, Mar 4"
   
