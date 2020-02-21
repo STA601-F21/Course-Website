@@ -127,6 +127,9 @@ lessons:
   - date: "Fri, Feb 21"
     title: "Multivariate normal model cont'd"
     reading: "reading-13.html"
+    slides: "lec-slides/13-multivariate-normal-model-II.html"
+    slidespdf: "lec-slides/13-multivariate-normal-model-II.pdf"
+    hw: "hw-05.html"
   
   - title: "WEEK 8"
   
