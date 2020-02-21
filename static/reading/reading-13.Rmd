@@ -15,13 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
     + Section 7.4: Gibbs sampling of the mean and covariance
-    + Section 7.5: Missing data and imputation
     + Section 7.6: Discussion and further references
     
 
 ## Optional:
 
 - [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
-    <!-- + Section 3.6: Multinomial model for categorical data -->
     + Section 3.6: Multivariate normal with unknown mean and variance
     
