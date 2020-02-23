@@ -134,7 +134,8 @@ lessons:
   - title: "WEEK 8"
   
   - date: "Mon, Feb 24"
-    title: "Lab 6: Inference in Gaussian models"
+    title: "Lab 6: Gibbs sampling with block updates"
+    lab: "lab-06-block-gibbs-blank.html"
   
   - date: "Wed, Feb 26"
     title: "Missing data and imputation: multivariate normal example"
