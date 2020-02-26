@@ -138,7 +138,9 @@ lessons:
     lab: "lab-06-block-gibbs-blank.html"
   
   - date: "Wed, Feb 26"
-    title: "Missing data and imputation: multivariate normal example"
+    title: "Multivariate normal cont'd; missing data and imputation"
+    slides: "lec-slides/14-multivariate-normal-model-III.html"
+    slidespdf: "lec-slides/14-multivariate-normal-model-III.pdf"
     reading: "reading-14.html"
     
   - title: "PART V: MULTILEVEL MODELS"

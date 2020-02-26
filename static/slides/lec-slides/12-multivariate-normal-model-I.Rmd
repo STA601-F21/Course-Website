@@ -127,7 +127,7 @@ $$\boldsymbol{Y}_1 | \boldsymbol{Y}_2 = \boldsymbol{y}_2 \sim \mathcal{N}_q\left
 
 --
 
-- **Typical survey data:** response vector $\boldsymbol{y_i} = (y_{i1},\ldots,y_{ip})^T$ for each person $i$ in a sample of survey respondents, $i = 1,\ldots, n$. For example, we could have
+- **Typical survey data:** response vector $\boldsymbol{Y}_i = (Y_{i1},\ldots,Y_{ip})^T$ for each person $i$ in a sample of survey respondents, $i = 1,\ldots, n$. For example, we could have
   + $y_{i1} =$ income
   + $y_{i2} =$ level of education
   + $y_{i3} =$ number of children
@@ -259,7 +259,7 @@ How to do posterior inference if this is our sampling model?
 ---
 ## Multivariate normal likelihood
 
-- For data $\boldsymbol{y_i} = (y_{i1},\ldots,y_{ip})^T \sim \mathcal{N}_p(\boldsymbol{\theta}, \Sigma)$, the likelihood is
+- For data $\boldsymbol{Y}_i = (Y_{i1},\ldots,Y_{ip})^T \sim \mathcal{N}_p(\boldsymbol{\theta}, \Sigma)$, the likelihood is
 .block[
 .small[
 $$
