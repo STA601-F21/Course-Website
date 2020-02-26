@@ -870,7 +870,8 @@ Y <- as.matrix(dget("http://www2.stat.duke.edu/~pdh10/FCBS/Inline/Y.reading"))
 set.seed(1234)
 Y_WithMiss <- Y #So we can keep the full data
 Miss_frac <- 0.20
-R <- matrix(rbinom(nrow(Y)*ncol(Y),1,Miss_frac),nrow(Y),ncol(Y))
+R <- matrix(rbinom(nrow(Y_WithMiss)*ncol(Y_WithMiss),1,Miss_frac),
+            nrow(Y_WithMiss),ncol(Y_WithMiss))
 Y_WithMiss[R==1]<-NA
 Y_WithMiss[1:12,]
 colMeans(is.na(Y_WithMiss))
@@ -884,7 +885,7 @@ colMeans(is.na(Y_WithMiss))
 ```{r}
 #ACTUAL ANALYSIS STARTS HERE!!!
 #Data dimensions
-n <- nrow(Y); p <- ncol(Y)
+n <- nrow(Y_WithMiss); p <- ncol(Y_WithMiss)
 
 #Hyperparameters for the priors
 mu_0 <- c(50,50)
@@ -941,7 +942,7 @@ for (s in 1:(n_iter+burn_in)){
   theta <- rmvnorm(1,mu_n,Lambda_n)
 
   ##update Sigma
-  S_theta <- (t(Y)-c(theta))%*%t(t(Y)-c(theta))
+  S_theta <- (t(Y_Full)-c(theta))%*%t(t(Y_Full)-c(theta))
   S_n <- S_0 + S_theta
   nu_n <- nu_0 + n
   Sigma <- riwish(nu_n, S_n)
@@ -996,7 +997,7 @@ for (s in 1:(n_iter+burn_in)){
   theta <- rmvnorm(1,mu_n,Lambda_n)
 
   ##update Sigma
-  S_theta <- (t(Y)-c(theta))%*%t(t(Y)-c(theta))
+  S_theta <- (t(Y_Full)-c(theta))%*%t(t(Y_Full)-c(theta))
   S_n <- S_0 + S_theta
   nu_n <- nu_0 + n
   Sigma <- riwish(nu_n, S_n)
@@ -1037,8 +1038,6 @@ for (s in 1:(n_iter+burn_in)){
 colnames(THETA_WithMiss) <- c("theta_1","theta_2")
 colnames(SIGMA_WithMiss) <- c("sigma_11","sigma_12","sigma_21","sigma_22") #symmetry in sigma
 ```
-
-
 
 
 
