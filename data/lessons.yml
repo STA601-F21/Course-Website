@@ -143,21 +143,24 @@ lessons:
     slidespdf: "lec-slides/14-multivariate-normal-model-III.pdf"
     reading: "reading-14.html"
     
-  - title: "PART V: MULTILEVEL MODELS"
+  - title: "PART V: HIERARCHICAL MODELS"
   
   - date: "Fri, Feb 28"
+    title: "Hierarchical models"
+    reading: "reading-15.html"
+    slides: "lec-slides/15-hierarchical-models-I.html"
+    slidespdf: "lec-slides/15-hierarchical-models-I.pdf"
   
   - title: "WEEK 9"
   
   - date: "Mon, Mar 2"
     title: "Lab 7: Missing data and imputation"
-    
-  - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
   - date: "Wed, Mar 4"
+    title: "Review for Midterm"
   
   - date: "Fri, Mar 6"
-    title: "Tentative date for midterm exam; Spring break begins 7:00pm"
+    title: "Midterm exam; Spring break begins 7:00pm"
   
   - title: "WEEK 10"
   
@@ -173,9 +176,12 @@ lessons:
   - title: "WEEK 11"
   
   - date: "Mon, Mar 16"
-    title: "Lab 8: Introduction to Hamiltonian Monte Carlo"
+    title: "Lab 8: Multilevel modeling"
+  
+  - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
   - date: "Wed, Mar 18"
+    #title: "Hierarchical models II"
   
   - date: "Fri, Mar 20"
   
@@ -201,7 +207,7 @@ lessons:
   - title: "WEEK 14"
   
   - date: "Mon, Apr 6"
-    title: "Lab 11: Multilevel modeling"
+    title: "Lab 11: Introduction to Hamiltonian Monte Carlo"
   
   - date: "Wed, Apr 8"
   
@@ -210,7 +216,7 @@ lessons:
   - title: "WEEK 15"
   
   - date: "Mon, Apr 13"
-    title: "No class: maybe review session??"
+    title: "No lab: maybe review session??"
   
   - date: "Wed, Apr 15"
     title: "Graduate classes end"
