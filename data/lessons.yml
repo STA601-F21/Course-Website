@@ -148,8 +148,8 @@ lessons:
   - date: "Fri, Feb 28"
     title: "Hierarchical models"
     reading: "reading-15.html"
-    slides: "lec-slides/15-hierarchical-models-I.html"
-    slidespdf: "lec-slides/15-hierarchical-models-I.pdf"
+    #slides: "lec-slides/15-hierarchical-models-I.html"
+    #slidespdf: "lec-slides/15-hierarchical-models-I.pdf"
   
   - title: "WEEK 9"
   
