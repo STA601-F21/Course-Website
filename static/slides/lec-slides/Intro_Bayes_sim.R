@@ -129,3 +129,21 @@ for (s in 1:S) {
 
 
 
+########
+#install.packages(c("coda","mvtnorm","devtools","loo","dagitty"))
+#library(devtools)
+#devtools::install_github("rmcelreath/rethinking",ref="Experimental")
+
+library(rethinking)
+data(Howell1)
+dim(Howell1)
+head(Howell1)
+
+sum(Howell1$age < 15 & Howell1$male==1)
+sum(Howell1$age < 15 & Howell1$male==0)
+
+sum(Howell1$age > 75 & Howell1$male==1)
+sum(Howell1$age > 75 & Howell1$male==0)
+
+
+

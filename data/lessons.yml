@@ -146,7 +146,7 @@ lessons:
   - title: "PART V: HIERARCHICAL MODELS"
   
   - date: "Fri, Feb 28"
-    title: "Hierarchical models"
+    title: "Hierarchical models I"
     reading: "reading-15.html"
     slides: "lec-slides/15-hierarchical-models-I.html"
     slidespdf: "lec-slides/15-hierarchical-models-I.pdf"
