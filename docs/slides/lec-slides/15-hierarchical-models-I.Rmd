@@ -1103,7 +1103,7 @@ $$
 
 
 ---
-## Full conditionals for within-group variance
+## Full conditionals for across-group variance
 
 - The full conditional distribution of $\tau^2$ is proportional to the part of the joint posterior $\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)$ that involves $\tau^2$.
 
@@ -1139,7 +1139,7 @@ $$
 
 
 ---
-## Full conditionals for across-group variance
+## Full conditionals for within-group variance
 
 - Finally, the full conditional distribution of $\sigma^2$ is proportional to the part of the joint posterior $\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)$ that involves $\sigma^2$.
 

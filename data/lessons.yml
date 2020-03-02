@@ -154,7 +154,8 @@ lessons:
   - title: "WEEK 9"
   
   - date: "Mon, Mar 2"
-    title: "Lab 7: Missing data and imputation"
+    title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
+    lab: "lab-07-HMC-blank.html"
   
   - date: "Wed, Mar 4"
     title: "Review for Midterm"
@@ -207,7 +208,7 @@ lessons:
   - title: "WEEK 14"
   
   - date: "Mon, Apr 6"
-    title: "Lab 11: Introduction to Hamiltonian Monte Carlo"
+    title: "Lab 11: "
   
   - date: "Wed, Apr 8"
   
