@@ -145,7 +145,7 @@ Consider data generated from a bivariate normal distribution with mean parameter
 
 $$
 \begin{aligned}
-\boldsymbol{X}_1, \dots, \boldsymbol{X}_n &\sim N \left(\boldsymbol{\theta}, \Sigma \right); \\
+\boldsymbol{X}_1, \dots, \boldsymbol{X}_n &\sim N_2 \left(\boldsymbol{\theta}, \Sigma \right); \\
 \theta_j &\sim N(0, 1)~~~~~~j=1,2.
 \end{aligned}
 $$

@@ -177,38 +177,41 @@ lessons:
   - title: "WEEK 11"
   
   - date: "Mon, Mar 16"
-    title: "Lab 8: Multilevel modeling"
-  
-  - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
+    title: "No lab: extended spring break"
   
   - date: "Wed, Mar 18"
-    #title: "Hierarchical models II"
+    title: "No class: extended spring break"
   
   - date: "Fri, Mar 20"
-  
+    title: "No class: extended spring break"
+    
   - title: "WEEK 12"
   
   - date: "Mon, Mar 23"
-    title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
+    title: "Lab 8: Hierarchical modeling"
+    
+  - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
   - date: "Wed, Mar 25"
-  
+    title: "Hierarchical models II; introduction to regression models"
+
   - date: "Fri, Mar 27"
   
   - title: "WEEK 13"
   
   - date: "Mon, Mar 30"
-    title: "Lab 10: Metropolis-Hastings"
+    title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
   
   - date: "Wed, Apr 1"
-    title: "Tentative date for quiz II"
+    
   
   - date: "Fri, Apr 3"
+    title: "Tentative date for quiz II"
   
   - title: "WEEK 14"
   
   - date: "Mon, Apr 6"
-    title: "Lab 11: "
+    title: "Lab 10: Metropolis-Hastings"
   
   - date: "Wed, Apr 8"
   
@@ -217,7 +220,7 @@ lessons:
   - title: "WEEK 15"
   
   - date: "Mon, Apr 13"
-    title: "No lab: maybe review session??"
+    title: "Lab 11: "
   
   - date: "Wed, Apr 15"
     title: "Graduate classes end"
