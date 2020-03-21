@@ -1,0 +1,328 @@
+\documentclass[11pt, a4paper]{article}
+%\usepackage{geometry}
+\usepackage[inner=2cm,outer=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\pagestyle{empty}
+\usepackage{graphicx}
+\usepackage{fancyhdr, lastpage, bbding, pmboxdraw}
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.7,0,0}
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{red}{rgb}{.98,0,0}
+\usepackage[colorlinks,pagebackref,pdfusetitle,urlcolor=darkblue,citecolor=darkblue,linkcolor=darkred,bookmarksnumbered,plainpages=false]{hyperref}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead{ \fancyplain{}{\textsc{STA 602L:\ Bayesian and Modern Statistics}} }
+%\chead{ \fancyplain{}{} }
+\rhead{ \fancyplain{}{\textsc{Spring 2020}} }
+\rfoot{Page \thepage}
+%\fancyfoot[RO, LE] {page \thepage\ of \pageref{LastPage} }
+\thispagestyle{plain}
+
+%%%%%%%%%%%% LISTING %%%
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\usepackage{verbatim} % used to display code
+\usepackage{fancyvrb}
+\usepackage{acronym}
+\usepackage{amsthm}
+\usepackage{ulem}
+\VerbatimFootnotes % Required, otherwise verbatim does not work in footnotes!
+
+
+
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.93}
+
+
+\lstset{
+%language=bash,                          % Code langugage
+basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+commentstyle=\color{gray},              % Comments font
+numbers=left,                           % Line nums position
+numberstyle=\tiny,                      % Line-numbers fonts
+stepnumber=1,                           % Step between two line-numbers
+numbersep=5pt,                          % How far are line-numbers from code
+backgroundcolor=\color{lightlightgray}, % Choose background color
+frame=none,                             % A frame around the code
+tabsize=2,                              % Default tab size
+captionpos=t,                           % Caption-position = bottom
+breaklines=true,                        % Automatic line breaking?
+breakatwhitespace=false,                % Automatic breaks only at whitespace?
+showspaces=false,                       % Dont make spaces visible
+showtabs=false,                         % Dont make tabls visible
+columns=flexible,                       % Column format
+morekeywords={__global__, __device__},  % CUDA specific keywords
+}
+
+
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\renewcommand{\arraystretch}{1.5}	
+
+
+\begin{center}
+{\Large \textsc{STA 602L:\ Bayesian and Modern Statistics}}
+\end{center}
+
+
+\begin{center}
+	\textsc{Spring 2020} \\
+	\textsc{Duke University} \\
+\end{center}
+
+
+
+\begin{center}
+\begin{minipage}[t]{.9\textwidth}
+\begin{tabular}{@{}L{3cm}L{12cm}}
+	\toprule[0.065cm]
+\textsc{Instructor:} & \href{https://akandelanre.github.io.}{\textsc{Olanrewaju Michael Akande, Ph.D.}} \\
+\textsc{Email:} &\href{mailto:olanrewaju.akande@duke.edu}{\Envelope ~olanrewaju.akande@duke.edu} \\
+\textsc{Office:} & 256 Gross Hall \\
+\textsc{Office Hours:} & Wed 9:00 - 10:00am and Thur 11:45am - 12:45pm, {\color{darkred} \textbf{using Zoom} \sout{\textbf{256 Gross Hall}}};
+        \newline {\color{darkred} \textbf{Zoom Meeting ID: 683-599-2594}}.  \\
+%\textsc{Lead TA} & \href{https://stat.duke.edu/people/jordan-bryan}{Jordan Bryan} \\
+\textsc{Teaching Assistants:} & \href{https://stat.duke.edu/people/zhuoqun-wang-0}{Zhuoqun Wang}. Office hours: Tues 3:00 - 5:00pm, {\color{darkred} \textbf{using Zoom} \sout{\textbf{Old Chem 025}}}; 
+        \newline {\color{darkred} \textbf{Zoom Meeting ID: 913-440-7090}}.
+        \vspace{6pt}
+				\newline \href{https://stat.duke.edu/people/bai-li}{Bai Li}. Office hours: Wed 3:00 - 5:00pm, {\color{darkred} \textbf{using Zoom} \sout{\textbf{Old Chem 025}}};
+				\newline {\color{darkred} \textbf{Zoom Meeting ID: 906-400-0025}}. \\ 
+%\textsc{Teaching Assistants:} & \href{https://stat.duke.edu/people/zhuoqun-wang-0}{Zhuoqun Wang}. Office hours: Wed 3:00 - 5:00pm, 257 Gross Hall. \newline \href{https://stat.duke.edu/people/bai-li}{Bai Li}. Office hours: Thur 3:00 - 5:00pm, 257 Gross Hall. \\ 
+\textsc{Lectures:} & Wed/Fri 11:45am - 01:00pm, {\color{darkred} \textbf{using Zoom} \ \ \ \ \ \ \ \ \ \ \sout{\textbf{Old Chemistry 116}}};
+		\newline {\color{darkred} \textbf{Zoom Meeting ID: 359-482-959}}.  \\
+\textsc{Labs:} & Section 01: Mon 11:45am - 01:00pm, {\color{darkred} \textbf{using Zoom} \sout{\textbf{Sociology Psychology 127}}};
+							\newline {\color{darkred} \textbf{Zoom Meeting ID: 230-936-664}}. 
+							\vspace{6pt}
+								\newline Section 02: Mon 01:25pm - 02:40pm,  {\color{darkred} \textbf{using Zoom} \sout{\textbf{Old Chemistry 101}}};
+								\newline {\color{darkred} \textbf{Zoom Meeting ID: 520-899-963}}. \\
+\textsc{Course Page:} & \href{https://sta-602l-s20.github.io/Course-Website/}{https://sta-602l-s20.github.io/Course-Website/} \\
+\textsc{Required Textbook:} & \href{https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997}{\textit{A First Course in Bayesian Statistical Methods}} Peter D. Hoff, 2009, New York: Springer. (Available online from Duke library.)\\
+\textsc{Optional Textbooks:}	& \href{http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/}{\textit{Bayesian Data Analysis}} (Third Edition) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. \\
+\textsc{Important Dates:} & \begin{minipage}[t]{.9\textwidth}
+													\begin{tabular}{@{}ll}
+														\tabitem Fri, January 10 & First class for STA 602L (not January 8!!!) \\
+														\tabitem Mon, January 20 & Martin Luther King Jr. Day; no classes! \\
+														\tabitem Wed, January 22 & Drop/add ends \\
+														\tabitem Fri, March 6 & Midterm exam \\
+																							  & Spring break begins 7:00pm \\
+														\tabitem {\color{darkred} \textbf{Mon, March 23}} & Spring break ends; classes resume 8:30am \\
+														\tabitem Wed, April 15 & Graduate classes end \\
+														\tabitem Sat, May 2 & Final exam \\
+													\end{tabular}
+													\end{minipage} \\
+	 \bottomrule[0.065cm]
+\end{tabular}
+\end{minipage}
+\end{center}
+
+
+
+
+
+\vspace{.5cm}
+\setlength{\unitlength}{1in}
+\renewcommand{\arraystretch}{1.5}
+
+
+
+\section{Course Overview}
+Bayesian methods are increasingly important in both industry and academia. This is a graduate-level course, within the Department of Statistical Science, that introduces students to the basics of Bayesian inference and provides students with the tools needed to fit Bayesian models. 
+
+In this course, you will learn the importance of Bayesian methods and inference. You will be introduced to Bayesian theory, with particular emphasis on conceptual foundations as well as implementation and model fitting. You will learn the essential distinctions between classical and Bayesian methods and become familiar with the origins of Bayesian inference. You will also learn about conjugate families of distributions and why they are very convenient, and how to conduct Bayesian inference with intractable posterior distributions,  when you do not have conjugate distributions.
+
+Although this course emphasizes the mathematical theory behind Bayesian inference, data analysis and interpretation of results are also important components. Students who wish to explore the mathematical theory in more detail than what is covered in class are welcome to engage with and request further reading materials from the instructor outside of class. Also, all students must have the theoretical background covered in the prerequisites to be able to keep up with and understand the materials. 
+
+\section{Learning Objectives}
+By the end of this course, students should be able to
+\begin{itemize}[label= {\color{darkblue}{\ArrowBoldRightStrobe}}]
+	\item Understand the basics of Bayesian inference, that is, be able to define likelihood functions, prior distributions, posterior distributions, prior predictive distributions and posterior predictive distributions.
+	\item Derive posterior distributions, prior predictive distributions and posterior predictive distributions, for common likelihood-prior combinations of distributions.
+	\item Interpret the results of fitted models and conduct checks to ascertain that the models have converged.
+	\item Use the Bayesian methods and models covered in class to analyze real data sets.
+	\item Assess the adequacy of Bayesian models to any given data and make a decision on what to do in cases when certain models are not appropriate for a given data set.
+\end{itemize}
+
+
+
+\section{Prerequisites}
+ALL students are expected to be familiar with all the topics covered within the required prerequisites to be in this course. That is, STA 611 or the following: STA 210 and (STA 230 or 240L) and (MATH 202, 202D, 212, or 222) and (MATH 216, 218, or 221, any of which may be taken concurrently). Students are also expected to be very familiar with \textsf{R} and are encouraged to have learned \LaTeX \ or a Markdown language by the end of the course.
+
+
+\section{Class Materials}
+Lecture notes and slides, lab exercises and other reading resources will be posted on the course website. In-class black/white boards will also be used frequently so class attendance in required. Finally, we will closely follow the main textbook so students should make sure to always read the corresponding textbook chapters per topic, outside of class.
+
+
+\section{Graded Work} 
+Graded work for the course will consist of homework, lab exercises, {\color{darkred} \textbf{one quiz} \sout{\textbf{quizzes}}}, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST \textbf{24 hours} after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST \textbf{12 hours} after grades are released!
+\begin{itemize}[label= {\color{darkblue}{\ArrowBoldRightStrobe}}]
+	\item There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
+	
+	\item Students' final grades will be determined as follows:
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ll}
+			Component & Percentage \\ 
+			\hline
+			Final Exam ({\color{darkred} \textbf{timed online or take home}}) & 30\% \\ 
+			Midterm (in class) & 20\% \\
+			Homework assignments (at least one per week) & {\color{darkred} \textbf{25\%}}\\
+			Quiz I (in class) & 10\% \\
+			{\color{darkred} \textbf{\sout{Quiz II (in class)}}} & {\color{darkred} \textbf{\sout{10\%}}}  \\
+			Lab exercises & 10\% \\
+			Class Participation & 5\% \\
+			\hline 
+		\end{tabular}
+	\end{table}
+
+	\item Grades $\underline{may}$ be curved at the end of the semester. Cumulative averages of 90\% -- 100\% are guaranteed at least an A-, 80\% -- 89\% at least a B-, and 70\% -- 79\% at least a C-, however the exact ranges for letter grades will be determined after the final exam.
+	
+	\item {\color{darkred} \textbf{Following the memo sent out to all graduate and professional students on March 19, 2020, please note that Spring 2020 graduate courses, including this one, will transition to a default satisfactory/unsatisfactory (S/U) grading option. If you want to receive a letter grade for this course, you can do so by submitting a form (see here: \url{https://dukeuniversityregistrar.formstack.com/forms/grading_basis_change_s_u_to_graded}) to the registrar, no later than 5pm EST on the last day of classes, that is, April 15, 2020. Accordingly, final grades will still be determined as outlined above, however, you will be assigned an ``S'' grade at the end for a final grade of C- and above, but a ``U'' grade for a final grade of D+ and below. For more details, please refer to the memo that was sent to you by the Provost, Executive Vice Provost and Dean of the Graduate School. If you did not recieve the memo, let the instructor know.}}
+\end{itemize}
+
+
+\section{Descriptions of graded work}
+\subsection{Homework and lab exercises}
+Homework assignments will be given on a weekly basis. They will be based on both the lectures and labs and will be announced every Friday at the most – please always check the website! \textbf{Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.} For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
+
+Each student MUST write up and turn in her or his own answers. You are encouraged to talk to each other regarding homework problems or to the instructor/TA. However, the write-up, solution, and code must be entirely your own work. The assignments must be submitted on \href{https://www.gradescope.com/courses/77790/assignments}{Gradescope} under ``Assignments''. Note that you will not be able to make online submissions after the due date, so be sure to submit before or by the Gradescope-specified deadline.
+
+Homework solutions will be curated from student solutions with proper attribution. Every week the TAs will select a representative correct solution for the assigned problems and put them together into one solutions set with each answer being attributed to the student who wrote it. \textbf{If you would like to OPT OUT of having your homework solutions used for the class solutions, please let the Instructor and TAs know in advance.}
+
+\textbf{Finally, your lowest homework score will be dropped!}
+
+\subsection{Lab exercises}
+The objective of the lab assignments is to give you more hands-on experience with Bayesian data analysis. Come learn a concept or two and some R from the TAs and then work on the computational part of the homeworks. Lab attendance is not mandatory, however, each lab assignment should be submitted in timely fashion You are REQUIRED to use R Markdown to type up your lab reports.
+
+\subsection{Quizzes}
+{\color{darkred} \textbf{There will be one quiz in February. See the website for the exact date. There will be no make-ups for the quiz.}}
+
+
+\subsection{Midterm Exam}
+There will be a midterm exam on March 6.  Soon after the midterm, you will be given a midterm grade assessing your overall performance. Note that this does not go on your transcript, with the main purpose being to let you know how you are doing in the class.
+
+\subsection{Final Exam}
+If you miss the quiz or midterm, your grade will depend more on the final exam score since there are no make-up exams. You cannot miss the final exam! Detailed instructions on the final exam will be made available later.
+
+
+\section{Late Submission Policy} 
+\begin{itemize}
+	\item Generally, you will lose 50\% of the total points on each homework if you submit within the first 24 hours after it is due, and 100\% of the total points if you submit later than that.
+	
+	{\color{darkred} \textbf{However, starting March 23, you will lose 25\% of the total points on each homework if you submit within the first 24 hours after it is due, 50\% of the total points if you submit within the first 48 hours after it is due, and 100\% of the total points if you submit later than that.}}
+	
+	{\color{darkred} \textbf{In addition, you will lose 50\% of the total points on each lab exercise if you submit within the first 24 hours after it is due, and 100\% of the total points if you submit later than that.}}
+	
+	\item You will lose 100\% of the total points on quizzes, midterms and final exams if do not show up to take them or submit later than the due dates.
+\end{itemize}
+
+
+\section{Auditing}
+{\color{darkred} \textbf{Students who audit this course will be expected to get an ``S'' grade.}}
+
+
+
+
+\section{Tentative Course Schedule} 
+We will cover the topics below. We may spend different amounts of time on each topic, depending on the interests of students. For a detailed and updated outline, check on the updated course schedule on the course page regularly. 
+\begin{enumerate}[label= {\color{darkblue}{\ArrowBoldRightStrobe}}]
+	\item Introduction to course
+	\item Introduction to Bayesian methods
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Bayesian vs frequentist paradigms
+		\item Review of probability and exchangeability
+		\item Conjugacy
+		\item Monte Carlo approximation
+		\item Credible intervals
+	\end{enumerate}
+	\item One parameter models
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Binomial models
+		\item Poisson models
+		\item Other one-parameter exponential family models
+	\end{enumerate}
+	\item The normal model
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Unknown mean, known variance
+		\item Unknown mean, unknown variance
+		\item Prior specification based on expectations
+	\end{enumerate}
+	\item Markov chain Monte Carlo
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Gibbs Sampling
+		\item Metropolis and Metropolis-Hastings
+		\item Tuning and convergence
+	\end{enumerate}
+	\item Multivariate Gaussian models
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Unknown mean, known covariance matrix
+		\item Unknown mean, unknown covariance matrix
+		\item Missing data and imputation
+	\end{enumerate}
+	\item Linear regression
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Frequentist inference vs Bayesian inference
+		\item Prior specification
+		\item Model selection (mini-intro)
+		\item Model averaging (mini-intro)
+	\end{enumerate}
+	\item Finite mixture and latent variable models 
+	\begin{enumerate}[label= {\color{cyan}{\Rectangle}}]
+		\item Data augmentation
+		\item Mixtures of normal distributions
+		\item Mixtures of multinomial distributions
+		\item Probit regression
+	\end{enumerate}
+	\item Introduction to multilevel/hierarchical models
+	\item Wrap up (would spend more time on model selection and averaging should time permit).
+\end{enumerate}
+
+
+\section{Academic Integrity}  
+Duke University is a community dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, respect, and accountability. Citizens of this community commit to reflect upon and uphold these principles in all academic and nonacademic endeavors, and to protect and promote a culture of integrity. To uphold the \href{https://studentaffairs.duke.edu/conduct/about-us/duke-community-standard}{Duke Community Standard}:
+\begin{itemize}[label= {\color{darkred}{\Large \HandRight}}]
+	\item I will not lie, cheat, or steal in my academic endeavors;
+	\item I will conduct myself honorably in all my endeavors; and
+	\item I will act if the Standard is compromised.
+\end{itemize}
+
+Cheating on exams or plagiarism on homework assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the Duke Community Standard, and will not be tolerated. Such incidences will result in a 0 grade for all parties involved. Additionally, there may be penalties to your final class grade along with being reported to the Office of Student Conduct. Please review the academic dishonesty policies at \url{https://studentaffairs.duke.edu/conduct/z-policies/academic-dishonesty}.
+
+
+\section{Diversity \& Inclusiveness:}
+This course is designed so that students from all backgrounds and perspectives all feel welcome both in and out of class. Please feel free to talk to me (in person or via email) if you do not feel well-served by any aspect of this class, or if some aspect of class is not welcoming or accessible to you. My goal is for you to succeed in this course, therefore, please let me know immediately if you feel you are struggling with any part of the course more than you know how to manage. Doing so will not affect your grades, but it will allow me to provide the resources to help you succeed in the course.
+
+
+\section{Disability Statement} 
+Students with disabilities who believe that they may need accommodations in the class are encouraged to contact the \href{https://access.duke.edu/students/staff.php}{Student Disabilities Access Office} at 919.668.1267 or \href{mailto:disabilities@aas.duke.edu}{disabilities@aas.duke.edu}  as soon as possible to better ensure that such accommodations are implemented in a timely fashion.
+
+
+\section{Other Information} 
+It can be a lot more pleasant oftentimes to get in-person answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to come to my office during office hours or by appointment to discuss a homework problem or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily.
+
+{\color{darkred} \textbf{All of the course components, including classes, labs and all office hours, will move online starting March 23, and will all be held using Zoom meetings. Please see the first page of the syllabus for the meeting IDs for each component. If you have any concerns, issues or challenges, please let the instructor know as soon as possible. Also, all students are strongly encouraged to rely on Piazza, for interacting among yourself and asking other students questions. You can also ask the instructor or the TAs questions on there and we will try to respond as soon as possible.  If you experience any technical issues with joining or using Piazza, let the instructor know.}}
+
+
+\section{Professionalism}
+Please refrain from texting or using your computer for anything other than coursework during class. You are responsible for everything from lecture, mentioned in class and lab, and in the Hoff book. You will be expected to follow along the Hoff book as we go along in the lectures.
+
+
+\end{document} 

@@ -21,25 +21,32 @@ By the end of this course, students should be able to
 - Assess the adequacy of Bayesian models to any given data and make a decision on what to do in cases when certain models are not appropriate for a given data set.
 
 
+### Updates Effective from March 23
+
+<font color="darkred">As most (and hopefully all) of you know by now, classes will be moving online, following Duke University directives, given the current situation with respect to COVID-19. Consequently, I have highlighted the most important changes to the syllabus (and more generally, the website) in red, so please pay special attention to those.</font>
+
+
+
+
 ### Course Info
 
 #### Lectures
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Old Chemistry 116
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 116</font>~~ <font color="darkred">**Zoom Meeting ID: 359-482-959**</font>  
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Wed/Fri 11:45am - 01:00pm
 
 #### Labs
 
 ##### Section 01:
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp;  Sociology Psychology 127
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp;  ~~<font color="darkred">Sociology Psychology 127</font>~~ <font color="darkred">**Zoom Meeting ID: 230-936-664**</font> 
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 11:45am - 01:00pm
 
 <font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Bai Li](https://stat.duke.edu/people/bai-li)
 
 ##### Section 02:
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Old Chemistry 101
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 101</font>~~ <font color="darkred">**Zoom Meeting ID: 520-899-963**</font>
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 01:25pm - 02:40pm
 
@@ -51,10 +58,10 @@ By the end of this course, students should be able to
 {.table .table-condensed .table-striped .text-left}
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
-Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm | 256 Gross Hall
+Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm | ~~<font color="darkred">256 Gross Hall</font>~~ <font color="darkred">**Zoom Meeting ID: 683-599-2594**</font>
 Lead TA           | [Jordan Bryan](https://stat.duke.edu/people/jordan-bryan) (mainly for STA 360) | <a href="mailto:jordan.bryan@duke.edu" title="email"><i class="fa fa-envelope"></i></a> |  | 
-TAs               | [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tues 3:00 - 5:00pm | Old Chem 025
-                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wed 3:00 - 5:00pm | Old Chem 025
+TAs               | [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tues 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 913-440-7090**</font>
+                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wed 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 906-400-0025**</font>
 
 
 ### Texts
@@ -79,10 +86,10 @@ Lecture notes and slides, lab exercises and other reading resources will be post
 Fri, January 10 | First class for STA 602L (not January 8!!!)
 Mon, January 20 | Martin Luther King Jr. Day; no classes!
 Wed, January 22 | Drop/add ends
-Wed, February 12 | Tentative date for quiz I
-Fri, March 6 | Tentative date for midterm exam; <br /> Spring break begins 7:00pm
-Mon, March 16 | Spring break ends; classes resume 8:30am
-Wed, April 1 | Tentative date for quiz II
+Wed, February 12 | Quiz I
+Fri, March 6 | Midterm exam; <br /> Spring break begins 7:00pm
+<font color="darkred">Mon, March 23</font> | Spring break ends; classes resume 8:30am
+~~<font color="darkred">Wed, April 1</font>~~ | ~~<font color="darkred">Tentative date for quiz II</font>~~
 Wed, April 15 | Graduate classes end
 Sat, May 2 | Final exam
 

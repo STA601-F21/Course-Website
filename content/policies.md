@@ -15,22 +15,24 @@ Class time is designed to be as interactive as possible. My role as instructor i
 
 ### Graded Work
 
-Graded work for the course will consist of homework, lab exercises, quizzes, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released! **Always write in complete sentences and show all of your steps.**
+Graded work for the course will consist of homework, lab exercises, <font color="darkred">one quiz</font> ~~<font color="darkred">quizzes</font>~~, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released! **Always write in complete sentences and show all of your steps.**
 
 {.table .table-condensed .table-striped .text-left}
 Component             | Percentage
 ----------------------|----------------
-Final Exam (in-class, online or take home?) | 30%
+Final Exam (<font color="darkred">timed online or take home</font>) | 30%
 Midterm (in class) | 20%
-Homework assignments (at least one per week) | 15%
+Homework assignments (at least one per week) | <font color="darkred">25%</font>
 Quiz I (in class) | 10%
-Quiz II (in class) | 10%
+~~<font color="darkred">Quiz II (in class)</font>~~ | ~~<font color="darkred">10%</font>~~
 Lab exercises | 10%
 Class Participation | 5%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
-Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined after the final exam. 
+Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined after the final exam.
+
+<font color="darkred">Following the memo sent out to all graduate and professional students on March 19, 2020, please note that Spring 2020 graduate courses, including this one, will transition to a default satisfactory/unsatisfactory (S/U) grading option. If you want to receive a letter grade for this course, you can do so by submitting a form (see here: [https://dukeuniversityregistrar.formstack.com/forms/grading_basis_change_s_u_to_graded](https://dukeuniversityregistrar.formstack.com/forms/grading_basis_change_s_u_to_graded) to the registrar, no later than 5pm EST on the last day of classes, that is, April 15, 2020. Accordingly, final grades will still be determined as outlined above, however, you will be assigned an "S" grade at the end for a final grade of C- and above, but a "U" grade for a final grade of D+ and below. For more details, please refer to the memo that was sent to you by the Provost, Executive Vice Provost and Dean of the Graduate School. If you did not recieve the memo, let the instructor know.</font>
 
 
 ### Descriptions of graded work
@@ -48,7 +50,7 @@ Homework solutions will be curated from student solutions with proper attributio
 The objective of the lab assignments is to give you more hands-on experience with Bayesian data analysis.zhuoqun.wang@duke.edu Come learn a concept or two and some R from the TAs and then work on the computational part of the homework assignments. Lab attendance is not mandatory, however, each lab assignment should be submitted in timely fashion on the due date. You are REQUIRED to use R Markdown to type up your lab reports.
 
 #### Quizzes
-Two quizzes will be administered through the semester, one before the midterm (sometime in February) and the other after the midterm (sometime early April). The exact dates will be announced later. There will be no make-ups for quizzes so make sure to be in class on the dates to take them.
+<font color="darkred">There will be one quiz in February. See the website for the exact date. There will be no make-ups for the quiz.</font>
 
 #### Midterm Exam
 The midterm exam will hold either March 4 or March 6 (March 6 is the current tentative date). See the course schedule for the updated date for the midterm exam closer to the end of February. After the midterm, you will be given a midterm grade assessing your overall performance. If you are an undergraduate, this will also be sent to the registrar. Note that this does not go on your transcript, with the main purpose being to let you know how you are doing in the class.
@@ -58,12 +60,17 @@ If you miss any of the quizzes or midterm, your grade will depend more on the fi
 
 
 ### Late Submission Policy
-- You will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
+- Generally, ou will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
+
+    <font color="darkred">However, starting March 23, you will lose 25% of the total points on each homework if you submit within the first 24 hours after it is due, 50% of the total points if you submit within the first 48 hours after it is due, and 100% of the total points if you submit later than that.</font>
+  
+    <font color="darkred">In addition, you will lose 50% of the total points on each lab exercise if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.</font>
+  
 - You will lose 100% of the total points on quizzes, midterms and final exams if do not show up to take them or submit later than the due dates.
 
 
 ### Auditing
-Students who audit this course will be expected to complete most of the graded work with the goal of getting an overall score of at least 70%; you will only need to complete enough graded work to get to 70%. You are also expected to attend most of the classes and participate like everyone else. There are very limited seats for auditing this course and most students will be expected to take the course for credit, therefore, you must contact the instructor in advance if you wish to audit the course.
+<font color="darkred">Students who audit this course will be expected to get an ``S'' grade.</font>
 
 
 ### Academic integrity:
@@ -94,6 +101,8 @@ Students with disabilities who believe that they may need accommodations in the 
 
 ### Other Information
 It can be a lot more pleasant oftentimes to get in-person answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to come to my office during office hours or by appointment to discuss a homework problem or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily. Also, take advantage of **Piazza** and post your questions there!
+
+<font color="darkred">All of the course components, including classes, labs and all office hours, will move online starting March 23, and will all be held using Zoom meetings. Please see the first page of the syllabus for the meeting IDs for each component. If you have any concerns, issues or challenges, please let the instructor know as soon as possible. Also, all students are strongly encouraged to rely on Piazza, for interacting among yourself and asking other students questions. You can also ask the instructor or the TAs questions on there and we will try to respond as soon as possible.  If you experience any technical issues with joining or using Piazza, let the instructor know.</font>
 
 
 
