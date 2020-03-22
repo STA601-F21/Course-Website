@@ -32,21 +32,21 @@ By the end of this course, students should be able to
 
 #### Lectures
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 116</font>~~ <font color="darkred">**Zoom Meeting ID: 359-482-959**</font>  
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 116</font>~~ <font color="darkred">**Zoom Meeting ID: 359-482-959 (URL: [https://duke.zoom.us/j/359482959](https://duke.zoom.us/j/359482959))**</font>  
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Wed/Fri 11:45am - 01:00pm
 
 #### Labs
 
 ##### Section 01:
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp;  ~~<font color="darkred">Sociology Psychology 127</font>~~ <font color="darkred">**Zoom Meeting ID: 230-936-664**</font> 
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp;  ~~<font color="darkred">Sociology Psychology 127</font>~~ <font color="darkred">**Zoom Meeting ID: 230-936-664 (URL: [https://duke.zoom.us/j/230936664](https://duke.zoom.us/j/230936664))**</font> 
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 11:45am - 01:00pm
 
 <font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Bai Li](https://stat.duke.edu/people/bai-li)
 
 ##### Section 02:
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 101</font>~~ <font color="darkred">**Zoom Meeting ID: 520-899-963**</font>
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; ~~<font color="darkred">Old Chemistry 101</font>~~ <font color="darkred">**Zoom Meeting ID: 520-899-963 (URL: [https://duke.zoom.us/j/520899963](https://duke.zoom.us/j/520899963))**</font>
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Mon 01:25pm - 02:40pm
 
@@ -58,10 +58,10 @@ By the end of this course, students should be able to
 {.table .table-condensed .table-striped .text-left}
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
-Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm | ~~<font color="darkred">256 Gross Hall</font>~~ <font color="darkred">**Zoom Meeting ID: 683-599-2594**</font>
+Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Wed 9:00 - 10:00am; Thur 11:45 - 12:45pm | ~~<font color="darkred">256 Gross Hall</font>~~ <font color="darkred">**Zoom Meeting ID: 683-599-2594 (URL: [https://duke.zoom.us/j/6835992594](https://duke.zoom.us/j/6835992594))**</font>
 Lead TA           | [Jordan Bryan](https://stat.duke.edu/people/jordan-bryan) (mainly for STA 360) | <a href="mailto:jordan.bryan@duke.edu" title="email"><i class="fa fa-envelope"></i></a> |  | 
-TAs               | [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tues 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 913-440-7090**</font>
-                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wed 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 906-400-0025**</font>
+TAs               | [Zhuoqun (Carol) Wang](https://stat.duke.edu/people/zhuoqun-wang-0) | <a href="mailto:zhuoqun.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tues 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 913-440-7090 (URL: [https://duke.zoom.us/j/9134407090](https://duke.zoom.us/j/9134407090))**</font>
+                  | [Bai Li](https://stat.duke.edu/people/bai-li) | <a href="mailto:bai.li@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wed 3:00 - 5:00pm | ~~<font color="darkred">Old Chem 025</font>~~ <font color="darkred">**Zoom Meeting ID: 906-400-0025 (URL: [https://duke.zoom.us/j/9064000025](https://duke.zoom.us/j/9064000025))**</font>
 
 
 ### Texts
