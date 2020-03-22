@@ -21,7 +21,7 @@ By the end of this course, students should be able to
 - Assess the adequacy of Bayesian models to any given data and make a decision on what to do in cases when certain models are not appropriate for a given data set.
 
 
-### Updates Effective from March 23
+### Updates Effective March 23
 
 <font color="darkred">As most (and hopefully all) of you know by now, classes will be moving online, following Duke University directives, given the current situation with respect to COVID-19. Consequently, I have highlighted the most important changes to the syllabus (and more generally, the website) in red, so please pay special attention to those.</font>
 
