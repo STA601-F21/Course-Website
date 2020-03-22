@@ -189,6 +189,7 @@ lessons:
   
   - date: "Mon, Mar 23"
     title: "Lab 8: Hierarchical modeling"
+    lab: "lab-08-multilevel-modeling-blank.html"
     
   - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
