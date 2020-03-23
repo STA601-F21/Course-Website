@@ -195,8 +195,13 @@ lessons:
   
   - date: "Wed, Mar 25"
     title: "Hierarchical models II; introduction to regression models"
+    reading: "reading-16.html"
+    #slides: "lec-slides/16-hierarchical-models-II.html"
+    #slidespdf: "lec-slides/16-hierarchical-models-II.pdf"
 
   - date: "Fri, Mar 27"
+    title: "Regression models cont'd"
+    reading: "reading-17.html"
   
   - title: "WEEK 13"
   
