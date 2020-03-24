@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hierarchical models I</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Hierarchical models I
+### Dr. Olanrewaju Michael Akande
+### Feb 28, 2020
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- CLass Zoom meeting ID:
+
+--
+
+- Changes to the syllabus
+
+--
+
+- Any concerns from the lab meetings?
+
+
+---
+## Outline
+
+- Hierarchical models
+  + Recap
+  + Math example
+  + Hierarchical modeling of means and variances
+  + Math example cont'd
+
+
+---
+## Motivation
+
+- Sometimes, we may have a natural grouping in our data, for example 
+  + students within schools,
+  + patients within hospitals,
+  + voters within counties or states,
+  + biology data, where animals are followed within natural populations organized geographically and, in some cases, socially.
+
+--
+
+- For such grouped data, we may want to do inference across all the groups, for example, comparison of the group means.
+
+--
+
+- Ideally, we should do so in a way that takes advantage of the relationship between observations in the same group, but we should also look to borrow information across groups when possible.
+
+--
+
+- .hlight[Hierarchical modeling] provides a principled way to do so. 
+
+
+
+---
+## Bayes estimators and bias
+
+- Recall the normal model:
+.block[
+.small[
+`$$y_{i} | \mu, \sigma^2 \overset{iid}{\sim} \mathcal{N} \left( \mu, \sigma^2\right).$$`
+]
+]
+
+--
+
+- The MLE for the population mean `\(\mu\)` is just the sample mean `\(\bar{y}\)`.
+
+--
+
+- `\(\bar{y}\)` is unbiased for `\(\mu\)`. That is, for any data `\(y_i \overset{iid}{\sim} \mathcal{N} \left( \mu, \sigma^2\right)\)`, `\(\mathbb{E}[\bar{y}] = \mu\)`.
+
+--
+
+- However, recall that in the conjugate Normal-Gamma normal for example, the posterior expectation is a **weighted average** of the prior mean and the sample mean.
+
+--
+
+- That is, it is actually biased!
+
+
+
+---
+## Shrinkage
+
+- Usually through the weighting of the sample data and prior, the Bayes procedure has the tendency to pull the estimate of `\(\mu\)` toward the prior
+mean.
+
+--
+
+- Of course, the magnitude of the pull depends on the sample size.
+
+--
+
+- This "pulling" phenomenon is referred to as .hlight[shrinkage].
+
+--
+
+- &lt;div class="question"&gt;
+Why would we ever want to do this? Why not just stick with the MLE?
+&lt;/div&gt;
+
+--
+
+- Well, in part, because shrinkage estimators are often "more accurate" in prediction problems -- i.e. they tend to do a
+better job of predicting a future outcome or of recovering the actual parameter values. Remember variance-bias trade off!
+
+--
+
+- The fact that a biased estimator would do a better job in many prediction problems can be proven rigorously, and is referred to as .hlight[Stein's paradox].
+
+
+
+---
+## Modern relevance
+
+- Stein's result implies, in particular, that the sample mean is an *inadmissible* estimator of the mean of a multivariate normal distribution in more than two dimensions -- i.e. there are other estimators that will come closer to the true value in expectation.
+
+--
+
+- In fact, these are Bayes point estimators (the posterior expectation of the parameter `\(\mu\)` ).
+
+--
+
+- Most of what we do now in high-dimensional statistics is develop biased estimators that perform better than unbiased ones.
+
+--
+
+- Examples: lasso regression, ridge regression, various kinds of hierarchical Bayesian models, etc.
+
+--
+
+- Today we will get a very basic introduction to .hlight[Bayesian hierarchical models], which provide a formal and coherent framework for constructing shrinkage estimators.
+
+
+
+---
+## Why hierarchical models?
+
+- **Bayesian hierarchical models** is a sort of catch-all phrase for a large class of models that have several levels of conditional distributions making up the prior.
+
+--
+
+- Like simpler one-level priors, they also accomplish shrinkage. However, they are much more flexible.
+
+--
+
+- Why use them? Several reasons:
+
+  + We may want to exploit more complex dependence structures.
+
+--
+  + We may have many parameters relative to the amount of data that we have, and want to borrow information in estimating them.
+  
+--
+  + We may want to shrink toward something other than a simple prior mean/hyper-parameter.
+
+
+
+---
+## Comparing two groups
+
+- Suppose we want to do inference on mean body mass index (BMI) for two groups (male or female).
+
+--
+
+- BMI is known to often follow a normal distribution, so let's assume the same here.
+
+--
+
+- We should expect some relationship between the mean BMI for the two groups. 
+
+--
+
+- We may also think the shape of the two distributions would be relatively the same (at least as a simplifying assumption for now). 
+
+--
+
+- Thus, a reasonable model might be
+.block[
+.small[
+$$
+`\begin{split}
+y_{i,male}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\theta_m, \sigma^2\right); \ \ i = 1, \ldots, n_m;\\
+y_{i,female}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\theta_f, \sigma^2\right); \ \ i = 1, \ldots, n_f.\\
+\end{split}`
+$$
+]
+]
+
+  but with some relationship between `\(\theta_m\)` and `\(\theta_f\)`.
+
+
+
+---
+## Application
+
+- First, let's do classical inference on such data. The data we will use in the `\(\textsf{R}\)` package `rethinking`.
+  
+  ```r
+  #install.packages(c("coda","mvtnorm","devtools","loo","dagitty"))
+  #library(devtools)
+  #devtools::install_github("rmcelreath/rethinking",ref="Experimental")
+  #library(rethinking)
+  data(Howell1)
+  
+  Howell1[1:15,]
+  ```
+  
+  ```
+  ##     height   weight  age male
+  ## 1  151.765 47.82561 63.0    1
+  ## 2  139.700 36.48581 63.0    0
+  ## 3  136.525 31.86484 65.0    0
+  ## 4  156.845 53.04191 41.0    1
+  ## 5  145.415 41.27687 51.0    0
+  ## 6  163.830 62.99259 35.0    1
+  ## 7  149.225 38.24348 32.0    0
+  ## 8  168.910 55.47997 27.0    1
+  ## 9  147.955 34.86988 19.0    0
+  ## 10 165.100 54.48774 54.0    1
+  ## 11 154.305 49.89512 47.0    0
+  ## 12 151.130 41.22017 66.0    1
+  ## 13 144.780 36.03221 73.0    0
+  ## 14 149.900 47.70000 20.0    0
+  ## 15 150.495 33.84930 65.3    0
+  ```
+
+
+
+---
+## Data
+
+- For now, focus on data for individuals under age 15.
+  
+  ```r
+  htm &lt;- Howell1$height/100
+  bmi &lt;- Howell1$weight/(htm^2)
+  y_male &lt;- bmi[Howell1$age&lt;15 &amp; Howell1$male==1]
+  y_female &lt;- bmi[Howell1$age&lt;15 &amp; Howell1$male==0]
+  n_m &lt;- length(y_male)
+  n_f &lt;- length(y_female)
+  
+  n_f
+  ```
+  
+  ```
+  ## [1] 84
+  ```
+  
+  ```r
+  n_m
+  ```
+  
+  ```
+  ## [1] 77
+  ```
+  
+  ```r
+  summary(y_male)
+  ```
+  
+  ```
+  ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  ##   12.07   13.87   14.63   14.84   15.53   18.22
+  ```
+  
+  ```r
+  summary(y_female)
+  ```
+  
+  ```
+  ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  ##   9.815  13.559  14.305  14.585  15.712  18.741
+  ```
+
+
+
+---
+## Classical inference
+
+- No significant difference in group means.
+  
+  ```r
+  t.test(y_male,y_female)
+  ```
+  
+  ```
+  ## 
+  ## 	Welch Two Sample t-test
+  ## 
+  ## data:  y_male and y_female
+  ## t = 1.1204, df = 157.87, p-value = 0.2643
+  ## alternative hypothesis: true difference in means is not equal to 0
+  ## 95 percent confidence interval:
+  ##  -0.1947946  0.7054729
+  ## sample estimates:
+  ## mean of x mean of y 
+  ##  14.84037  14.58503
+  ```
+
+
+
+---
+## Simple weighted estimator
+
+- One parameterization  that can reflect some relationship between `\(\theta_m\)` and `\(\theta_f\)` is
+.block[
+.small[
+$$
+`\begin{split}
+y_{i,male}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu + \delta, \sigma^2\right); \ \ i = 1, \ldots, n_m;\\
+y_{i,female}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu - \delta, \sigma^2\right); \ \ i = 1, \ldots, n_f.\\
+\end{split}`
+$$
+]
+]
+
+--
+
+  where
+    + `\(\theta_m = \mu + \delta\)` and `\(\theta_f = \mu - \delta\)`,
+    
+    + `\(\mu = \dfrac{\theta_m + \theta_f}{2}\)` is the pooled average, and 
+    
+    + `\(\delta = \dfrac{\theta_m - \theta_f}{2}\)` is half of the population difference in means.
+
+---
+## Simple weighted estimator
+
+- Convenient prior: 
+  + `\(\pi(\mu, \delta, \sigma^2) = \pi(\mu) \cdot \pi(\delta) \cdot \pi(\sigma^2)\)`, where
+      - `\(\pi(\mu) = \mathcal{N}(\mu_0, \gamma_0^2)\)`,
+      
+      - `\(\pi(\delta) = \mathcal{N}(\delta_0, \tau_0^2)\)`, and
+      
+      - `\(\pi(\sigma^2) = \mathcal{IG}(\dfrac{\nu_0}{2}, \dfrac{\nu_0 \sigma_0^2}{2})\)`.
+      
+--
+
+- We will set the hyper-parameters as:
+  + `\(\mu_0 = 15, \gamma_0 = 5\)`,
+  + `\(\delta_0 = 0, \tau_0 = 3\)`,
+  + `\(\nu_0 = 1, \sigma_0 = 5\)`.
+
+--
+
+- &lt;div class="question"&gt;
+Do these values seem reasonable to you?
+&lt;/div&gt;
+
+
+
+---
+## Simple weighted estimator
+
+- Note that we can rewrite
+.block[
+.small[
+$$
+`\begin{split}
+y_{i,male}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu + \delta, \sigma^2\right); \ \ i = 1, \ldots, n_m;\\
+y_{i,female}  &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu - \delta, \sigma^2\right); \ \ i = 1, \ldots, n_f\\
+\end{split}`
+$$
+]
+]
+
+  as
+.block[
+.small[
+$$
+`\begin{split}
+(y_{i,male} - \delta) &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu, \sigma^2\right); \ \ i = 1, \ldots, n_m;\\
+(y_{i,female} + \delta)  &amp; \overset{iid}{\sim} \mathcal{N} \left(\mu, \sigma^2\right); \ \ i = 1, \ldots, n_f\\
+\end{split}`
+$$
+]
+]
+
+--
+
+  or
+.block[
+.small[
+$$
+`\begin{split}
+(y_{i,male} - \mu) &amp; \overset{iid}{\sim} \mathcal{N} \left(\delta, \sigma^2\right); \ \ i = 1, \ldots, n_m;\\
+(-1) (y_{i,female} - \mu)  &amp; \overset{iid}{\sim} \mathcal{N} \left(\delta, \sigma^2\right); \ \ i = 1, \ldots, n_f.\\
+\end{split}`
+$$
+]
+]
+
+  as needed, so we can leverage past results for the full conditionals.
+
+
+
+---
+## Full conditionals
+
+- For the full conditionals we will derive today, we will take advantage of previous results from the regular univariate normal model.
+
+--
+
+- Recall that if we assume
+.block[
+.small[
+`$$y_i \sim \mathcal{N}(\mu, \sigma^2), \ \ i=1, \ldots, n,$$`
+]
+]
+
+--
+
+  and set our priors to be
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu) &amp; = \mathcal{N}\left(\mu_0, \gamma_0^2\right).\\
+\pi(\sigma^2) &amp; = \mathcal{IG}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0 \sigma_0^2}{2}\right),\\
+\end{split}`
+$$
+]
+]
+
+--
+
+  then we have
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu, \sigma^2 | Y) &amp; \boldsymbol{\propto} \left\{ \prod_{i=1}^{n} p(y_{i} | \mu, \sigma^2 ) \right\} \cdot \pi(\mu) \cdot \pi(\sigma^2) \\
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Full conditionals
+
+- We have
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu | \sigma^2, Y) &amp; = \mathcal{N}\left(\mu_n, \gamma_n^2\right).\\
+\end{split}`
+$$
+]
+]
+
+  where
+.block[
+.small[
+$$
+`\begin{split}
+\gamma^2_n = \dfrac{1}{ \dfrac{n}{\sigma^2} + \dfrac{1}{\gamma_0^2} }; \ \ \ \ \ \ \ \ \mu_n &amp; = \gamma^2_n \left[ \dfrac{n}{\sigma^2} \bar{y} + \dfrac{1}{\gamma_0^2} \mu_0 \right],
+\end{split}`
+$$
+]
+]
+
+--
+
+- and
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\sigma^2 | \mu,Y) \boldsymbol{=} \mathcal{IG}\left(\dfrac{\nu_n}{2}, \dfrac{\nu_n\sigma_n^2}{2}\right),
+\end{split}`
+$$
+]
+]
+
+  where
+.block[
+.small[
+$$
+`\begin{split}
+\nu_n &amp; = \nu_0 + n; \ \ \ \ \ \ \ \sigma_n^2  = \dfrac{1}{\nu_n} \left[ \nu_0 \sigma_0^2 + \sum^n_{i=1} (y_i - \mu)^2 \right].\\
+\end{split}`
+$$
+]
+]
+
+
+
+
+
+---
+## Full conditionals
+
+- With `\(\pi(\mu) = \mathcal{N}(\mu_0, \gamma_0^2)\)`, we have
+.block[
+.small[
+$$
+`\begin{split}
+\mu | Y, \delta, \sigma^2 &amp; \sim \mathcal{N}(\mu_n, \gamma_n^2), \ \ \ \text{where}\\
+\\
+\gamma_n^2 &amp; = \dfrac{1}{\dfrac{1}{\gamma_0^2} + \dfrac{n_m + n_f}{\sigma^2} }\\
+\\
+\mu_n &amp; = \gamma_n^2 \left[\dfrac{\mu_0}{\gamma_0^2} + \dfrac{ n_m \overline{(y_{i,male} - \delta)} + n_f \overline{(y_{i,female} + \delta)} }{\sigma^2} \right].\\
+\end{split}`
+$$
+]
+]
+
+  where
+  + `\(\overline{(y_{i,male} - \delta)} = \dfrac{1}{n_m} \sum\limits_{i=1}^{n_m} (y_{i,male} - \delta)\)`, and
+  + `\(\overline{(y_{i,female} + \delta)} = \dfrac{1}{n_f} \sum\limits_{i=1}^{n_f} (y_{i,female} + \delta)\)`.
+
+
+---
+## Full conditionals
+
+- With `\(\pi(\delta) = \mathcal{N}(\delta_0, \tau_0^2)\)`, we have
+.block[
+.small[
+$$
+`\begin{split}
+\delta | Y, \mu, \sigma^2 &amp; \sim \mathcal{N}(\delta_n, \tau_n^2), \ \ \ \text{where}\\
+\\
+\tau_n^2 &amp; = \dfrac{1}{\dfrac{1}{\tau_0^2} + \dfrac{n_m + n_f}{\sigma^2} }\\
+\\
+\delta_n &amp; = \tau_n^2 \left[\dfrac{\delta_0}{\tau_0^2} + \dfrac{n_m \overline{(y_{i,male} - \mu)} + (-1) n_f \overline{(y_{i,female} + \mu)} }{\sigma^2} \right].\\
+\end{split}`
+$$
+]
+]
+
+  where
+  + `\(\overline{(y_{i,male} - \mu)} = \dfrac{1}{n_m} \sum\limits_{i=1}^{n_m} (y_{i,male} - \mu)\)`, and
+  + `\(\overline{(y_{i,female} - \mu)} = \dfrac{1}{n_f} \sum\limits_{i=1}^{n_f} (y_{i,female} - \mu)\)`.
+
+
+
+---
+## Full conditionals
+
+- With `\(\pi(\sigma^2) = \mathcal{IG}(\dfrac{\nu_0}{2}, \dfrac{\nu_0 \sigma_0^2}{2})\)`, we have
+.block[
+.small[
+$$
+`\begin{split}
+\sigma^2 | Y, \mu, \delta &amp; \sim \mathcal{IG}(\dfrac{\nu_n}{2}, \dfrac{\nu_n \sigma_n^2}{2}), \ \ \ \text{where}\\
+\\
+\nu_n &amp; = \nu_n + n_m + n_f\\
+\\
+\sigma_n^2 &amp; = \dfrac{1}{\nu_n} \left[\nu_0\sigma_0^2 + \sum\limits_{i=1}^{n_m} (y_{i,male} - [\mu + \delta])^2 + \sum\limits_{i=1}^{n_f} (y_{i,female} - [\mu - \delta])^2 \right].\\
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Application to data
+
+
+```r
+#priors
+mu0 &lt;- 15; gamma02 &lt;- 5^2
+delta0 &lt;- 0; tau02 &lt;- 3^2
+nu0 &lt;- 1; sigma02 &lt;- 5^2
+
+#starting values
+mu &lt;- (mean(y_male) + mean(y_female))/2
+delta &lt;- (mean(y_male) - mean(y_female))/2
+#no need for starting values for sigma_squared, we can sample it first
+
+MU &lt;- DELTA &lt;- SIGMA2 &lt;- NULL
+```
+
+
+
+
+---
+## Application to data
+
+
+```r
+#set seed
+set.seed(1234)
+
+#set number of iterations and burn-in
+n_iter &lt;- 10000; burn_in &lt;- 0.2*n_iter
+
+##Gibbs sampler
+for (s in 1:(n_iter+burn_in)) {
+#update sigma2
+sigma2 &lt;- 1/rgamma(1,(nu0 + n_m + n_f)/2,
+                   (nu0*sigma02 + sum((y_male-mu-delta)^2) + sum((y_female-mu+delta)^2))/2)
+
+#update mu
+gamma2n &lt;- 1/(1/gamma02 + (n_m + n_f)/sigma2)
+mun &lt;- gamma2n*(mu0/gamma02 + sum(y_male-delta)/sigma2 + sum(y_female+delta)/sigma2)
+mu &lt;- rnorm(1,mun,sqrt(gamma2n))
+
+#update delta
+tau2n &lt;- 1/(1/tau02 + (n_m+n_f)/sigma2)
+deltan &lt;- tau2n*(delta0/tau02 + sum(y_male-mu)/sigma2 - sum(y_female-mu)/sigma2)
+delta &lt;- rnorm(1,deltan,sqrt(tau2n))
+
+#save parameter values
+MU &lt;- c(MU,mu); DELTA &lt;- c(DELTA,delta); SIGMA2 &lt;- c(SIGMA2,sigma2)
+}
+```
+
+
+
+---
+## Posterior summaries
+
+
+```r
+#library(coda)
+MU.mcmc &lt;- mcmc(MU,start=1)
+summary(MU.mcmc)
+```
+
+```
+## 
+## Iterations = 1:12000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 12000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean             SD       Naive SE Time-series SE 
+##      14.712517       0.118765       0.001084       0.001089 
+## 
+## 2. Quantiles for each variable:
+## 
+##  2.5%   25%   50%   75% 97.5% 
+## 14.48 14.63 14.71 14.79 14.95
+```
+
+```r
+(mean(y_male) + mean(y_female))/2 #compare to data
+```
+
+```
+## [1] 14.7127
+```
+
+
+
+---
+## Posterior summaries
+
+
+```r
+DELTA.mcmc &lt;- mcmc(DELTA,start=1)
+summary(DELTA.mcmc)
+```
+
+```
+## 
+## Iterations = 1:12000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 12000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean             SD       Naive SE Time-series SE 
+##       0.127657       0.119522       0.001091       0.001091 
+## 
+## 2. Quantiles for each variable:
+## 
+##     2.5%      25%      50%      75%    97.5% 
+## -0.10691  0.04791  0.12743  0.20796  0.36407
+```
+
+```r
+summary((2*DELTA)) #rescale as difference in group means
+```
+
+```
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.63464  0.09582  0.25487  0.25531  0.41592  1.23660
+```
+
+```r
+mean(y_male) - mean(y_female) #compare to data
+```
+
+```
+## [1] 0.2553392
+```
+
+
+
+---
+## Posterior summaries
+
+
+```r
+SIGMA2.mcmc &lt;- mcmc(SIGMA2,start=1)
+summary(SIGMA2.mcmc)
+```
+
+```
+## 
+## Iterations = 1:12000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 12000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean             SD       Naive SE Time-series SE 
+##       2.287927       0.257689       0.002352       0.002352 
+## 
+## 2. Quantiles for each variable:
+## 
+##  2.5%   25%   50%   75% 97.5% 
+## 1.833 2.107 2.272 2.455 2.841
+```
+
+
+
+---
+## Diagnostics
+
+
+```r
+plot(MU.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Diagnostics
+
+
+```r
+autocorr.plot(MU.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Diagnostics
+
+
+```r
+plot(DELTA.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Diagnostics
+
+
+```r
+autocorr.plot(DELTA.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Diagnostics
+
+
+```r
+plot(SIGMA2.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Diagnostics
+
+
+```r
+autocorr.plot(SIGMA2.mcmc)
+```
+
+&lt;img src="16-hierarchical-models-II_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Application to data
+
+- Posterior probability that boys have larger average BMI than girls is 0.86!
+
+- Posterior medians and 95% credible intervals for the group means are actually quite similar to the unpooled (gender specific) intervals from classified inference.
+  
+  ```r
+  #mean for boys
+  quantile((MU+DELTA),probs=c(0.025,0.5,0.975))
+  ```
+  
+  ```
+  ##     2.5%      50%    97.5% 
+  ## 14.50255 14.84146 15.17925
+  ```
+  
+  ```r
+  #mean for girls
+  quantile((MU-DELTA),probs=c(0.025,0.5,0.975))
+  ```
+  
+  ```
+  ##     2.5%      50%    97.5% 
+  ## 14.26848 14.58276 14.90761
+  ```
+  
+  ```r
+  #posterior probability girls have larger BMI than boys
+  mean(DELTA &gt; 0)
+  ```
+  
+  ```
+  ## [1] 0.8571667
+  ```
+
+
+
+---
+## Application to data
+
+- Let's look at a different sub-population. For older individuals `\(&gt; 75\)`, we only have 8 male and 4 female.
+  
+  ```r
+  y_male &lt;- bmi[Howell1$age &gt; 75 &amp; Howell1$male==1]
+  y_female &lt;- bmi[Howell1$age &gt; 75 &amp; Howell1$male==0]
+  n_m &lt;- length(y_male)
+  n_f &lt;- length(y_female)
+  n_m
+  ```
+  
+  ```
+  ## [1] 8
+  ```
+  
+  ```r
+  n_f
+  ```
+  
+  ```
+  ## [1] 4
+  ```
+
+
+
+---
+## Application to data
+
+- A 95% confidence interval for the difference between genders in BMI (estimated as 0.24) is (-4.20,4.68).
+  
+  ```r
+  mean(y_male) - mean(y_female)
+  ```
+  
+  ```
+  ## [1] 0.2408966
+  ```
+  
+  ```r
+  t.test(y_male,y_female)
+  ```
+  
+  ```
+  ## 
+  ## 	Welch Two Sample t-test
+  ## 
+  ## data:  y_male and y_female
+  ## t = 0.13801, df = 5.1869, p-value = 0.8954
+  ## alternative hypothesis: true difference in means is not equal to 0
+  ## 95 percent confidence interval:
+  ##  -4.197948  4.679741
+  ## sample estimates:
+  ## mean of x mean of y 
+  ##  18.06751  17.82662
+  ```
+
+
+
+
+---
+## Application to data
+
+- Let's apply the shrinkage model with these priors:
+  + `\(\mu_0 = 18, \gamma_0 = 5\)`,
+  + `\(\delta_0 = 0, \tau_0 = 3\)`,
+  + `\(\nu_0 = 1, \sigma_0 = 5\)`.
+  
+
+
+--
+
+- Using the shrinkage model, the posterior mean is 0.25 with 95% CI (-3.45, 3.88).
+  
+  ```r
+  mean((DELTA*2))
+  ```
+  
+  ```
+  ## [1] 0.2493733
+  ```
+  
+  ```r
+  quantile((DELTA*2),probs=c(0.025,0.5,0.975))
+  ```
+  
+  ```
+  ##       2.5%        50%      97.5% 
+  ## -3.4466931  0.2758598  3.8762543
+  ```
+
+- Our precision has been improved by borrowing of information across the groups. Of course the prior is important here given the sample sizes.
+
+
+
+
+---
+## Comparing multiple groups
+
+- Suppose we wish to investigate the mean (and distribution) of test scores for students at `\(J\)` different high schools.
+
+--
+
+- In each school `\(j\)`, where `\(j = 1, \ldots, J\)`, suppose we test a random sample of `\(n_j\)` students.
+
+--
+
+- Let `\(y_{ij}\)` be the test score for the `\(i\)`th student in school `\(j\)`, with `\(i = 1,\ldots, n_j\)`, with
+.block[
+.small[
+`$$y_{ij} | \theta_j, \sigma^2_j \sim \mathcal{N} \left( \theta_j, \sigma^2_j\right)$$`
+]
+]
+
+  where for each school `\(j\)`, `\(\theta_j\)` is the school-wide average test score, and `\(\sigma^2_j\)` is the school-wide variance of individual test scores.
+  
+--
+
+- This is what we did for the the Pygmalion study, job training data and the science classroom exercise on homework 3.
+
+
+
+---
+## School testing example
+
+- Classical inference for each school can be based on large sample 95% CI: `\(\bar{y}_j \pm 1.96 \sqrt{s^2_j/n_j}\)`, where `\(\bar{y}_j\)` is the sample average in school `\(j\)`, and `\(s^2_j\)` is the sample variance in school `\(j\)`.
+
+--
+
+- Clearly, we can overfit the data within schools, for example, what if we only have 4 students from one of the schools? `\(\bar{y}_j\)` can be a good estimate if `\(n_j\)` is large but it may be poor if `\(n_j\)` is small.
+
+--
+
+- .hlight[Option II]: alternatively, we might believe that `\(\theta_j = \mu\)` for all `\(j\)`; that is, all schools have the same mean. This is the assumption (null hypothesis) in ANOVA models for example. We can also set `\(\sigma^2_j = \sigma^2\)` for all `\(J\)`.
+
+--
+
+- Option I ignores that the `\(\theta_j\)`'s should be reasonably similar, whereas option II ignores any differences between them.
+
+--
+
+- It would be nice to find a compromise! Borrowing information across, and shrinking our estimate towards a **grand mean** could be very useful here.
+
+
+
+
+---
+## School testing example
+
+- For the Pygmalion study and job training data, we focused using priors that are independent between the groups.
+
+--
+
+- For example, in the conjugate case, we would have
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\theta_j|\sigma^2_j) &amp; = \mathcal{N}\left(\mu_0, \dfrac{\sigma^2_j}{\kappa_0}\right)\\
+\pi(\sigma^2_j) &amp; = \mathcal{IG} \left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)\\
+\end{split}`
+$$
+]
+]
+
+  for some hyperparameters (constants), `\(\mu_0\)`, `\(\kappa_0\)`, `\(\nu_0\)`, and `\(\sigma_0^2\)`.
+
+--
+
+- In the semi-conjugate case,
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\theta_j) &amp; = \mathcal{N}\left(\mu_0, \sigma^2_0\right)\\
+\pi(\sigma^2_j) &amp; = \mathcal{IG} \left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\gamma_0^2}{2}\right)\\
+\end{split}`
+$$
+]
+]
+
+  for some hyperparameters (constants), `\(\mu_0\)`, `\(\sigma^2_0\)`, `\(\nu_0\)`, and `\(\gamma_0^2\)`.
+
+
+
+---
+## Hierarchical normal model
+
+- Instead, we can assume that the `\(\theta_j\)`'s are drawn from a distribution based on the following: conceive of the schools themselves as being a random sample from all possible schools.
+
+--
+
+- For now, assume the variance is constant across schools. The hierarchical normal model assumes normal sampling models both within and between groups:
+.block[
+.small[
+$$
+`\begin{split}
+y_{ij} | \theta_j, \sigma^2 &amp; \sim \mathcal{N} \left( \theta_j, \sigma^2\right); \ \ \ i = 1,\ldots, n_j\\
+\theta_j | \mu, \tau^2 &amp; \sim \mathcal{N} \left( \mu, \tau^2 \right); \ \ \ j = 1, \ldots, J,
+\end{split}`
+$$
+]
+]
+
+  which gives us an extra level in the prior on the means, which leads to sharing of information across the groups in estimating the group-specific means.
+  
+--
+
+- We have an extra variance parameter `\(\tau^2\)`. Comparing `\(\tau^2\)` to `\(\sigma^2\)` tells us how much of the variation in `\(Y\)` is due to within-group versus between-group variation.
+
+
+
+---
+## Hierarchical normal model
+
+- Standard semi-conjugate priors are given by
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu) &amp; = \mathcal{N}\left(\mu_0, \gamma^2_0\right)\\
+\pi(\sigma^2) &amp; = \mathcal{IG} \left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)\\
+\pi(\tau^2) &amp; = \mathcal{IG} \left(\dfrac{\eta_0}{2}, \dfrac{\eta_0\tau_0^2}{2}\right).\\
+\end{split}`
+$$
+]
+]
+  
+--
+
+  with
+    + `\(\mu_0\)`: best guess of average of school averages
+    + `\(\gamma^2_0\)`: set based on plausible ranges of values of `\(\mu\)`
+    
+--
++ `\(\tau_0^2\)`: best guess of variance of school averages
+    + `\(\eta_0\)`: set based on how tight prior for `\(\tau^2\)` is around `\(\tau_0^2\)`
+    
+--
++ `\(\sigma_0^2\)`: best guess of variance of individual test scores around respective school means
+    + `\(\nu_0\)`: set based on how tight prior for `\(\sigma^2\)` is around `\(\sigma_0^2\)`.
+
+
+
+---
+## Exchangeability
+
+- This model relies heavily on exchangeability across units at each level.
+
+--
+
+- For example, we assume the schools are a random sample from the population of all schools, and the students within schools
+are a random sample of all the students in each school.
+
+--
+
+- This is not always completely true.
+
+--
+
+- Note: we can allow the variance to vary across schools if desired (and we will soon in fact).
+
+
+
+---
+## Exchangeability
+
+- Turns out that **conditional exchangeability** would be enough if we control for relevant variables in our modeling.
+
+--
+
+- For example, the schools in Chapel Hill/Carrboro are not entirely exchangeable.
+
+--
+
+- For example, Phoenix Academy is for students on long-term out-of-school suspension or who need to make up work due to extended absences (e.g., pregnancy), and Memorial Hospital School is for children battling serious illnesses.
+
+--
+
+- However, if we condition on school type (public, charter, private, special services, home), the schools may then be exchangeable.
+
+
+
+---
+## Posterior inference
+
+- Recall the model is
+.block[
+.small[
+$$
+`\begin{split}
+y_{ij} | \theta_j, \sigma^2 &amp; \sim \mathcal{N} \left( \theta_j, \sigma^2\right); \ \ \ i = 1,\ldots, n_j\\
+\theta_j | \mu, \tau^2 &amp; \sim \mathcal{N} \left( \mu, \tau^2 \right); \ \ \ j = 1, \ldots, J,
+\end{split}`
+$$
+]
+]
+
+--
+
+- Under our prior specification, we can factor the posterior as follows:
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y) &amp; \boldsymbol{\propto} p(y | \theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2)\\
+&amp; \ \ \ \ \times p(\theta_1, \ldots, \theta_J | \mu, \sigma^2,\tau^2)\\
+&amp; \ \ \ \ \times \pi(\mu, \sigma^2,\tau^2)\\
+\\
+&amp; \boldsymbol{=} p(y | \theta_1, \ldots, \theta_J, \sigma^2 )\\
+&amp; \ \ \ \ \times p(\theta_1, \ldots, \theta_J | \mu,\tau^2)\\
+&amp; \ \ \ \ \times \pi(\mu) \cdot \pi(\sigma^2) \cdot \pi(\tau^2)\\
+\\
+&amp; \boldsymbol{=} \left\{ \prod_{j=1}^{J} \prod_{i=1}^{n_j} p(y_{ij} | \theta_j, \sigma^2 ) \right\}\\
+&amp; \ \ \ \ \times \left\{ \prod_{j=1}^{J} p(\theta_j | \mu,\tau^2) \right\}\\
+&amp; \ \ \ \ \times\pi(\mu) \cdot \pi(\sigma^2) \cdot \pi(\tau^2)\\
+\end{split}`
+$$
+]
+]
+  
+
+
+---
+## Full conditional for grand mean
+
+- The full conditional distribution of `\(\mu\)` is proportional to the part of the joint posterior `\(\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)\)` that involves `\(\mu\)`.
+
+--
+
+- That is,
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu | \theta_1, \ldots, \theta_J, \sigma^2,\tau^2, Y) &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} p(\theta_j | \mu,\tau^2) \right\} \cdot \pi(\mu).
+\end{split}`
+$$
+]
+]
+
+--
+
+- This looks like the full conditional distribution from the one-sample normal case, so you can show that
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu | \theta_1, \ldots, \theta_J, \sigma^2,\tau^2, Y) &amp; = \mathcal{N}\left(\mu_n, \gamma^2_n \right) \ \ \ \ \textrm{where}\\
+\\
+\gamma^2_n = \dfrac{1}{ \dfrac{J}{\tau^2} + \dfrac{1}{\gamma_0^2}  } ; \ \ \ \ \ \ \ \  \mu_n = \gamma^2_n \left[ \dfrac{J}{\tau^2} \bar{\theta} + \dfrac{1}{\gamma_0^2} \mu_0 \right]
+\end{split}`
+$$
+]
+]
+
+  and `\(\bar{\theta} = \frac{1}{J} \sum\limits^J_{j=1} \theta_j\)`.
+
+
+
+
+---
+## Full conditionals for group means
+
+- Similarly, the full conditional distribution of each `\(\theta_j\)` is proportional to the part of the joint posterior `\(\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)\)` that involves `\(\theta_j\)`.
+
+--
+
+- That is,
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\theta_j | \mu, \sigma^2,\tau^2, Y) &amp; \boldsymbol{\propto} \left\{ \prod_{i=1}^{n_j} p(y_{ij} | \theta_j, \sigma^2 ) \right\} \cdot p(\theta_j | \mu,\tau^2) \\
+\end{split}`
+$$
+]
+]
+
+--
+
+- Those terms include a normal for `\(\theta_j\)` multiplied by a product of normals in which `\(\theta_j\)` is the mean, again mirroring the one-sample case, so you can show that
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\theta_j | \mu, \sigma^2,\tau^2, Y) &amp; = \mathcal{N}\left(\theta_j^\star, \nu_j^\star \right) \ \ \ \ \textrm{where}\\
+\\
+\nu_j^\star &amp; = \dfrac{1}{ \dfrac{n_j}{\sigma^2} + \dfrac{1}{\tau^2}  } ; \ \ \ \ \ \ \ \theta_j^\star = \nu_j^\star \left[ \dfrac{n_j}{\sigma^2} \bar{y}_j + \dfrac{1}{\tau^2} \mu \right]
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Full conditionals for group means
+
+- Our estimate for each `\(\theta_j\)` is a weighted average of `\(\bar{y}_j\)` and `\(\mu\)`, ensuring that we are borrowing information across all levels through `\(\mu\)` and `\(\tau^2\)`.
+
+--
+
+- The weights for the weighted average is determined by relative precisions from the data and from the second level model.
+
+--
+  
+- The groups with smaller `\(n_j\)` have estimated `\(\theta_j^\star\)` closer to `\(\mu\)` than schools with larger `\(n_j\)`.
+
+--
+
+- Thus, degree of shrinkage of `\(\theta_j\)` depends on ratio of within-group to between-group variances.
+
+
+
+
+---
+## Full conditionals for across-group variance
+
+- The full conditional distribution of `\(\tau^2\)` is proportional to the part of the joint posterior `\(\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)\)` that involves `\(\tau^2\)`.
+
+--
+
+- That is,
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\tau^2 | \theta_1, \ldots, \theta_J, \mu, \sigma^2, Y) &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} p(\theta_j | \mu,\tau^2) \right\} \cdot \pi(\tau^2)\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- As in the case for `\(\mu\)`, this looks like the one-sample normal problem, and our full conditional posterior is
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\tau^2 | \theta_1, \ldots, \theta_J, \mu, \sigma^2, Y) &amp; = \mathcal{IG} \left(\dfrac{\eta_n}{2}, \dfrac{\eta_n\tau_n^2}{2}\right) \ \ \ \ \textrm{where}\\
+\\
+\eta_n = \eta_0 + J ; \ \ \ \ \ \ \ \tau_n^2 &amp; = \dfrac{1}{\eta_n} \left[\eta_0\tau_0^2 + \sum\limits_{j=1}^{J} (\theta_j - \mu)^2 \right].\\
+\end{split}`
+$$
+]
+]
+
+
+
+
+---
+## Full conditionals for within-group variance
+
+- Finally, the full conditional distribution of `\(\sigma^2\)` is proportional to the part of the joint posterior `\(\pi(\theta_1, \ldots, \theta_J, \mu, \sigma^2,\tau^2 | Y)\)` that involves `\(\sigma^2\)`.
+
+--
+
+- That is,
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\sigma^2 | \theta_1, \ldots, \theta_J, \mu, \tau^2, Y) &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} \prod_{i=1}^{n_j} p(y_{ij} | \theta_j, \sigma^2 ) \right\} \cdot \pi(\sigma^2)\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- We can again take advantage of the one-sample normal problem, so that our full conditional posterior is
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\sigma^2 | \theta_1, \ldots, \theta_J, \mu, \tau^2, Y) &amp; = \mathcal{IG} \left(\dfrac{\nu_n}{2}, \dfrac{\nu_n\sigma_n^2}{2}\right) \ \ \ \ \textrm{where}\\
+\\
+\nu_n = \nu_0 + \sum\limits_{j=1}^{J} n_j ; \ \ \ \ \ \ \ \sigma_n^2 &amp; = \dfrac{1}{\nu_n} \left[\nu_0\sigma_0^2 + \sum\limits_{j=1}^{J}\sum\limits_{i=1}^{n_j} (y_{ij} - \theta_j)^2 \right].\\
+\end{split}`
+$$
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -198,6 +198,7 @@ lessons:
     reading: "reading-16.html"
     #slides: "lec-slides/16-hierarchical-models-II.html"
     #slidespdf: "lec-slides/16-hierarchical-models-II.pdf"
+    hw: "hw-06.html"
 
   - date: "Fri, Mar 27"
     title: "Regression models cont'd"

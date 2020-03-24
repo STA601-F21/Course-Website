@@ -60,7 +60,7 @@ If you miss any of the quizzes or midterm, your grade will depend more on the fi
 
 
 ### Late Submission Policy
-- Generally, ou will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
+- Generally, you will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
 
     <font color="darkred">However, starting March 23, you will lose 25% of the total points on each homework if you submit within the first 24 hours after it is due, 50% of the total points if you submit within the first 48 hours after it is due, and 100% of the total points if you submit later than that.</font>
   
