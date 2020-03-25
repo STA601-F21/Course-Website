@@ -194,14 +194,14 @@ lessons:
   - title: "PART VI: REGRESSION MODELS AND METROPOLIS-HASTINGS"
   
   - date: "Wed, Mar 25"
-    title: "Hierarchical models II; introduction to regression models"
+    title: "Hierarchical models II"
     reading: "reading-16.html"
-    #slides: "lec-slides/16-hierarchical-models-II.html"
-    #slidespdf: "lec-slides/16-hierarchical-models-II.pdf"
+    slides: "lec-slides/16-hierarchical-models-II.html"
+    slidespdf: "lec-slides/16-hierarchical-models-II.pdf"
     hw: "hw-06.html"
 
   - date: "Fri, Mar 27"
-    title: "Regression models cont'd"
+    title: "Introduction to regression models"
     reading: "reading-17.html"
   
   - title: "WEEK 13"

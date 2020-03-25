@@ -11,3 +11,5 @@ ggplot2
 rstan
 dagitty
 rethinking
+dplyr
+plotrix
