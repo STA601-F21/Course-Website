@@ -1,5 +1,5 @@
 ---
-title: "Hierarchical models II; introduction to regression models"
+title: "Introduction to regression models"
 output: 
   html_document:
     css: reading.css
@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Required:
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
+    + Section 9.1: The linear regression model
     + Section 9.2: Bayesian estimation for a regression model
     + Section 9.3: Model selection
     + Section 9.4: Discussion and further references
@@ -22,7 +23,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Optional:
 
 - [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 14.1: Conditional modeling
     + Section 14.2: Bayesian analysis of the classical regression model
+    + Section 14.4: Goals of regression analysis
+    + Section 14.5: Assembling the matrix of explanatory variables
     + Section 14.6: Regularization and dimension reduction for multiple predictors
     + Section 14.7: Unequal variances and correlations
     
