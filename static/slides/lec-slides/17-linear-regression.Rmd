@@ -373,7 +373,7 @@ colnames(OTHER_PAR) <- c("mu","tau_sq","sigma_0_sq","nu_0")
 
 
 ---
-## Posterior inference
+## Posterior inference for group means
 
 The blue lines indicate the posterior median and a 95% for $\mu$. The red asterisks indicate the data values $\bar{y}_j$.
 
@@ -484,11 +484,11 @@ abline(h=scoremed[3],col=4,lty=2)
 
 
 ---
-## Posterior inference
+## Posterior inference for group variances
 
 Posterior summaries of $\sigma^2_j$.
 
-```{r fig.height=4.8, echo=F}
+```{r fig.height=4.5, echo=F}
 ##plot of school-specific variances
 plotCI(idvec,rmat[2,],li=rmat[1,],ui=rmat[3,],
        main='Posterior medians and 95% CI for schools',
@@ -576,10 +576,10 @@ class: center, middle
 ---
 ## Normal regression model
 
-- The model assumes the following distribution for a response variable $Y_i$ given multiple covariates/predictors $\boldsymbol{x}_i = (x_{i1}, x_{i2}, \ldots, x_{ip})$.
+- The model assumes the following distribution for a response variable $Y_i$ given multiple covariates/predictors $\boldsymbol{x}_i = (1, x_{i1}, x_{i2}, \ldots, x_{i(p-1)})$.
 .block[
 .small[
-$$Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \ldots + \beta_p x_{ip} + \epsilon_i; \ \ \ \  \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2).$$
+$$Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \ldots + \beta_{p-1} x_{i(p-1)} + \epsilon_i; \ \ \ \  \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2).$$
 ]
 ]
 
@@ -592,7 +592,7 @@ $$Y_i = \boldsymbol{\beta}^T \boldsymbol{x}_i + \epsilon_i; \ \ \ \  \epsilon_i 
 ]
 ]
 
-  where $\boldsymbol{\beta} = (\beta_1, \beta_2, \ldots, \beta_p)$.
+  where $\boldsymbol{\beta} = (\beta_0, \beta_1, \beta_2, \ldots, \beta_{p-1})$.
 
 --
 
@@ -654,10 +654,10 @@ Y_n \\
 \hspace{0.5em}
 \boldsymbol{X} =
 \begin{bmatrix}
-1 & x_{11} & x_{12} & \ldots & x_{1p} \\
-1 & x_{21} & x_{22} & \ldots & x_{2p} \\
+1 & x_{11} & x_{12} & \ldots & x_{1(p-1)} \\
+1 & x_{21} & x_{22} & \ldots & x_{2(p-1)} \\
 \vdots & \vdots & \vdots & \vdots & \vdots \\
-1 & x_{n1} & x_{n2} & \ldots & x_{np} \\
+1 & x_{n1} & x_{n2} & \ldots & x_{n(p-1)} \\
 \end{bmatrix}
 \hspace{0.5em}
 \boldsymbol{\beta} =
@@ -666,7 +666,7 @@ Y_n \\
 \beta_1\\
 \beta_2 \\
 \vdots \\
-\beta_p \\
+\beta_{p-1} \\
 \end{bmatrix}
 \hspace{0.5em}
 \boldsymbol{\epsilon} =
@@ -692,7 +692,7 @@ $$
 - Then, we can write the model as
 .block[
 .small[
-$$\boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}; \ \ \boldsymbol{\epsilon} \sim \mathcal{N}_p(0, \sigma^2 \boldsymbol{I}_{p\times p}).$$
+$$\boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}; \ \ \boldsymbol{\epsilon} \sim \mathcal{N}_n(0, \sigma^2 \boldsymbol{I}_{n\times n}).$$
 ]
 ]
 
@@ -700,7 +700,7 @@ $$\boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}; \ \
 
 - That is, in multivariate form, we have
 .block[
-$$\boldsymbol{Y} \sim \mathcal{N}(\boldsymbol{X}\boldsymbol{\beta}, \sigma^2\boldsymbol{I}_{p\times p}).$$
+$$\boldsymbol{Y} \sim \mathcal{N}_n(\boldsymbol{X}\boldsymbol{\beta}, \sigma^2\boldsymbol{I}_{n\times n}).$$
 ]
 
 
@@ -727,7 +727,7 @@ $$\hat{\boldsymbol{y}} =  \boldsymbol{X}\hat{\boldsymbol{\beta}}_{\text{ols}} = 
 
 --
 
-- The variance of the OLS estimates of all $(p+1)$ coefficients (intercept plus $p$ slopes) is
+- The variance of the OLS estimates of all $p$ coefficients is
 .block[
 .small[
 $$\mathbb{V}ar\left[ \hat{\boldsymbol{\beta}}_{\text{ols}} \right] = \sigma^2 \left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1}.$$
@@ -739,7 +739,7 @@ $$\mathbb{V}ar\left[ \hat{\boldsymbol{\beta}}_{\text{ols}} \right] = \sigma^2 \l
 - Finally,
 .block[
 .small[
-$$s_e^2 = \dfrac{(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}_{\text{ols}})^T(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}_{\text{ols}})}{n-(p+1)}.$$
+$$s_e^2 = \dfrac{(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}_{\text{ols}})^T(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}_{\text{ols}})}{n-p}.$$
 ]
 ]
 
