@@ -614,7 +614,7 @@ $$
 &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} p(\sigma^2_j | \nu_0, \sigma_0^2) \right\} \cdot \pi(\nu_0)\\
 &amp; \propto \ \mathcal{IG} \left(\sigma^2_j; \dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right) \  \cdot \ e^{-\alpha \nu_0} \\
 &amp; \boldsymbol{=} \left[ \prod_{j=1}^{J} \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \left(\sigma^2_j\right)^{-\left(\dfrac{\nu_0}{2}+1 \right)} e^{-\dfrac{\nu_0\sigma_0^2}{2 (\sigma^2_j)}} \right]  \cdot e^{-\alpha \nu_0} \\
-&amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}-1 \right)} \cdot  e^{- \nu_0 \left[ \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right]  \cdot e^{-\alpha \nu_0} \\
+&amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}+1 \right)} \cdot  e^{- \nu_0 \left[ \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right]  \cdot e^{-\alpha \nu_0} \\
 \end{split}`
 $$
 ]
@@ -630,7 +630,7 @@ $$
 .small[
 $$
 `\begin{split}
-\pi(\nu_0 | \cdots \cdots ) &amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}-1 \right)} \cdot  e^{- \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right], \\
+\pi(\nu_0 | \cdots \cdots ) &amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}+1 \right)} \cdot  e^{- \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right], \\
 \end{split}`
 $$
 ]
@@ -664,7 +664,7 @@ $$
 \pi(\nu_0 | \cdots \cdots ) &amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}-1 \right)} \cdot  e^{- \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right]\\
 \\
 \Rightarrow \ \text{ln} \pi(\nu_0 | \cdots \cdots ) &amp;  \boldsymbol{\propto} \left(\dfrac{J\nu_0}{2} \right) \text{ln} \left( \dfrac{\nu_0\sigma_0^2}{2} \right) - J\text{ln}\left[ \Gamma\left(\dfrac{\nu_0}{2} \right) \right] \\
-&amp; \ \ \ \ + \left(\dfrac{\nu_0}{2}-1 \right) \left(\sum_{j=1}^{J} \text{ln} \left[\dfrac{1}{\sigma^2_j} \right] \right) \\
+&amp; \ \ \ \ + \left(\dfrac{\nu_0}{2}+1 \right) \left(\sum_{j=1}^{J} \text{ln} \left[\dfrac{1}{\sigma^2_j} \right] \right) \\
 &amp; \ \ \ \ - \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right] \\
 \end{split}`
 $$
@@ -898,7 +898,7 @@ $$
 $$
 `\begin{split}
 \text{ln} \pi(\nu_0 | \cdots \cdots ) &amp;  \boldsymbol{\propto} \left(\dfrac{J\nu_0}{2} \right) \text{ln} \left( \dfrac{\nu_0\sigma_0^2}{2} \right) - J\text{ln}\left[ \Gamma\left(\dfrac{\nu_0}{2} \right) \right] \\
-&amp; \ \ \ \ + \left(\dfrac{\nu_0}{2}-1 \right) \left(\sum_{j=1}^{J} \text{ln} \left[\dfrac{1}{\sigma^2_j} \right] \right) \\
+&amp; \ \ \ \ + \left(\dfrac{\nu_0}{2}+1 \right) \left(\sum_{j=1}^{J} \text{ln} \left[\dfrac{1}{\sigma^2_j} \right] \right) \\
 &amp; \ \ \ \ - \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right] \\
 \end{split}`
 $$
@@ -1023,7 +1023,7 @@ for(s in 1:(n_iter+burn_in)){
   #update nu_0
   log_prob_nu_0 &lt;- (J*nu_0_grid/2)*log(nu_0_grid*sigma_0_sq/2) -
     J*lgamma(nu_0_grid/2) +
-    (nu_0_grid/2-1)*sum(log(1/sigma_sq)) -
+    (nu_0_grid/2+1)*sum(log(1/sigma_sq)) -
     nu_0_grid*(alpha + sigma_0_sq*sum(1/sigma_sq)/2)
   nu_0 &lt;- sample(nu_0_grid,1, prob = exp(log_prob_nu_0 - max(log_prob_nu_0)) )
   #this last step substracts the maximum logarithm from all logs

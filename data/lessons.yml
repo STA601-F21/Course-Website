@@ -203,7 +203,9 @@ lessons:
   - date: "Fri, Mar 27"
     title: "Introduction to regression models"
     reading: "reading-17.html"
-  
+    slides: "lec-slides/17-linear-regression.html"
+    slidespdf: "lec-slides/17-linear-regression.pdf"
+    
   - title: "WEEK 13"
   
   - date: "Mon, Mar 30"
