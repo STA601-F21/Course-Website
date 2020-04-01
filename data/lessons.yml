@@ -213,11 +213,14 @@ lessons:
     lab: "lab-09-glms-blank.html"
   
   - date: "Wed, Apr 1"
-    title: "Regression models cont'd; intro to the Metropolis algorithm"
+    title: "Regression models cont'd"
     reading: "reading-18.html"
+    slides: "lec-slides/18-linear-regression-II.html"
+    slidespdf: "lec-slides/18-linear-regression-II.pdf"
+    hw: "hw-07.html"
     
   - date: "Fri, Apr 3"
-    title: "The Metropolis-Hastings algorithm"
+    title: "Metropolis and Metropolis-Hastings I"
     reading: "reading-19.html"
   
   - title: "WEEK 14"
