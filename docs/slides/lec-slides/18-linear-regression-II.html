@@ -583,7 +583,7 @@ p(y_{n+1}|Y = (y_1, \ldots, y_n)) &amp; = \int \int p(y_{n+1}|\gamma, \theta_\ga
 &amp; = \int \int p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma) \cdot \Pr[\gamma | Y]  \text{d}\theta_\gamma \text{d}\gamma  \\
 &amp; = \sum_{\gamma \in \Gamma} \int p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma) \cdot \hat{\Pi}_\gamma  \text{d}\theta_\gamma \\
 &amp; = \sum_{\gamma \in \Gamma} \hat{\Pi}_\gamma \cdot \int p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma)  \text{d}\theta_\gamma \\
-&amp; = \sum_{\gamma \in \Gamma} \hat{\Pi}_\gamma \cdot \int p(y_{n+1} | Y, \gamma)  \text{d}\theta_\gamma, \\
+&amp; = \sum_{\gamma \in \Gamma} \hat{\Pi}_\gamma \cdot p(y_{n+1} | Y, \gamma), \\
 \end{split}`
 $$
 ]
