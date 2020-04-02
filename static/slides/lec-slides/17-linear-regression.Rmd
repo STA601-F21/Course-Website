@@ -1224,7 +1224,7 @@ beta_pr_less_0
 x_new <- matrix(c(1,(14-mean(W))),ncol=1)
 post_pred <- matrix(0,nrow=n_iter,ncol=n_swimmers)
 for(j in 1:n_swimmers){
-  post_pred[,j] <- rnorm(n_iter,BETA[j,,]%*%x_new,SIGMA_SQ[j,])
+  post_pred[,j] <- rnorm(n_iter,BETA[j,,]%*%x_new,sqrt(SIGMA_SQ[j,]))
 }
 colnames(post_pred) <- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
 
@@ -1245,7 +1245,7 @@ lines(density(post_pred[,"Swimmer 4"]),lwd=1.5)
 x_new <- matrix(c(1,(14-mean(W))),ncol=1)
 post_pred <- matrix(0,nrow=n_iter,ncol=n_swimmers)
 for(j in 1:n_swimmers){
-  post_pred[,j] <- rnorm(n_iter,BETA[j,,]%*%x_new,SIGMA_SQ[j,])
+  post_pred[,j] <- rnorm(n_iter,BETA[j,,]%*%x_new,sqrt(SIGMA_SQ[j,]))
 }
 colnames(post_pred) <- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
 

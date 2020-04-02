@@ -1170,7 +1170,7 @@ Is there any evidence that the times matter?
   x_new &lt;- matrix(c(1,(14-mean(W))),ncol=1)
   post_pred &lt;- matrix(0,nrow=n_iter,ncol=n_swimmers)
   for(j in 1:n_swimmers){
-  post_pred[,j] &lt;- rnorm(n_iter,BETA[j,,]%*%x_new,SIGMA_SQ[j,])
+  post_pred[,j] &lt;- rnorm(n_iter,BETA[j,,]%*%x_new,sqrt(SIGMA_SQ[j,]))
   }
   colnames(post_pred) &lt;- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
   
@@ -1215,7 +1215,7 @@ Is there any evidence that the times matter?
   ```
   ## 
   ## Swimmer 1 Swimmer 2 Swimmer 3 Swimmer 4 
-  ##    0.8686    0.0027    0.1256    0.0031
+  ##    0.7790    0.0078    0.1994    0.0138
   ```
 
 - &lt;div class="question"&gt;
