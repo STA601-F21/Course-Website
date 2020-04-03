@@ -222,6 +222,8 @@ lessons:
   - date: "Fri, Apr 3"
     title: "Metropolis and Metropolis-Hastings I"
     reading: "reading-19.html"
+    slides: "lec-slides/19-Metropolis-I.html"
+    slidespdf: "lec-slides/19-Metropolis-I.pdf"
   
   - title: "WEEK 14"
   

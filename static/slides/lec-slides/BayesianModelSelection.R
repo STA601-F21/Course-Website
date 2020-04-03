@@ -81,7 +81,7 @@ round(apply(beta,2,function(x) quantile(x,c(0.025,0.975))),4)
 
 
 
-######## Bayesian Model Averaging
+######## Bayesian Model Selection and Averaging
 #library(BAS)
 Data_bas <- bas.lm(COST~RXPM+GS+RI+COPAY+AGE+F+MM, data=Data, prior="g-prior",alpha=n,
                     n.models=2^p, update=50, initprobs="Uniform")
