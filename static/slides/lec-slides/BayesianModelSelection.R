@@ -19,7 +19,7 @@ library(mvtnorm)
 
 ###### Data
 Data <- read.table("data/costs.txt",header=TRUE)[,-9]
-
+head(Data)
 
 
 ###### Very basic EDA
@@ -84,7 +84,7 @@ round(apply(beta,2,function(x) quantile(x,c(0.025,0.975))),4)
 ######## Bayesian Model Selection and Averaging
 #library(BAS)
 Data_bas <- bas.lm(COST~RXPM+GS+RI+COPAY+AGE+F+MM, data=Data, prior="g-prior",alpha=n,
-                    n.models=2^p, update=50, initprobs="Uniform")
+                    n.models=2^p, initprobs="Uniform")
 plot(Data_bas,which=4)
 image(Data_bas)
 summary(Data_bas)
@@ -95,7 +95,7 @@ plot(coef(Data_bas), subset=2:8,ask=T)
 
 ######## Performs Bayesian simultaneous variable selection and outlier identification
 #library(BMA)
-Data_bma <- MC3.REG(COST, as.matrix(Data[, -1]),num.its=10000,outliers=TRUE, 
+Data_bma <- MC3.REG(Y, as.matrix(Data[, -1]),num.its=10000,outliers=TRUE, 
                    M0.out=rep(FALSE, 29), outs.list=1:29, M0.var=rep(TRUE,7))
 summary(Data_bma)
 
