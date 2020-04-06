@@ -232,16 +232,19 @@ lessons:
     lab: "lab-10-metropolis-blank.html"
   
   - date: "Wed, Apr 8"
+    title: "Metropolis and Metropolis-Hastings II"
+    reading: "reading-20.html"
   
   - date: "Fri, Apr 10"
+    title: "Metropolis-Hastings III; introduction to finite mixture models"
   
   - title: "WEEK 15"
   
   - date: "Mon, Apr 13"
-    title: "No lab; maybe review session"
+    title: "No lab"
   
   - date: "Wed, Apr 15"
-    title: "Graduate classes end"
+    title: "Wrap-up for finite mixture models; brief review session"
     
   - date: "Fri, Apr 17"
     title: "No class: reading period"

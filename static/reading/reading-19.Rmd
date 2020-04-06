@@ -1,5 +1,5 @@
 ---
-title: "The Metropolis-Hastings algorithm"
+title: "The Metropolis-Hastings algorithm I"
 output: 
   html_document:
     css: reading.css
@@ -17,9 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
     + Section 10.1: Generalized linear models
     + Section 10.2: The Metropolis algorithm
     + Section 10.3: The Metropolis algorithm for Poisson regression
-    + Section 10.4: Metropolis, Metropolis-Hastings and Gibbs
-    + Section 10.5: Combining the Metropolis and Gibbs algorithm
-    + Section 10.6: Discussion and further references
     
 
 ## Optional:
