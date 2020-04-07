@@ -46,7 +46,9 @@ var_prop <- delta*var(log(Y+c))*solve(t(X)%*%X)
 beta <- beta_0
 
 #First set number of iterations and burn-in, then set seed
-n_iter <- 10000; burn_in <- 0.3*n_iter
+n_iter <- 10000
+burn_in <- 0.3*n_iter
+thin <- 1
 set.seed(1234)
 
 #Set counter for acceptances
@@ -75,27 +77,38 @@ for(s in 1:(n_iter+burn_in)){
     BETA[(s-burn_in),] <- beta
   }
 }
-colnames(BETA) <- colnames(X)
 #Check acceptance rate
 accept_counter/(n_iter+burn_in)
 
 
-plot(mcmc(BETA)) 
+#thinning
+sample_thin <- seq(1,n_iter,by=thin)
+BETA_thinned <- BETA[sample_thin,]
+colnames(BETA_thinned) <- colnames(X)
+
+
+plot(mcmc(BETA_thinned)) 
 #trace plots look fine
-autocorr.plot(mcmc(BETA)) 
+autocorr.plot(mcmc(BETA_thinned)) 
 #unlike Gibbs sampling, we do have some stickiness when doing Metropolis/M-H
 #you also saw this in the lab
+apply(BETA_thinned,2,effectiveSize)
+#we can still:
+  #1. increase burn-in
+  #2. increase the number of samples
+  #3. thin some more
+#I leave that as an exercise for you!!
 
 
 #quick convergence diagnostics.
-geweke.diag(mcmc(BETA))
+geweke.diag(mcmc(BETA_thinned))
 #these are z-scores for the hypothesis that both parts of the chain come from the same distribution. 
 #so, Geweke's test is reassuring.
 
 
 #posterior summaries
-round(apply(BETA,2,mean),2)
-round(apply(BETA,2,function(x) quantile(x,probs=c(0.025,0.975))),2)
+round(apply(BETA_thinned,2,mean),2)
+round(apply(BETA_thinned,2,function(x) quantile(x,probs=c(0.025,0.975))),2)
 
 
 #Just for reference, take a look at freqentist model
