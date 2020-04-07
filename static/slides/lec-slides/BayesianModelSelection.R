@@ -88,7 +88,8 @@ Data_bas <- bas.lm(COST~RXPM+GS+RI+COPAY+AGE+F+MM, data=Data, prior="g-prior",al
 plot(Data_bas,which=4)
 image(Data_bas)
 summary(Data_bas)
-coef(Data_bas)
+model_coef <- coef(Data_bas)
+confint(model_coef)
 par(mfrow=c(3,3))
 plot(coef(Data_bas), subset=2:8,ask=T)
 

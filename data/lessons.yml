@@ -234,6 +234,9 @@ lessons:
   - date: "Wed, Apr 8"
     title: "Metropolis and Metropolis-Hastings II"
     reading: "reading-20.html"
+    slides: "lec-slides/20-Metropolis-II.html"
+    slidespdf: "lec-slides/20-Metropolis-II.pdf"
+    hw: "hw-08.html"
   
   - date: "Fri, Apr 10"
     title: "Metropolis-Hastings III; introduction to finite mixture models"
