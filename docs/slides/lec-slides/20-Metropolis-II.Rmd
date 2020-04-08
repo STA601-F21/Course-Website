@@ -41,6 +41,8 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 ## Announcements
 
+- Last homework (HW8) now online.
+
 - Reminder: let the instructor know if you plan to request a letter grade.
 
 
