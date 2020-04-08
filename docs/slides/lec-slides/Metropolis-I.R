@@ -14,7 +14,7 @@ library(coda)
 #Use a normal proposal
 #Choose delta > 0 such that the acceptance probability is very close to 45%
 #we will try different values: 0.01, 0.05, 2, 4, 8 and 100
-delta <- 0.01
+delta <- 100
 
 #Initial values for sampler
 theta <- 0
