@@ -1,6 +1,6 @@
 ---
 title: "Homework 8"
-date: "Due: 11:59pm, Wednesday, April 15"
+date: "Due: 11:59pm, Thursday, April 16"
 output: 
   html_document: 
     css: hw.css
