@@ -239,7 +239,9 @@ lessons:
     hw: "hw-08.html"
   
   - date: "Fri, Apr 10"
-    title: "Metropolis-Hastings III; introduction to finite mixture models"
+    title: "Metropolis-Hastings; Introduction to finite mixture models"
+    slides: "lec-slides/21-MixtureModels.html"
+    slidespdf: "lec-slides/21-MixtureModels.pdf"
   
   - title: "WEEK 15"
   

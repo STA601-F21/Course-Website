@@ -48,7 +48,7 @@ beta <- beta_0
 #First set number of iterations and burn-in, then set seed
 n_iter <- 10000
 burn_in <- 0.3*n_iter
-thin <- 1
+thin <- 5
 set.seed(1234)
 
 #Set counter for acceptances
@@ -65,8 +65,10 @@ for(s in 1:(n_iter+burn_in)){
   
   #compute acceptance ratio/probability
   #do so on log scale because r can be numerically unstable
-  log_r <- sum(dpois(Y,exp(X%*%beta_star),log=T)) + dmvnorm(c(beta_star),beta_0,Sigma_0,log=T) -
-    sum(dpois(Y,exp(X%*%beta),log=T)) - dmvnorm(c(beta),beta_0,Sigma_0,log=T)
+  log_r <- sum(dpois(Y,exp(X%*%beta_star),log=T)) + 
+    dmvnorm(c(beta_star),beta_0,Sigma_0,log=T) -
+    sum(dpois(Y,exp(X%*%beta),log=T)) - 
+    dmvnorm(c(beta),beta_0,Sigma_0,log=T)
   
   if(log(runif(1)) < log_r){
     accept_counter <- accept_counter + 1
