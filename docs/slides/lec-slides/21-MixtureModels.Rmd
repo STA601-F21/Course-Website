@@ -135,7 +135,8 @@ $$
   .block[
 $$
 \begin{split}
-r & = \dfrac{\pi(\theta^\star | y)}{\pi(\theta^{(s)} | y)} = \dfrac{\mathcal{L}(y | \theta^\star) \pi(\theta^\star)}{\mathcal{L}(y | \theta^{(s)}) \pi(\theta^{(s)})} \times \dfrac{g_{\theta}[\theta^{(s)} | \theta^\star]}{g_{\theta}[\theta^\star | \theta^{(s)}]}.
+r & = \dfrac{\pi(\theta^\star | y)}{\pi(\theta^{(s)} | y)} \times \dfrac{g_{\theta}[\theta^{(s)} | \theta^\star]}{g_{\theta}[\theta^\star | \theta^{(s)}]}\\
+& = \dfrac{\mathcal{L}(y | \theta^\star) \pi(\theta^\star)}{\mathcal{L}(y | \theta^{(s)}) \pi(\theta^{(s)})} \times \dfrac{g_{\theta}[\theta^{(s)} | \theta^\star]}{g_{\theta}[\theta^\star | \theta^{(s)}]}.
 \end{split}
 $$
 ]
