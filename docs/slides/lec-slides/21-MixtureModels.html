@@ -332,7 +332,7 @@ $$
 `\begin{split}
 \theta_d &amp; = \Pr(y_i = d)\\
 &amp; = \sum_{k=1}^K \Pr(y_i = d | z_i = k) \cdot \Pr(z_i = k)\\
-&amp; = \sum_{k=1}^K \lambda_k \cdot \psi_{z_i,d}, \\
+&amp; = \sum_{k=1}^K \lambda_k \cdot \psi_{h,d}, \\
 \end{split}`
 $$
 ]
@@ -652,7 +652,7 @@ $$
 .small[
 $$
 `\begin{split}
-L\left[Y = (y_1, \ldots, y_n) | Z = (z_1, \ldots, z_n), \boldsymbol{\psi}, \boldsymbol{\mu}, \sigma^2 \right] &amp; = \prod_{i=1}^n  p\left(y_i | z_i, \mu_{z_i}, \sigma^2 \right)\\
+L\left[Y = (y_1, \ldots, y_n) | Z = (z_1, \ldots, z_n), \boldsymbol{\lambda}, \boldsymbol{\mu}, \sigma^2 \right] &amp; = \prod_{i=1}^n  p\left(y_i | z_i, \mu_{z_i}, \sigma^2 \right)\\
 \\
 &amp; = \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi\sigma^2}}  \ \textrm{exp}\left\{-\frac{1}{2\sigma^2} (y_i-\mu_{z_i})^2\right\}\\
 \end{split}`
@@ -698,7 +698,7 @@ $$
 `\begin{split}
 \Pr[z_i = k | \dots ] &amp; = \dfrac{ \Pr[y_i, z_i = k | \mu_k, \sigma^2, \lambda_k] }{ \sum\limits^K_{l=1} \Pr[y_i, z_i = l | \mu_l, \sigma^2, \lambda_l] } \\
 \\
-&amp; = \dfrac{ \Pr[y_i | z_i = k, \mu_k, \sigma^2] \cdot \Pr[z_i = k, \lambda_k] }{ \sum\limits^K_{l=1} \Pr[y_i | z_i = l, \mu_l, \sigma^2] \cdot \Pr[z_i = l, \lambda_l] } \\
+&amp; = \dfrac{ \Pr[y_i | z_i = k, \mu_k, \sigma^2] \cdot \Pr[z_i = k| \lambda_k] }{ \sum\limits^K_{l=1} \Pr[y_i | z_i = l, \mu_l, \sigma^2] \cdot \Pr[z_i = l| \lambda_l] } \\
 \\
 &amp; = \dfrac{ \lambda_k \cdot \mathcal{N}\left(y_i;  \mu_k, \sigma^2 \right) }{ \sum\limits^K_{l=1} \lambda_l \cdot \mathcal{N}\left(y_i;  \mu_l, \sigma^2 \right) }. \\
 \end{split}`
@@ -769,11 +769,11 @@ $$
   
 --
 
-- How to choose `\(k\)`, the number of clusters?
+- How to choose `\(K\)`, the number of clusters?
 
-  + Compare marginal likelihood for different choices of `\(k\)` and select `\(k\)` with best performance.
+  + Compare marginal likelihood for different choices of `\(K\)` and select `\(K\)` with best performance.
   
-  + Can also use other metrics MSE, and so on. Maybe even cross validation.
+  + Can also use other metrics, such as MSE, and so on.
   
   + Go Bayesian non-parametric: .hlight[Dirichlet processes]!
     </textarea>

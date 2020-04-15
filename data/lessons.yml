@@ -249,7 +249,9 @@ lessons:
     title: "No lab"
   
   - date: "Wed, Apr 15"
-    title: "Wrap-up for finite mixture models; brief review session"
+    title: "Finite mixture models cont'd; course wrap-up and brief review session"
+    slides: "lec-slides/22-MixtureModels-II.html"
+    slidespdf: "lec-slides/22-MixtureModels-II.pdf"
     
   - date: "Fri, Apr 17"
     title: "No class: reading period"
