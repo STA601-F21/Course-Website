@@ -9,6 +9,7 @@ Course website is at https://sta-360-602l-su20.github.io/Course-Website/
 
 # Notes for building the website:
 
-- Colors: #000033 and #0085A1
+- Colors: #520B00 (old #000033) and #B89600 (old #0085A1)
   - To change, search & replace in `themes/material/static/css/material-kit.css`
+  
  

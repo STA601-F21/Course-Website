@@ -9,36 +9,34 @@ markup: "mmark"
 ### Prerequisites
 ALL students are expected to be familiar with all the topics covered within the required prerequisites to be in this course. That is, STA 611 or the following: STA 210 and (STA 230 or 240L) and (MATH 202, 202D, 212, or 222) and (MATH 216, 218, or 221, any of which may be taken concurrently). Students are also expected to be very familiar with R and are encouraged to have learned LaTeX or a Markdown language by the end of the course.
 
-### Class
+### Workload
 
-Class time is designed to be as interactive as possible. My role as instructor is to introduce you to Bayesian methods, but it is up to you to take them and make use of them. The techniques we will cover are best learned by regular homework assignments and practical data analysis, so you will be working on various homework assignments and models as much as possible, through a variety of tasks and activities throughout each class. Ask as many questions as possible during and outside classes; there are no stupid questions. 
+You are expected to put in approximately 15-20 hours of work per week if you are enrolled in STA 360 and 18-25 hours of work per week if you are enrolled in STA 602, depending on your level of comfort with the topics covered in the prerequisites. The work hours will include time spent going through the preassigned readings, watching the lecture videos, watching or attending the lab sessions, and doing all graded work. Please note that the more focused and engaged you are, the quicker you will be able to get through all the materials.
 
 ### Graded Work
 
-Graded work for the course will consist of homework, lab exercises, <font color="darkred">one quiz</font> ~~<font color="darkred">quizzes</font>~~, a midterm exam and a final exam. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released! **Always write in complete sentences and show all of your steps.**
+Graded work for the course will consist of problem sets, lab exercises, two quizzes, a midterm exam and a final exam. Most of the problem sets and lab exercises assigned to students enrolled in STA 602 will contain at least one question more than those assigned to students enrolled in STA 360. Regrade requests for homework and lab exercises must be done via Gradescope AT MOST **24 hours** after grades are released! Regrade requests for quizzes, midterm, and final exams must be done via Gradescope AT MOST **12 hours** after grades are released! **Always write in complete sentences and show all of your steps.**
 
 {.table .table-condensed .table-striped .text-left}
 Component             | Percentage
 ----------------------|----------------
-Final Exam (<font color="darkred">timed online or take home</font>) | 30%
-Midterm (in class) | 20%
-Homework assignments (at least one per week) | <font color="darkred">25%</font>
-Quiz I (in class) | 10%
-~~<font color="darkred">Quiz II (in class)</font>~~ | ~~<font color="darkred">10%</font>~~
-Lab exercises | 10%
-Class Participation | 5%
+Final Exam & 25%
+Midterm & 20%
+Problem Sets & 20%
+Quiz I & 10%
+Quiz II & 10%
+Lab exercises & 10%
+Participation Quizzes & 5%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
 Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined after the final exam.
 
-<font color="darkred">Following the memo sent out to all graduate and professional students on March 19, 2020, please note that Spring 2020 graduate courses, including this one, will transition to a default satisfactory/unsatisfactory (S/U) grading option. If you want to receive a letter grade for this course, you can do so by submitting a form (see here: [https://dukeuniversityregistrar.formstack.com/forms/grading_basis_change_s_u_to_graded](https://dukeuniversityregistrar.formstack.com/forms/grading_basis_change_s_u_to_graded)) to the registrar, no later than 5pm EST on the last day of classes, that is, April 15, 2020. Accordingly, final grades will still be determined as outlined above, however, you will be assigned an "S" grade at the end for a final grade of C- and above, but a "U" grade for a final grade of D+ and below. For more details, please refer to the memo that was sent to you by the Provost, Executive Vice Provost and Dean of the Graduate School. If you did not recieve the memo, let the instructor know.</font>
-
 
 ### Descriptions of graded work
 
-#### Homework exercises
-Homework assignments will be given on a weekly basis. They will be based on both the lectures and labs and will be announced every Friday at the most – please always check the website! **Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.** For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
+#### Problem sets and lab exercises
+There will be five problem sets which will be handed out on a weekly basis. They will be based on all topics covered in the lecture videos and assigned readings will often be posted on the website every Monday, so please check the website regularly!  **Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.** For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
 
 Each student MUST write up and turn in her or his own answers. You are encouraged to talk to each other regarding homework problems or to the instructor/TA. However, the write-up, solution, and code must be entirely your own work. The assignments must be submitted on [Gradescope](https://www.gradescope.com/courses/77790/assignments) under ``Assignments''. Note that you will not be able to make online submissions after the due date, so be sure to submit before or by the Gradescope-specified deadline.
 
@@ -50,27 +48,31 @@ Homework solutions will be curated from student solutions with proper attributio
 The objective of the lab assignments is to give you more hands-on experience with Bayesian data analysis.zhuoqun.wang@duke.edu Come learn a concept or two and some R from the TAs and then work on the computational part of the homework assignments. Lab attendance is not mandatory, however, each lab assignment should be submitted in timely fashion on the due date. You are REQUIRED to use R Markdown to type up your lab reports.
 
 #### Quizzes
-<font color="darkred">There will be one quiz in February. See the website for the exact date. There will be no make-ups for the quiz.</font>
+There will be two quizzes, both timed and online. Students will be able to take the quiz within any one-hour slot in a 24-hour window. Detailed instructions on the quizzes will be made available later.
 
 #### Midterm Exam
-The midterm exam will hold either March 4 or March 6 (March 6 is the current tentative date). See the course schedule for the updated date for the midterm exam closer to the end of February. After the midterm, you will be given a midterm grade assessing your overall performance. If you are an undergraduate, this will also be sent to the registrar. Note that this does not go on your transcript, with the main purpose being to let you know how you are doing in the class.
+There will be a midterm exam on July 17.  Students will be able to take the midterm within any two-hour slot in a 24-hour window.  Soon after the midterm, you will be given a midterm grade assessing your overall performance. Note that the main purpose of this is to let you know how you are doing in the class. Detailed instructions on the midterm will be made available later.
 
 #### Final Exam
-If you miss any of the quizzes or midterm, your grade will depend more on the final exam score since there are no make-up exams. You cannot miss the final exam! Detailed instructions on the final exam will be made available later.
+There will be a final exam, which you will be able to take between August 7 and August 9. If you miss any quiz or the midterm, your grade will depend more on the final exam score since there are no make-up exams. You cannot miss the final exam! Students will be able to take the final within any three-hour slot in a 48-hour window. Detailed instructions on the final will be made available later.
 
 
 ### Late Submission Policy
-- Generally, you will lose 50% of the total points on each homework if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.
 
-    <font color="darkred">However, starting March 23, you will lose 25% of the total points on each homework if you submit within the first 24 hours after it is due, 50% of the total points if you submit within the first 48 hours after it is due, and 100% of the total points if you submit later than that.</font>
-  
-    <font color="darkred">In addition, you will lose 50% of the total points on each lab exercise if you submit within the first 24 hours after it is due, and 100% of the total points if you submit later than that.</font>
-  
-- You will lose 100% of the total points on quizzes, midterms and final exams if do not show up to take them or submit later than the due dates.
+- You will lose
+  + 25% of the total points on each problem set if you submit within the first 24 hours after it is due,
+  + 50% of the total points if you submit within the first 48 hours after it is due, and
+  + 100% of the total points if you submit later than that.
+	
+	In addition, you will lose
+	+ 50% of the total points on each lab exercise if you submit within the first 24 hours after it is due, and
+	+ 100% of the total points if you submit later than that.
+	
+- You will lose 100% of the total points on quizzes, midterms and final exams if you miss the dates/times.
 
 
 ### Auditing
-<font color="darkred">Students who audit this course will be expected to get an ``S'' grade.</font>
+Students who audit this course will be expected to complete most of the graded work with the goal of getting an overall score of at least 70%; you will only need to complete enough graded work to get to 70%. You are also expected to watch the videos, go through the readings, and generally, participate like everyone else. You must contact the instructor in advance if you wish to audit the course.
 
 
 ### Academic integrity:
@@ -100,12 +102,11 @@ Students with disabilities who believe that they may need accommodations in the 
 
 
 ### Other Information
-It can be a lot more pleasant oftentimes to get in-person answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to come to my office during office hours or by appointment to discuss a homework problem or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily. Also, take advantage of **Piazza** and post your questions there!
+It can be a lot more pleasant oftentimes to get one-on-one answers and help. Make use of the teaching team's office hours, we're here to help! Do not hesitate to talk to me during office hours or by appointment to discuss a problem set or any aspect of the course.  Questions related to course assignments and honesty policy should be directed to me. When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily.
 
-<font color="darkred">All of the course components, including classes, labs and all office hours, will move online starting March 23, and will all be held using Zoom meetings. Please see the first page of the syllabus for the meeting IDs for each component. If you have any concerns, issues or challenges, please let the instructor know as soon as possible. Also, all students are strongly encouraged to rely on Piazza, for interacting among yourself and asking other students questions. You can also ask the instructor or the TAs questions on there and we will try to respond as soon as possible.  If you experience any technical issues with joining or using Piazza, let the instructor know.</font>
-
+As a reminder, all of the course components, including lectures, labs and all office hours, will be held online using Zoom meetings. Meeting IDs will be provided closer to the beginning of the course. If you have any concerns, issues or challenges, please let the instructor know as soon as possible. Also, all students are strongly encouraged to rely on Piazza, for interacting among yourself and asking other students questions. You can also ask the instructor or the TAs questions on there and we will try to respond as soon as possible.  If you experience any technical issues with joining or using Piazza, let the instructor know.
 
 
 ### Professionalism
 
-Please refrain from texting or using your computer for anything other than coursework during class. You are responsible for everything from lecture, mentioned in class and lab, and in the Hoff book. You will be expected to follow along the Hoff book as we go along in the lectures.
+Try as much as possible to refrain from texting or using your computer for anything other than coursework while watching the lecture videos. Again, the more engaged you are, the quicker you will be able to get through the materials. You are responsible for everything covered in the lecture videos, labs, lecture notes/slides, and in the Hoff book. You will be expected to follow along with the Hoff book as we go along in the lectures.
