@@ -1,7 +1,7 @@
 # Website
-Website for the StaSci Course "STA 602L - Bayesian and Modern Statistics" at Duke University, for Spring 2020.
+Website for "STA 360/602L - Bayesian and Modern Statistics" at Duke University, for Summer II 2020.
 
-Course website is at https://sta-602l-s20.github.io/Course-Website/
+Course website is at https://sta-360-602l-su20.github.io/Course-Website/
 
 # Attribution
 
