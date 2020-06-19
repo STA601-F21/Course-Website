@@ -47,6 +47,7 @@ By the end of this course, students should be able to
 ------------------|-------------------|------------------|------------------|------------------ 
 Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
 TA               | [Christine Shen](https://stat.duke.edu/people/christine-shen) | <a href="mailto:yueming.shen@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
+                 | [Bo Liu](https://stat.duke.edu/people/bo-liu-0) | <a href="mailto:bo.liu1997@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
 
 
 ### Texts
