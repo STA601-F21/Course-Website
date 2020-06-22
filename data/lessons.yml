@@ -1,10 +1,74 @@
 lessons:
-  - title: "PART I: INTRODUCTION TO BAYESIAN INFERENCE & ONE PARAMETER MODELS"
+
+  - date: " "
+    title: "Module 0.0: Course overview"
+    
+    
+    
+  - title: "MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE"
   
   - title: "WEEK 1"
   
-  - date: "Mon, Jun 29"
-    title: "Course overview and introduction to Bayesian inference"
+  - date: "Mon, June 29"
+    title: "Module 1.1: Building blocks of Bayesian inference"
+    
+  - date: " "
+    title: "Module 1.2: Probability review"
+    
+  - date: " "
+    title: "Lab 1: R review"
+    
+  - date: "Tues, June 30"
+    title: "Module 1.3: Conjugacy and selecting priors"
+    
+  - date: " "
+    title: "Module 1.4: Frequentist vs Bayesian intervals"
+    
+    
+    
+  - title: "MODULE 2: ONE PARAMETER MODELS"
+    
+  - date: "Wed, July 1"
+    title: "Module 2.1: Beta-Bernoulli and beta-binomial models I"
+    
+  - date: " "
+    title: "Module 2.2: Beta-binomial models cont'd; posterior prediction"
+  
+  - date: " "
+    title: "Lab 2: The Beta-Binomial model"
+    
+  - date: "Thur, July 2"
+    title: "Module 2.3: Truncated priors and the inverse cdf method"
+    
+  - date: " "
+    title: "Module 2.4: Loss functions and Bayes risk"
+    
+    
+  - title: "WEEK 2"
+  
+  
+  - date: "Mon, July 6"
+    title: "Module 2.5: Poisson-gamma model"
+    
+  - date: " "
+    title: "Module 2.6: Finding conjugate distributions"
+    
+  - date: " "
+    title: "Lab 3: The Poisson model and posterior predictive checks"
+    
+    
+    
+  - title: "MODULE 3: SAMPLING AND MULTIPARAMETER MODELS"
+    
+  - date: "Tues, July 7"
+    title: "Module 3.1: Monte Carlo approximation and sampling"
+    
+  - date: " "
+    title: "Module 3.2: Rejection sampling"
+    
+    
+    
+    
     #slides: "lec-slides/01-intro.html"
     #slidespdf: "lec-slides/01-intro.pdf"
     #reading: "reading-01.html"
@@ -13,30 +77,30 @@ lessons:
     #title: "Lab 1: R review"
     #lab: "lab-01-r-review-blank.html"
     
-  - date: "Tue, Jun 30"
-    title: "Probability review and one parameter models"
+  #- date: "Module 1.2"
+    #title: "Probability review and one parameter models"
     #reading: "reading-02.html"
     #slides: "lec-slides/02-one-parameter-models-I.html"
     #slidespdf: "lec-slides/02-one-parameter-models-I.pdf"
     
-  - date: "Wed, Jul 1"
-    title: "Drop/add ends"
+  #- date: "Module 1.3"
+    #title: "Drop/add ends"
     
-  - title: "One parameter models cont'd"
+  #- title: "One parameter models cont'd"
     #reading: "reading-03.html"
     #hw: "hw-01.html"
     #slides: "lec-slides/03-one-parameter-models-II.html"
     #slidespdf: "lec-slides/03-one-parameter-models-II.pdf"
     
-  - date: "Thur, Jul 2"
-    title: "One parameter models cont'd; Loss functions and Bayes risk"
+  #- date: "Module 1.4"
+    #title: "One parameter models cont'd; Loss functions and Bayes risk"
     #reading: "reading-04.html"
     #slides: "lec-slides/04-one-parameter-models-III.html"
     #slidespdf: "lec-slides/04-one-parameter-models-III.pdf"
     
   
-  - date: "Fri, Jul 3"
-    title: "Poisson model (wrap-up); Monte Carlo approximation and sampling"
+  #- date: "Module 1.5"
+    #title: "Poisson model (wrap-up); Monte Carlo approximation and sampling"
     #reading: "reading-05.html"
     #slides: "lec-slides/05-Monte-Carlo.html"
     #slidespdf: "lec-slides/05-Monte-Carlo.pdf"

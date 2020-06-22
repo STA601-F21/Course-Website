@@ -25,19 +25,23 @@ By the end of this course, students should be able to
 
 ### Course Info
 
-#### Lectures
+#### Meeting Times
+
+There will be no **fully synchronous** meetings. There will be pre-recorded lecture videos for each topic. There will be Zoom discussion sessions every day (see below for times), but those will be recorded and shared with all students. Students are **strongly encouraged** to attend the live sessions and ask questions but students who prefer not to can watch the recordings.
+
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday - Friday: 11:00am - 12:00pm
 
 <font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; **Zoom Meeting ID: TBD**</font>  
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Wed/Fri 11:45am - 01:00pm
+#### Online Labs
 
-#### Labs
-
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; **Zoom Meeting ID: TBD**
-
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; TBD
+These are live **optional** lab sessions on Zoom  for students who wish to attend. Recordings will be made available afterwards for students who prefer not to.
 
 <font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Christine Shen](https://stat.duke.edu/people/christine-shen)
+
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday/Wednesday: 2pm - 3:15pm
+
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; **Zoom Meeting ID: TBD**
 
 
 ### Teaching Team and Office Hours 
@@ -45,7 +49,7 @@ By the end of this course, students should be able to
 {.table .table-condensed .table-striped .text-left}
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
-Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
+Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Tuesday/Thursday: 3:00pm - 4:00pm | **Zoom Meeting ID: TBD**
 TA               | [Christine Shen](https://stat.duke.edu/people/christine-shen) | <a href="mailto:yueming.shen@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
                  | [Bo Liu](https://stat.duke.edu/people/bo-liu-0) | <a href="mailto:bo.liu1997@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Times TBD | **Zoom Meeting ID: TBD**
 
@@ -69,10 +73,15 @@ Lecture notes and slides, lab exercises and assigned readings will be posted on 
 {.table .table-condensed .table-striped .text-left}
  <span></span>     | <span></span>
 -----------|---------------------------------
-Mon, June 26 | Classes begin \\
-Fri, July 4 | 4th of July Holiday \\
-Fri, July 17 | Midterm exam day \\
-Fri, August 7 - Sun, August 9 | Final exam period \\
+Mon, June 29 | Classes begin
+Wed, July 1 | Drop/Add for Term II ends
+Fri, July 3 | Independence Day holiday observed
+Tue, July 7 | Quiz I day **(tentative)**
+Fri, July 17 | Midterm exam day **(tentative)**
+Mon, July 27 | Last day to withdraw with W
+Wed, July 29 | Quiz II day **(tentative)**
+Thurs, August 6 | Classes end
+Fri, August 7 - Sun, August 9 | Final exam period
 
 
 
