@@ -41,7 +41,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   identifier = "syllabus_360_pdf"
   name = "STA 360 Syllabus"
   pre = "<i class=\"material-icons\">book</i>"
-  url = "syllabus_360_pdf/Syllabus_36.pdf"
+  url = "syllabus_360_pdf/Syllabus_360.pdf"
 [[menu.main]]
   weight = 3
   identifier = "syllabus_602_pdf"
