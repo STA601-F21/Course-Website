@@ -29,7 +29,7 @@ By the end of this course, students should be able to
 
 There will be no **fully synchronous** meetings. There will be pre-recorded lecture videos for each topic. There will be Zoom discussion sessions every day (see below for times), but those will be recorded and shared with all students. Students are **strongly encouraged** to attend the live sessions and ask questions but students who prefer not to can watch the recordings.
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday - Friday: 11:00am - 12:00pm
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday - Friday: 11:00am - 12:00pm **(tentative)**
 
 <font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; **Zoom Meeting ID: TBD**</font>  
 
@@ -39,7 +39,7 @@ These are live **optional** lab sessions on Zoom  for students who wish to atten
 
 <font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; [Christine Shen](https://stat.duke.edu/people/christine-shen)
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday/Wednesday: 2pm - 3:15pm
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday/Wednesday: 2pm - 3:15pm **(tentative)**
 
 <font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; **Zoom Meeting ID: TBD**
 
