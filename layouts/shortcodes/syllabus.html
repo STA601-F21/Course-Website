@@ -19,16 +19,18 @@
       <td align="right">{{ .date }}</td>
       <td>{{ .title }}</td>
 
-      {{ if .slides }}
-      <td align="center"><a href="{{ .Site.baseurl }}/slides/{{ .slides  }}">
+      
+      
+      {{ if .video }}
+      <td align="center"><a href="{{ .video  }}">
           <i class="fa fa-laptop  fa-lg"></i></a></td>
       {{ else }}
         <td align="center"><font color="f1f1f1">
           <i class="fa fa-laptop  fa-lg"></i></font></td>
       {{ end }}
       
-      {{ if .slidespdf }}
-      <td align="center"><a href="{{ .Site.baseurl }}/slides/{{ .slidespdf  }}">
+      {{ if .slides }}
+      <td align="center"><a href="{{ .Site.baseurl }}/slides/{{ .slides  }}">
           <i class="fa fa-file-pdf-o  fa-lg"></i></a></td>
       {{ else }}
         <td align="center"><font color="f1f1f1">

@@ -1,76 +1,165 @@
 lessons:
 
   - date: " "
-    title: "Module 0.0: Course overview"
-    
-    
-    
-  - title: "MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE"
+    title: "Module 0.1: Course overview"
+    #video: " "
+    slides: "01-course-overview.html"
   
-  - title: "WEEK 1"
+  - date: " "
+  - date: "WEEK 1"
+  - date: " "
+  
+  
+  - title: "MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE"
+   
   
   - date: "Mon, June 29"
     title: "Module 1.1: Building blocks of Bayesian inference"
+    reading: "11-reading.html"
     
   - date: " "
     title: "Module 1.2: Probability review"
+    reading: "12-reading.html"
     
   - date: " "
     title: "Lab 1: R review"
     
-  - date: "Tues, June 30"
-    title: "Module 1.3: Conjugacy and selecting priors"
     
-  - date: " "
-    title: "Module 1.4: Frequentist vs Bayesian intervals"
-    
-    
-    
+  - title: " " 
   - title: "MODULE 2: ONE PARAMETER MODELS"
     
-  - date: "Wed, July 1"
-    title: "Module 2.1: Beta-Bernoulli and beta-binomial models I"
+    
+  - date: "Tues, June 30"
+    title: "Module 2.1: Conjugacy; Beta-Bernoulli and beta-binomial models"
+    reading: "21-reading.html"
     
   - date: " "
-    title: "Module 2.2: Beta-binomial models cont'd; posterior prediction"
+    title: "Module 2.2: Operationalizing data analysis; selecting priors"
+    reading: "22-reading.html"
+    
+  - date: "Wed, July 1"
+    title: "Module 2.3: Marginal likelihood and posterior prediction"
+    reading: "23-reading.html"
+    
+  - date: " "
+    title: "Module 2.4: Truncated priors and the inverse cdf method"
+    reading: "24-reading.html"
   
   - date: " "
     title: "Lab 2: The Beta-Binomial model"
     
   - date: "Thur, July 2"
-    title: "Module 2.3: Truncated priors and the inverse cdf method"
+    title: "Module 2.5: Frequentist vs Bayesian intervals"
+    reading: "25-reading.html"
     
   - date: " "
-    title: "Module 2.4: Loss functions and Bayes risk"
+    title: "Module 2.6: Loss functions and Bayes risk"
+    reading: "26-reading.html"
     
+  - date: "Fri, July 3" 
+    title: "Independence Day holiday observed"
     
-  - title: "WEEK 2"
+  
+  - date: " "
+  - date: "WEEK 2"
+  - date: " "
   
   
   - date: "Mon, July 6"
-    title: "Module 2.5: Poisson-gamma model"
+    title: "Module 2.7: Poisson-gamma model"
+    reading: "27-reading.html"
     
   - date: " "
-    title: "Module 2.6: Finding conjugate distributions"
+    title: "Module 2.8: Finding conjugate distributions"
+    reading: "28-reading.html"
     
   - date: " "
     title: "Lab 3: The Poisson model and posterior predictive checks"
     
-    
-    
-  - title: "MODULE 3: SAMPLING AND MULTIPARAMETER MODELS"
-    
   - date: "Tues, July 7"
+    title: "Quiz I"
+  
+  
+  - title: " "   
+  - title: "MODULE 3: MONTE CARLO AND MULTIPARAMETER MODELS"
+  
+    
+  - date: "Wed, July 8"
     title: "Module 3.1: Monte Carlo approximation and sampling"
+    reading: "31-reading.html"
     
   - date: " "
-    title: "Module 3.2: Rejection sampling"
+    title: "Module 3.2: Rejection; Importance sampling"
+    reading: "32-reading.html"
+    
+  - date: "Thur, July 9"
+    title: "Module 3.3: The normal model: conditional inference for the mean"
+    #reading: "33-reading.html"
+    
+  - date: " "
+    title: "Module 3.4: The normal model: joint inference for mean and variance"
+    #reading: "34-reading.html"
+  
+  - date: " "
+    title: "Lab 4: Prior selection and model reparameterization"
+    
+  - date: "Fri, July 10"
+    title: "Module 3.5: Noninformative and improper priors"
+    #reading: "35-reading.html"
+    
+  - date: " "
+    title: "Module 3.6: The normal model: illustration"
+    #reading: "36-reading.html"
+  
+  
+  - date: " "
+  - date: "WEEK 3"
+  - date: " "
+  
+  
+  - date: "Mon, July 13"
+    title: "Module 3.7: MCMC and Gibbs sampling I"
+    #reading: "37-reading.html"
+    
+  - date: " "
+    title: "Module 3.8: MCMC and Gibbs sampling II"
+    #reading: "38-reading.html"
+    
+    
+  - title: " " 
+  - title: "MODULE 4: MULTIVARIATE DATA"
+  
+  
+  - date: "Tues, July 14"
+    title: "Module 4.1: Multivariate normal model I"
+    
+  - date: " "
+    title: "Module 4.2: Multivariate normal model I"
+    
+  - date: "Wed, July 15"
+    title: "Module 4.3: Multivariate normal model III"
+    
+  - date: " "
+    title: "Module 4.4: Missing data and imputation"
     
     
     
     
-    #slides: "lec-slides/01-intro.html"
-    #slidespdf: "lec-slides/01-intro.pdf"
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    #slides: "01-intro.html"
+    #slidespdf: "01-intro.pdf"
     #reading: "reading-01.html"
   
   #- date: " "
@@ -80,8 +169,8 @@ lessons:
   #- date: "Module 1.2"
     #title: "Probability review and one parameter models"
     #reading: "reading-02.html"
-    #slides: "lec-slides/02-one-parameter-models-I.html"
-    #slidespdf: "lec-slides/02-one-parameter-models-I.pdf"
+    #slides: "02-one-parameter-models-I.html"
+    #slidespdf: "02-one-parameter-models-I.pdf"
     
   #- date: "Module 1.3"
     #title: "Drop/add ends"
@@ -89,21 +178,21 @@ lessons:
   #- title: "One parameter models cont'd"
     #reading: "reading-03.html"
     #hw: "hw-01.html"
-    #slides: "lec-slides/03-one-parameter-models-II.html"
-    #slidespdf: "lec-slides/03-one-parameter-models-II.pdf"
+    #slides: "03-one-parameter-models-II.html"
+    #slidespdf: "03-one-parameter-models-II.pdf"
     
   #- date: "Module 1.4"
     #title: "One parameter models cont'd; Loss functions and Bayes risk"
     #reading: "reading-04.html"
-    #slides: "lec-slides/04-one-parameter-models-III.html"
-    #slidespdf: "lec-slides/04-one-parameter-models-III.pdf"
+    #slides: "04-one-parameter-models-III.html"
+    #slidespdf: "04-one-parameter-models-III.pdf"
     
   
   #- date: "Module 1.5"
     #title: "Poisson model (wrap-up); Monte Carlo approximation and sampling"
     #reading: "reading-05.html"
-    #slides: "lec-slides/05-Monte-Carlo.html"
-    #slidespdf: "lec-slides/05-Monte-Carlo.pdf"
+    #slides: "05-Monte-Carlo.html"
+    #slidespdf: "05-Monte-Carlo.pdf"
     #hw: "hw-02.html"
   
   #- title: "WEEK 2"
@@ -117,14 +206,14 @@ lessons:
  # - date: " "
     #title: "Rejection sampling; introduction to the normal model"
     #reading: "reading-06.html"
-    #slides: "lec-slides/06-normal-model-I.html"
-    #slidespdf: "lec-slides/06-normal-model-I.pdf"
+    #slides: "06-normal-model-I.html"
+    #slidespdf: "06-normal-model-I.pdf"
   
   #- date: " "
     #title: "Normal model cont'd"
     #reading: "reading-07.html"
-    #slides: "lec-slides/07-normal-model-II.html"
-    #slidespdf: "lec-slides/07-normal-model-II.pdf"
+    #slides: "07-normal-model-II.html"
+    #slidespdf: "07-normal-model-II.pdf"
     #hw: "hw-03.html"
   
   #- date: " "
@@ -134,14 +223,14 @@ lessons:
   #- date: " "
     #title: "Gibbs sampling"
     #reading: "reading-08.html"
-    #slides: "lec-slides/08-Gibbs-sampling-I.html"
-    #slidespdf: "lec-slides/08-Gibbs-sampling-I.pdf"
+    #slides: "08-Gibbs-sampling-I.html"
+    #slidespdf: "08-Gibbs-sampling-I.pdf"
   
   #- date: " "
     #title: "Gibbs sampling cont'd"
     #reading: "reading-09.html"
-    #slides: "lec-slides/09-Gibbs-sampling-II.html"
-    #slidespdf: "lec-slides/09-Gibbs-sampling-II.pdf"
+    #slides: "09-Gibbs-sampling-II.html"
+    #slidespdf: "09-Gibbs-sampling-II.pdf"
     #hw: "hw-04.html"
   
   #- title: "WEEK 6"
@@ -155,13 +244,13 @@ lessons:
     
   #- title: "The multinomial model"
     #reading: "reading-10.html"
-    #slides: "lec-slides/10-multinomial-model.html"
-    #slidespdf: "lec-slides/10-multinomial-model.pdf"
+    #slides: "10-multinomial-model.html"
+    #slidespdf: "10-multinomial-model.pdf"
   
   #- date: " "
     #title: "In-class exercise; introduction to multivariate normal"
-    #slides: "lec-slides/11-introduction-to-multivariate-normal.html"
-    #slidespdf: "lec-slides/11-introduction-to-multivariate-normal.pdf"
+    #slides: "11-introduction-to-multivariate-normal.html"
+    #slidespdf: "11-introduction-to-multivariate-normal.pdf"
     #reading: "reading-11.html"
     
   #- title: "WEEK 7"
@@ -174,15 +263,15 @@ lessons:
   
   #- date: " "
     #title: "Multivariate normal model"
-    #slides: "lec-slides/12-multivariate-normal-model-I.html"
-    #slidespdf: "lec-slides/12-multivariate-normal-model-I.pdf"
+    #slides: "12-multivariate-normal-model-I.html"
+    #slidespdf: "12-multivariate-normal-model-I.pdf"
     #reading: "reading-12.html"
   
   #- date: " "
     #title: "Multivariate normal model cont'd"
     #reading: "reading-13.html"
-    #slides: "lec-slides/13-multivariate-normal-model-II.html"
-    #slidespdf: "lec-slides/13-multivariate-normal-model-II.pdf"
+    #slides: "13-multivariate-normal-model-II.html"
+    #slidespdf: "13-multivariate-normal-model-II.pdf"
     #hw: "hw-05.html"
   
   #- title: "WEEK 8"
@@ -193,8 +282,8 @@ lessons:
   
   #- date: " "
     #title: "Multivariate normal cont'd; missing data and imputation"
-    #slides: "lec-slides/14-multivariate-normal-model-III.html"
-    #slidespdf: "lec-slides/14-multivariate-normal-model-III.pdf"
+    #slides: "14-multivariate-normal-model-III.html"
+    #slidespdf: "14-multivariate-normal-model-III.pdf"
     #reading: "reading-14.html"
     
   #- title: "PART V: HIERARCHICAL MODELS"
@@ -202,8 +291,8 @@ lessons:
   #- date: " "
     #title: "Hierarchical models I"
     #reading: "reading-15.html"
-    #slides: "lec-slides/15-hierarchical-models-I.html"
-    #slidespdf: "lec-slides/15-hierarchical-models-I.pdf"
+    #slides: "15-hierarchical-models-I.html"
+    #slidespdf: "15-hierarchical-models-I.pdf"
   
   #- title: "WEEK 9"
   
@@ -228,15 +317,15 @@ lessons:
   #- date: " "
     #title: "Hierarchical models II"
     #reading: "reading-16.html"
-    #slides: "lec-slides/16-hierarchical-models-II.html"
-    #slidespdf: "lec-slides/16-hierarchical-models-II.pdf"
+    #slides: "16-hierarchical-models-II.html"
+    #slidespdf: "16-hierarchical-models-II.pdf"
     #hw: "hw-06.html"
 
   #- date: " "
     #title: "Introduction to regression models"
     #reading: "reading-17.html"
-    #slides: "lec-slides/17-linear-regression.html"
-    #slidespdf: "lec-slides/17-linear-regression.pdf"
+    #slides: "17-linear-regression.html"
+    #slidespdf: "17-linear-regression.pdf"
     
   #- title: "WEEK 13"
   
@@ -247,15 +336,15 @@ lessons:
   #- date: " "
     #title: "Regression models cont'd"
     #reading: "reading-18.html"
-    #slides: "lec-slides/18-linear-regression-II.html"
-    #slidespdf: "lec-slides/18-linear-regression-II.pdf"
+    #slides: "18-linear-regression-II.html"
+    #slidespdf: "18-linear-regression-II.pdf"
     #hw: "hw-07.html"
     
   #- date: " "
     #title: "Metropolis and Metropolis-Hastings I"
     #reading: "reading-19.html"
-    #slides: "lec-slides/19-Metropolis-I.html"
-    #slidespdf: "lec-slides/19-Metropolis-I.pdf"
+    #slides: "19-Metropolis-I.html"
+    #slidespdf: "19-Metropolis-I.pdf"
   
   #- title: "WEEK 14"
   
@@ -266,14 +355,14 @@ lessons:
   #- date: " "
     #title: "Metropolis and Metropolis-Hastings II"
     #reading: "reading-20.html"
-    #slides: "lec-slides/20-Metropolis-II.html"
-    #slidespdf: "lec-slides/20-Metropolis-II.pdf"
+    #slides: "20-Metropolis-II.html"
+    #slidespdf: "20-Metropolis-II.pdf"
     #hw: "hw-08.html"
   
   #- date: " "
     #title: "Metropolis-Hastings; Introduction to finite mixture models"
-    #slides: "lec-slides/21-MixtureModels.html"
-    #slidespdf: "lec-slides/21-MixtureModels.pdf"
+    #slides: "21-MixtureModels.html"
+    #slidespdf: "21-MixtureModels.pdf"
   
   #- title: "WEEK 15"
   
@@ -282,8 +371,8 @@ lessons:
   
   #- date: " "
     #title: "Finite mixture models cont'd; course wrap-up and brief review session"
-    #slides: "lec-slides/22-MixtureModels-II.html"
-    #slidespdf: "lec-slides/22-MixtureModels-II.pdf"
+    #slides: "22-MixtureModels-II.html"
+    #slidespdf: "22-MixtureModels-II.pdf"
     
   #- date: " "
     #title: "No class: reading period"

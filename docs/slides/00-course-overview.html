@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Course overview and introduction to Bayesian inference</title>
+    <title>Course overview</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Olanrewaju Michael Akande" />
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
@@ -12,9 +12,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Course overview and introduction to Bayesian inference
+# Course overview
 ### Dr. Olanrewaju Michael Akande
-### Jan 10, 2020
+### Module 0.1
 
 ---
 
@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
-# Welcome to STA 602L!
+# Welcome to STA 360 and STA 602L!
 
 
 
@@ -174,244 +174,6 @@ class: center, middle
 --
 
 - Confirm that you have access to Sakai and Gradescope.
-
-
-
----
-
-class: center, middle
-
-# Your turn!
-
-
-
----
-
-## Introductions
-
-- Your full name.
-
-- The name you prefer to go by.
-
-- One goal you hope this course would help you achieve.
-
-
----
-
-class: center, middle
-
-# Introduction to Bayesian inference
-
-
----
-## What are Bayesian methods?
-
-- .hlight[Bayesian methods] are data analysis tools derived from the principles of Bayesian inference and provide
-
---
-
-  + parameter estimates with good statistical properties;
-  
---
-
-  + parsimonious descriptions of observed data;
-  
---
-
-  + predictions for missing data and forecasts of future data; and
-  
---
-
-  + a computational framework for model estimation, selection,
-and validation.
-
-
----
-## Building blocks of Bayesian inference
-
-- Generally (unless otherwise stated), in this course, we will use the following notation. Let
-
---
-
-  + `\(\mathcal{Y}\)` be the .hlight[sample space];
-
---
-
-  + `\(y\)` be the .hlight[observed data];
-
---
-
-  + `\(\Theta\)` be the .hlight[parameter space]; and
-
---
-
-  + `\(\theta\)` be the .hlight[parameter of interest].
-  
---
-
-- More to come later.
-
-
----
-## Bayes' theorem - basic conditional probability
-
-- Let's take a step back and quickly review the basic form of Bayes' theorem.
-
---
-
-- Suppose there are some events `\(A\)` and B having probabilities `\(\Pr(A)\)` and `\(\Pr(B)\)`.
-
---
-
-- Bayes' rule gives the relationship between the marginal probabilities of A and B and the conditional probabilities.
-
---
-
-- In particular, the basic form of .hlight[Bayes' rule] or .hlight[Bayes' theorem] is
-.block[
-.small[
-`$$\Pr(A | B) = \frac{\Pr(A \ \textrm{and} \ B)}{\Pr(B)} = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$`
-]
-]
-
---
-`\(\Pr(A)\)` = marginal probability of event `\(A\)`, `\(\Pr(B | A)\)` = conditional probability of event `\(B\)` given event `\(A\)`, and so on.
-
-
----
-## Building blocks of Bayesian inference
-
-- Now, to a slightly more complicated version of Bayes' rule. First,
-
-  1. For each `\(\theta \in \Theta\)`, specify a .hlight[prior distribution] `\(p(\theta)\)` or `\(\pi(\theta)\)`, describing our beliefs about `\(\theta\)` being the true population parameter.
-
---
-
-  2. For each `\(\theta \in \Theta\)` and `\(y \in \mathcal{Y}\)`, specify a .hlight[sampling distribution] `\(p(y|\theta)\)`, describing our belief that the data we see `\(y\)` is the outcome of a study with true parameter `\(\theta\)`. `\(p(y|\theta)\)` gets us the .hlight[likelihood] `\(L(y;\theta)\)`
-
---
-
-  3. After observing the data `\(y\)`, for each `\(\theta \in \Theta\)`, update the prior distribution to a .hlight[posterior distribution] `\(p(\theta | y)\)`, describing our "updated" belief about `\(\theta\)` being the true population parameter.
-
---
-
-- Now, how do we get from Step 1 to 3? .hlight[Bayes' rule]!
-.block[
-.small[
-`$$p(\theta | y) = \frac{p(\theta)L(y;\theta)}{\int_{\Theta}p(\tilde{\theta})L(y; \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{p(\theta)L(y;\theta)}{L(y)}$$`
-]
-]
-
-  We will use this over and over throughout the course!
-
-  
-  
----
-## Notes on prior distributions
-
-Many types of priors may be of interest. These may
-
-  + represent our own beliefs; 
-
---
-
-  + represent beliefs of a variety of people with differing prior opinions; or
-
---
-
-  + assign probability more or less evenly over a large region of the parameter space.
-  
---
-
-  + and so on...
-  
-
----
-## Notes on prior distributions
-
-- .hlight[Subjective Bayes]: a prior should accurately quantify some individual's beliefs about `\(\theta\)`.
-
---
-
-- .hlight[Objective Bayes]: the prior should be chosen to produce a procedure with "good" operating characteristics without including subjective prior knowledge.
-
---
-
-- .hlight[Weakly informative]: prior centered in a plausible region but not overly-informative, as there is a tendency to be over
-confident about one's beliefs.
-
-
----
-## Notes on prior distributions
-
-- The prior quantifies your initial uncertainty in `\(\theta\)` before you observe new data (new information) - this may be necessarily subjective &amp; summarize experience in a field or
-prior research.
-
---
-
-- Even if the prior is not "perfect", placing higher probability in a ballpark of the truth leads to better performance.
-
---
-
-- Hence, it is very seldom the case that a weakly informative prior is not preferred over no prior.
-
---
-
-- One (very important) role of the prior is to stabilize estimates in the presence of limited data.
-
-  
-  
----
-## Simple example - estimating a population proportion
-
-- Suppose `\(\theta \in (0,1)\)` is the population proportion of individuals with diabetes in the US.
-
---
-
-- A prior distribution for `\(\theta\)` would correspond to some distribution that distributes probability across `\((0, 1)\)`.
-
---
-
-- A very precise prior corresponding to abundant prior knowledge would be concentrated tightly in a small sub-interval of `\((0, 1)\)`.
-
---
-
-- A vague prior may be distributed widely across `\((0, 1)\)` - e.g., a uniform distribution would be the common choice here.
-
-
----
-## Some possible prior densities
-
-&lt;img src="img/beta_densities.png" width="383" height="500px" style="display: block; margin: auto;" /&gt;
-
-
----
-## Beta prior densities
-
-- These three priors correspond to Beta(1,1) [also, Unif(0,1)], Beta(1,11) and Beta(2,10) densities.
-
---
-
-- .hlight[Beta(a,b)] is a probability density function (pdf) on (0,1),
-.block[
-.small[
-`$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1},$$`
-]
-]
-
-  where `\(B(a,b)\)` = beta function = normalizing constant ensuring the kernel integrates to one. Note: some texts write `\(\textrm{beta}(\alpha,\beta)\)` instead.
-  
---
-
-- The beta(a,b) distribution has expectation `\(\mathbb{E} = a/(a+b)\)` and the density becomes more and more concentrated as `\(a + b\)` = prior "sample size" increases.
-
---
-
-- The variance is `\(ab/[(a+b)^2(a+b+1)]\)`.
-
---
-
-- We will look more carefully into the beta-binomial model next week but for now, I'll illustrate how this prior gets updated as data becomes available.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

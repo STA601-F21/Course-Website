@@ -1,0 +1,221 @@
+---
+title: "Module 0.1"
+subtitle: "Course overview"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+class: center, middle
+
+# Welcome to STA 360/602L!
+
+
+
+---
+
+## What is this course about?
+
+<i class="fa fa-book fa-2x"></i> Learn the foundations of Bayesian inference.
+
+--
+
+<i class="fa fa-folder-open fa-2x"></i> Work through the theory of several Bayesian models.
+
+--
+
+<i class="fa fa-tasks fa-2x"></i> Use Bayesian models to answer inferential questions.
+
+--
+
+<i class="fa fa-database fa-2x"></i> Apply the models to several different problem sets.
+
+--
+
+<i class="fa fa-refresh fa-spin fa-2x"></i> ".hlight[Prior] $\rightarrow$ .hlight[likelihood] $\rightarrow$ .hlight[posterior]" over and over again!
+
+--
+
+<i class="fa fa-clock fa-2x"></i> We will follow the Hoff book closely -- roughly two chapters per week.
+
+--
+
+--- 
+<i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
+<i class="fa fa-quote-right fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
+A Bayesian version will usually make things better...
+
+-- Andrew Gelman.
+
+
+
+---
+## Instructor
+
+[Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.)
+
+<i class="fa fa-envelope"></i> &nbsp; [olanrewaju.akande@duke.edu](mailto:olanrewaju.akande@duke.edu) <br>
+<i class="fa fa-home"></i> &nbsp; [akandelanre.github.io.](https://akandelanre.github.io/IDS702_F19/) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tuesday/Thursday 3:00pm - 4:00pm **(tentative)** <br>
+<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD
+
+
+---
+## TAs
+
+[Christine Shen](https://stat.duke.edu/people/christine-shen)
+
+<i class="fa fa-envelope"></i> &nbsp; [yueming.shen@duke.edu](mailto:yueming.shen@duke.edu) <br>
+<i class="fa fa-calendar"></i> &nbsp; Times TBD <br>
+<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD <br>
+
+[Bo Liu](https://stat.duke.edu/people/bo-liu-0)
+
+<i class="fa fa-envelope"></i> &nbsp; [bo.liu1997@duke.edu](mailto:bo.liu1997@duke.edu) <br>
+<i class="fa fa-calendar"></i> &nbsp; Times TBD <br>
+<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD
+
+
+
+---
+
+## FAQs
+
+All materials and information will be posted on the course webpage:
+
+[https://sta-360-602l-su20.github.io/Course-Website/](https://sta-360-602l-su20.github.io/Course-Website/)
+
+--
+
+- How much theory will this class cover? A lot! Make sure you are especially comfortable working with probability distributions.
+
+--
+
+- Am I prepared to take this course? Yes, if you are familiar with the topics covered in the course prerequisites.
+
+--
+
+- Will we be doing "very heavy" computing? Not too heavy but yes, a good amount. You will be expected to be able to write your own MCMC sampler later on.
+
+--
+
+- What computing language will we use? R!
+
+--
+
+- What if I don't know R? This course assumes you already know R but you can still learn on the fly (you must be self-motivated). Here are some resources for you: [https://sta-360-602l-su20.github.io/Course-Website/resources/](https://sta-360-602l-su20.github.io/Course-Website/resources/).
+
+
+
+---
+
+## FAQs
+
+- What if I can't remember the topics in the prerequisites?
+  1. Review Chapters 1 to 5 of the [Casella and Berger book](https://mybiostats.files.wordpress.com/2015/03/casella-berger.pdf)
+  
+  2. You can find the solution manual [here](http://www.ams.sunysb.edu/~zhu/ams570/Solutions-Casella-Berger.pdf)
+  
+  3. Focus on the following topics:
+      + basic probability theory, random variables, transformations of random variables, expectations of random variables, common families of probability distribution functions including multivariate distributions
+      + concepts of convergence, principles of statistical inference, likelihood based inference, sampling distributions and hypothesis testing.
+
+
+---
+
+class: center, middle
+
+# Course structure and policies
+
+
+---
+## Course structure and policies
+
+- All on the website (here: [https://sta-360-602l-su20.github.io/Course-Website/policies/](https://sta-360-602l-su20.github.io/Course-Website/policies/))
+
+--
+
+- Make use of the teaching team's office hours, we're here to help!
+
+--
+
+- Do not hesitate to come to my online office hours or you can also make an appointment to discuss a homework problem or any aspect of the course. 
+
+--
+
+- When the teaching team has announcements for you we will send an email to your Duke email address. Please make sure to check your email daily.
+
+--
+
+- Try as much as possible to refrain from texting or using your computer for anything other than coursework while watching the lecture videos and during discussion sessions.
+
+
+---
+## Other details
+
+- What topics will we cover? Refer to Section 11 of the syllabus (here: [STA 360 Syllabus](https://sta-360-602l-su20.github.io/Course-Website/syllabus_360_pdf/Syllabus_360.pdf) or [STA 602L Syllabus](https://sta-360-602l-su20.github.io/Course-Website/syllabus_602_pdf/Syllabus_602.pdf)).
+
+--
+
+- Also refer to the schedule on the website for updated breakdown of the courses. Remember to refresh the page frequently. See here: [Class Schedule](https://sta-360-602l-su20.github.io/Course-Website/syllabus/).
+
+--
+
+- If you are auditing this course, remember to complete the necessary audit forms.
+
+--
+
+- Confirm that you have access to Sakai, Piazza and Gradescope.
+
+
+
+---
+## Other details
+
+Finally, here are some readings to keep you busy. Make sure to glance through them within the next week or so.
+  1. Efron, B., 1986. Why isn't everyone a Bayesian?. The American Statistician, 40(1), pp. 1-5.
+  2. Gelman, A., 2008. Objections to Bayesian statistics. Bayesian Analysis, 3(3), pp. 445-449.
+  3. Diaconis, P., 1977. Finite forms of de Finetti's theorem on exchangeability. Synthese, 36(2), pp. 271-281.
+  4. Gelman, A., Meng, X. L. and Stern, H., 1996. Posterior predictive assessment of model fitness via realized discrepancies. Statistica sinica, pp. 733-760.
+  5. Dunson, D. B., 2018. Statistics in the big data era: Failures of the machine. Statistics & Probability Letters, 136, pp. 4-9.
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
+
+
+
