@@ -1,5 +1,5 @@
 ---
-title: "Module 0.1"
+title: "STA 360/602L: Module 0.1"
 subtitle: "Course overview"
 author: "Dr. Olanrewaju Michael Akande"
 date: " "

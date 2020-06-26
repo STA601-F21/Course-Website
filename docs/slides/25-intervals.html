@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 2.5</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 2.5
+## Frequentist vs Bayesian intervals
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Frequentist confidence intervals
+
+- Recall that a frequentist confidence interval  `\([l(y), \ u(y)]\)` has 95% frequentist coverage for a population parameter `\(\theta\)` if, before we collect the data,
+.block[
+`$$\Pr[l(y) &lt; \theta &lt; u(y) | \theta] = 0.95.$$`
+]
+
+--
+
+- This means that 95% of the time, our constructed interval will cover the true parameter, and 5% of the time it won't.
+
+--
+
+- In any given sample, you don't know whether you're in the lucky 95% or the unlucky 5%.
+
+
+---
+## Frequentist confidence intervals
+
+- You just know that either the interval covers the parameter, or it doesn't (useful, but not too helpful clearly). 
+
+--
+
+- There is NOT a 95% chance your interval covers the true parameter once you have collected the data.
+
+--
+
+- Asking about the definition of a confidence interval is tricky, even for those who know what they're doing.
+
+
+
+---
+## Bayesian intervals
+
+- An interval `\([l(y), \ u(y)]\)` has 95% Bayesian coverage for `\(\theta\)` if
+.block[
+`$$\Pr[l(y) &lt; \theta &lt; u(y) | Y=y] = 0.95.$$`
+]
+
+--
+
+- This describes our information about where `\(\theta\)` lies _after_ we observe the data.
+
+--
+
+- Fantastic!
+
+--
+
+- This is actually the interpretation people want to give to the frequentist confidence interval.
+
+--
+
+- Bayesian interval estimates are often generally called .hlight[credible intervals].
+
+
+
+---
+## Bayesian quantile-based interval
+
+- The easiest way to obtain a Bayesian interval estimate is to use posterior quantiles.
+
+--
+
+- Easy since we either know the posterior densities exactly or can sample from the distributions.
+
+--
+
+- To make a `\(100 \times (1-\alpha)%\)` quantile-based credible interval, find numbers (quantiles) `\(\theta_{\alpha/2} &lt; \theta_{1-\alpha/2}\)` such that
+
+  1. `\(\Pr(\theta &lt; \theta_{\alpha/2} | Y=y) = \dfrac{\alpha}{2}\)`; and
+  
+  2. `\(\Pr(\theta &gt; \theta_{1-\alpha/2} | Y=y) = \dfrac{\alpha}{2}\)`.
+  
+--
+
+- This is an .hlight[equal-tailed interval]. Often when researchers refer to a credible interval, this is what they mean.
+
+
+
+---
+## Equal-tailed quantile-based interval
+
+&lt;img src="img/hpd.png" width="700px" height="370px" style="display: block; margin: auto;" /&gt;
+
+- This is Figure 3.6 from the Hoff book. Focus on the quantile-based credible interval for now.
+
+--
+
+- Note that there are values of `\(\theta\)` outside the quantile-based credible interval, with higher density than some values inside the interval. 
+
+
+
+---
+## HPD region
+
+- A `\(100 \times (1-\alpha)%\)` highest posterior density (HPD) region is a subset `\(s(y)\)` of the parameter space `\(\Theta\)` such that
+
+  1. `\(\Pr(\theta \in s(y) | Y=y) = 1-\alpha\)`; and
+  
+  2. If `\(\theta_a \in s(y)\)` and `\(\theta_b \notin s(y)\)`, then `\(\Pr(\theta_a | Y=y) &gt; \Pr(\theta_b | Y=y)\)`.
+
+--
+
+- `\(\Rightarrow\)` **All** points in a HPD region have higher posterior density than points outside the region. 
+
+  *Note this region is not necessarily a single interval (e.g., in the case of a multimodal posterior).*
+  
+--
+
+- The basic idea is to gradually move a horizontal line down across the density, including in the HPD region all values of `\(\theta\)` with a density above the horizontal line.
+
+--
+
+- Stop moving the line down when the posterior probability of the values of `\(\theta\)` in the region reaches `\(1-\alpha\)`.
+
+
+
+---
+## HPD region
+
+Hoff Figure 3.6 shows how to construct an HPD region.
+
+&lt;img src="img/hpd.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

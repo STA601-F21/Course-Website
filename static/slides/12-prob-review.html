@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 1.2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 1.2
+## Probability review
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+
+## Outline
+
+- Random variables
+
+- Joint distributions
+
+- Independence
+
+- Exchangeability
+
+
+
+---
+## Discrete random variables
+
+- A .hlight[random variable] is .hlight[discrete] if the set of all possible outcomes is .hlight[countable].
+
+--
+
+- The .hlight[probability mass function (pmf)] of a discrete random variable `\(Y\)`, `\(p(y)\)` describes the probability associated with each possible value of `\(Y\)`.
+
+--
+
+- `\(p(y)\)` has the following properties:
+
+  1. `\(0 \leq p(y) \leq 1\)` for all values `\(y \in \mathcal{Y}\)`.
+  
+  2. `\(\sum_{y \in \mathcal{Y}} p(y) = 1\)`.
+  
+--
+
+- Most distributions are often charaterized by some parameter (or set/vector of parameters) `\(\theta\)`.
+
+--
+
+- So, to make this clear, we will often write the pmf instead as `\(p(y | \theta)\)`.
+
+
+---
+## Bernoulli distribution
+
+- The .hlight[Bernoulli distribution] can be used to describe an experiment with two outcomes, such as
+  + Flipping a coin (heads or tails);
+  + Vote turnout (vote or not); and
+  + The outcome of a basketball game (win or loss).
+
+--
+
+- In all cases, we can represent this as a binary random variable where the probability of "success" is `\(\theta\)` and the probability of "failure" is `\(1-\theta\)`.
+
+--
+
+- We usually write this as: `\(Y \sim \textrm{Bernoulli}(\theta)\)`, where `\(\theta \in [0,1]\)`.
+
+--
+
+- It follows that
+.block[
+.small[
+`$$p(y|\theta) = \Pr(Y=y|\theta) = \theta^y(1-\theta)^{1-y}; \ \ \ y=0,1.$$`
+]
+]
+
+--
+
+- &lt;div class="question"&gt;
+What is the mean of this distribution? What is the variance?
+&lt;/div&gt;
+
+
+---
+## Binomial distribution
+
+- The .hlight[binomial distribution] describes the number of successes from `\(n\)` independent Bernoulli trials.
+
+--
+
+- That is, `\(Y =\)` number of "successes" in `\(n\)` independent trials and `\(\theta\)` is the probability of success per trial.
+
+--
+
+- We usually write this as: `\(Y \sim \textrm{Bin}(n,\theta)\)`, where `\(\theta \in [0,1]\)`.
+
+--
+
+- The pmf is
+.block[
+.small[
+`$$p(y|\theta) = \Pr(Y=y|\theta,n) = {n \choose y} \theta^y(1-\theta)^{n-y}; \ \ \ y=0,1,\ldots,n.$$`
+]
+]
+
+--
+
+- **Example**: `\(Y =\)` number of individuals with type I diabetes out of a sample of `\(n\)` surveyed.
+
+--
+
+- Binomial likelihoods are commonly used in collecting data on proportions.
+
+--
+
+- &lt;div class="question"&gt;
+What is the mean of this distribution? What is the variance?
+&lt;/div&gt;
+
+
+---
+## Poisson distribution
+
+- `\(Y \sim \textrm{Po}(\theta)\)` denotes that `\(Y\)` is a .hlight[Poisson random variable].
+
+--
+
+- The Poisson distribution is commonly used to model count data consisting of the number of events in a given time interval.
+
+--
+
+- The Poisson distribution is parameterized by `\(\theta\)` and the pmf is given by
+.block[
+.small[
+`$$p(y|\theta) - \Pr[Y = y | \theta] = \dfrac{\theta^y e^{-\theta}}{y!}; \ \ \ \ y=0,1,2,\ldots; \ \ \ \ \theta &gt; 0.$$`
+]
+]
+
+--
+
+- Similar to binomial but with no limit on the total number of counts.
+
+--
+
+- &lt;div class="question"&gt;
+What is the mean of this distribution? What is the variance?
+&lt;/div&gt;
+
+
+---
+## General discrete distributions
+
+- Useful to consider general discrete distributions having an arbitrary form.
+
+--
+
+- Suppose `\(Y \in \{y_1^\star,\ldots,y_k^\star\}\)`. Then define `\(\Pr(Y = y_h^\star) = \pi_h\)` for each `\(h = 1,\ldots, k\)`. That is,
+.block[
+.small[
+`$$p(y|\boldsymbol{\pi}) = \Pr[Y = y| \boldsymbol{\pi}] = \prod_h \pi_h^{\mathbb{1}[Y = y_h^\star]}; \ \ y \in \{y_1^\star,\ldots,y_k^\star\}$$`
+]
+]
+  where `\(\boldsymbol{\pi} = (\pi_1,\ldots,\pi_k)\)`.
+
+--
+
+- `\((y_1^\star,\ldots,y_k^\star)\)` are "atoms" representing possible values for `\(Y\)`.
+
+--
+
+- For example, these may be words in a dictionary or values for education as a categorical variable. Useful for text data, categorical observations, etc.
+
+--
+
+- Can also write as `\(Y \sim \sum^k_{h=1} \pi_h \delta_{y_h^\star}\)`, where `\(\delta_{y_h^\star}\)` denotes a unit mass at `\(y_h^\star\)`.
+
+--
+
+- Often called the .hlight[categorical distribution] or .hlight[generalized Bernoulli distribution]. Also, see the .hlight[multinomial distribution].
+
+
+---
+## Continuous random variables
+
+- The .hlight[probability density function (pdf)], `\(p(y)\)` or `\(f(y)\)`, of a continuous random variable `\(Y\)` has slightly different properties:
+  
+  1. `\(0 \leq f(y)\)` for all `\(y \in \mathcal{Y}\)`.
+  
+  2. `\(\int_{y \in \mathbb{R}} f(y) \textrm{d}y = 1\)`.
+  
+--
+
+- The pdf for a continuous random variable is not necessarily less than 1. 
+
+--
+
+- Also, `\(f(y)\)` is NOT the probability of value `\(y\)`. 
+
+--
+
+- However, if `\(f(y_1) &gt; f(y_2)\)`, we say informally that `\(y_1\)` has a "higher probability" than `\(y_2\)`.
+
+--
+
+- As we did in the discrete case, we will also often write the pdf instead as `\(f(y | \theta)\)` or `\(p(y | \theta)\)` to make the conditioning obvious.
+
+
+---
+## Uniform density
+
+- The simplest example of a continuous density is the .hlight[uniform density].
+
+--
+
+- `\(Y \sim \textrm{Unif}(a,b)\)` denotes density is uniform in interval `\((a,b)\)`.
+
+--
+
+- The pdf is simply
+.block[
+.small[
+`$$f(y | a,b) = \dfrac{1}{b-a}; \ \ \ y  \in (a,b).$$`
+]
+]
+
+--
+
+- The cdf is
+.block[
+.small[
+`$$F(y) = \Pr(Y \leq y) = \int^y_a \dfrac{1}{b-a} \textrm{d}z = \dfrac{y-a}{b-a}$$`
+]
+]
+
+--
+
+- The mean (expectation) is
+.block[
+.small[
+`$$\dfrac{a+b}{2}$$`
+]
+]
+
+- &lt;div class="question"&gt;
+What is the variance? Also, can you prove the formula for the mean?
+&lt;/div&gt;
+
+---
+## Beta density
+
+- The uniform density can be used as a prior for a probability if `\((a,b) \subset (0,1)\)`.
+
+--
+
+- However, it is very inflexible clearly. &lt;div class="question"&gt;
+Why?
+&lt;/div&gt;
+
+--
+
+- An alternative for `\(y \in \mathcal{Y}\)` is the .hlight[beta density], written as `\(Y \sim \textrm{Beta}(a,b)\)`, with
+.block[
+.small[
+`$$f(y | a,b) = \frac{1}{B(a,b)} y^{a-1} (1-y)^{b-1}; \ \ \ y  \in (0,1), \ a &gt; 0, \ b &gt; 0.$$`
+]
+]
+
+  where `\(B(a,b) = \dfrac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\)`. `\(\Gamma(n) = (n-1)!\)` for any positive integer `\(n\)`.
+  
+--
+
+- As we have already seen, the beta density is quite flexible in characterizing a broad variety of densities on `\((0,1)\)`.
+
+--
+
+- &lt;div class="question"&gt;
+Beta(1,1) is the same as Unif(0,1). Workout the pdfs to convince yourself!
+&lt;/div&gt;
+
+
+---
+## Gamma density
+
+- The .hlight[gamma density] will be useful as a prior for parameters that are strictly positive.
+
+--
+
+- For random variables `\(Y \sim \textrm{Ga}(a,b)\)`, we have the pdf
+.block[
+.small[
+`$$f(y | a,b) = \frac{b^a}{\Gamma(a)} y^{a-1}e^{-by}; \ \ \ y  \in (0,\infty), \ a &gt; 0, \ b &gt; 0.$$`
+]
+]
+
+--
+
+- Properties:
+.block[
+.small[
+`$$\mathbb{E}[Y] = \dfrac{a}{b}; \ \ \mathbb{V}[Y] = \dfrac{a}{b^2}.$$`
+]
+]
+
+--
+
+- **Note**: there are multiple parameterizations of the gamma distribution. We will rely on this version in this course.
+
+--
+
+- Under this parameterization, `\(a\)` is known as the shape parameter, while `\(b\)` is known as the rate parameter.
+
+--
+
+- Under this parameterization, if `\(Y \sim \textrm{Ga}(1,\theta)\)`, then `\(Y \sim \textrm{Exp}(\theta)\)`, that is, the .hlight[exponential distribution].
+
+
+---
+## Continuous joint distributions
+
+- Suppose we have two random variables `\(\theta = (\theta_1,\theta_2)\)`.
+
+--
+
+- Their **joint distribution function** is
+.block[
+.small[
+`$$\Pr(\theta_1 \leq a,\theta_2 \leq b) = \int^a_{-\infty} \int^b_{-\infty} f(\theta_1,\theta_2) \textrm{d}\theta_1\textrm{d}\theta_2,$$`
+]
+]
+
+  where `\(f(\theta_1,\theta_2)\)` is the **joint pdf**.
+  
+--
+
+- The **marginal** density of `\(\theta_1\)` can be obtained by
+.block[
+.small[
+`$$f(\theta_1) = \int^\infty_{-\infty} f(\theta_1,\theta_2) \textrm{d}\theta_2,$$`
+]
+]
+
+  which is referred to as marginalizing out `\(\theta_2\)`.
+  
+--
+
+- We will be doing a lot of "marginalizations", so take note!
+
+
+---
+## Factorizing joint densities and independence
+
+- The joint density `\(f(\theta_1,\theta_2)\)` can be factorized as
+.block[
+.small[
+`$$f(\theta_1,\theta_2) = f(\theta_1|\theta_2)f(\theta_2), \ \ \ \textrm{or} \ \ \ f(\theta_1,\theta_2) = f(\theta_2|\theta_1)f(\theta_1).$$`
+]
+]
+
+--
+
+- For independent random variables, the joint density equals the product of the marginals:
+.block[
+.small[
+`$$f(\theta_1,\theta_2) = f(\theta_1)f(\theta_2).$$`
+]
+]
+
+--
+
+- This implies that `\(f(\theta_2|\theta_1) = f(\theta_2)\)` and `\(f(\theta_1|\theta_2) = f(\theta_1)\)` under independence.
+
+--
+
+- These relationships extend automatically to `\(\theta = (\theta_1,\ldots,\theta_p)\)`. That is,
+.block[
+.small[
+`$$f(\theta_1,\ldots,\theta_p) = \prod^p_{j=1} f(\theta_j),$$`
+]
+]
+
+  under mutual independence of the elements of the `\(\theta\)` vector.
+  
+
+---
+## Conditional independence
+
+- Suppose `\(y_i \overset{iid}{\sim} f(y_i | \theta)\)` for `\(i = 1,\ldots,n\)`.
+
+--
+
+- Data `\(\{y_i\}\)` are independent &amp; identically distributed draws from distribution `\(f(y_i | \theta)\)`.
+
+--
+
+- The data are said to be .hlight[conditionally independent] given `\(\theta\)` if
+.block[
+.small[
+`$$f(y_1,\ldots,y_n | \theta) = \prod^n_{i=1} f(y_i | \theta).$$`
+]
+]
+
+--
+
+- `\(f(y_1,\ldots,y_n | \theta)\)` is also the likelihood function `\(L(\theta | y)\)` of the data.
+  
+--
+
+- The .hlight[marginal likelihood] of the data is
+.block[
+.small[
+`$$L(y) = f(y_1,\ldots,y_n) = \int_\Theta f(y_1,\ldots,y_n | \theta) p(\theta)\textrm{d}\theta = \int_\Theta L(\theta | y)p(\theta)\textrm{d}\theta.$$`
+]
+]
+
+--
+
+- Here, `\(L(y)\)` can not be written as a product of densities as in `\(\prod\limits^n_{i=1} f(y_i)\)`; we lose independence when we marginalize out `\(\theta\)`.
+
+
+---
+## Exchangeability
+
+- In marginalizing out `\(\theta\)`, the observations `\(\{y_i\}\)` are not marginally independent.
+
+--
+
+- `\(\{y_i\}\)` are .hlight[exchangeable] if `\(f(y_1,\ldots,y_n) = f(y_{\pi_1},\ldots,y_{\pi_n})\)`, for all permutations `\(\pi\)` of `\(\{1,\ldots,n\}\)`.
+
+--
+
+- .hlight[de Finetti's Theorem]: Suppose `\(\{y_i\}\)` are exchangeable under above definition for any `\(n\)`. Then
+.block[
+.small[
+`$$f(y_1,\ldots,y_n) = \int_\Theta \left[ \prod^n_{i=1} f(y_i| \theta) \right] p(\theta)\textrm{d}\theta.$$`
+]
+]
+
+  for some `\(\theta\)`, prior distribution `\(p(\theta)\)` and sampling model `\(f(y_i|\theta)\)`.
+  
+--
+
+- Simply put, de Finetti's Theorem states that exchangeable observations are conditionally independent relative to some parameter.
+
+--
+
+- de Finetti's Theorem is critical in providing a motivation for using parameters and for putting priors on parameters.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

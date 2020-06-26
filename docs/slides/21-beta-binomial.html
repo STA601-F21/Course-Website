@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 2.1</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 2.1
+## Conjugacy; beta-Bernoulli and beta-binomial models
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+---
+## Outline
+
+- Conjugacy
+
+- Kernels
+
+- Bernoulli data
+
+- Binomial data
+
+
+---
+## Bayesian inference
+
+- Once again, given **data** `\(y\)` and an **unknown population parameter** `\(\theta\)`, estimate `\(\theta\)`.
+
+--
+
+- As a Bayesian, you update some prior information for `\(\theta\)` with information in the data `\(y\)`, to obtain the posterior density `\(p(\theta | y)\)`.
+
+--
+
+- Personally, I prefer being able to obtain posterior densities that describe my parameter, instead of estimated summaries (usually measures of central tendency) along with confidence intervals.
+
+--
+
+- Bayes' theorem - reminder: 
+.block[
+.small[
+`$$p(\theta | y) = \frac{p(\theta)p(y|\theta)}{\int_{\Theta}p(\tilde{\theta})p(y| \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{p(\theta)p(y|\theta)}{p(y)}$$`
+]
+]
+
+
+---
+## Comments on the posterior density
+
+- The posterior density is more concentrated than the prior &amp; quantifies learning about `\(\theta\)`.
+
+--
+
+- In fact, this is the optimal way to learn from data - see discussion in Hoff chapter 1.
+
+--
+
+- As more &amp; more data become available, posterior density will converge to a normal (Gaussian) density centered on the MLE (Bayes central limit theorem).
+
+--
+
+- In finite samples for limited data, the posterior can be highly skewed &amp; noticeably non-Gaussian.
+
+
+
+---
+## Conjugacy
+
+- Starting with an arbitrary prior density `\(p(\theta)\)` &amp; sampling density `\(p(y|\theta)\)` we may encounter problems in calculating the
+posterior density `\(p(\theta | y)\)`.
+
+--
+
+- In particular, you may notice the denominator in the Bayes' rule: 
+.block[
+.small[
+`$$p(y) = \int_{\Theta}p(\theta)p(y| \theta) \textrm{d}\theta.$$`
+]
+]
+  This integral may not be analytically tractable!
+
+--
+
+- When the prior is .hlight[conjugate] however, the marginal likelihood can be calculated analytically.
+
+--
+
+- .hlight[Conjugacy] `\(\Rightarrow\)` the posterior density (or mass) function has the same form as the prior density (or mass) function.
+
+--
+
+- Conjugate priors make calculations easy but may not represent our prior information well.
+
+
+
+---
+## Kernels
+
+- In Bayesian statistics, the .hlight[kernel] of a pdf or pmf omits any multipliers that do not depend on the random variable or parameter we care about.
+
+--
+
+- For many distributions, the kernel is in a simple form but the normalizing constant complicates calculations.
+
+--
+
+- If one recognizes the kernel as that matching a known distribution, then the normalizing factor can be reinstated. This is a very MAJOR TRICK we will use to calculate posterior distributions.
+
+--
+
+- For example, the normal density is given by
+.block[
+.small[
+`$$p(y|\mu,\sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\dfrac{(y-\mu)^2}{2\sigma^2}}$$`
+]
+]
+
+--
+
+  but the kernel is just
+.block[
+.small[
+`$$p(y|\mu,\sigma^2) \propto e^{-\dfrac{(y-\mu)^2}{2\sigma^2}}.$$`
+]
+]
+
+
+---
+## Bernoulli data
+
+- Back to our example: suppose `\(\theta \in (0,1)\)` is the population proportion of individuals with diabetes in the US.
+
+--
+
+- Suppose we take a sample of `\(n\)` individuals and record whether or not they have diabetes (as binary: 0,1). 
+
+--
+
+- Then we can use the Bernoulli distribution as the sampling distribution. 
+
+--
+
+- Also, we already established that we can use a beta prior for `\(\theta\)`.
+
+
+
+---
+## Bernoulli data
+
+- Generally, it turns out that if 
+  + `\(p(y_i| \theta): y_i \overset{iid}{\sim} \textrm{Bernoulli}(\theta)\)` for `\(i = 1,\ldots,n\)`, and
+  + `\(\pi(\theta): \theta \sim \textrm{Beta}(a,b)\)`,
+  
+  then the posterior distribution is also a beta distribution.
+  
+--
+
+- &lt;div class="question"&gt;
+Can we derive the posterior distribution and its parameters? Let's do some work on the board!
+&lt;/div&gt;
+
+--
+
+- Updating a beta prior with a Bernoulli likelihood leads to a beta posterior - we have conjugacy!
+
+--
+
+- Let `\(y = (y_1,\ldots,y_n)\)`. Specifically, we have.
+.block[
+.small[
+`$$p(\theta | y) = \textrm{Beta}\left(a+\sum_{i=1}^n y_i,b+n-\sum_{i=1}^n y_i\right).$$`
+]
+]
+
+--
+
+- This is the .hlight[beta-Bernoulli model]. More generally, this is actually the .hlight[beta-binomial model].
+
+
+
+---
+## Beta-binomial in more detail
+
+- Suppose the sampling density of the data is
+.block[
+.small[
+`$$p(y|\theta) = {n \choose y} \theta^y(1-\theta)^{n-y}.$$`
+]
+]
+
+
+--
+
+- Suppose also that we have a `\(\textrm{Beta}(a,b)\)` prior on the probability `\(\theta\)`.
+
+--
+
+- Then the posterior density then has the beta form
+.block[
+.small[
+`$$\pi(\theta | y) = \textrm{Beta}(a+y,b+n-y).$$`
+]
+]
+
+--
+
+- The posterior has expectation
+.block[
+.small[
+`$$\mathbb{E}(\theta | y) = \dfrac{a+y}{a+b+n} = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}.$$`
+]
+]
+
+--
+
+- For this specification, **sometimes `\(a\)` and `\(b\)` are interpreted as "prior data" with a interpreted as the prior number of 1's, `\(b\)` as the prior number of 0's, and `\(a + b\)` as the prior sample size.**
+
+--
+
+- As we get more and more data, the majority of our information about `\(\theta\)` comes from the data as opposed to the prior.
+
+
+
+---
+## Binomial data
+
+- For example, suppose you want to find the Bayesian estimate of the probability `\(\theta\)` that a coin comes up heads.
+
+--
+
+- Before you see the data, you express your uncertainty about `\(\theta\)` through the prior `\(p(\theta) = \textrm{Beta}(2,2)\)`
+
+--
+
+- Now suppose you observe 10 tosses, of which only 1 was heads.
+
+--
+
+- Then, the posterior density `\(p(\theta \,|\, y)\)` is `\(\mbox{Beta}(3, 11)\)`.
+
+
+
+---
+## Binomial data
+
+- Recall that the mean of `\(\mbox{Beta}(a,b)\)` is `\(\frac{a}{a+b}\)`.
+
+--
+
+- So, before you saw the data, you thought the mean for `\(\theta\)` was `\(\frac{2}{2+2} = 0.50\)`. 
+
+--
+
+- However, after seeing the data, you believe it is `\(\frac{3}{3+11} = 0.21\)`.
+
+--
+
+- The variance of `\(\mbox{Beta}(a,b)\)` is `\(\frac{ab}{(a+b)^2(a+b+1)}\)`.
+
+--
+
+- So before you saw data, your uncertainty about `\(\theta\)`, in terms of the standard deviation, was `\(\sqrt{\frac{4}{4^2 \times 5}} = 0.22\)`. 
+
+--
+
+- However, after seeing 1 Heads in 10 tosses, your standard deviation gets updated to `\(\sqrt{\frac{33}{14^2 \times 15}} = 0.11\)`.
+
+--
+
+- Clearly, as the number of tosses goes to infinity, your uncertainty goes to zero.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

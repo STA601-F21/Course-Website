@@ -1,0 +1,349 @@
+---
+title: "STA 360/602L: Module 2.2"
+subtitle: "Operationalizing data analysis; selecting priors"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+
+---
+## Outline
+
+- Operationalizing data analysis
+
+- Example: rare events
+
+- Selecting priors and potential problems
+
+
+
+---
+## Operationalizing data analysis
+
+How should we approach data analysis in general?
+
+--
+
+- .hlight[Step 1]. State the question.
+
+--
+
+- .hlight[Step 2]. Collect the data.
+
+--
+
+- .hlight[Step 3]. Explore the data.
+
+--
+
+- .hlight[Step 4]. Formulate and state a modeling framework. 
+
+--
+
+- .hlight[Step 5]. Check your models.
+
+--
+
+- .hlight[Step 6]. Answer the question.
+
+
+---
+## Example: rare events
+
+- .hlight[Step 1]. State the question:
+  + What is the prevalence of an infectious disease in a small city?
+  + Why? High prevalence means more public health precautions are recommended.
+  
+--
+
+- .hlight[Step 2]. Collect the data:
+  + Suppose you collect a small random sample of 20 individuals.
+  
+--
+
+- .hlight[Step 3]. Explore the data:
+  + Let $Y$ denote the unknown number of infected individuals in the sample.
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Parameter of interest: $\theta$ is the fraction of infected individuals in the city.
+  + Sampling model: a reasonable model for $Y$ can be $\textrm{Bin}(20,\theta)$
+  
+```{r echo=FALSE, out.height="370px",out.width="500px"}
+knitr::include_graphics("img/binomial_histograms.png")
+```
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Prior specification: information from previous studies — infection rate in “comparable cities” ranges from 0.05 to
+0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
+  + What is a good prior? The **expected value** of $\theta$ close to 0.10 and the **variance** close to 0.05.
+  + Possible option: $\mbox{Beta}(3.5,31.5)$ or maybe even $\mbox{Beta}(3,32)$?
+  ```{r fig.height=3.7, echo=F}
+curve(dbeta(x,3,32),ylim=c(0,10),col="green4",xlab=expression(theta),ylab="density",lwd=1)
+curve(dbeta(x,3.5,31.5),col="red3",add=TRUE,lwd=1,lty=2)
+legend("topright", legend=c("beta(3,32)","beta(3.5,31.5)"),
+       col=c("green4", "red3"), lwd=2, cex=1)
+```
+
+
+---
+## Quick beta-binomial recap
+
+- Binomial likelihood:
+.block[
+.small[
+$$p(y | \theta) = {n \choose y} \theta^y(1-\theta)^{n-y}$$
+]
+]
+
+
+--
+
+- $+$ Beta Prior:
+.block[
+.small[
+$$\pi(\theta) = \frac{1}{B(a,b)} \theta^{a-1} (1-\theta)^{b-1} = \textrm{Beta}(a,b)$$
+]
+]
+
+--
+
+- $\Rightarrow$ Beta posterior:
+.block[
+.small[
+$$\pi(\theta | y) = \frac{1}{B(a+y,b+n-y)} \theta^{a+y-1} (1-\theta)^{b+n-y-1} = \textrm{Beta}(a+y,b+n-y).$$
+]
+]
+
+--
+
+- Recall: If $\theta \sim \textrm{Beta}(a,b)$, then
+  + $\mathbb{E}[\theta] = \frac{a}{a+b}$
+  + $\mathbb{V}[\theta] = \frac{ab}{(a+b)^2(a+b+1)}$
+
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 4]. Formulate and state a modeling framework:
+  + Under $\mbox{Beta}(3,32)$, $\Pr(\theta < 0.1) \approx 0.67$.
+  + Posterior distribution for the model: $\pi(\theta | Y=y) = \textrm{Beta}(a+y,b+n-y)$
+  + Suppose $Y=0$. Then, $\pi(\theta | Y=y) = \textrm{Beta}(3,32+20)$
+```{r fig.height=4.2, echo=F}
+PlotPriorPlusPosterior <- function(a,b,ones,zeros){
+  curve(dbeta(x,a+ones,b+zeros),col="green4",xlab=expression(theta),ylab="density",lwd=1)
+  curve(dbeta(x,a,b),col="red3",add=TRUE,lwd=1)
+  legend("topright", legend=c(expression(paste(pi,"(", phi, "|",x,")")),expression(paste(pi,"(", phi,")"))),
+         col=c("green4", "red3"), lwd=2, cex=1)
+}
+PlotPriorPlusPosterior(a=3,b=32,ones=0,zeros=20)
+```
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 5]. Check your models:
+  + Compare performance of posterior mean and posterior probability that $\theta < 0.1$.
+  + Under $\mbox{Beta}(3,52)$, 
+      - $\Pr(\theta < 0.1 | Y=y) \approx 0.92$. More confidence in low values of $\theta$.
+      - For $\mathbb{E}(\theta | Y=y)$, we have
+.block[
+.small[
+$$
+\begin{split}
+\mathbb{E}(\theta | y) & = \dfrac{a+y}{a+b+n} = \dfrac{3}{52} = 0.058.\\
+\end{split}
+$$
+]
+]
+      - Recall that the prior mean is $a/(a+b)=0.09$. Thus, we can see how that contributes to the prior mean.
+.block[
+.small[
+$$
+\begin{split}
+\mathbb{E}(\theta | y) & = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}\\
+& = \dfrac{a+b}{a+b+n} \times \dfrac{a}{a+b} + \dfrac{n}{a+b+n} \times \dfrac{y}{n}\\
+& = \dfrac{35}{52} \times \dfrac{3}{35} + \dfrac{20}{52} \times \dfrac{0}{n} = \dfrac{3}{52} = 0.058.\\
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Example: rare events
+
+- .hlight[Step 6]. Answer the question:
+  + People with low prior expectations are generally at least $90\%$ certain that the infection rate is below 0.10.
+  + $\pi(\theta | Y)$ is to the left of $\pi(\theta)$ because the observation $Y=0$ provides evidence of a low value of $\theta$.
+  + $\pi(\theta | Y)$ is more peaked than $\pi(\theta)$ because it combines information and so contains more information than $\pi(\theta)$ alone.
+  + The posterior expectation is 0.058.
+  + The posterior mode is 0.04.
+      - Note, for $\mbox{Beta}(a,b)$, the mode is $(a-1)/(a+b-2)$.
+  + The posterior probability that $\theta < 0.1$ is 0.92.
+
+
+
+  
+---
+## Cautionary tale: parameters at the boundary
+
+- Tuyl et al. (2008) discuss potential dangers of using priors that have $a < 1$ with data that are all 0's (or $b < 1$ with all 1's). They consider data on adverse reactions to a new radiological contrast agent.
+
+--
+
+- Let $\theta_N$: probability of a bad reaction using the new agent.
+
+--
+
+- Current standard agent causes bad reactions about 15 times in 10000, so one might think 0.0015 is a good guess for $\theta_N$.
+
+--
+
+- How do we choose a prior distribution?
+
+
+---
+## Potential prior distributions
+
+- One might consider a variety of choices centered on $15/10000 = 0.0015$:
+  + Prior 1: .hlight[Beta(1,666)] (mean 0.0015; 1 prior bad reaction in 667 administrations)
+  
+  + Prior 2: .hlight[Beta(0.05,33.33)] (mean 0.0015; 0.05 prior bad reactions in 33.38 administrations)
+  
+  + Prior 3: .hlight[Beta(1.6, 407.4)] (mode 0.0015; 409 prior administrations)
+  
+  + Prior 4: .hlight[Beta(1.05, 497)] (median 0.0015; 498.05 prior administrations)
+
+--
+
+- Does it matter which one we choose?
+  
+  
+  
+---
+## Potential prior distributions
+
+```{r fig.height=5, echo=F}
+x <- seq(0,1,by=0.00001)
+plot(x,dbeta(x,1,666),ylim=c(0,600),xlim=c(0,1),type="l",
+      col="green3",xlab=expression(theta[N]),ylab="density")
+lines(x,dbeta(x,0.05,33.33),col="red2",type="l")
+lines(x,dbeta(x,1.6,407.4),col="blue2",type="l")
+lines(x,dbeta(x,1.05,497),col="orange3",type="l")
+legend("topright", legend=c("beta(1,666)","beta(0.05,33.33)","beta(1.6,407.4)","beta(1.05,497)"),
+       col=c("green3","red2","blue2","orange3"), lwd=2, cex=1)
+```
+
+
+---
+## Potential prior distributions
+
+Let's zoom in:
+
+```{r fig.height=5, echo=F}
+x <- seq(0,1,by=0.00001)
+plot(x,dbeta(x,1,666),ylim=c(0,600),xlim=c(0,0.015),type="l",
+      col="green3",xlab=expression(theta[N]),ylab="density")
+lines(x,dbeta(x,0.05,33.33),col="red2",type="l")
+lines(x,dbeta(x,1.6,407.4),col="blue2",type="l")
+lines(x,dbeta(x,1.05,497),col="orange3",type="l")
+legend("topright", legend=c("beta(1,666)","beta(0.05,33.33)","beta(1.6,407.4)","beta(1.05,497)"),
+       col=c("green3","red2","blue2","orange3"), lwd=2, cex=1)
+```
+
+
+
+---
+## Potential prior distributions
+
+- Let's take a closer look at properties of these four prior distributions, concentrating on the probability that $\theta_N < 0.0015$.
+
+--
+
+- That is, new agent not more dangerous than old agent.
+
+<br />       |  Be(1,666) | Be(0.05,33.33) | Be(1.6,407.4) | Be(1.05,497)
+:----------- | :---------: |:---------: |:---------: |:---------: |
+Prior prob | 0.632 | 0.882 | 0.222 | 0.500
+Post prob (0 events) | 0.683 | 0.939 | 0.289 | 0.568
+Post prob (1 event) | 0.319 | 0.162 | 0.074 | 0.213
+
+--
+
+- Suppose we have a single arm study of 100 subjects.
+
+--
+
+- Consider the two most likely potential outcomes:
+  + 0 adverse outcomes observed
+  + 1 adverse outcome observed
+  
+  
+  
+---
+## Problems with the priors
+
+- After just 100 trials with no bad reactions, the low weight (33.38 prior observations) prior indicates one should be 94% sure the new agent is equally safe as (or safer than) the old one. 
+
+--
+
+- The low weight prior largely assumes the conclusion we actually hope for (that the new agent is safer), thus it takes very little confirmatory data to reach that conclusion.
+
+--
+
+- Is this the behavior we want?
+
+--
+
+- Take home message: be very careful with priors that have $a < 1$ with data that are all 0's (or $b < 1$ with all 1's).
+
+--
+
+- Given that we know the adverse event rate should be small, we might try a restricted prior e.g. Unif(0,0.1).
+
+
+
+
+
