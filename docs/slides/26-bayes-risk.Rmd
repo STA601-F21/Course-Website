@@ -385,7 +385,13 @@ $$
 - Want more on loss functions, expected loss/utility, or decision problems in general? Consider taking a course on decision theory (STA623?).
 
 
+---
 
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
 
 
 

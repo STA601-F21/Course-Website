@@ -295,6 +295,13 @@ $$\mathbb{E}(\theta | y) = \dfrac{a+y}{a+b+n} = \dfrac{a+b}{a+b+n} \times \textr
 - Clearly, as the number of tosses goes to infinity, your uncertainty goes to zero.
 
 
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
 
 
 

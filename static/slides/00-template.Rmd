@@ -46,10 +46,14 @@ library(rvest)
 - Outline for the module....
 
 
+
 ---
+
 class: center, middle
 
-# According to outline....
+# What's next? 
+
+### Move on to the readings for the next module!
 
 
 

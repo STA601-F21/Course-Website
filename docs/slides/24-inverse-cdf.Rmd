@@ -330,7 +330,13 @@ $$u^\star = \{F(b) - F(a)\}u + F(a).$$
 - Note we can equivalently sample $u^\star \sim runif(1,F(a),F(b))$.
 
 
+---
 
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
 
 
 

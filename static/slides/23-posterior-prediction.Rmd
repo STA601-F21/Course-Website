@@ -242,4 +242,12 @@ $$
   where $y = (y_1, \ldots, y_n)$.
 
 
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
 

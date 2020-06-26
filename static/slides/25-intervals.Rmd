@@ -164,5 +164,11 @@ knitr::include_graphics("img/hpd.png")
 ```
 
 
+---
 
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
 
