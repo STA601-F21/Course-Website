@@ -20,13 +20,13 @@ Graded work for the course will consist of problem sets, lab exercises, two quiz
 {.table .table-condensed .table-striped .text-left}
 Component             | Percentage
 ----------------------|----------------
-Final Exam & 25%
-Midterm & 20%
-Problem Sets & 20%
-Quiz I & 10%
-Quiz II & 10%
-Lab exercises & 10%
-Participation Quizzes & 5%
+Final Exam | 25%
+Midterm | 20%
+Problem Sets | 20%
+Quiz I | 10%
+Quiz II | 10%
+Lab exercises | 10%
+Participation Quizzes | 5%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
