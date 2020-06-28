@@ -19,12 +19,14 @@ lessons:
     reading: "11-reading.html"
     slides: "11-building-blocks-bayes.html"
     slidespdf: "11-building-blocks-bayes.pdf"
+    video: "https://api.playposit.com/go/play/735956/1403540/914922/0/Module-11-Building-blocks-of-Bayesian-inference"
     
   - date: " "
     title: "Module 1.2: Probability review"
     reading: "12-reading.html"
     slides: "12-prob-review.html"
     slidespdf: "12-prob-review.pdf"
+    video: "https://api.playposit.com/go/play/736001/1403540/914922/0/Module-12-Probability-review"
     
   - date: " "
     title: "Lab 1: R review"

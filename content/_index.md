@@ -27,9 +27,7 @@ By the end of this course, students should be able to
 
 ### Playposit
 
-To gain access to the pre-recorded lecture videos, you will have to enroll in Playposit via Duke. There are participation quizzes embedded within the videos. These quizzes make up 5% of your final grade (see: [course policies](https://sta-360-602l-su20.github.io/Course-Website/policies/)) so take them seriously. To join the class on Playposit, follow the steps below. Let me know asap if you run into any problems.
- + Log in to Playposit using your NetID here: https://www.playposit.com/duke.
- + Enroll in the STA 360/602 class here: https://www.playposit.com/join-class/1403540-914922.
+To gain access to the pre-recorded lecture videos, you will have to enroll in Playposit via Duke. There are participation quizzes embedded within the videos. These quizzes make up 5% of your final grade (see: [course policies](https://sta-360-602l-su20.github.io/Course-Website/policies/)) so take them seriously. To join the class on Playposit, you need create a new account as a student [here](https://www.playposit.com/join), then use the class link [here](https://www.playposit.com/join-class/1403540-914922) or class code (1403540-914922) to join the class.
 
 #### Zoom meetings
 
