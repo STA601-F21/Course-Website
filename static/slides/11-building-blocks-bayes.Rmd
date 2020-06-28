@@ -34,7 +34,7 @@ library(rvest)
 ```
 
 
----
+
 ## Building blocks of Bayesian inference
 
 - Generally (unless otherwise stated), in this course, we will use the following notation. Let

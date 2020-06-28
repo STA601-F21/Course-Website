@@ -4,6 +4,7 @@ lessons:
     title: "Module 0.1: Course overview"
     #video: " "
     slides: "01-course-overview.html"
+    slidespdf: "01-course-overview.pdf"
   
   - date: " "
   - date: "WEEK 1"
@@ -17,11 +18,13 @@ lessons:
     title: "Module 1.1: Building blocks of Bayesian inference"
     reading: "11-reading.html"
     slides: "11-building-blocks-bayes.html"
+    slidespdf: "11-building-blocks-bayes.pdf"
     
   - date: " "
     title: "Module 1.2: Probability review"
     reading: "12-reading.html"
     slides: "12-prob-review.html"
+    slidespdf: "12-prob-review.pdf"
     
   - date: " "
     title: "Lab 1: R review"
@@ -36,21 +39,25 @@ lessons:
     title: "Module 2.1: Conjugacy; Beta-Bernoulli and beta-binomial models"
     reading: "21-reading.html"
     slides: "21-beta-binomial.html"
+    slidespdf: "21-beta-binomial.pdf"
     
   - date: " "
     title: "Module 2.2: Operationalizing data analysis; selecting priors"
     reading: "22-reading.html"
     slides: "22-selecting-priors.html"
+    slidespdf: "22-selecting-priors.pdf"
     
   - date: "Wed, July 1"
     title: "Module 2.3: Marginal likelihood and posterior prediction"
     reading: "23-reading.html"
     slides: "23-posterior-prediction.html"
+    slidespdf: "23-posterior-prediction.pdf"
     
   - date: " "
     title: "Module 2.4: Truncated priors and the inverse cdf method"
     reading: "24-reading.html"
     slides: "24-inverse-cdf.html"
+    slidespdf: "24-inverse-cdf.pdf"
   
   - date: " "
     title: "Lab 2: The Beta-Binomial model"
@@ -60,11 +67,13 @@ lessons:
     title: "Module 2.5: Frequentist vs Bayesian intervals"
     reading: "25-reading.html"
     slides: "25-intervals.html"
+    slidespdf: "25-intervals.pdf"
     
   - date: " "
     title: "Module 2.6: Loss functions and Bayes risk"
     reading: "26-reading.html"
     slides: "26-bayes-risk.html"
+    slidespdf: "26-bayes-risk.pdf"
     
   - date: "Fri, July 3" 
     title: "Independence Day holiday observed"

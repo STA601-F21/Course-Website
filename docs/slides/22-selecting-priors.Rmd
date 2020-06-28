@@ -34,7 +34,6 @@ library(rvest)
 ```
 
 
----
 ## Outline
 
 - Operationalizing data analysis
@@ -265,7 +264,7 @@ $$
 ---
 ## Potential prior distributions
 
-```{r fig.height=5, echo=F}
+```{r fig.height=4.5, echo=F}
 x <- seq(0,1,by=0.00001)
 plot(x,dbeta(x,1,666),ylim=c(0,600),xlim=c(0,1),type="l",
       col="green3",xlab=expression(theta[N]),ylab="density")
@@ -282,7 +281,7 @@ legend("topright", legend=c("beta(1,666)","beta(0.05,33.33)","beta(1.6,407.4)","
 
 Let's zoom in:
 
-```{r fig.height=5, echo=F}
+```{r fig.height=4.5, echo=F}
 x <- seq(0,1,by=0.00001)
 plot(x,dbeta(x,1,666),ylim=c(0,600),xlim=c(0,0.015),type="l",
       col="green3",xlab=expression(theta[N]),ylab="density")
