@@ -83,8 +83,8 @@ A Bayesian version will usually make things better...
 
 <i class="fa fa-envelope"></i> &nbsp; [olanrewaju.akande@duke.edu](mailto:olanrewaju.akande@duke.edu) <br>
 <i class="fa fa-home"></i> &nbsp; [akandelanre.github.io.](https://akandelanre.github.io/IDS702_F19/) <br>
-<i class="fa fa-calendar"></i> &nbsp; Tuesday/Thursday 3:00pm - 4:00pm **(tentative)** <br>
-<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD
+<i class="fa fa-calendar"></i> &nbsp; See course website <br>
+<i class="fa fa-university"></i> &nbsp; See course website
 
 
 ---
@@ -93,14 +93,14 @@ A Bayesian version will usually make things better...
 [Christine Shen](https://stat.duke.edu/people/christine-shen)
 
 <i class="fa fa-envelope"></i> &nbsp; [yueming.shen@duke.edu](mailto:yueming.shen@duke.edu) <br>
-<i class="fa fa-calendar"></i> &nbsp; Times TBD <br>
-<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD <br>
+<i class="fa fa-calendar"></i> &nbsp; See course website <br>
+<i class="fa fa-university"></i> &nbsp; See course website <br>
 
 [Bo Liu](https://stat.duke.edu/people/bo-liu-0)
 
 <i class="fa fa-envelope"></i> &nbsp; [bo.liu1997@duke.edu](mailto:bo.liu1997@duke.edu) <br>
-<i class="fa fa-calendar"></i> &nbsp; Times TBD <br>
-<i class="fa fa-university"></i> &nbsp; Zoom Meeting ID TBD
+<i class="fa fa-calendar"></i> &nbsp; See course website <br>
+<i class="fa fa-university"></i> &nbsp; See course website
 
 
 
