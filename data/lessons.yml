@@ -42,12 +42,15 @@ lessons:
     reading: "21-reading.html"
     slides: "21-beta-binomial.html"
     slidespdf: "21-beta-binomial.pdf"
+    video: "https://api.playposit.com/go/play/736861/1403540/914922/0/Module-21-Conjugacy-Beta-Bernoulli-and-beta-binomial-models"
+    
     
   - date: " "
     title: "Module 2.2: Operationalizing data analysis; selecting priors"
     reading: "22-reading.html"
     slides: "22-selecting-priors.html"
     slidespdf: "22-selecting-priors.pdf"
+    video: "https://api.playposit.com/go/play/736899/1403540/914922/0/Module-22-Operationalizing-data-analysis-selecting-priors"
     
   - date: "Wed, July 1"
     title: "Module 2.3: Marginal likelihood and posterior prediction"
