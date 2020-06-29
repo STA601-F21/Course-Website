@@ -111,9 +111,9 @@ knitr::include_graphics("img/binomial_histograms.png")
 - .hlight[Step 4]. Formulate and state a modeling framework:
   + Prior specification: information from previous studies — infection rate in “comparable cities” ranges from 0.05 to
 0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
-  + What is a good prior? The **expected value** of $\theta$ close to 0.10 and the **variance** close to 0.05.
+  + What is a good prior? The **expected value** of $\theta$ close to 0.10 and the **standard deviation** close to 0.05.
   + Possible option: $\mbox{Beta}(3.5,31.5)$ or maybe even $\mbox{Beta}(3,32)$?
-  ```{r fig.height=3.7, echo=F}
+  ```{r fig.height=3.2, echo=F}
 curve(dbeta(x,3,32),ylim=c(0,10),col="green4",xlab=expression(theta),ylab="density",lwd=1)
 curve(dbeta(x,3.5,31.5),col="red3",add=TRUE,lwd=1,lty=2)
 legend("topright", legend=c("beta(3,32)","beta(3.5,31.5)"),
@@ -166,7 +166,7 @@ $$\pi(\theta | y) = \frac{1}{B(a+y,b+n-y)} \theta^{a+y-1} (1-\theta)^{b+n-y-1} =
   + Under $\mbox{Beta}(3,32)$, $\Pr(\theta < 0.1) \approx 0.67$.
   + Posterior distribution for the model: $\pi(\theta | Y=y) = \textrm{Beta}(a+y,b+n-y)$
   + Suppose $Y=0$. Then, $\pi(\theta | Y=y) = \textrm{Beta}(3,32+20)$
-```{r fig.height=4.2, echo=F}
+```{r fig.height=3.2, echo=F}
 PlotPriorPlusPosterior <- function(a,b,ones,zeros){
   curve(dbeta(x,a+ones,b+zeros),col="green4",xlab=expression(theta),ylab="density",lwd=1)
   curve(dbeta(x,a,b),col="red3",add=TRUE,lwd=1)
