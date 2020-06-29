@@ -54,7 +54,7 @@ lessons:
     
   - date: " "
     title: "Homework 1"
-    #hw: "hw-01.html"
+    hw: "hw-01.html"
     
   - date: "Wed, July 1"
     title: "Module 2.3: Marginal likelihood and posterior prediction"
