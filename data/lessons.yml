@@ -52,6 +52,10 @@ lessons:
     slidespdf: "22-selecting-priors.pdf"
     video: "https://api.playposit.com/go/play/736899/1403540/914922/0/Module-22-Operationalizing-data-analysis-selecting-priors"
     
+  - date: " "
+    title: "Homework 1"
+    hw: "hw-01.html"
+    
   - date: "Wed, July 1"
     title: "Module 2.3: Marginal likelihood and posterior prediction"
     reading: "23-reading.html"

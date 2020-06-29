@@ -1717,36 +1717,53 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Homework 1</h1>
-<h4 class="date">Due: 11:59pm, Thursday, Jan 23</h4>
+<h4 class="date">Due: 11:59pm, Monday, July 6</h4>
 
 </div>
 
 
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
-<p>This assignment involves some probability review and one parameter models. Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 1.</p>
+<p>This assignment involves some probability review and one parameter models. Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 1 (360) for students in STA 360 and Homework 1 (602) for students in STA 602.</p>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
 <ol style="list-style-type: decimal">
 <li>There are three coins in a bag; two fair coins (probability of heads = probability of tails) and one fake coin (probability of heads = 1).
 <ul>
-<li>You reach in and select one coin at random and throw it in the air. What is the probability that it lands on heads?</li>
-<li>You reach in and select one coin at random and throw it in the air and get heads. What is the probability that it is the fake coin?</li>
+<li><font color="green"><strong>Part (a):</strong></font> You reach in and select one coin at random and throw it in the air. What is the probability that it lands on heads?<br />
+<font color="blue"><strong>(1 point for all students)</strong></font></li>
+<li><font color="green"><strong>Part (b):</strong></font> You reach in and select one coin at random and throw it in the air and get heads. What is the probability that it is the fake coin?<br />
+<font color="blue"><strong>(Students in STA 360: 2 points; Students in STA 602: 1.5 points)</strong></font></li>
 </ul></li>
-<li><p>Hoff 2.3</p></li>
-<li><p>Show that the posterior variance of the beta-binomial model can be written as <span class="math display">\[\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)}{a+b+n+1}.\]</span></p></li>
-<li><p>Hoff 3.1.</p>
+<li>Hoff 2.3
+<ul>
+<li><font color="blue"><strong>Part (a): Students in STA 360: 2.5 points; Students in STA 602: 2 points</strong></font></li>
+<li><font color="blue"><strong>Part (b): Students in STA 360: 2.5 points; Students in STA 602: 2 points</strong></font></li>
+<li><font color="blue"><strong>Part (c): 1 point for all students</strong></font></li>
+</ul></li>
+<li><p>Show that the posterior variance of the beta-binomial model can be written as <span class="math display">\[\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)}{a+b+n+1}.\]</span><br />
+<font color="blue"><strong>(2.5 points for all students)</strong></font></p></li>
+<li>Hoff 3.1.
+<ul>
+<li><font color="blue"><strong>Part (a): 0.5 points for all students</strong></font></li>
+<li><font color="blue"><strong>Part (b): Students in STA 360: 2 points; Students in STA 602: 1.5 points</strong></font></li>
+<li><font color="blue"><strong>Part (c): Students in STA 360: 2 points; Students in STA 602: 1.5 points</strong></font></li>
+<li><font color="blue"><strong>Part (d): Students in STA 360: 2 points; Students in STA 602: 1.5 points</strong></font></li>
+<li><font color="blue"><strong>Part (e): 2 points for all students</strong></font></li>
+</ul>
 <p><font color="red"><em>Don’t work out part (a), just say what the correct sampling distribution is (you should already know) and move on to the remaining parts.</em></font></p></li>
-<li><p>Hoff 3.2.</p>
-<p><font color="red"><em>Refer back to pages 5 to 7 of the Hoff book (the section on sensitivity analysis) if you are not sure what to do.</em></font></p></li>
-<li><p><font color="blue">Continuation of the “new agent” example from class</font>. For each of the priors (that is, <font color="red">Beta(1,666)</font>, <font color="red">Beta(0.05,33.33)</font>, <font color="red">Beta(1.6, 407.4)</font>, <font color="red">Beta(1.05, 497)</font>, and <font color="red">Unif(0,0.1)</font>), how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? That is, what value of <span class="math inline">\(n\)</span> is required to ensure that <span class="math inline">\(\Pr(\theta_N \leq 0.0015| y) = 0.95\)</span>?</p>
+<li><p><font color="green">Continuation of the “new agent” example from class</font>. For each of the priors (that is, <font color="red">Beta(1,666)</font>, <font color="red">Beta(0.05,33.33)</font>, <font color="red">Beta(1.6, 407.4)</font>, <font color="red">Beta(1.05, 497)</font>, and <font color="red">Unif(0,0.1)</font>), how many trials would we need, assuming no adverse reactions, to be 95% sure that the new agent is as safe as (or safer than) the old one? That is, what value of <span class="math inline">\(n\)</span> is required to ensure that <span class="math inline">\(\Pr(\theta_N \leq 0.0015| y) = 0.95\)</span>?<br />
+<font color="blue"><strong>(Students in STA 360: Skip; Students in STA 602: 3 points)</strong></font></p>
 <p><font color="red"><em>You don’t need to do any rigorous math here. Do it in R!</em></font></p></li>
+<li><p>Hoff 3.2.<br />
+<font color="blue"><strong>(Not graded. Attempt for practice but you don’t need to submit!)</strong></font></p>
+<p><font color="red"><em>Refer back to pages 5 to 7 of the Hoff book (the section on sensitivity analysis) if you are not sure what to do.</em></font></p></li>
 </ol>
 </div>
 <div id="grading" class="section level2">
 <h2>Grading</h2>
-<p>20 points.</p>
+<p>Total: 20 points.</p>
 </div>
 
 
