@@ -57,16 +57,21 @@ lessons:
     hw: "hw-01.html"
     
   - date: "Wed, July 1"
+    title: "Drop/Add for Term II ends"
+    
+  - date: " "
     title: "Module 2.3: Marginal likelihood and posterior prediction"
     reading: "23-reading.html"
     slides: "23-posterior-prediction.html"
     slidespdf: "23-posterior-prediction.pdf"
+    video: "https://api.playposit.com/go/play/738165/1403540/914922/0/Module-23-Marginal-likelihood-and-posterior-prediction"
     
   - date: " "
     title: "Module 2.4: Truncated priors and the inverse cdf method"
     reading: "24-reading.html"
     slides: "24-inverse-cdf.html"
     slidespdf: "24-inverse-cdf.pdf"
+    video: "https://api.playposit.com/go/play/738212/1403540/914922/0/Module-24-Truncated-priors-and-the-inverse-cdf-method"
   
   - date: " "
     title: "Lab 2: The Beta-Binomial model"
@@ -77,12 +82,14 @@ lessons:
     reading: "25-reading.html"
     slides: "25-intervals.html"
     slidespdf: "25-intervals.pdf"
+    #video: " "
     
   - date: " "
     title: "Module 2.6: Loss functions and Bayes risk"
     reading: "26-reading.html"
     slides: "26-bayes-risk.html"
     slidespdf: "26-bayes-risk.pdf"
+    #video: " "
     
   - date: "Fri, July 3" 
     title: "Independence Day holiday observed"
@@ -170,6 +177,119 @@ lessons:
   - date: " "
     title: "Module 4.4: Missing data and imputation"
     
+  - date: "Thurs, July 16"
+    title: "Review for midterm exam"
+    
+  - date: "Fri, July 17"
+    title: "Midterm exam"
+    
+    
+  - date: " "
+  - date: "WEEK 4"
+  - date: " "
+  
+  
+  - title: "MODULE 5: HIERARCHICAL MODELS"
+    
+    
+  - date: "Mon, July 20"
+    title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
+    
+  - date: " "
+    title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
+    
+  - date: "Tues, July 21"
+    title: "Module 5.3: Hierarchical normal modeling of means and variances"
+    
+  - date: " "
+    title: "Module 5.4: Missing data and imputation"
+    
+  - date: "Wed, July 22"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Thurs, July 23"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Fri, July 24"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+    
+  - date: " "
+  - date: "WEEK 5"
+  - date: " "
+    
+    
+  - date: "Mon, July 27"
+    title: "Last day to withdraw with W"
+  
+  - date: " "
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Tues, July 28"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Wed, July 29"
+    title: "Quiz II"
+    
+  - date: "Thurs, July 30"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Fri, July 31"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: " "
+  - date: "WEEK 6"
+  - date: " "
+    
+    
+  - date: "Mon, Aug 3"
+    title: " "
+    
+  - title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Tues, Aug 4"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Wed, Aug 5"
+    title: " "
+    
+  - date: " "
+    title: " "
+    
+  - date: "Thurs, Aug 6"
+    title: "Review for final exam"
+    
+  - date: "Fri, Aug 7 - Sun, Aug 9"
+    title: "Final exam period"
+    
+  
     
     
     
@@ -178,14 +298,7 @@ lessons:
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     #slides: "01-intro.html"
     #slidespdf: "01-intro.pdf"
     #reading: "reading-01.html"
