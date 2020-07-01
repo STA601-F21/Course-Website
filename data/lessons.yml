@@ -82,14 +82,14 @@ lessons:
     reading: "25-reading.html"
     slides: "25-intervals.html"
     slidespdf: "25-intervals.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/739070/1403540/914922/0/Module-25-Frequentist-vs-Bayesian-intervals"
     
   - date: " "
     title: "Module 2.6: Loss functions and Bayes risk"
     reading: "26-reading.html"
     slides: "26-bayes-risk.html"
     slidespdf: "26-bayes-risk.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/739082/1403540/914922/0/Module-26-Loss-functions-and-Bayes-risk"
     
   - date: "Fri, July 3" 
     title: "Independence Day holiday observed"
@@ -103,6 +103,7 @@ lessons:
   - date: "Mon, July 6"
     title: "Module 2.7: Poisson-gamma model"
     reading: "27-reading.html"
+    #video: " "
     
   - date: " "
     title: "Module 2.8: Finding conjugate distributions"
@@ -199,55 +200,66 @@ lessons:
     title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
     
   - date: "Tues, July 21"
-    title: "Module 5.3: Hierarchical normal modeling of means and variances"
+    title: "Module 5.3: Hierarchical normal modeling of means and variances I"
     
   - date: " "
-    title: "Module 5.4: Missing data and imputation"
+    title: "Module 5.4: Hierarchical normal modeling of means and variances II"
+    
+  
+  - title: "MODULE 6: BAYESIAN LINEAR REGRESSION"
+    
     
   - date: "Wed, July 22"
-    title: " "
+    title: "Module 6.1: Bayesian linear regression"
     
   - date: " "
-    title: " "
+    title: "Module 6.2: Bayesian linear regression: illustration"
     
   - date: "Thurs, July 23"
-    title: " "
+    title: "Module 6.3: Bayesian linear regression: weakly informative priors"
     
   - date: " "
-    title: " "
+    title: "Module 6.4: Bayesian hypothesis testing"
     
   - date: "Fri, July 24"
-    title: " "
+    title: "Module 6.5: Bayesian model selection"
     
   - date: " "
-    title: " "
+    title: "Module 6.6: Bayesian model selection: illustration"
     
     
   - date: " "
   - date: "WEEK 5"
   - date: " "
+  
+  
+  - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
     
     
   - date: "Mon, July 27"
     title: "Last day to withdraw with W"
   
   - date: " "
-    title: " "
+    title: "Module 7.1: The Metropolis algorithm"
     
   - date: " "
-    title: " "
+    title: "Module 7.2: Metropolis in action"
     
   - date: "Tues, July 28"
-    title: " "
+    title: "Module 7.3: The Metropolis-Hastings algorithm"
     
   - date: " "
-    title: " "
+    title: "Module 7.4: Metropolis-Hastings within Gibbs"
     
   - date: "Wed, July 29"
     title: "Quiz II"
     
+    
+  - title: "MODULE 8: CATEGORICAL DATA AND MIXTURE MODELS"
+    
+  
   - date: "Thurs, July 30"
-    title: " "
+    title: "Module 8.1: The multinomial model"
     
   - date: " "
     title: " "
