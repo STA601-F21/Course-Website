@@ -101,13 +101,18 @@ lessons:
   
   
   - date: "Mon, July 6"
-    title: "Module 2.7: Poisson-gamma model"
+    title: "Module 2.7: Gamma-Poisson model I"
     reading: "27-reading.html"
+    slides: "27-gamma-poisson.html"
+    slidespdf: "27-gamma-poisson.pdf"
     #video: " "
     
   - date: " "
-    title: "Module 2.8: Finding conjugate distributions"
+    title: "Module 2.8: Gamma-Poisson model II; finding conjugate distributions"
     reading: "28-reading.html"
+    slides: "28-derive-conjugacy.html"
+    slidespdf: "28-derive-conjugacy.pdf"
+    #video: " "
     
   - date: " "
     title: "Lab 3: The Poisson model and posterior predictive checks"

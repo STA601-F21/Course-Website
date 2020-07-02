@@ -1,0 +1,389 @@
+---
+title: "STA 360/602L: Module 2.8"
+subtitle: "Gamma-Poisson model II; finding conjugate distributions"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+
+
+## Posterior predictive distribution
+
+- <div class="question">
+What is the posterior predictive distribution for the Gamma-Poisson model?
+</div>
+
+--
+
+- Let $a_n = a+\sum y_i$ and $b_n = b+n$.
+
+--
+
+- We have
+.block[
+$$
+\begin{aligned}
+p(y_{n+1}|y_{1:n}) &= \int p(y_{n+1}|\theta) \pi(\theta|y_{1:n})\,d\theta \\
+&= \int \textrm{Po}(y_{n+1}| \theta)  \textrm{Ga}(\theta | a_n,b_n)\,d\theta \\
+&= ... \\
+&= ... \\
+\\
+&= \dfrac{\Gamma(a_n + y_{n+1})}{\Gamma(a_n)\Gamma(y_{n+1}+1)} \ \left(\dfrac{b_n}{b_n + 1} \right)^{a_n} \ \left(\dfrac{1}{b_n + 1} \right)^{y_{n+1}}
+\end{aligned}
+$$
+]
+
+  which is the .hlight[negative binomial distribution], $\textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)$.
+  
+<!-- -- -->
+
+<!-- - The .hlight[prior predictive distribution] $f(y_{n+1}; a,b)$  takes a similar form. -->
+
+
+
+---
+## Negative binomial distribution
+
+- Originally derived as the number of successes in a sequence of independent $\textrm{Bernoulli}(p)$ trials before $r$ failures occur.
+
+--
+
+- The negative binomial distribution $\textrm{Neg-binomial}\left(r,p\right)$ is parameterized by $r$ and $p$ and the pmf is given by
+.block[
+.small[
+$$\Pr[Y = y | r, p] = {y + r - 1 \choose y} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$
+]
+]
+
+--
+
+- Starting with this, the distribution can be extended to allow $r \in (0,\infty)$ as
+.block[
+.small[
+$$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ \ \ y=0,1,2,\ldots; \ \ \ p \in [0,1].$$
+]
+]
+
+--
+
+- Some properties:
+
+  + $\mathbb{E}[\theta] = \dfrac{pr}{1-p}$
+  
+  + $\mathbb{V}[\theta] = \dfrac{pr}{(1-p)^2}$
+
+
+
+
+---
+## Posterior predictive distribution
+
+- The negative binomial distribution is an over-dispersed generalization of the Poisson.
+
+--
+
+- <div class="question">
+What does over-dispersion mean?
+</div>
+
+--
+
+- In marginalizing $\theta$ out of the Poisson likelihood, over a gamma distribution, we obtain a negative-binomial.
+
+--
+
+- For $(y_{n+1}|y_{1:n}) \sim \textrm{Neg-binomial}\left(a_n,\dfrac{1}{b_n + 1}\right)$, we have
+
+--
+
+  + $\mathbb{E}[y_{n+1}|y_{1:n}] = \dfrac{a_n}{b_n} = \mathbb{E}[\theta|y_{1:n}] =$ posterior mean, and
+  
+--
+
+  + $\mathbb{V}[y_{n+1}|y_{1:n}] = \dfrac{a_n(b_n+1)}{b_n^2} = \mathbb{E}[\theta|y_{1:n}] \left(\dfrac{b_n+1}{b_n}\right)$,
+
+--
+
+    so that variance is larger than the mean by an amount determined by $b_n$, which takes the over-dispersion into account.
+
+
+
+---
+## Predictive uncertainty
+
+- Note that as the sample size $n$ increases, the posterior density for $\theta$ becomes more and more concentrated.
+.block[
+$$\mathbb{V}[\theta | y_{1:n}] = \dfrac{a_n}{b_n^2} = \dfrac{a + \sum_i y_i}{(b + n)^2} \approx \dfrac{\bar{y}}{n} \rightarrow 0.$$
+]
+
+--
+
+- Also, recall that $\mathbb{V}[y_{n+1}|y_{1:n}] = \mathbb{E}[\theta|y_{1:n}] \left(\dfrac{b_n+1}{b_n}\right)$.
+
+--
+
+- As we have less uncertainty about $\theta$, the inflation factor
+.block[
+$$\dfrac{b_n+1}{b_n} = \dfrac{b + n+1}{b + n} \rightarrow 1$$
+]
+
+  and the predictive density $f(y_{n+1}|y_{1:n}) \rightarrow \textrm{Po}(\bar{y})$.
+  
+--
+
+- Of course, in smaller samples, it is important to inflate our predictive intervals to account for uncertainty in $\theta$.
+
+
+
+---
+## Back to birth rates
+
+- Let's compare the posterior predictive distributions for the two groups of women.
+```{r fig.height=4.5, echo=F}
+a=2; b=1; #prior
+n1=111; sumy1=217; n2=44; sumy2=66 #data
+y=0:10
+ltbach=dnbinom(y,size=(a+sumy1),mu=(a+sumy1)/(b+n1))
+bach=dnbinom(y,size=(a+sumy2),mu=(a+sumy2)/(b+n2))
+barplot(rbind(ltbach,bach),xlab="Children", 
+        names.arg=c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+        col=c("orange3","green3"),beside=TRUE, main="Posterior predictive distributions")
+legend("topright",c("No Bachelors","Bachelors"),bty="n", fill=c("orange3","green3"))
+```
+
+
+
+---
+## Poisson model in terms of rate
+
+- In many applications, it is often convenient to parameterize the Poisson model a bit differently. One option takes the form
+.block[
+$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
+]
+
+  where $x_i$ represents an explanatory variable and $\theta$ is once again the population parameter of interest. The model is not exchangeable in the $y_i$'s but is exchangeable in the pairs $(x,y)_i$.
+  
+--
+
+- In epidemiology, $\theta$ is often called the population "rate" and $x_i$ is called the "exposure" of unit $i$.
+
+--
+
+- When dealing with mortality rates in different counties for example, $x_i$ can be the population $n_i$ in county $i$, with $\theta =$ the overall mortality rate.
+
+--
+
+- The gamma distribution is still conjugate for $\theta$, with the resulting posterior taking the form
+.block[
+$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i).$$
+]
+
+
+
+---
+## BDA example: asthma mortality rate
+
+- Consider an example on estimating asthma mortality rates for cities in the US.
+
+--
+
+- Since actual mortality rates can be small on the raw scale, they are often commonly estimated per 100,000 or even per one million. 
+
+--
+
+- To keep it simple, let's use "per 100,000" for this example.
+
+--
+
+- For inference, ideally, we collect data which should basically count the number of asthma-related deaths per county.
+
+--
+
+- Note that inference is by county here, so county is indexes observations in the sample.
+
+--
+
+- Since we basically have count data, a Poisson model would be reasonable here.
+
+
+
+---
+## Asthma mortality rate
+
+- Since each city would be expected to have different populations, we might consider the sampling model:
+.block[
+$$y_i \sim \textrm{Po}(x_i\theta); \ \ \ i=1,\ldots, n.$$
+]
+
+  where 
+    + $x_i$ is the "exposure" for county $i$, that is, population of county $i$ is $x_i \times 100,000$; and
+    + $\theta$ is the unknown "true" city mortality rate per 100,000.
+
+- Suppose 
+  + we pick a city in the US with population of 200,000;
+
+--
+  + we find that 3 people died of asthma, i.e., roughly 1.5 cases per 100,000.
+
+--
+
+- Thus, we have one single observation with $x_i = 2$ and $y_i = 3$ for this city.
+
+
+
+---
+## Asthma mortality rate
+
+- Next, we need to specify a prior. What is a sensible prior here?
+
+--
+
+- Perhaps we should look at mortality rates around the world or in similar countries.
+
+--
+
+- Suppose reviews of asthma mortality rates around the world suggest rates above 1.5 per 100,000 are very rare in Western countries, with typical rates around 0.6 per 100,000.
+
+--
+
+- Let's try a gamma distribution with $\mathbb{E}[\theta] = 0.6$ and $\Pr[\theta \geq 1.5]$ very low!
+
+--
+
+- A few options here, but let's go with $\textrm{Ga}(3,5)$, which has $\mathbb{E}[\theta] = 0.6$ and $\Pr[\theta \geq 1.5] \approx 0.02$.
+
+--
+
+- Using trial-and error, explore more options in R!
+
+
+
+---
+## Asthma mortality rate
+
+- Therefore, our posterior takes the form
+.block[
+$$\pi(\theta | \{x_i, y_i\}): \theta | \{x_i, y_i\} \sim \textrm{Ga}(a+\sum_i y_i,b+\sum_i x_i)$$
+]
+
+  which is actually
+.block[
+$$\pi(\theta | x,y) = \textrm{Ga}(a+y,b+x) = \textrm{Ga}(3+3,5+2) = \textrm{Ga}(6,7).$$
+]
+
+--
+
+- $\mathbb{E}[\theta | x,y] = 6/7=0.86$ so that we expect less than 1 (0.86 to be exact) asthma-related deaths per 100,000 people in this city.
+  
+--
+
+- In fact, the posterior probability that the long term death rate from asthma in this city is more than 1 per 100,000, $\Pr[\theta > 1| x,y]$, is 0.3.
+
+--
+
+- Also, $\Pr[\theta \leq 2 | x,y] = 0.99$, so that there is very little chance that we see more than 2 asthma-related deaths per 100,000 people in this city.
+
+--
+
+- Use `pgamma` in R to compute the probabilities.
+
+
+
+---
+## Prior vs posterior
+
+```{r fig.height=4, echo=F}
+x <- seq(0,3,by=0.00001)
+plot(x,dgamma(x,shape=3,rate=5),xlim=c(0,3),ylim=c(0,2),lwd=1.5,type="l",
+      col="orange3",xlab=expression(theta),ylab="density")
+lines(x,dgamma(x,shape=6,rate=7),col="red3",lwd=1.5,type="l")
+legend("topright", legend=c("Prior","Posterior"),
+       col=c("orange3","red3"), lwd=2, cex=1)
+```
+
+Posterior is to the right of the prior since the data suggests higher mortality rates are more likely than the prior suggests. However, we only have one data point!
+
+
+
+---
+class: center, middle
+
+# Finding conjugate distributions
+
+
+
+---
+## Finding conjugate distributions
+
+- In the conjugate examples we have looked at so far, how did we know the prior distributions we chose would result in conjugacy?
+
+--
+
+- <div class="question">
+Can we figure out the family of distributions that would be conjugate for arbitrary densities?
+</div>
+
+--
+
+- Let's explore this using the .hlight[exponential distribution]. The exponential distribution is often used to model "waiting times" or other random variables (with support $(0,\infty)$) often measured on a time scale.
+
+--
+
+- If $y \sim \textrm{Exp}(\theta)$, we have the pdf
+.block[
+$$p(y | \theta) = \theta e^{-y\theta}; \ \ \ y > 0.$$
+]
+
+  where $\theta$ is the .hlight[rate parameter], and $\mathbb{E}[y] = 1/\theta$.
+  
+--
+
+- Recall, if $Y \sim \textrm{Ga}(1,\theta)$, then $Y \sim \textrm{Exp}(\theta)$. What is $\mathbb{V}[y]$ then?
+
+--
+
+- Let's figure out what the conjugate prior for this density would look like (to be done on the board).
+
+
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
+
+
+
