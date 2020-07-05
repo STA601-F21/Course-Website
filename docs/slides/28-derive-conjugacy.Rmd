@@ -96,9 +96,9 @@ $$\Pr[Y = y | r, p] = \dfrac{\Gamma(y+r)}{\Gamma(y+1)\Gamma(r)} (1-p)^rp^y; \ \ 
 
 - Some properties:
 
-  + $\mathbb{E}[\theta] = \dfrac{pr}{1-p}$
+  + $\mathbb{E}[Y] = \dfrac{pr}{1-p}$
   
-  + $\mathbb{V}[\theta] = \dfrac{pr}{(1-p)^2}$
+  + $\mathbb{V}[Y] = \dfrac{pr}{(1-p)^2}$
 
 
 
