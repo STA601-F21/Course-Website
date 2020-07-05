@@ -50,7 +50,7 @@ library(rvest)
 
 - The Poisson distribution is parameterized by $\theta$ and the pmf is given by
 .block[
-$$\Pr[Y_i = y_i | \theta] = \dfrac{\theta^y_i e^{-\theta}}{y_i!}; \ \ \ \ y_i=0,1,2,\ldots; \ \ \ \ \theta > 0.$$
+$$\Pr[Y_i = y_i | \theta] = \dfrac{\theta^{y_i} e^{-\theta}}{y_i!}; \ \ \ \ y_i=0,1,2,\ldots; \ \ \ \ \theta > 0.$$
 ]
 
   where
