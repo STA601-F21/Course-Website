@@ -140,6 +140,10 @@ lessons:
     slidespdf: "32-rejection-importance-sampling.pdf"
     #video: " "
     
+  - date: " "
+    title: "Lab 4: Prior selection and model reparameterization"
+    lab: "lab-04-model-reparameterization-blank.html"
+    
   - date: "Thur, July 9"
     title: "Module 3.3: The normal model: conditional inference for the mean"
     reading: "33-reading.html"
@@ -147,9 +151,6 @@ lessons:
   - date: " "
     title: "Module 3.4: The normal model: joint inference for mean and variance"
     reading: "34-reading.html"
-  
-  - date: " "
-    title: "Lab 4: Prior selection and model reparameterization"
     
   - date: "Fri, July 10"
     title: "Module 3.5: Noninformative and improper priors"

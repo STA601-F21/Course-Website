@@ -10,10 +10,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="STA 602L: Bayesian and Modern Statistics" />
+<meta name="author" content="STA 360/602L: Bayesian and Modern Statistics" />
 
 
-<title>STA 602L Lab 4: Prior selection and model reparameterization</title>
+<title>Lab 4: Prior selection and model reparameterization</title>
 
 <style type="text/css">
 @charset "UTF-8";
@@ -467,9 +467,8 @@ background-color: #bf4f22;
 
 
 
-<h1 class="title toc-ignore">STA 602L Lab 4: Prior selection and model reparameterization</h1>
-<h4 class="author">STA 602L: Bayesian and Modern Statistics</h4>
-<h4 class="date">Feb 10, 2020</h4>
+<h1 class="title toc-ignore">Lab 4: Prior selection and model reparameterization</h1>
+<h4 class="author">STA 360/602L: Bayesian and Modern Statistics</h4>
 
 
 <div id="TOC">
@@ -499,7 +498,7 @@ background-color: #bf4f22;
 </ul>
 </div>
 
-<p><strong>Due:</strong> 11:59pm, Feb 10, 2020</p>
+<p><strong>Due:</strong> 11:59pm, July 10, 2020</p>
 <div id="housekeeping" class="section level1">
 <h1>Housekeeping</h1>
 <div id="rrstudio" class="section level2">
@@ -562,7 +561,7 @@ background-color: #bf4f22;
 <p>Note the true values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Once we observe the data <span class="math inline">\(\{x_i,y_i\}\)</span>, both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are unknown, so we would like to perform inference on them. However, we only have 5 data points. Given so few data points, we can be quite sure that the resulting posteriors will be sensitive to the choice of priors.</p>
 <div id="flat-priors" class="section level2">
 <h2>Flat priors</h2>
-<p>One possible choice of prior is a flat prior for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. That is, <span class="math inline">\(p(\alpha) \propto 1\)</span> and <span class="math inline">\(p(\beta) \propto 1\)</span>. Let’s look at how our posterior beliefs about <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> (especially <span class="math inline">\(\alpha\)</span>) act under these priors.</p>
+<p>One possible choice of prior is a flat prior for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. That is, <span class="math inline">\(\pi(\alpha) \propto 1\)</span> and <span class="math inline">\(\pi(\beta) \propto 1\)</span>. Let’s look at how our posterior beliefs about <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> (especially <span class="math inline">\(\alpha\)</span>) act under these priors.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">stan_dat &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> y, <span class="dt">x=</span>x, <span class="dt">N=</span>N)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">fit.flat &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&quot;lab-04-flat_prior.stan&quot;</span>, <span class="dt">data =</span> stan_dat, <span class="dt">chains =</span> <span class="dv">1</span>, <span class="dt">refresh =</span> <span class="dv">0</span>, <span class="dt">iter =</span> <span class="dv">2000</span>, <span class="dt">warmup =</span> <span class="dv">500</span>, <span class="dt">seed=</span><span class="dv">48</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">alpha.flat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(fit.flat, <span class="dt">pars =</span> <span class="st">&quot;alpha&quot;</span>)</a>
@@ -775,7 +774,7 @@ background-color: #bf4f22;
 <p>If we transformed variables back to probabilities, we would see that the induced prior on <span class="math inline">\(\theta\)</span> would be a <span class="math inline">\(\text{Beta}(0, 0)\)</span>.</p>
 <hr />
 <ol start="8" style="list-style-type: decimal">
-<li>Is this prior proper? Does it result in a proper posterior? If so, under which conditions?</li>
+<li>Is this prior proper, that is, does it integrate to 1? Does it result in a proper posterior, that is, does it integrate to 1? If so, under which conditions?</li>
 </ol>
 <hr />
 <p>Let’s try to sample from this model:</p>
@@ -799,7 +798,7 @@ background-color: #bf4f22;
 <p>Consider yet another parameterization of the binomial sampling model in terms of the (un-logged) odds <span class="math inline">\(\pi = \frac{\theta}{1 - \theta}\)</span>.</p>
 <hr />
 <ol start="9" style="list-style-type: decimal">
-<li>If we set a uniform prior for <span class="math inline">\(\pi\)</span>, what is the induced prior on <span class="math inline">\(\theta = \frac{\pi}{(1+\pi)}\)</span>? Is this prior proper?</li>
+<li>If we set a uniform prior for <span class="math inline">\(\pi\)</span>, what is the induced prior on <span class="math inline">\(\theta = \frac{\pi}{(1+\pi)}\)</span> (do a quick review of functions of random variables if you do not remember)? Is this prior proper, that is, does it integrate to 1?</li>
 </ol>
 <hr />
 <p>From our work above, we realize that the innocuous uniform prior belief about <span class="math inline">\(\theta\)</span> sometimes translates into <em>improper</em> priors for transformations of <span class="math inline">\(\theta\)</span>.</p>
@@ -808,23 +807,22 @@ background-color: #bf4f22;
 <h2>Jeffreys’ prior</h2>
 <p>Jeffreys (1961) suggested a default procedure for specifying a prior distribution for any parameter in the sampling model, which he designed to be invariant under transformations:</p>
 <p><span class="math display">\[
-p(\theta) \propto \sqrt{I(\theta)}
+\pi(\theta) \propto \sqrt{I(\theta)}
 \]</span></p>
 <p>where <span class="math inline">\(I(\theta)\)</span> is the Fisher Information <em>of the sampling model</em> <span class="math inline">\(p(x | \theta)\)</span>:</p>
 <p><span class="math display">\[
 I(\theta) = - \text{E}\left[ \frac{\partial^2 \log \left( p(x | \theta) \right)}{\partial\theta^2} \right]
 \]</span></p>
-<p>and the expectation is taken with respect to the sampling distribution <span class="math inline">\(p(x | \theta)\)</span>. It is important to recognize that because the Fisher Information is determined by the sampling model, the Jeffreys prior is also determined by the sampling model.</p>
-<hr />
-<ol start="10" style="list-style-type: decimal">
-<li>Derive the Fisher Information of the Binomial sampling model under the success probability parameterization. From this expression, state the Jeffreys prior for <span class="math inline">\(\theta\)</span>. Write your own Stan file called <code>jeffreys.stan</code> to produce samples from the model under your derived Jeffreys prior. Use the existing <code>.stan</code> files as a guide. Use the code chunks above as a guideline to run Stan from R and print the results obtained from your sampler.</li>
-</ol>
-<hr />
+<p>and the expectation is taken with respect to the sampling distribution <span class="math inline">\(p(x | \theta)\)</span>. It is important to recognize that because the Fisher Information is determined by the sampling model, the Jeffreys prior is also determined by the sampling model. Specifying a Jeffreys prior for this model would thus be useful.</p>
+<p>This is meant as a quick introduction to Jeffreys prior; we will dive deeper into this in the main lectures.</p>
+<!-- *** -->
+<!-- 10. Derive the Fisher Information of the Binomial sampling model under the success probability parameterization. From this expression, state the Jeffreys prior for $\theta$. Write your own Stan file called `jeffreys.stan` to produce samples from the model under your derived Jeffreys prior. Use the existing `.stan` files as a guide. Use the code chunks above as a guideline to run Stan from R and print the results obtained from your sampler. -->
+<!-- *** -->
 </div>
 </div>
 <div id="grading" class="section level1">
 <h1>Grading</h1>
-<p>10 points: 1 point for each exercise.</p>
+<p>10 points: 2 points for exercise 9, 1 point for the remaining exercises.</p>
 </div>
 <div id="acknowledgement" class="section level1">
 <h1>Acknowledgement</h1>

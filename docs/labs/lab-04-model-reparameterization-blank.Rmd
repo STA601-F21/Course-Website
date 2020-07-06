@@ -1,8 +1,8 @@
 ---
-title: "STA 602L Lab 4: Prior selection and model reparameterization"
-author: "STA 602L: Bayesian and Modern Statistics"
+title: "Lab 4: Prior selection and model reparameterization"
+author: "STA 360/602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "Feb 10, 2020"
+#date: "Feb 10, 2020"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -33,7 +33,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 11:59pm, Feb 10, 2020
+**Due:** 11:59pm, July 10, 2020
 
 
 # Housekeeping
@@ -117,7 +117,7 @@ Note the true values of $\alpha$ and $\beta$. Once we observe the data $\{x_i,y_
 
 ## Flat priors
 
-One possible choice of prior is a flat prior for $\alpha$ and $\beta$. That is, $p(\alpha) \propto 1$ and $p(\beta) \propto 1$. Let's look at how our posterior beliefs about $\alpha$ and $\beta$ (especially $\alpha$) act under these priors.
+One possible choice of prior is a flat prior for $\alpha$ and $\beta$. That is, $\pi(\alpha) \propto 1$ and $\pi(\beta) \propto 1$. Let's look at how our posterior beliefs about $\alpha$ and $\beta$ (especially $\alpha$) act under these priors.
 
 ```{r flat, cache=T}
 stan_dat <- list(y = y, x=x, N=N)
@@ -352,7 +352,7 @@ If we transformed variables back to probabilities, we would see that the induced
 
 ***
 
-8. Is this prior proper? Does it result in a proper posterior? If so, under which conditions?
+8. Is this prior proper, that is, does it integrate to 1? Does it result in a proper posterior, that is, does it integrate to 1? If so, under which conditions?
 
 ***
 
@@ -369,7 +369,7 @@ Consider yet another parameterization of the binomial sampling model in terms of
 
 ***
 
-9. If we set a uniform prior for $\pi$, what is the induced prior on $\theta = \frac{\pi}{(1+\pi)}$? Is this prior proper?
+9. If we set a uniform prior for $\pi$, what is the induced prior on $\theta = \frac{\pi}{(1+\pi)}$ (do a quick review of functions of random variables if you do not remember)? Is this prior proper, that is, does it integrate to 1?
 
 ***
 
@@ -380,7 +380,7 @@ From our work above, we realize that the innocuous uniform prior belief about $\
 Jeffreys (1961) suggested a default procedure for specifying a prior distribution for any parameter in the sampling model, which he designed to be invariant under transformations:
 
 $$
-p(\theta) \propto \sqrt{I(\theta)}
+\pi(\theta) \propto \sqrt{I(\theta)}
 $$
 
 where $I(\theta)$ is the Fisher Information *of the sampling model* $p(x | \theta)$:
@@ -389,13 +389,15 @@ $$
 I(\theta) = - \text{E}\left[ \frac{\partial^2 \log \left( p(x | \theta) \right)}{\partial\theta^2} \right]
 $$
 
-and the expectation is taken with respect to the sampling distribution $p(x | \theta)$. It is important to recognize that because the Fisher Information is determined by the sampling model, the Jeffreys prior is also determined by the sampling model.
+and the expectation is taken with respect to the sampling distribution $p(x | \theta)$. It is important to recognize that because the Fisher Information is determined by the sampling model, the Jeffreys prior is also determined by the sampling model. Specifying a Jeffreys prior for this model would thus be useful.
 
-***
+This is meant as a quick introduction to Jeffreys prior; we will dive deeper into this in the main lectures.
 
-10. Derive the Fisher Information of the Binomial sampling model under the success probability parameterization. From this expression, state the Jeffreys prior for $\theta$. Write your own Stan file called `jeffreys.stan` to produce samples from the model under your derived Jeffreys prior. Use the existing `.stan` files as a guide. Use the code chunks above as a guideline to run Stan from R and print the results obtained from your sampler.
+<!-- *** -->
 
-***
+<!-- 10. Derive the Fisher Information of the Binomial sampling model under the success probability parameterization. From this expression, state the Jeffreys prior for $\theta$. Write your own Stan file called `jeffreys.stan` to produce samples from the model under your derived Jeffreys prior. Use the existing `.stan` files as a guide. Use the code chunks above as a guideline to run Stan from R and print the results obtained from your sampler. -->
+
+<!-- *** -->
 
 
 
@@ -404,7 +406,7 @@ and the expectation is taken with respect to the sampling distribution $p(x | \t
 
 # Grading
 
-10 points: 1 point for each exercise.
+10 points: 2 points for exercise 9, 1 point for the remaining exercises.
 
 
 # Acknowledgement
