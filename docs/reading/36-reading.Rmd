@@ -1,0 +1,18 @@
+---
+title: "Module 3.6: The normal model: illustration"
+output: 
+  html_document:
+    css: reading.css
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
+    + Section 5.5: Prior specification based on expectations
+    + Section 5.7: Discussion and further references

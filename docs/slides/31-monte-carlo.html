@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 3.1</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 3.1
+## Monte Carlo approximation and sampling
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Monte Carlo approximation
+
+- Monte Carlo integration is very key for Bayesian computation and using simulations in general.
+
+--
+
+- While we will focus on using Monte Carlo integration for Bayesian inference, the development is general and applies to any pdf/pmf `\(p(\theta)\)`.
+
+--
+
+- For our purposes, we will want to evaluate expectations of the form
+.block[
+`$$H = \int h(\theta) \cdot p(\theta) d\theta,$$`
+]
+
+  for many different functions `\(h(.)\)` (usually scalar for us).
+  
+
+---
+## Monte Carlo approximation
+
+- Procedure:
+  1. Generate a random sample `\(\theta_1, \ldots, \theta_m \overset{ind}{\sim} p(\theta)\)`.
+  
+--
+  2. Estimate `\(H\)` using
+.block[
+`$$\bar{h} = \dfrac{1}{m} \sum_{i=1}^m h(\theta_i).$$`
+]
+
+--
+
+- In this course, `\(p(\theta)\)` would often be the posterior distribution `\(\pi(\theta|y)\)`.
+  
+
+---
+## Monte Carlo approximation
+
+- We have `\(\mathbb{E}[h(\theta_i)] = H\)`.
+
+--
+
+- Assuming `\(\mathbb{E}[h^2(\theta_i)] &lt; \infty\)`, so that the variance of each `\(h(\theta_i)\)` is finite, we have
+
+  1. .hlight[LLN]: `\(\bar{h} \overset{a.s.}{\rightarrow} H\)`.
+  
+--
+  2. .hlight[CLT]: `\(\bar{h} - H\)` is is asymptotically normal, with asymptotic variance
+.block[
+`$$\dfrac{1}{m} \int (h(\theta)-H)^2 p(\theta) d\theta,$$`
+]
+
+      which can be approximated by
+.block[
+`$$v_m = \dfrac{1}{m^2} \sum_{i=1}^m (h(\theta_i)-\bar{h})^2.$$`
+]
+
+--
+
+- `\(\sqrt{v_m}\)` is often called the .hlight[Monte Carlo standard error].
+
+
+---
+## Monte Carlo approximation
+
+- That is, generally, taking large Monte Carlo sample sizes `\(m\)` (in the thousands or tens of thousands) can yield very precise, and cheaply computed, numerical approximations to mathematically difficult integrals.
+
+--
+
+- .hlight[What this means for us]: we can approximate just about any aspect of the posterior distribution with a large enough Monte Carlo sample.
+
+
+---
+## Monte Carlo approximation
+
+- For samples `\(\theta_1, \ldots, \theta_m\)` drawn iid from `\(\pi(\theta|y)\)`, as `\(m \rightarrow \infty\)`, we have
+
+--
+  + `\(\bar{\theta} = \dfrac{1}{m} \sum\limits_{i=1}^m \theta_i \rightarrow \mathbb{E}[\theta | y]\)`
+  
+--
+
+  + `\(\hat{\sigma}_{\theta} = \dfrac{1}{m-1} \sum\limits_{i=1}^m (\theta_i - \bar{\theta})^2 \rightarrow \mathbb{V}[\theta | y]\)`
+
+--
+
+  + `\(\dfrac{1}{m} \sum\limits_{i=1}^m \mathbb{1}[\theta_i \leq c] = \dfrac{\# \theta_i \leq c}{m} \rightarrow \Pr[\theta \leq c| y]\)`
+  
+--
+
+  + `\([\dfrac{\alpha}{2}\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m), (1-\dfrac{\alpha}{2})\textrm{th} \ \textrm{percentile of } (\theta_1, \ldots, \theta_m)]\)` `\(\rightarrow\)` `\(100 \times (1-\alpha)%\)` quantile-based credible interval.
+
+
+
+---
+## Back to birth rates
+
+- Suppose we randomly sample two "new" women, one with degree and one without.
+
+--
+
+- To what extent do we expect the one without the degree to have more kids than the other, e.g. `\(\tilde{y}_1 &gt; \tilde{y}_2 | y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2}\)`?
+
+--
+
+- Using R, 
+    
+    ```r
+    set.seed(01222020)
+    a &lt;- 2; b &lt;- 1; #prior
+    n1 &lt;- 111; sumy1 &lt;- 217; n2 &lt;- 44; sumy2 &lt;- 66 #data
+    y1_pred &lt;- rnbinom(100000,size=(a+sumy1),mu=(a+sumy1)/(b+n1))
+    y2_pred &lt;- rnbinom(10000,size=(a+sumy2),mu=(a+sumy2)/(b+n2))
+    mean(y1_pred &gt; y2_pred)
+    ```
+    
+    ```
+    ## [1] 0.48218
+    ```
+    
+    ```r
+    mean(y1_pred == y2_pred)
+    ```
+    
+    ```
+    ## [1] 0.21842
+    ```
+
+
+---
+## Back to birth rates
+
+- That is, `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2 | y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2}) \approx 0.48\)` and `\(\Pr(\tilde{y}_1 = \tilde{y}_2| y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2}) \approx 0.22\)`.
+
+--
+
+- Notice that strong evidence of difference between two populations does not really imply the difference in predictions is large.
+
+
+
+
+---
+## Monte Carlo approximation
+
+- This general idea of using samples to "approximate" averages (expectations) is also useful when trying to approximate posterior predictive distributions.
+
+--
+
+- Quite often, we are able to sample from `\(p(y_i| \theta)\)` and `\(\pi(\theta | \{y_i\})\)` but not from `\(p(y_{n+1}|y_{1:n})\)` directly.
+
+--
+
+- We can do so indirectly using the following Monte Carlo procedure:
+.block[
+.small[
+$$
+`\begin{split}
+\textrm{sample } \theta^{(1)} &amp; \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(1)} \sim f(y_{n+1}| \theta^{(1)})\\
+\textrm{sample } \theta^{(2)} &amp; \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(2)} \sim f(y_{n+1}| \theta^{(2)})\\
+&amp; \ \ \vdots \hspace{133pt} \vdots \\
+\textrm{sample } \theta^{(m)} &amp; \sim \pi(\theta | \{y_i\}), \ \textrm{ then sample } y_{n+1}^{(m)} \sim f(y_{n+1}| \theta^{(m)}).\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- The sequence `\(\{(\theta, y_{n+1})^{(1)}, \ldots, (\theta, y_{n+1})^{(m)}\}\)` constitutes `\(m\)` independent samples from the joint posterior of `\((\theta, Y_{n+1})\)`.
+
+--
+
+- In fact, `\(\{ y_{n+1}^{(1)}, \ldots, y_{n+1}^{(m)}\}\)` are independent draws from the posterior predictive distribution we care about.
+
+
+
+---
+## Back to birth rates
+
+- Let's re-compute `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2 | y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2})\)` and `\(\Pr(\tilde{y}_1 = \tilde{y}_2| y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2})\)` using this method.
+
+--
+
+- Using R, 
+    
+    ```r
+    set.seed(01222020)
+    a &lt;- 2; b &lt;- 1; #prior
+    n1 &lt;- 111; sumy1 &lt;- 217; n2 &lt;- 44; sumy2 &lt;- 66 #data
+    theta1_pred &lt;- rgamma(10000,219,112); theta2_pred &lt;- rgamma(10000,68,45)
+    y1_pred &lt;- rpois(10000,theta1_pred); y2_pred &lt;- rpois(10000,theta2_pred)
+    mean(y1_pred &gt; y2_pred)
+    ```
+    
+    ```
+    ## [1] 0.4765
+    ```
+    
+    ```r
+    mean(y1_pred == y2_pred)
+    ```
+    
+    ```
+    ## [1] 0.2167
+    ```
+
+- Again, `\(\Pr(\tilde{y}_1 &gt; \tilde{y}_2 | y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2}) \approx 0.48\)` and `\(\Pr(\tilde{y}_1 = \tilde{y}_2| y_{11},\ldots,y_{1n_1},y_{21},\ldots,y_{2n_2}) \approx 0.22\)`.
+
+
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

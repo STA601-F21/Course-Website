@@ -129,31 +129,35 @@ lessons:
   - date: "Wed, July 8"
     title: "Module 3.1: Monte Carlo approximation and sampling"
     reading: "31-reading.html"
+    slides: "31-monte-carlo.html"
+    slidespdf: "31-monte-carlo.pdf"
     #video: " "
     
   - date: " "
     title: "Module 3.2: Rejection sampling; Importance sampling"
     reading: "32-reading.html"
+    slides: "32-rejection-importance-sampling.html"
+    slidespdf: "32-rejection-importance-sampling.pdf"
     #video: " "
     
   - date: "Thur, July 9"
     title: "Module 3.3: The normal model: conditional inference for the mean"
-    #reading: "33-reading.html"
+    reading: "33-reading.html"
     
   - date: " "
     title: "Module 3.4: The normal model: joint inference for mean and variance"
-    #reading: "34-reading.html"
+    reading: "34-reading.html"
   
   - date: " "
     title: "Lab 4: Prior selection and model reparameterization"
     
   - date: "Fri, July 10"
     title: "Module 3.5: Noninformative and improper priors"
-    #reading: "35-reading.html"
+    reading: "35-reading.html"
     
   - date: " "
     title: "Module 3.6: The normal model: illustration"
-    #reading: "36-reading.html"
+    reading: "36-reading.html"
   
   
   - date: " "
@@ -176,15 +180,19 @@ lessons:
   
   - date: "Tues, July 14"
     title: "Module 4.1: Multivariate normal model I"
+    #reading: "41-reading.html"
     
   - date: " "
     title: "Module 4.2: Multivariate normal model I"
+    #reading: "42-reading.html"
     
   - date: "Wed, July 15"
     title: "Module 4.3: Multivariate normal model III"
+    #reading: "43-reading.html"
     
   - date: " "
     title: "Module 4.4: Missing data and imputation"
+    #reading: "44-reading.html"
     
   - date: "Thurs, July 16"
     title: "Review for midterm exam"
