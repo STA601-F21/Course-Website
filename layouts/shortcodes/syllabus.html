@@ -6,10 +6,10 @@
   <tr>
     <th style="width:25%;text-align:right">Date</th>
     <th style="width:45%">Lesson</th>
+    <th style="width:5%;text-align:center">Reading</th>
     <th style="width:5%;text-align:center">Video</th>
     <th style="width:5%;text-align:center">Slides</th>
     <th style="width:5%;text-align:center">Slides (pdf)</th>
-    <th style="width:5%;text-align:center">Reading</th>
     <th style="width:5%;text-align:center">Lab</th>
     <th style="width:5%;text-align:center">HW</th>
   </tr>
@@ -21,6 +21,14 @@
       <td>{{ .title }}</td>
 
       
+      
+      {{ if .reading }}
+      <td align="center"><a href="{{ .Site.baseurl }}/reading/{{ .reading  }}">
+          <i class="fa fa-book fa-lg"></i></a></td>
+      {{ else }}
+        <td align="center"><font color="f1f1f1">
+          <i class="fa fa-book fa-lg"></i></font></td>
+      {{ end }}
       
       {{ if .video }}
       <td align="center"><a href="{{ .video  }}">
@@ -44,14 +52,6 @@
       {{ else }}
         <td align="center"><font color="f1f1f1">
           <i class="fa fa-file-pdf-o  fa-lg"></i></font></td>
-      {{ end }}
-      
-      {{ if .reading }}
-      <td align="center"><a href="{{ .Site.baseurl }}/reading/{{ .reading  }}">
-          <i class="fa fa-book fa-lg"></i></a></td>
-      {{ else }}
-        <td align="center"><font color="f1f1f1">
-          <i class="fa fa-book fa-lg"></i></font></td>
       {{ end }}
 
       {{ if .lab }}
