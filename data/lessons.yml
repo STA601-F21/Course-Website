@@ -120,6 +120,10 @@ lessons:
     
   - date: "Tues, July 7"
     title: "Quiz I"
+    
+  - date: " "
+    title: "Homework 2"
+    hw: "hw-02.html"
   
   
   - title: " "   
@@ -131,14 +135,14 @@ lessons:
     reading: "31-reading.html"
     slides: "31-monte-carlo.html"
     slidespdf: "31-monte-carlo.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/745244/1403540/914922/0/Module-31-Monte-Carlo-approximation-and-sampling"
     
   - date: " "
     title: "Module 3.2: Rejection sampling; Importance sampling"
     reading: "32-reading.html"
     slides: "32-rejection-importance-sampling.html"
     slidespdf: "32-rejection-importance-sampling.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/745281/1403540/914922/0/Module-32-Rejection-sampling-Importance-sampling"
     
   - date: " "
     title: "Lab 4: Prior selection and model reparameterization"
@@ -147,10 +151,12 @@ lessons:
   - date: "Thur, July 9"
     title: "Module 3.3: The normal model: conditional inference for the mean"
     reading: "33-reading.html"
+    #video: " "
     
   - date: " "
     title: "Module 3.4: The normal model: joint inference for mean and variance"
     reading: "34-reading.html"
+    #video: " "
     
   - date: "Fri, July 10"
     title: "Module 3.5: Noninformative and improper priors"

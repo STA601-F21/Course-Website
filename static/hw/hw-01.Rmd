@@ -36,8 +36,8 @@ $$\mathbb{V}(\theta | y) = \dfrac{\mathbb{E}(\theta | y)\mathbb{E}(1-\theta | y)
     
 4. Hoff 3.1. 
     + <font color="blue">**Part (a): 0.5 points for all students**</font>
-    + <font color="blue">**Part (b): Students in STA 360: 2 points; Students in STA 602: 1 points**</font>
-    + <font color="blue">**Part (c): Students in STA 360: 2 points; Students in STA 602: 1 points**</font>
+    + <font color="blue">**Part (b): Students in STA 360: 2 points; Students in STA 602: 1 point**</font>
+    + <font color="blue">**Part (c): Students in STA 360: 2 points; Students in STA 602: 1 point**</font>
     + <font color="blue">**Part (d): Students in STA 360: 2 points; Students in STA 602: 1.5 points**</font>
     + <font color="blue">**Part (e): 2 points for all students**</font>
 
