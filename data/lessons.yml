@@ -153,14 +153,14 @@ lessons:
     reading: "33-reading.html"
     slides: "33-normal-intro.html"
     slidespdf: "33-normal-intro.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/746405/1403540/914922/0/Module-33-The-normal-model-introduction-and-motivating-examples"
     
   - date: " "
     title: "Module 3.4: The normal model: conditional inference for the mean"
     reading: "34-reading.html"
     slides: "34-normal-cond-inference.html"
     slidespdf: "34-normal-cond-inference.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/746431/1403540/914922/0/Module-34-The-normal-model-conditional-inference-for-the-mean"
     
   - date: "Fri, July 10"
     title: "Module 3.5: The normal model: joint inference for mean and variance"
