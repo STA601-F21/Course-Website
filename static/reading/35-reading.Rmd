@@ -1,5 +1,5 @@
 ---
-title: "Module 3.5: Noninformative and improper priors"
+title: "Module 3.5: The normal model: joint inference for mean and variance"
 output: 
   html_document:
     css: reading.css
@@ -14,12 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Required:
 
 - [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
-    + Section 5.3: Joint inference for the mean and variance (pages 78-79)
+    + Section 5.3: Joint inference for the mean and variance
+    + Section 5.5: Prior specification based on expectations
 
 ## Optional:
 
 - [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
-    + Section 2.8: Noninformative prior distributions
-    + Section 3.1: Averaging over 'nuisance' parameters
-    + Section 3.2: Normal data with noninformative prior distribution
-    
+    + Section 3.3: Normal data with a conjugate prior distribution
