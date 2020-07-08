@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 3.6</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 3.6
+## Noninformative and improper priors
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+
+## Noninformative and improper priors
+
+- Generally, we must specify both `\(\mu_0\)` and `\(\tau_0\)` to do inference.
+
+--
+
+- When prior distributions have no population basis, that is, there is no justification of the prior as "prior data", prior distributions can be difficult to construct.
+
+--
+
+- To that end, there is often the desire to construct .hlight[noninformative priors], with the rationale being _"to let the data speak for themselves"_.
+
+--
+
+- For example, we could instead assume a uniform prior on `\(\mu\)` that is constant over the real line, i.e., `\(\pi(\mu) \propto 1\)` `\(\Rightarrow\)` all values on the real line are equally likely apriori.
+
+--
+
+- Clearly, this is not a valid pdf since it will not integrate to 1 over the real line. Such priors are known as .hlight[improper priors].
+
+--
+
+- An improper prior can still be very useful, we just need to ensure it results in a .hlight[proper posterior].
+
+
+
+---
+## Jeffreys' prior
+
+- Question: is there a prior pdf (for a given model) that would be universally accepted as a noninformative prior?
+
+--
+
+- Laplace proposed the uniform distribution.  This proposal lacks invariance under monotone transformations of the parameter.
+
+--
+
+- For example, a uniform prior on the binomial proportion parameter `\(\theta\)` is not the same as a uniform prior on the odds parameter `\(\phi = \dfrac{\theta}{1-\theta}\)`.
+
+--
+
+- A more acceptable approach was introduced by Jeffreys. For single parameter models, the .hlight[Jeffreys' prior] defines a noninformative prior density of a parameter `\(\theta\)` as
+.block[
+.small[
+`$$\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$$`
+]
+]
+
+  where `\(\mathcal{I}(\theta)\)` is the .hlight[Fisher information] for `\(\theta\)`.
+
+
+
+---
+## Jeffreys' prior
+
+- The Fisher information gives a way to measure the amount of information a random variable `\(Y\)` carries about an unknown parameter `\(\theta\)` of a distribution that describes `\(Y\)`.
+
+--
+
+- Formally, `\(\mathcal{I}(\theta)\)` is defined as
+.block[
+.small[
+`$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 f(y; \theta) dy.$$`
+]
+]
+
+--
+
+- Alternatively,
+.block[
+.small[
+`$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \bigg| \theta \right] = - \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \right) f(y; \theta) dy.$$`
+]
+]
+
+--
+
+- Turns out that the Jeffreys' prior for `\(\mu\)` under the normal model, when `\(\sigma^2\)` is known, is
+.block[
+.small[
+`$$\pi(\mu) \propto 1,$$`
+]
+]
+
+  the uniform prior over the real line. Let's derive this on the board.
+  
+
+
+  
+  
+
+---
+## Inference for mean, conditional on variance using Jeffreys' prior
+
+- Recall that for `\(\sigma^2\)` known, the normal likelihood simplifies to
+.block[
+.small[
+`$$\propto \ \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$`
+]
+]
+
+  ignoring everything else that does not depend on `\(\mu\)`.
+  
+- With the Jeffreys' prior `\(\pi(\mu) \propto 1\)`, can we derive the posterior distribution?
+
+
+
+
+---
+## Inference for mean, conditional on variance using Jeffreys' prior
+
+- Posterior:
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\mu|Y,\sigma^2) \ &amp; \propto \  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\} \pi(\mu)\\
+&amp; \propto \  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- This is the kernel of a normal distribution with
+    + mean `\(\bar{y}\)`, and
+    + precision `\(n\tau\)` or variance `\(\dfrac{1}{n\tau} = \dfrac{\sigma^2}{n}\)`.
+
+--
+
+- Written differently, we have `\(\mu|Y,\sigma^2 \sim \mathcal{N}(\bar{y},\dfrac{\sigma^2}{n})\)`
+
+--
+
+- &lt;div class="question"&gt;
+This should look familiar to you. Does it?
+&lt;/div&gt;
+
+
+
+---
+## Improper prior
+
+- Let's be very objective with the prior selection. In fact, let's be extreme!
+
+--
+  + If we let the normal variance `\(\rightarrow \infty\)` then our prior on `\(\mu\)` is `\(\propto 1\)` (recall the Jeffreys' prior on `\(\mu\)` for known `\(\sigma^2\)`).
+
+--
+  + If we let the gamma variance get very large (e.g., `\(a,b \rightarrow 0\)`), then the prior on `\(\sigma^2\)` is `\(\propto \dfrac{1}{\sigma^2}\)`.
+
+--
+
+- `\(\pi(\mu,\sigma^2) \propto \dfrac{1}{\sigma^2}\)` is improper (does not integrate to 1) but does lead to a proper posterior distribution that yields inferences similar to frequentist ones.
+
+--
+
+- For that choice, we have
+.block[
+.small[
+$$
+`\begin{split}
+\mu|Y,\tau &amp; \sim \mathcal{N}\left(\bar{y},\dfrac{1}{n \tau}\right)\\
+\tau | Y &amp; \sim \textrm{Gamma}\left(\dfrac{n-1}{2}, \dfrac{(n-1)s^2}{2}\right)\\
+\end{split}`
+$$
+]
+]
+
+
+---
+## Analysis with noninformative priors
+
+- So our joint posterior is
+.block[
+.small[
+$$
+`\begin{split}
+\mu_A | Y_A, \tau_A &amp; \sim \ \mathcal{N}\left(\bar{y}_A,\dfrac{1}{n_A \tau_A}\right) = \mathcal{N}\left(15.2, \dfrac{1}{6\tau_A} \right)\\
+\tau_A | Y_A &amp; \sim \textrm{Gamma}\left(\dfrac{n_A-1}{2}, \dfrac{(n_A-1)s^2_A}{2}\right) = \textrm{Gamma}\left(\dfrac{6-1}{2}, \dfrac{(6-1)(22.17)}{2}\right)\\
+\mu_N | Y_N, \tau_N &amp; \sim \ \mathcal{N}\left(\bar{y}_N,\dfrac{1}{n_N \tau_N}\right) = \mathcal{N}\left(6.2, \dfrac{1}{6\tau_N} \right)\\
+\tau_N | Y_N &amp; \sim \textrm{Gamma}\left(\dfrac{n_N-1}{2}, \dfrac{(n_N-1)s^2_A}{2}\right) = \textrm{Gamma}\left(\dfrac{6-1}{2}, \dfrac{(6-1)(13.37)}{2}\right)\\
+\end{split}`
+$$
+]
+]
+
+
+---
+## Monte Carlo sampling
+
+It is easy to sample from these posteriors:
+
+```r
+aA &lt;- (6-1)/2
+aN &lt;- (6-1)/2
+bA &lt;- (6-1)*22.17/2
+bN &lt;- (6-1)*13.37/2
+muA &lt;- 15.2
+muN &lt;- 6.2
+tauA_postsample_impr &lt;- rgamma(10000,aA,bA)
+thetaA_postsample_impr &lt;- rnorm(10000,muA,sqrt(1/(6*tauA_postsample_impr)))
+tauN_postsample_impr &lt;- rgamma(10000,aN,bN)
+thetaN_postsample_impr &lt;- rnorm(10000,muN,sqrt(1/(6*tauN_postsample_impr)))
+sigma2A_postsample_impr &lt;- 1/tauA_postsample_impr
+sigma2N_postsample_impr &lt;- 1/tauN_postsample_impr
+```
+
+
+
+---
+## Monte Carlo sampling
+
+- Is the average improvement for the accelerated group larger than that for the no growth group?
+  + What is `\(\Pr[\mu_A &gt; \mu_N | Y_A, Y_N)\)`?
+  
+  ```r
+  mean(thetaA_postsample_impr &gt; thetaN_postsample_impr)
+  ```
+  
+  ```
+  ## [1] 0.9924
+  ```
+
+--
+
+- Is the variance of improvement scores for the accelerated group larger than that for the no growth group?
+  + What is `\(\Pr[\sigma^2_A &gt; \sigma^2_N | Y_A, Y_N)\)`?
+  
+  ```r
+  mean(sigma2A_postsample_impr &gt; sigma2N_postsample_impr)
+  ```
+  
+  ```
+  ## [1] 0.7041
+  ```
+      
+--
+
+- &lt;div class="question"&gt;
+How does the new choice of prior affect our conclusions?
+&lt;/div&gt;
+
+
+
+
+
+---
+## Recall the job training data
+
+- Data:
+  
+  + No training group (N): sample size `\(n_N = 429\)`.
+  
+  + Training group (T): sample size `\(n_A = 185\)`.
+
+--
+
+- Summary statistics for change in annual earnings:
+  
+  + `\(\bar{y}_N = 1364.93\)`; `\(s_N = 7460.05\)`
+  
+  + `\(\bar{y}_T = 4253.57\)`; `\(s_T = 8926.99\)`
+  
+--
+
+- &lt;div class="question"&gt;
+Using the same approach we used for the Pygmalion data, answer the questions of interest.
+&lt;/div&gt;
+
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

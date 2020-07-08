@@ -34,328 +34,6 @@ library(rvest)
 ```
 
 
-
-## Motivating example: job training
-
-- In the 1970s, researchers in the U.S. ran several randomized experiments intended to evaluate public policy programs. 
-
---
-
-- One of the most famous experiments is the National Supported Work (NSW) Demonstration, in which researchers wanted to assess whether or not job training for disadvantaged workers had an effect on their wages. 
-
---
-
-- Eligible workers were randomly assigned either to receive job training or not to receive job training. 
-
---
-
-- Candidates eligible for the NSW were randomized into the program between March 1975 and July 1977.
-
---
-
-- For more details, read Lalonde, R. J. (1986) and Dehejia, R., and Wahba, S. (1999).
-
-
-
----
-## Motivating example: job training
-
-- Setup:
-  + **Pre-training wages**: real annual earnings in 1974 before training.
-  
---
-  + Two groups: some participants received job training and the rest did not.
-  
---
-  + **Post-training wages**: real annual earnings in 1978 upon completion of training.
-  
---
-
-- <div class="question">
-Question of interest: is there evidence that workers who receive job training tend to earn higher wages than workers who do not receive job training?
-</div>
-
---
-
-- The original study really is a causal inference setup, but the data used in this example only uses a subset of the data.
-
---
-
-- The data is richer than what we will use it for (i.e., there are covariates we can control for) but we will only focus on the pre and post wages for the two groups.
-
-
-
-
----
-## Job training: the data
-
-- Data:
-  
-  + No training group (N): sample size $n_N = 429$.
-  
-  + Training group (T): sample size $n_A = 185$.
-  
-  + **Diff wages**: Post-training wages -- Pre-training wages.
-
---
-
-- Summary statistics for change in annual earnings:
-  
-  + $\bar{y}_N = 1364.93$; $s_N = 7460.05$
-  
-  + $\bar{y}_T = 4253.57$; $s_T = 8926.99$
-
---
-
-- Wages/income are well known to be approximately normally distributed. Let's look at the distribution of "change in annual earnings" for the two groups.
-
-
-
----
-## Job training: the data
-
-```{r fig.height=4.2, echo=F}
-Data <- read.csv("data/lalondedata.txt",header=T)
-Data$Diff <- Data$re78 - Data$re74
-plot(density(Data$Diff[Data$treat==0]),lwd=1.5,type="l",
-     col="green4",xlab="Diff wages",ylab="Density",main="Change in real annual earnings for the two groups")
-lines(density(Data$Diff[Data$treat==1]),col="orange3",lwd=1.5,type="l")
-legend("topright",legend=c("did not receive job training","received job training"),
-       col=c("green4","orange3"), lwd=2, cex=1)
-```
-
-Not completely normal but not too far off either. Lots of overlap between the two groups.
-
-
----
-## Model for changes in earnings
-
-- $$y_i^{(T)} \sim \mathcal{N}(\mu_T,\sigma^2_T)$$
-  $$y_i^{(N)} \sim \mathcal{N}(\mu_N,\sigma^2_N)$$
-
---
-
-- Want posterior distribution of $\mu_T - \mu_N$. Specifically, we would like to compute $\Pr[\mu_T > \mu_N | Y_T, Y_N)$ or equivalently, $\Pr[\mu_T - \mu_N > 0 | Y_T, Y_N)$.
-
---
-
-- Inference for $\mu_T - \mu_N$ can be complicated in frequentist paradigm when $\sigma^2_T \neq \sigma^2_N$.
-
---
-
-- Use approximate $t$-distributions based on the Welch-Satterthwaite degrees of freedom.
-
---
-
-- Trivial with Bayesian inference
-
---
-
-- By the way, also trivial to compute $\Pr[\sigma^2_T > \sigma^2_N | Y_T, Y_N)$ with Bayesian inference, which we will do later.
-
---
-
-- How to do posterior inference for such normal models?
-
-
-
----
-## Another example: Pygmalion study
-
-- Pygmalion effect is a phenomenon where expectation affects performance.
-
---
-
-- <div class="question">
-Question of interest: do teachers' expectations impact academic development of children?
-</div>
-
---
-
-- Setup:
-  + Researchers gave IQ test to elementary school children.
-  
---
-  + Randomly picked six children & told teachers that the test predicts them to **have high potential for accelerated growth**.
-  
---
-  + They randomly picked six children and told teachers that the test predicts them to have **NO potential for growth**.
-  
---
-  + At end of school year, they gave IQ test again to all students.
-  
---
-  + They recorded the change in IQ scores of each student.
-
-
-
----
-## Another example: Pygmalion study
-
-- Data:
-  
-  + Accelerated group (A): 20, 10, 19, 15, 9, 18.
-  
-  + No growth group (N): 3, 2, 6, 10, 11, 5.
---
-
-- Summary statistics:
-  
-  + $\bar{y}_A = 15.2$; $s_A = 4.71$.
-  
-  + $\bar{y}_N = 6.2$; $s_N = 3.65$.
-  
---
-
-- IQ test scores are also well known to be approximately normally distributed.
-
---
-
-- Can't really check this assumption with only $n = 6$ observations.
-
-
-
----
-## Model for changes in scores
-
-- $$y_i^{(A)} \sim \mathcal{N}(\mu_A,\sigma^2_A)$$
-  $$y_i^{(N)} \sim \mathcal{N}(\mu_N,\sigma^2_N)$$
-
---
-
-- Once again, we want posterior distribution of $\mu_A - \mu_N$. 
-
---
-
-- As before, we would like to compute $\Pr[\mu_A > \mu_N | Y_A, Y_N) \equiv \Pr[\mu_A - \mu_N > 0 | Y_A, Y_N)$.
-
---
-
-- We would also like to compute $\Pr[\sigma^2_A > \sigma^2_N | Y_A, Y_N)$.
-
---
-
-- To answer both questions, let's learn the Bayesian normal model.
-
-
-
----
-## Normal distribution
-
-- A random variable $Y$ has a .hlight[normal distribution], written as $Y \sim \mathcal{N}(\mu, \sigma^2)$, if the pdf is
-.block[
-.small[
-$$p(y; \mu,\sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \ e^{-\dfrac{(y-\mu)^2}{2\sigma^2}}; \ \ \ y \in (-\infty,\infty), \ \ \mu \in (-\infty,\infty), \ \ \sigma \in (0,\infty).$$
-]
-]
-
-  where $\mu$ is the mean and $\sigma^2$ is the variance.
-
---
-
-- It is also common (and would often be more convenient for our purposes) to write the pdf in terms of .hlight[precision], $\tau$, where $\tau = 1/\sigma^2$.
-
---
-
-- In that case, the pdf is instead
-.block[
-.large[
-$$p(y; \mu,\sigma^2) = \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ e^{-\frac{1}{2} \tau (y-\mu)^2}; \ \ \ y \in (-\infty,\infty), \ \ \mu \in (-\infty,\infty), \ \ \tau \in (0,\infty).$$
-]
-]
-
-
-
----
-## Example normal distributions
-
-```{r fig.height=5.3, echo=F}
-x <- seq(-6,6,by=0.0001)
-plot(x,dnorm(x,0,1),xlim=c(-6,6),ylim=c(0,2),lwd=1.5,type="l",
-      col="green4",xlab="y",ylab="Density")
-lines(x,dnorm(x,0,2),col="red3",lwd=1.5,type="l")
-lines(x,dnorm(x,-1,0.5),col="blue3",lwd=1.5,type="l")
-lines(x,dnorm(x,2,0.2),col="orange3",lwd=1.5,type="l")
-legend("topleft",
-       legend=c(expression(paste(N,"(",y,"| ",mu,"=0, ",sigma^2,"=1)")),
-                expression(paste(N,"(",y,"| ",mu,"=0, ",sigma^2,"=",2^2,")")),
-                expression(paste(N,"(",y,"| ",mu,"=-1, ",sigma^2,"=",0.5^2,")")),
-                expression(paste(N,"(",y,"| ",mu,"=2, ",sigma^2,"=",0.2^2,")"))),
-       col=c("green4","red3","blue3","orange3"), lwd=2, cex=1)
-```
-
-
-
----
-## Comments on the normal distribution
-
-- It is amazing how often real data are close to normally distributed.
-
---
-
-- Likely a consequence of CLT -- sums and means of independent random variables tend to be approximately normally distributed.
-
---
-
-- Occurs under very general conditions.
-
---
-
-- Normality?
-  + Height, weight and other body measurements,
-  + Income\wages\earnings,
-  + Cumulative hydrologic measures such as annual rainfall or monthly river discharge,
-  + Errors in astronomical or physical observations,
-  + Many more examples!
-
-
-
----
-## Properties of the normal distribution
-
-- Mean, median and mode are all the same $(\mu)$.
-
---
-
-- Symmetric about the mean $\mu$.
-
---
-
-- 95% of the density (95% probability) within $\pm1.96\sigma$ (approximately two standard deviations) of the mean.
-
---
-
-- If $X \sim \mathcal{N}(\theta,s^2)$ and $Y \sim \mathcal{N}(\mu, \sigma^2)$ with $X \perp Y$, then
-.block[
-.small[
-$$aX + bY \sim \mathcal{N}(a\theta + b\mu,a^2s^2+b^2\sigma^2),$$
-]
-]
-
-  for constants $a$ and $b$.
-  
---
-
-- When independence does not hold, the sum of two normally distributed random variables is still normally distributed.
-
---
-
-- However, when that is the case, we must account for the correlation in the variance term.
-
-
-
----
-## Notes on normal distribution in R
-
-- `rnorm`, `dnorm`, `pnorm`, `qnorm` in R take mean and **standard deviation** $\sigma$ as arguments.
-
-- If you use the variance $\sigma^2$ instead you will get wrong answers!
-
-- For example, `rnorm(n,m,s)` generates $n$ normal random variables with mean $m$ and standard deviation $s$, that is, $\mathcal{N}(m,s^2)$.
-
-
-
----
 ## Normal model
 
 - Suppose we have independent observations $Y = (y_1,y_2,\ldots,y_n)$, where each $y_i \sim \mathcal{N}(\mu, \sigma^2)$ or $y_i \sim \mathcal{N}(\mu, \tau^{-1})$, with unknown parameters $\mu$ and $\sigma^2$ (or $\tau$).
@@ -370,6 +48,7 @@ $$
 L(Y; \mu,\sigma^2) & = \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau (y_i-\mu)^2\right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n (y_i-\mu)^2\right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n \left[ (y_i-\bar{y}) - (\mu - \bar{y}) \right]^2 \right\}\\
+\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \left[ \sum_{i=1}^n (y_i-\bar{y})^2 - \sum_{i=1}^n(\mu - \bar{y})^2 \right] \right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \left[ \sum_{i=1}^n (y_i-\bar{y})^2 - n(\mu - \bar{y})^2 \right] \right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.\\
@@ -413,7 +92,7 @@ $$L(Y; \mu,\sigma^2) \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2
 
 --
 
-- First start by developing inference on $\mu$ when $\sigma^2$ is known. Turns out we can use a conjugate prior for $\pi(\mu|\sigma^2)$. We will get to unknown $\sigma^2$ in the next class.
+- First start by developing inference on $\mu$ when $\sigma^2$ is known. Turns out we can use a conjugate prior for $\pi(\mu|\sigma^2)$. We will get to unknown $\sigma^2$ in the next module.
 
 --
 
@@ -435,11 +114,38 @@ $$\propto \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
 - Let's derive the posterior $\pi(\mu|Y,\sigma^2)$.
 
 
+---
+## Inference for mean, conditional on variance
+
+- First, the prior $\pi(\mu|\sigma^2) = \mathcal{N}(\mu_0, \tau_0^{-1})$ can be written as
+.block[
+.small[
+$$
+\begin{split}
+\Rightarrow \pi(\mu|\sigma^2) \ & = \ \dfrac{1}{\sqrt{2\pi}} \tau_0^{\frac{1}{2}} \cdot \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu-\mu_0)^2) \right\} \\
+\\
+&  \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu^2 - 2\mu\mu_0 + \mu_0^2) \right\} \\
+\\
+&  \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu^2 - 2\mu\mu_0) \right\}.\\
+\end{split}
+$$
+]
+]
+
+--
+
+- **When the normal density is written in this form, note the following details in the exponent.**
+
+  + First, we must have $\mu^2 - 2\mu$, and whatever term we see multiplying $2\mu$ must be the mean, in this case, $\mu_0$.
+  
+  + Second, the precision $\tau_0$ is outside the parenthensis.
+
+
 
 ---
 ## Inference for mean, conditional on variance
 
-- Posterior:
+- Now to the posterior:
 .block[
 .small[
 $$\pi(\mu|Y,\sigma^2) \ \propto \ \pi(\mu|\sigma^2) L(Y; \mu,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu - \mu_0)^2 \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}$$
@@ -463,8 +169,10 @@ $$\Rightarrow \pi(\mu|Y,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \t
 $$
 \begin{split}
 \Rightarrow \pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu^2 - 2\mu\mu_0) \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu^2 - 2\mu\bar{y}) \right\}\\
-& \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[\tau_0 (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\}\\
-& \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right] \right\}.\\
+\\
+& = \ \textrm{exp}\left\{-\frac{1}{2} \left[\tau_0 (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\}\\
+\\
+& = \ \textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right] \right\}.\\
 \end{split}
 $$
 ]
@@ -476,101 +184,58 @@ $$
 ---
 ## Inference for mean, conditional on variance
 
-- Notice that $\left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right]$ is essentially a quadratic equation of the form $a^\star\mu^2 - 2b^\star\mu + c^\star$, where
-
---
-  + $a^\star = \tau n + \tau_0$,
-  
---
-  + $b^\star = \tau n\bar{y} + \tau_0\mu_0$, and
-  
---
-  + $c^\star$ does not depend on $\mu$.
-  
-      _Note that $c^\star$ contains some of the terms we ignored on the previous slide but we need not know its exact form here._
-  
---
-
-- .hlight[Goal]: Turn this quadratic equation into an expression of the form $m(\mu - r)^2$, for some $m$ and $r$, so that we have something that resembles the kernel of a normal density.
+- This sort of looks like a normal kernel but we need to do a bit more work to get there.
 
 --
 
-- <div class="question">
-How? Complete the square!
-</div>
+- Particularly, we need to have it be of the form $b(\mu^2 - 2\mu a)$, so that we have $a$ as the mean and $b$ as the precision.
 
+--
 
-
----
-## Inference for mean, conditional on variance
-
-- Recall how to complete the square. Specifically, we can write
-.block[
-.small[
-$$a\mu^2 + b\mu + c$$
-]
-]
-
-  as
-.block[
-.small[
-$$a(\mu + d)^2 + e,$$
-]
-]
-
-  where
-  + $d = \dfrac{b}{2a}$, and
-  
-  + $e = c - \dfrac{b^2}{4a}$.
-
-
-
-
----
-## Inference for mean, conditional on variance
-
-- Completing the square and rearranging (where $a^\star = \tau n + \tau_0$ and $b^\star = \tau n\bar{y} + \tau_0\mu_0$),
+- We have
 .block[
 .small[
 $$
 \begin{split}
-\Rightarrow \pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[ a^\star\mu^2- 2b^\star\mu\right] \right\}\\
-& = \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu^2- \dfrac{2b^\star}{a^\star}\mu\right] \right\}\\
-& = \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu^2- \dfrac{2b^\star}{a^\star}\mu + \dfrac{(b^\star)^2}{(a^\star)^2} \right] + \dfrac{(b^\star)^2}{2a^\star} \right\}\\
-& \propto \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\},\\
+\pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(\tau n + \tau_0) - 2\mu(\tau n\bar{y} + \tau_0\mu_0)   \right] \right\}\\
+\\
+& = \ \textrm{exp}\left\{-\frac{1}{2} \cdot (\tau n + \tau_0) \left[ \mu^2 - 2\mu \left( \frac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0} \right)   \right] \right\}.\\
 \end{split}
 $$
 ]
 ]
 
-  which is the kernel of a normal distribution with
-    + mean $\dfrac{b^\star}{a^\star}$, and
-    + precision $a^\star$ or variance $(a^\star)^{-1}$.
+  which now looks like the kernel of a normal distribution.
 
 
 
 ---
 ## Posterior with precision terms
 
-- In terms of precision, we have
+- Again, the posterior is
 .block[
-.large[
-$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \tau_n^{-1})$$
+$$
+\begin{split}
+\pi(\mu|Y,\sigma^2) \ & \propto \ \textrm{exp}\left\{-\frac{1}{2} \cdot (\tau n + \tau_0) \left[ \mu^2 - 2\mu \left( \frac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0} \right)   \right] \right\}.\\
+\end{split}
+$$
 ]
+
+--
+
+- So, in terms of precision, we have
+.block[
+$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \tau_n^{-1})$$
 ]
 
   where
 .block[
-.small[
-$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}$$
-]
+$$\mu_n = \dfrac{\tau n\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}$$
 ]
 
   and
 .block[
-.small[
-$$\tau_n = a^\star = \tau n + \tau_0.$$
-]
+$$\tau_n = \tau n + \tau_0.$$
 ]
 
 
@@ -591,11 +256,11 @@ $$\tau_n = a^\star = \tau n + \tau_0.$$
 
 --
 
-- As we have on the previous slide, _the posterior precision equals the prior precision plus the data precision_.
+- From the posterior, we can see that, _the posterior precision equals the prior precision plus the data precision_.
 
 --
 
-- That is, we see that the posterior information is a sum of the prior information and the information from the data.
+- That is, once again, the posterior information is a combination of the prior information and the information from the data.
 
 
 
@@ -604,14 +269,12 @@ $$\tau_n = a^\star = \tau n + \tau_0.$$
 
 - Posterior mean is weighted sum of prior information plus data information:
 .block[
-.small[
 $$
 \begin{split}
 \mu_n & = \dfrac{n\tau\bar{y} + \tau_0\mu_0}{\tau n + \tau_0}\\
 & = \dfrac{\tau_0}{\tau_0 + \tau n} \mu_0 + \dfrac{n\tau}{\tau_0 + \tau n} \bar{y}
 \end{split}
 $$
-]
 ]
 
 --
@@ -622,13 +285,11 @@ $$
 
 - If we think of the prior mean as being based on $\kappa_0$ prior observations from a similar population as $y_1,y_2,\ldots,y_n$, then we might set $\sigma_0^2 = \frac{\sigma^2}{\kappa_0}$, which implies $\tau_0 = \kappa_0 \tau$, and then the posterior mean is given by
 .block[
-.small[
 $$
 \begin{split}
 \mu_n & = \dfrac{\kappa_0}{\kappa_0 + n} \mu_0 + \dfrac{n}{\kappa_0 + n} \bar{y}.
 \end{split}
 $$
-]
 ]
 
 
@@ -637,23 +298,17 @@ $$
 
 - In terms of variances, we have
 .block[
-.large[
 $$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \sigma_n^2)$$
-]
 ]
 
   where
 .block[
-.l.small[
-$$\mu_n = \dfrac{b^\star}{a^\star} = \dfrac{ \dfrac{n}{\sigma^2}\bar{y} + \dfrac{1}{\sigma^2_0} \mu_0}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}$$
-]
+$$\mu_n = \dfrac{ \dfrac{n}{\sigma^2}\bar{y} + \dfrac{1}{\sigma^2_0} \mu_0}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}$$
 ]
 
   and
 .block[
-.small[
-$$\sigma^2_n = \dfrac{1}{a^\star} = \dfrac{1}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}.$$
-]
+$$\sigma^2_n = \dfrac{1}{\dfrac{n}{\sigma^2} + \dfrac{1}{\sigma^2_0}}.$$
 ]
 
 --

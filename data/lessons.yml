@@ -149,17 +149,17 @@ lessons:
     lab: "lab-04-model-reparameterization-blank.html"
     
   - date: "Thur, July 9"
-    title: "Module 3.3: The normal model: motivating examples"
+    title: "Module 3.3: The normal model: introduction and motivating examples"
     reading: "33-reading.html"
-    #slides: "33-normal-intro.html"
-    #slidespdf: "33-normal-intro.pdf"
+    slides: "33-normal-intro.html"
+    slidespdf: "33-normal-intro.pdf"
     #video: " "
     
   - date: " "
     title: "Module 3.4: The normal model: conditional inference for the mean"
     reading: "34-reading.html"
-    #slides: "34-normal-cond-inference.html"
-    #slidespdf: "34-normal-cond-inference.pdf"
+    slides: "34-normal-cond-inference.html"
+    slidespdf: "34-normal-cond-inference.pdf"
     #video: " "
     
   - date: "Fri, July 10"

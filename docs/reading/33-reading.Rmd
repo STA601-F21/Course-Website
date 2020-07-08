@@ -1,5 +1,5 @@
 ---
-title: "Module 3.3: The normal model: motivating examples"
+title: "Module 3.3: The normal model: introduction and motivating examples"
 output: 
   html_document:
     css: reading.css
