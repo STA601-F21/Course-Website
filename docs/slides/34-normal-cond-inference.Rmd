@@ -45,7 +45,7 @@ library(rvest)
 .small[
 $$
 \begin{split}
-L(Y; \mu,\sigma^2) & = \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau (y_i-\mu)^2\right\}\\
+P(Y| \mu,\sigma^2) & = \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi}} \tau^{\frac{1}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau (y_i-\mu)^2\right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n (y_i-\mu)^2\right\}\\
 & \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau \sum_{i=1}^n \left[ (y_i-\bar{y}) - (\mu - \bar{y}) \right]^2 \right\}\\
 \\
@@ -65,7 +65,7 @@ $$
 - Likelihood:
 .block[
 .large[
-$$L(Y; \mu,\sigma^2) \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
+$$P(Y| \mu,\sigma^2) \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
 ]
 ]
 
@@ -148,7 +148,7 @@ $$
 - Now to the posterior:
 .block[
 .small[
-$$\pi(\mu|Y,\sigma^2) \ \propto \ \pi(\mu|\sigma^2) L(Y; \mu,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu - \mu_0)^2 \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}$$
+$$\pi(\mu|Y,\sigma^2) \ \propto \ \pi(\mu|\sigma^2) P(Y| \mu,\sigma^2) \ \propto \ \textrm{exp}\left\{-\frac{1}{2} \tau_0 (\mu - \mu_0)^2 \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}$$
 ]
 ]
 
