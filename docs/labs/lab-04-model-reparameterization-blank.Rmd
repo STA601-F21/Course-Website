@@ -373,7 +373,7 @@ Consider yet another parameterization of the binomial sampling model in terms of
 
 ***
 
-From our work above, we realize that the innocuous uniform prior belief about $\theta$ sometimes translates into *improper* priors for transformations of $\theta$.
+From our work above, we realize that a uniform prior belief about $\pi$ does not necessarily translate into uniform priors for transformations of $\pi$.
 
 ## Jeffreys' prior
 
