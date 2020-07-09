@@ -97,7 +97,7 @@ $$\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$$
 - Formally, $\mathcal{I}(\theta)$ is defined as
 .block[
 .small[
-$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 f(y; \theta) dy.$$
+$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log } p(y | \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log } p(y | \theta) \right)^2 p(y | \theta) dy.$$
 ]
 ]
 
@@ -106,7 +106,7 @@ $$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \thet
 - Alternatively,
 .block[
 .small[
-$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \bigg| \theta \right] = - \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \right) f(y; \theta) dy.$$
+$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log } p(y | \theta) \bigg| \theta \right] = - \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log } p(y | \theta) \right) p(y | \theta) dy.$$
 ]
 ]
 

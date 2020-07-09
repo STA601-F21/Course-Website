@@ -87,7 +87,7 @@ class: center, middle, inverse, title-slide
 - Formally, `\(\mathcal{I}(\theta)\)` is defined as
 .block[
 .small[
-`$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log} f(y; \theta) \right)^2 f(y; \theta) dy.$$`
+`$$\mathcal{I}(\theta) = \mathbb{E} \left[ \left( \dfrac{\partial}{\partial \theta} \textrm{log } p(y | \theta) \right)^2 \bigg| \theta \right] = \int_\mathcal{Y} \left( \dfrac{\partial}{\partial \theta} \textrm{log } p(y | \theta) \right)^2 p(y | \theta) dy.$$`
 ]
 ]
 
@@ -96,7 +96,7 @@ class: center, middle, inverse, title-slide
 - Alternatively,
 .block[
 .small[
-`$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \bigg| \theta \right] = - \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log} f(y; \theta) \right) f(y; \theta) dy.$$`
+`$$\mathcal{I}(\theta) = - \mathbb{E} \left[ \dfrac{\partial^2}{\partial^2 \theta} \textrm{log } p(y | \theta) \bigg| \theta \right] = - \int_\mathcal{Y} \left( \dfrac{\partial^2}{\partial^2 \theta} \textrm{log } p(y | \theta) \right) p(y | \theta) dy.$$`
 ]
 ]
 
@@ -259,7 +259,7 @@ sigma2N_postsample_impr &lt;- 1/tauN_postsample_impr
   ```
   
   ```
-  ## [1] 0.9938
+  ## [1] 0.9951
   ```
 
 --
@@ -272,7 +272,7 @@ sigma2N_postsample_impr &lt;- 1/tauN_postsample_impr
   ```
   
   ```
-  ## [1] 0.701
+  ## [1] 0.7041
   ```
       
 --
