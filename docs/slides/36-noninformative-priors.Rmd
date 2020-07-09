@@ -151,7 +151,7 @@ $$\propto \ \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
 .small[
 $$
 \begin{split}
-\pi(\mu|Y,\sigma^2) \ & \propto \  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\} \pi(\mu)\\
+\pi(\mu|Y,\tau) \ & \propto \  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\} \pi(\mu)\\
 & \propto \  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.\\
 \end{split}
 $$
@@ -208,6 +208,18 @@ $$
 
 ---
 ## Analysis with noninformative priors
+
+- Recall the Pygmalion data:
+  + Accelerated group (A): 20, 10, 19, 15, 9, 18.
+  + No growth group (N): 3, 2, 6, 10, 11, 5.
+
+--
+
+- Summary statistics:
+  + $\bar{y}_A = 15.2$; $s_A = 4.71$.
+  + $\bar{y}_N = 6.2$; $s_N = 3.65$.
+  
+--
 
 - So our joint posterior is
 .block[

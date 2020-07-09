@@ -37,20 +37,20 @@ library(rvest)
 
 ## Joint inference for mean and variance
 
-- What happens when $\sigma$/ $\tau$ is unknown? We need a joint prior $\pi(\mu,\sigma^2)$ for $\mu$ and $\sigma^2$.
+- We have derived the posterior for the $\mu$, conditional on $\sigma$/ $\tau$ being known. What happens when $\sigma$/ $\tau$ is unknown? We need a joint prior $\pi(\mu,\sigma^2)$ for $\mu$ and $\sigma^2$.
 
 --
 
-- Write the joint prior distribution for the mean and variance as the product of a conditional and a marginal distribution, so we can take advantage of our work so far.
-
---
-
-- That is,
+- Write the joint prior distribution for the mean and variance as the product of a conditional and a marginal distribution. That is,
 .block[
 .small[
 $$\pi(\mu,\sigma^2) \ = \  \pi(\mu | \sigma^2)\pi(\sigma^2).$$
 ]
 ]
+
+--
+
+- From the previous module, we have seen that we can set the conditional prior $\pi(\mu | \sigma^2)$ to be a normal distribution.
 
 --
 
@@ -63,27 +63,77 @@ $$\pi(\mu,\sigma^2) \ = \  \pi(\mu | \sigma^2)\pi(\sigma^2).$$
 
 
 ---
-## Conditional specification of prior
+## Joint inference for mean and variance
+
+- Recall that conjugacy means that for a prior $\pi(\theta)$ in a class of distributions $\mathcal{P}$ , $\pi(\theta | Y)$ is also in class $\mathcal{P}$.
+
+--
+
+- However, when we have multiple parameters, the dependence structure in the prior must also be preserved in the posterior, for conjugacy to hold.
+
+--
+
+- So, if
+.block[
+.small[
+$$\pi(\mu,\sigma^2) \ = \  \pi(\mu | \sigma^2)\pi(\sigma^2).$$
+]
+]
+
+  with $\pi(\mu | \sigma^2)$ a normal distribution, and $\pi(\sigma^2)$ an inverse-gamma distribution, we will have conjugacy if $\pi(\mu,\sigma^2 | Y)$ can also be written as
+.block[
+.small[
+$$\pi(\mu,\sigma^2 | Y) \ = \  \pi(\mu | \sigma^2, Y)\pi(\sigma^2|Y),$$
+]
+]
+
+  where $\pi(\mu | \sigma^2, Y)$ is also a normal distribution, and $\pi(\sigma^2|Y)$ is an inverse-gamma distribution, just like the prior.
+  
+  
+---
+## Inverse-gamma distribution
+
+- As before, we will continue to work mostly in terms of the precision $\tau$.
+
+--
+
+- That is, we will deal with the already familiar gamma distribution, instead of the inverse-gamma distribution.
+
+--
+
+- However, as a quick review, if $\theta \sim \mathcal{IG}(a,b)$, then the pdf is
+.block[
+$$p(\theta) = \frac{b^a}{\Gamma(a)} \theta^{-(a+1)} e^{-\frac{b}{\theta} }\ \ \ \textrm{for} \ \ \ a, b > 0,$$
+]
+
+  where
+
+  + $\mathbb{E}[\theta] = \frac{b}{a - 1}$;
+  
+  + $\mathbb{V}[\theta] = \frac{b^2}{(a - 1)^2(a-2)} \ \ \textrm{for} \ \ a \geq 2$.;
+  
+  + $\textrm{Mode}[\theta] = \frac{b}{a+1}$.
+
+
+
+---
+## Conjugate prior
 
 - Once again, suppose $Y = (y_1,y_2,\ldots,y_n)$, where each
 .block[
-.small[
-$$y_i \sim \mathcal{N}(\mu, \sigma^2); \ \ \ \textrm{or} \ \ \ y_i \sim \mathcal{N}(\mu, \tau^{-1}).$$
-]
+$$y_i \sim \mathcal{N}(\mu, \tau^{-1}).$$
 ]
 
 --
 
 - A conjugate joint prior is given by
 .block[
-.small[
 $$
 \begin{split}
-\tau = \dfrac{1}{\sigma^2} \ & \sim \textrm{Gamma}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)\\
-\mu|\sigma^2 & \sim \mathcal{N}\left(\mu_0, \dfrac{\sigma^2}{\kappa_0}\right) \ \ \ \textrm{or} \ \ \ \mu|\tau & \sim \mathcal{N}\left(\mu_0, \dfrac{1}{\kappa_0 \tau}\right).\\
+\tau = \frac{1}{\sigma^2} \ & \sim \textrm{Gamma}\left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right)\\
+\mu|\tau & \sim \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau}\right).\\
 \end{split}
 $$
-]
 ]
 
 --
@@ -96,66 +146,211 @@ $$
 
 --
 
-- We do not have conjugacy if we replace $\dfrac{\sigma^2}{\kappa_0}$ in the normal prior with an arbitrary prior variance independent of $\sigma^2$. To do inference in that scenario, we need .hlight[Gibbs sampling] (to come next week!).
+- We do not have conjugacy if we replace $\frac{1}{\kappa_0 \tau}$ in the normal prior with an arbitrary prior variance independent of $\tau/\sigma^2$. To do inference in that scenario, we need .hlight[Gibbs sampling] (to come soon!).
+
+
+
+---
+## Conjugate prior
+
+- So, we have
+.block[
+.small[
+$$\pi(\mu|\tau) = \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau}\right)\propto \ \textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}.$$
+]
+]
+
+--
+
+- and
+.block[
+.small[
+$$\pi(\tau) = \textrm{Ga}\left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right) \propto \tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}.$$
+]
+]
+
+- Thus, the kernel of the normal-gamma prior distribution is
+.block[
+.small[
+$$
+\begin{split}
+\Rightarrow \pi(\mu,\tau) \ & \boldsymbol{ =} \ \pi(\mu|\tau) \cdot \pi(\tau) = \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau} \right) \cdot \textrm{Gamma}\left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right)\\
+& \boldsymbol{ \propto} \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\tau)} \cdot \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}.\\
+\end{split}
+$$
+]
+]
+
+--
+
+- Take note of this form. When we derive the posterior kernel, we will try to match it to this to recognize the parameters.
+
+
+
+
+
+
+
 
 
 
 ---
 ## Posterior for the mean given variance, under normal-gamma prior
 
-- Based on the normal-gamma prior, we need $\pi(\mu|Y,\sigma^2)$ and $\pi(\tau|Y)$.
+- Based on the normal-gamma prior, we need $\pi(\mu|Y,\tau)$ and $\pi(\tau|Y)$.
 
 --
 
-- For $\pi(\mu|Y,\sigma^2)$, we can leverage our previous results. We have
+- For $\pi(\mu|Y,\tau)$, we already know from the previous module that it will be a normal distribution.
+
+--
+
+- However, some algebra is required to get $\pi(\tau|Y)$. 
+
+--
+
+- Infact, we need to write the full joint posterior and go from there, because we will need to keep some of the terms we discarded in the derivation in the last module.
+
+--
+
+- First, recall that the likelihood is
 .block[
 .large[
-$$\mu|Y,\sigma^2 \sim \mathcal{N}(\mu_n, \dfrac{\sigma^2}{\kappa_n}) \ \ \ \textrm{or} \ \ \ \mu|Y,\tau \sim \mathcal{N}(\mu_n, \dfrac{1}{\kappa_n \tau})$$
+$$P(Y| \mu,\tau) \propto \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}.$$
+]
+]
+
+
+---
+## Posterior derivation
+
+.block[
+.small[
+$$
+\begin{split}
+\text{Then, } \ \ \ \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \pi(\mu|\tau) \times \pi(\tau) \times P(Y| \mu,\tau)\\
+\\
+& \boldsymbol{ \propto} \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\sigma^2)} \times \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\propto \ P(Y| \mu,\tau)}\\
+\\
+& \boldsymbol{=}  \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\} \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\end{split}
+$$
+]
+]
+
+
+
+
+---
+## Posterior derivation
+
+.block[
+.small[
+$$
+\begin{split}
+\pi(\mu,\tau | Y) \ & \boldsymbol{ \propto}  \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu^2 - 2\mu\mu_0 + \mu_0^2) \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu^2 - 2\mu\bar{y} + \bar{y}^2) \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+& \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[\kappa_0 \tau (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+& \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(n\tau + \kappa_0 \tau) - 2\mu(n\tau \bar{y} + \kappa_0 \tau\mu_0)   \right] \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\end{split}
+$$
+]
+]
+
+
+
+
+
+---
+## Posterior derivation
+
+- To match the terms for the terms involving $\mu$ to the normal kernel in the prior, we need to complete the square so that we have something that looks like the $(\mu - \mu_0)^2$ term in our prior.
+
+--
+
+- Recall how to complete the square. Specifically, we can write
+.block[
+.small[
+$$a\mu^2 + b\mu$$
+]
+]
+
+  as
+.block[
+.small[
+$$a(\mu + d)^2 + e,$$
 ]
 ]
 
   where
-.block[
-.small[
-$$\mu_n = \dfrac{ \dfrac{n}{\sigma^2}\bar{y} + \dfrac{\kappa_0}{\sigma^2} \mu_0}{\dfrac{n}{\sigma^2} + \dfrac{\kappa_0}{\sigma^2}} = \dfrac{\kappa_0 \mu_0 + n\bar{y}}{\kappa_n} = \dfrac{\kappa_0}{\kappa_n} \mu_0 + \dfrac{n}{\kappa_n} \bar{y} \ \ \ \textrm{and} \ \ \ \kappa_n = \kappa_0 + n.$$
-]
-]
+  + $d = \dfrac{b}{2a}$, and
+  
+  + $e = - \dfrac{b^2}{4a}$.
 
---
-
-- $\mu_n$ is simply the sample mean of the current and prior observations, and posterior variance of $\mu$ given $\sigma^2$ is $\sigma^2$ divided by the total number of observations (prior and current).
 
 
 
 ---
 ## Posterior derivation
 
-- Some algebra is required to get the marginal posterior of $\tau$. Let's write the full joint posterior and go from there. We must keep some of the terms we discarded in the last lecture.
-
---
-
-- Recall the likelihood
-.block[
-.large[
-$$L(Y; \mu,\tau) \propto \tau^{\dfrac{n}{2}} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\},$$
-]
-]
-
---
-
-- Now, $\mu|\tau \sim \mathcal{N}\left(\mu_0, \dfrac{1}{\kappa_0 \tau}\right)$ $\Rightarrow$
+- First, write out the posterior again:
 .block[
 .small[
-$$\pi(\mu|\tau) \propto \ \textrm{exp}\left\{-\dfrac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}.$$
+$$
+\begin{split}
+\pi(\mu,\tau | Y) \ & \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ (n\tau + \kappa_0 \tau)\mu^2 - 2\mu(n\tau \bar{y} + \kappa_0 \tau\mu_0)   \right] \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\end{split}
+$$
 ]
 ]
 
---
 
-- and $\tau \sim \textrm{Ga}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)$ $\Rightarrow$
+- Set $a^\star = (n\tau + \kappa_0 \tau)$ and $b^\star = (n\tau \bar{y} + \kappa_0 \tau\mu_0)$, then complete the square for the first part.
 .block[
 .small[
-$$\pi(\tau) \propto \tau^{\dfrac{\nu_0}{2}-1} \textrm{exp}\left\{-\dfrac{\tau\nu_0\sigma_0^2}{2}\right\}.$$
+$$
+\begin{split}
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ a^\star \mu^2 - 2 b^\star \mu   \right] \right\}}_{\textrm{Terms involving } \mu}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Posterior derivation
+
+.block[
+.small[
+$$
+\begin{split}
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 + \frac{(b^\star)^2}{2a^\star} \right\} \ \cdot \ \textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
+\\
+& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(b^\star)^2}{a^\star}\right] \right\}}_{\textrm{Next, substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}}\\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
+\\
+& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp} \underbrace{\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)^2}{(n\tau + \kappa_0 \tau)}\right] \right\}}_{\textrm{Next, expand terms and recombine}} \\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
+\end{split}
+$$ 
 ]
 ]
 
@@ -167,80 +362,17 @@ $$\pi(\tau) \propto \tau^{\dfrac{\nu_0}{2}-1} \textrm{exp}\left\{-\dfrac{\tau\nu
 .small[
 $$
 \begin{split}
-\Rightarrow \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \pi(\mu|\sigma^2) \times \pi(\tau) \times L(Y; \mu,\sigma^2)\\
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{1}{2} \left[\frac{n\kappa_0\tau^2 (\mu_0^2- 2\mu_0\bar{y} + \bar{y}^2)}{\tau(\kappa_0 + n)}\right] \right\}\\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
+\\
+& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{\tau}{2} \left[\frac{n\kappa_0 (\bar{y} - \mu_0)^2}{(\kappa_0 + n)}\right] \right\}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ 
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
  \\
-& \boldsymbol{ \propto} \underbrace{\textrm{exp}\left\{-\dfrac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\sigma^2)} \times \underbrace{\tau^{\dfrac{\nu_0}{2}-1} \textrm{exp}\left\{-\dfrac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}\\
+& \boldsymbol{=} \ \ \textrm{exp} \underbrace{\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\}}_{\textrm{Substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}} \\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\dfrac{n}{2}} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\propto \ L(Y; \mu,\sigma^2)}\\
-& \boldsymbol{=}  \underbrace{\textrm{exp}\left\{-\dfrac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\textrm{Terms involving } \mu}\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\dfrac{\nu_0}{2}-1} \textrm{exp}\left\{-\dfrac{\tau\nu_0\sigma_0^2}{2}\right\} \tau^{\dfrac{n}{2}} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau s^2(n-1) \right\}}_{\textrm{Terms NOT involving } \mu}\\
-& \boldsymbol{=}  \textrm{exp}\left\{-\dfrac{1}{2} \kappa_0 \tau (\mu^2 - 2\mu\mu_0 + \mu_0^2) \right\}\  \textrm{exp}\left\{-\dfrac{1}{2} \tau n(\mu^2 - 2\mu\bar{y} + \bar{y}^2) \right\}\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-\end{split}
-$$
-]
-]
-
-
-
-
----
-## Posterior derivation
-
-.block[
-.small[
-$$
-\begin{split}
-\pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\dfrac{1}{2} \left[\kappa_0 \tau (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
- \\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \mu^2(n\tau + \kappa_0 \tau) - 2\mu(n\tau \bar{y} + \kappa_0 \tau\mu_0)   \right] \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-\end{split}
-$$
-]
-]
-
---
-
-- Set $a^\star = (n\tau + \kappa_0 \tau)$ and $b^\star = (n\tau \bar{y} + \kappa_0 \tau\mu_0)$, then complete the square for the first part like we did in the last lecture.
-.block[
-.small[
-$$
-\begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \mu^2 a^\star - 2\mu b^\star   \right] \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-\end{split}
-$$
-]
-]
-
-
-
----
-## Posterior derivation
-
-.block[
-.small[
-$$
-\begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 + \dfrac{(b^\star)^2}{2a^\star} \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \dfrac{(b^\star)^2}{a^\star}\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp} \underbrace{\left\{-\dfrac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \dfrac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)^2}{(n\tau + \kappa_0 \tau)}\right] \right\}}_{\textrm{Expand terms and recombine}} \\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\dfrac{1}{2} \left[\dfrac{n\kappa_0\tau^2 (\mu_0^2- 2\mu_0\bar{y} + \bar{y}^2)}{\tau(n + \kappa_0)}\right] \right\}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
+\times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\} \textrm{exp}\left\{-\frac{\tau}{2} \left[\frac{n\kappa_0 (\bar{y} - \mu_0)^2}{(\kappa_0 + n)}\right] \right\}\\
 \end{split}
 $$ 
 ]
@@ -248,6 +380,7 @@ $$
 
 
 
+
 ---
 ## Posterior derivation
 
@@ -255,17 +388,13 @@ $$
 .small[
 $$
 \begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\dfrac{\tau}{2} \left[\dfrac{n\kappa_0 (\bar{y} - \mu_0)^2}{(n + \kappa_0)}\right] \right\}\\
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} (n\tau + \kappa_0 \tau) \left[ \mu- \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)}{(n\tau + \kappa_0 \tau)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
- \\
-& \boldsymbol{=} \ \ \textrm{exp} \underbrace{\left\{-\dfrac{1}{2} a^\star \left[ \mu- \dfrac{b^\star}{a^\star} \right]^2 \right\}}_{\textrm{Substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}} \\
+\times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \frac{n\kappa_0}{(\kappa_0 + n)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
+\\
+& \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \tau(\kappa_0 + n) \left[ \mu - \frac{(\kappa_0 \mu_0 + n \bar{y})}{(\kappa_0 + n)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\} \textrm{exp}\left\{-\dfrac{\tau}{2} \left[\dfrac{n\kappa_0 (\bar{y} - \mu_0)^2}{(n + \kappa_0)}\right] \right\}\\
- \\
-& \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\dfrac{1}{2} (n\tau + \kappa_0 \tau) \left[ \mu^2- \dfrac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)}{(n\tau + \kappa_0 \tau)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \dfrac{n\kappa_0}{(n + \kappa_0)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
+\times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \frac{n\kappa_0}{(\kappa_0 + n)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
 \end{split}
 $$
 ]
@@ -280,10 +409,7 @@ $$
 .small[
 $$
 \begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\textrm{exp}\left\{-\dfrac{1}{2} \tau(n + \kappa_0) \left[ \mu^2- \dfrac{(n \bar{y} + \kappa_0 \mu_0)}{(n + \kappa_0)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
-& \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\dfrac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\dfrac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \dfrac{n\kappa_0}{(n + \kappa_0)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
-& \boldsymbol{=} \ \ \mathcal{N}\left(\mu_n, \dfrac{1}{\kappa_n\tau} \right) \times \textrm{Gamma}\left(\dfrac{\nu_n}{2}, \dfrac{\nu_n \sigma_n^2}{2}\right) = \pi(\mu|Y, \tau) \pi(\tau|Y),
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{=} \ \ \mathcal{N}\left(\mu_n, \frac{1}{\kappa_n\tau} \right) \times \textrm{Gamma}\left(\frac{\nu_n}{2}, \frac{\nu_n \sigma_n^2}{2}\right) = \pi(\mu|Y, \tau) \pi(\tau|Y),
 \end{split}
 $$
 ]
@@ -295,9 +421,9 @@ $$
 $$
 \begin{split}
 \kappa_n & = \kappa_0 + n\\
-\mu_n & = \dfrac{\kappa_0 \mu_0 + n\bar{y}}{\kappa_n} = \dfrac{\kappa_0}{\kappa_n} \mu_0 + \dfrac{n}{\kappa_n} \bar{y}\\
+\mu_n & = \frac{\kappa_0 \mu_0 + n\bar{y}}{\kappa_n} = \frac{\kappa_0}{\kappa_n} \mu_0 + \frac{n}{\kappa_n} \bar{y}\\
 \nu_n & = \nu_0 + n\\
-\sigma_n^2 & = \dfrac{1}{\nu_n}\left[\nu_0\sigma_0^2 + s^2(n-1) + \dfrac{n\kappa_0}{\kappa_n} (\bar{y} - \mu_0)^2 \right] = \dfrac{1}{\nu_n}\left[\nu_0\sigma_0^2 + \sum_{i=1}^n (y_i-\bar{y})^2 + \dfrac{n\kappa_0}{\kappa_n} (\bar{y} - \mu_0)^2 \right]\\
+\sigma_n^2 & = \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + s^2(n-1) + \frac{n\kappa_0}{\kappa_n} (\bar{y} - \mu_0)^2 \right] = \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + \sum_{i=1}^n (y_i-\bar{y})^2 + \frac{n\kappa_0}{\kappa_n} (\bar{y} - \mu_0)^2 \right]\\
 \end{split}
 $$
 ]
@@ -305,217 +431,11 @@ $$
 
 --
 
-- Turns out that the marginal posterior of $\mu$, that is, $\pi(\mu|Y) = \int_0^\infty \pi(\mu, \tau|Y) d\tau$ is a **t-distribution**. You can derive that distribution if you are interested, we won't spend time on it in class. 
-
-
-
----
-## Back to our examples
-
-- .hlight[Pygmalion: questions of interest]
-  + Is the average improvement for the accelerated group larger than that for the no growth group?
-      - What is $\Pr[\mu_A > \mu_N | Y_A, Y_N)$?
-  + Is the variance of improvement scores for the accelerated group larger than that for the no growth group?
-      - What is $\Pr[\sigma^2_A > \sigma^2_N | Y_A, Y_N)$?
-      
---
-
-- .hlight[Job training: questions of interest]
-  + Is the average change in annual earnings for the training group larger than that for the no training group?
-      - What is $\Pr[\mu_T > \mu_N | Y_T, Y_N)$?
-  + Is the variance of change in annual earnings for the training group larger than that for the no training group?
-      - What is $\Pr[\sigma^2_T > \sigma^2_N | Y_T, Y_N)$?
-
-
-
----
-## Mildly informative priors
-
-- We will focus on the Pygmalion study. Follow the same approach for the job training data.
+- Turns out that the marginal posterior of $\mu$, that is, $\pi(\mu|Y) = \int_0^\infty \pi(\mu, \tau|Y) d\tau$ is a **t-distribution**. 
 
 --
 
-- Suppose you have no idea whether students would improve IQ on average. Set $\mu_{0A} = \mu_{0N} = 0$.
-
---
-
-- Suppose you don't have any faith in this belief, and think it is the equivalent of having only 1 prior observation in each group. Set $\kappa_{0A} = \kappa_{0N} = 1$.
-
---
-
-- Based on the literature, SD of change scores should be around 10 in each group, but still you don't have a lot of faith in this belief. Set 
-$\nu_{0A} = \nu_{0N} = 1$ and $\sigma^2_{0A} = \sigma^2_{0N} = 100$.
-
---
-
-- Graph priors to see if they accord with your beliefs. Sampling new values of $Y$ from the priors offers a good check.
-
-
-
----
-## Recall the Pygmalion data
-
-- Data:
-  
-  + Accelerated group (A): 20, 10, 19, 15, 9, 18.
-  
-  + No growth group (N): 3, 2, 6, 10, 11, 5.
---
-
-- Summary statistics:
-  
-  + $\bar{y}_A = 15.2$; $s_A = 4.71$.
-  
-  + $\bar{y}_N = 6.2$; $s_N = 3.65$.
-
-
-
----
-## Analysis with mildly informative priors
-
-.block[
-.small[
-$$
-\begin{split}
-\kappa_{nA} & = \kappa_{0A} + n_A = 1 + 6 = 7\\
-\kappa_{nN} & = \kappa_{0N} + n_N = 1 + 6 = 7\\
-\nu_{nA} & = \nu_{0A} + n_A = 1 + 6 = 7\\
-\nu_{nN} & = \nu_{0N} + n_N = 1 + 6 = 7\\
-\mu_{nA} & = \dfrac{\kappa_{0A} \mu_{0A} + n_A\bar{y}_A}{\kappa_{nA}} = \dfrac{ (1)(0) + (6)(15.2) }{7} \approx 13.03\\
-\mu_{nN} & = \dfrac{\kappa_{0N} \mu_{0N} + n_N\bar{y}_N}{\kappa_{nN}} = \dfrac{ (1)(0) + (6)(6.2) }{7} \approx 5.31\\
-\sigma_{nA}^2 & = \dfrac{1}{\nu_{nA}}\left[\nu_{0A}\sigma_{0A}^2 + s^2_A(n_A-1) + \dfrac{n_A\kappa_{0A}}{\kappa_{nA}} (\bar{y}_A - \mu_{0A})^2\right] \\
-& = \dfrac{1}{7}\left[(1)(100) + (22.17)(5) + \dfrac{(6)(1)}{(7)} (15.2- 0)^2\right] \approx 58.41\\
-\sigma_{nN}^2 & = \dfrac{1}{\nu_{nN}}\left[\nu_{0N}\sigma_{0N}^2 + s^2_N(n_N-1) + \dfrac{n_N\kappa_{0N}}{\kappa_{nN}} (\bar{y}_N - \mu_{0N})^2\right] \\
-& = \dfrac{1}{7}\left[(1)(100) + (13.37)(5) + \dfrac{(6)(1)}{(7)} (6.2- 0)^2\right] \approx 28.54\\
-\end{split}
-$$
-]
-]
-
-
-
----
-## Analysis with mildly informative priors
-
-- So our joint posterior is
-.block[
-.small[
-$$
-\begin{split}
-\mu_A | Y_A, \tau_A & \sim \ \mathcal{N}\left(\mu_{nA}, \dfrac{1}{\kappa_{nA}\tau_A} \right) = \mathcal{N}\left(13.03, \dfrac{1}{7\tau_A} \right)\\
-\tau_A | Y_A & \sim \textrm{Gamma}\left(\dfrac{\nu_{nA}}{2}, \dfrac{\nu_{nA} \sigma_{nA}^2}{2}\right) = \textrm{Gamma}\left(\dfrac{7}{2}, \dfrac{7 (58.41)}{2}\right)\\
-\mu_N | Y_N, \tau_N & \sim \ \mathcal{N}\left(\mu_{nN}, \dfrac{1}{\kappa_{nN}\tau_N} \right) = \mathcal{N}\left(5.31, \dfrac{1}{7\tau_N} \right)\\
-\tau_N | Y_N & \sim \textrm{Gamma}\left(\dfrac{\nu_{nN}}{2}, \dfrac{\nu_{nN} \sigma_{nN}^2}{2}\right) = \textrm{Gamma}\left(\dfrac{7}{2}, \dfrac{7 (28.54)}{2}\right)\\
-\end{split}
-$$
-]
-]
-
-
-
----
-## Monte Carlo sampling
-
-- To evaluate whether the accelerated group has larger IQ gains than the normal group, we would like to estimate quantities like $\Pr[\mu_A > \mu_N | Y_A, Y_N)$ which are based on the **marginal posterior** of $\mu$ rather than the **conditional distribution**.
-
---
-
-- Fortunately, this is easy to do by generating samples of $\mu$ and $\sigma^2$ from their joint posterior.
-
-
-
----
-## Monte Carlo sampling
-
-- Suppose we simulate values using the following Monte Carlo procedure:
-.block[
-.small[
-$$
-\begin{split}
-\tau^{(1)} & \sim \textrm{Gamma}\left(\dfrac{\nu_{n}}{2}, \dfrac{\nu_{n} \sigma_{n}^2}{2}\right)\\
-\mu^{(1)} & \sim \ \mathcal{N}\left(\mu_{n}, \dfrac{1}{\kappa_{n}\tau^{(1)}} \right)\\
-\tau^{(2)} & \sim \textrm{Gamma}\left(\dfrac{\nu_{n}}{2}, \dfrac{\nu_{n} \sigma_{n}^2}{2}\right)\\
-\mu^{(2)} & \sim \ \mathcal{N}\left(\mu_{n}, \dfrac{1}{\kappa_{n}\tau^{(2)}} \right)\\
-& \ \ \vdots \\
-& \ \ \vdots \\
-& \ \ \vdots \\
-\tau^{(m)} & \sim \textrm{Gamma}\left(\dfrac{\nu_{n}}{2}, \dfrac{\nu_{n} \sigma_{n}^2}{2}\right)\\
-\mu^{(m)} & \sim \ \mathcal{N}\left(\mu_{n}, \dfrac{1}{\kappa_{n}\tau^{(m)}} \right)\\
-\end{split}
-$$
-]
-]
-
-
----
-## Monte Carlo sampling
-
-- Note that we are sampling each $\mu^{(j)}$, $j=1,\ldots,m$, from its conditional distribution, not from the marginal.
-
---
-
-- The sequence of pairs $\{(\tau, \mu)^{(1)}, \ldots, (\tau, \mu)^{(m)}\}$ simulated using this method are independent samples from the joint posterior $\pi(\mu,\tau | Y)$.
-
---
-
-- Additionally, the simulated sequence $\{\mu^{(1)}, \ldots, \mu^{(m)}\}$ are independent samples from the **marginal posterior distribution**.
-
---
-
-- While this may seem odd, keep in mind that while we drew the $\mu$'s as conditional samples, each was conditional on a different value of $\tau$.
-
---
-
-- Thus, together they constitute marginal samples of $\mu$.
-
-
-
----
-## Monte Carlo sampling
-
-It is easy to sample from these posteriors:
-```{r}
-aA <- 7/2
-aN <- 7/2
-bA <- (7/2)*58.41
-bN <- (7/2)*28.54
-muA <- 13.03
-muN <- 5.31
-kappaA <- 7
-kappaN <- 7
-tauA_postsample <- rgamma(10000,aA,bA)
-thetaA_postsample <- rnorm(10000,muA,sqrt(1/(kappaA*tauA_postsample)))
-tauN_postsample <- rgamma(10000,aN,bN)
-thetaN_postsample <- rnorm(10000,muN,sqrt(1/(kappaN*tauN_postsample)))
-sigma2A_postsample <- 1/tauA_postsample
-sigma2N_postsample <- 1/tauN_postsample
-```
-
-
-
----
-## Monte Carlo sampling
-
-- Is the average improvement for the accelerated group larger than that for the no growth group?
-  + What is $\Pr[\mu_A > \mu_N | Y_A, Y_N)$?
-  ```{r}
-mean(thetaA_postsample > thetaN_postsample)
-```
-
---
-
-- Is the variance of improvement scores for the accelerated group larger than that for the no growth group?
-  + What is $\Pr[\sigma^2_A > \sigma^2_N | Y_A, Y_N)$?
-  ```{r}
-mean(sigma2A_postsample > sigma2N_postsample)
-```
-      
---
-
-- <div class="question">
-What can we conclude from this?
-</div>
-
+- You can derive that distribution if you are interested, we won't spend time on it in class. We will be able to sample from it through Monte Carlo anyway.
 
 
 ---

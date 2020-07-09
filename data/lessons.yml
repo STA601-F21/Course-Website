@@ -165,15 +165,21 @@ lessons:
   - date: "Fri, July 10"
     title: "Module 3.5: The normal model: joint inference for mean and variance"
     reading: "35-reading.html"
-    #slides: "35-normal-joint-inference.html"
-    #slidespdf: "35-normal-joint-inference.pdf"
+    slides: "35-normal-joint-inference.html"
+    slidespdf: "35-normal-joint-inference.pdf"
+    #video: " "
+    
+  - date: " "
+    title: "Module 3.5b: The normal model: joint inference for mean and variance (illustration)"
+    slides: "35b-normal-joint-inference.html"
+    slidespdf: "35b-normal-joint-inference.pdf"
     #video: " "
     
   - date: " "
     title: "Module 3.6: Noninformative and improper priors"
     reading: "36-reading.html"
-    #slides: "36-noninformative-priors.html"
-    #slidespdf: "36-noninformative-priors.pdf"
+    slides: "36-noninformative-priors.html"
+    slidespdf: "36-noninformative-priors.pdf"
     #video: " "
   
   
@@ -200,7 +206,7 @@ lessons:
     #reading: "41-reading.html"
     
   - date: " "
-    title: "Module 4.2: Multivariate normal model I"
+    title: "Module 4.2: Multivariate normal model II"
     #reading: "42-reading.html"
     
   - date: "Wed, July 15"
