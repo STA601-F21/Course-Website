@@ -193,14 +193,14 @@ lessons:
     reading: "37-reading.html"
     slides: "37-gibbs-sampling-I.html"
     slidespdf: "37-gibbs-sampling-I.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/750338/1403540/914922/0/Module-37-MCMC-and-Gibbs-sampling-I"
     
   - date: " "
     title: "Module 3.8: MCMC and Gibbs sampling II"
     reading: "38-reading.html"
     slides: "38-gibbs-sampling-II.html"
     slidespdf: "38-gibbs-sampling-II.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/750358/1403540/914922/0/Module-38-MCMC-and-Gibbs-sampling-II"
     
   - date: " "
     title: "Lab 5: Truncated data"
