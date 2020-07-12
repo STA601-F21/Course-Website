@@ -1,0 +1,475 @@
+---
+title: "STA 360/602L: Module 3.8"
+subtitle: "MCMC and Gibbs sampling II"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(MASS)
+library(mvtnorm)
+library(lattice)
+```
+
+
+
+## Example: bivariate normal
+
+- Consider
+.block[
+.small[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+0\\
+0
+\end{array}\right),\left(\begin{array}{cc}
+1 & \rho \\
+\rho & 1 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+]
+
+  where $\rho$ is known (and is the correlation between $\theta_1$ and $\theta_2$).
+
+--
+
+- We will review details of the multivariate normal distribution very soon but for now, let's use this example to explore Gibbs sampling.
+
+--
+
+- For this density, turns out that we have
+.block[
+.small[
+$$\theta_1|\theta_2 \sim \mathcal{N}\left(\rho\theta_2, 1-\rho^2 \right)$$
+]
+]
+
+  and
+.block[
+.small[
+$$\theta_2|\theta_1 \sim \mathcal{N}\left(\rho\theta_1, 1-\rho^2 \right)$$
+]
+]
+
+--
+
+- While we can easily sample directly from this distribution (using the `mvtnorm` or `MASS` packages in R), let's instead use the Gibbs sampler to draw samples from it.
+
+
+
+---
+## Bivariate normal
+
+First, a few examples of the bivariate normal distribution.
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+0\\
+0
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0 \\
+0 & 1 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4, echo=F}
+Sigma <- matrix(c(1,0,0,1),ncol=2)
+Mu <- c(0,0)
+
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+
+for (i in 1:100) {
+  for (j in 1:100) {
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
+  } 
+}
+
+wireframe(z~x+y,data=data.frame(x=x.points,y=rep(y.points, each=length(x.points)), z=z),
+          xlab=expression(theta[1]),ylab=expression(theta[2]),zlab="Density",
+          col="orange3")
+```
+
+
+
+---
+## Bivariate normal
+
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+0\\
+0
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0 \\
+0 & 1 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4.3, echo=F}
+sampmat_direct <- rmvnorm(10000, mean = Mu,sigma = Sigma)
+sampmat_direct.kde <- kde2d(sampmat_direct[,1], sampmat_direct[,2], n = 50)
+image(sampmat_direct.kde,xlab=expression(theta[1]),ylab=expression(theta[2]))
+contour(sampmat_direct.kde, add = T)
+```
+
+
+
+
+---
+## Bivariate normal
+
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+0\\
+2
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0.5 \\
+0.5 & 2 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4, echo=F}
+Sigma <- matrix(c(1,0.5,0.5,2),ncol=2)
+Mu <- c(0,2)
+
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+
+for (i in 1:100) {
+  for (j in 1:100) {
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
+  } 
+}
+
+wireframe(z~x+y,data=data.frame(x=x.points,y=rep(y.points, each=length(x.points)), z=z),
+          xlab=expression(theta[1]),ylab=expression(theta[2]),zlab="Density",
+          col="orange3")
+```
+
+
+
+---
+## Bivariate normal
+
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+0\\
+2
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0.5 \\
+0.5 & 2 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4.3, echo=F}
+sampmat_direct <- rmvnorm(10000, mean = Mu,sigma = Sigma)
+sampmat_direct.kde <- kde2d(sampmat_direct[,1], sampmat_direct[,2], n = 50)
+image(sampmat_direct.kde,xlab=expression(theta[1]),ylab=expression(theta[2]))
+contour(sampmat_direct.kde, add = T)
+```
+
+
+
+---
+## Bivariate normal
+
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+1\\
+-1
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0.9 \\
+0.9 & 0.5 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4, echo=F}
+Sigma <- matrix(c(1,0.9,0.9,1.5),ncol=2)
+Mu <- c(1,-1)
+
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+
+for (i in 1:100) {
+  for (j in 1:100) {
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
+  } 
+}
+
+wireframe(z~x+y,data=data.frame(x=x.points,y=rep(y.points, each=length(x.points)), z=z),
+          xlab=expression(theta[1]),ylab=expression(theta[2]),zlab="Density",
+          col="orange3")
+```
+
+
+
+---
+## Bivariate normal
+
+.midsmall[
+\begin{eqnarray*}
+\begin{pmatrix}\theta_1\\
+\theta_2
+\end{pmatrix} & \sim & \mathcal{N}\left[\left(\begin{array}{c}
+1\\
+-1
+\end{array}\right),\left(\begin{array}{cc}
+1 & 0.9 \\
+0.9 & 0.5 
+\end{array}\right)\right]\\
+\end{eqnarray*}
+]
+
+```{r fig.height=4.3, echo=F}
+sampmat_direct <- rmvnorm(10000, mean = Mu,sigma = Sigma)
+sampmat_direct.kde <- kde2d(sampmat_direct[,1], sampmat_direct[,2], n = 50)
+image(sampmat_direct.kde,xlab=expression(theta[1]),ylab=expression(theta[2]))
+contour(sampmat_direct.kde, add = T)
+```
+
+
+
+
+
+
+
+---
+## Back to the example
+
+- Again, we have
+.block[
+.small[
+$$\theta_1|\theta_2 \sim \mathcal{N}\left(\rho\theta_2, 1-\rho^2 \right); \ \ \ \ \theta_2|\theta_1 \sim \mathcal{N}\left(\rho\theta_1, 1-\rho^2 \right)$$
+]
+]
+
+- Here's a code to do Gibbs sampling using those full conditionals:
+  ```{r eval=F}
+rho <- #set correlation
+S <- #set number of MCMC samples
+thetamat <- matrix(0,nrow=S,ncol=2)
+theta <- c(10,10) #initialize values of theta
+for (s in 1:S) {
+  theta[1] <- rnorm(1,rho*theta[2],sqrt(1-rho^2)) #sample theta1
+  theta[2] <- rnorm(1,rho*theta[1],sqrt(1-rho^2)) #sample theta2
+  thetamat[s,] <- theta
+}
+```
+
+
+- Here's a code to do sample directly instead:
+  ```{r eval=F}
+library(mvtnorm)
+rho <- #set correlation; no need to set again once you've used previous code
+S <- #set number of MCMC samples; no need to set again once you've used previous code
+Mu <- c(0,0)
+Sigma <- matrix(c(1,rho,rho,1),ncol=2)
+thetamat_direct <- rmvnorm(S, mean = Mu,sigma = Sigma)
+```
+
+
+
+<!-- --- -->
+<!-- ## Participation exercise -->
+
+<!-- - You will work in groups of three. Work with the three students closest to you. -->
+
+<!-- - For $S \in \{50,250,500\}$ and $\rho \in \{0.1,0.5,0.95\}$, do the following: -->
+<!--   1. Generate $S$ samples using the two methods. -->
+<!--   2. Make a scatter plot of the samples from each method (plot the samples from the Gibbs sampler first) and compare them. -->
+<!--   <!-- 3. Overlay the samples from the Gibbs sampler alone on the true bivariate density. **See code on next slide!** --> -->
+
+<!-- - How do the results differ between the two methods for the different combinations of $S$ and $\rho$? -->
+
+<!-- - Discuss within your teams, document your team findings and submit. -->
+
+<!-- - You can have one person document the findings but make sure to write the name of all three members at the top of the sheet. -->
+
+
+
+---
+## More code
+
+See how the chain actually evolves with an overlay on the true density:
+```{r eval=F}
+rho <- #set correlation
+Sigma <- matrix(c(1,rho,rho,1),ncol=2); Mu <- c(0,0)
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+for (i in 1:100) {
+  for (j in 1:100) {
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
+  }
+}
+contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),"orange2",
+        xlab=expression(theta[1]),ylab=expression(theta[2]))
+
+S <- #set number of MCMC samples;
+thetamat <- matrix(0,nrow=S,ncol=2)
+theta <- c(10,10)
+points(x=theta[1],y=theta[2],col="black",pch=2)
+for (s in 1:S) {
+  theta[1] <- rnorm(1,rho*theta[2],sqrt(1-rho^2))
+  theta[2] <- rnorm(1,rho*theta[1],sqrt(1-rho^2))
+  thetamat[s,] <- theta
+  if(s < 20){
+    points(x=theta[1],y=theta[2],col="red4",pch=16); Sys.sleep(1)
+  } else {
+    points(x=theta[1],y=theta[2],col="green4",pch=16); Sys.sleep(0.1)
+  }
+}
+```
+
+
+
+---
+## MCMC
+
+- Gibbs sampling is one of several flavors of .hlight[Markov chain Monte Carlo (MCMC)].
+
+--
+  + .hlight[Markov chain]: a stochastic process in which future states are independent of past states conditional on the present state.
+  
+  + .hlight[Monte Carlo]: simulation.
+
+--
+
+- MCMC provides an approach for generating samples from posterior distributions.
+
+--
+
+- From these samples, we can obtain summaries (including summaries of functions) of the posterior distribution for $\theta$, our parameter of interest.
+
+
+
+---
+## How does MCMC work?
+
+- Let $\theta^{(s)} = (\theta_1^{(s)}, \ldots, \theta_p^{(s)})$ denote the value of the $p \times 1$ vector of parameters at iteration $s$.
+
+--
+
+- Let $\theta^{(0)}$ be an initial value used to start the chain (_should not be sensitive_).
+
+--
+
+- MCMC generates $\theta^{(s)}$ from a distribution that depends on the data and potentially on $\theta^{(s-1)}$, but not on $\theta^{(1)}, \ldots, \theta^{(s-2)}$.
+
+--
+
+- This results in a Markov chain with **stationary distribution** $\pi(\theta | Y)$ under some conditions on the sampling distribution.
+
+--
+
+- The theory of Markov Chains (structure, convergence, reversibility, detailed balance, stationarity, etc) is well beyond the scope of this course so we will not dive into it. 
+
+--
+
+- If you are interested, consider taking courses on stochastic process.
+
+
+---
+## Properties
+
+- **Note**: Our Markov chain is a collection of draws of $\theta$ that are (slightly we hope!) dependent on the previous draw. 
+
+--
+
+- The chain will wander around our parameter space, only remembering where it had been in the last draw.
+
+--
+
+- We want to have our MCMC sample size, $S$, big enough so that we can
+
+  + Move out of areas of low probability into regions of high probability (convergence)
+  
+  + Move between high probability regions (good mixing)
+  
+  + Know our Markov chain is stationary in time (the distribution of samples is the same for all samples, regardless of location in the chain)
+
+--
+
+- At the start of the sampling, the samples are **not** from the posterior distribution. It is necessary to discard the initial samples as a .hlight[burn-in] to allow convergence. We'll talk more about that in the next class.
+
+
+
+---
+## Different flavors of MCMC
+
+- The most commonly used MCMC algorithms are:
+  + Metropolis sampling (Metropolis et al., 1953).
+  + Metropolis-Hastings (MH) (Hastings, 1970).
+  + Gibbs sampling (Geman & Geman, 1984; Gelfand & Smith, 1990).
+  
+- Overview of Gibbs - Casella & George (1992, The American Statistician, 46, 167-174).
+
+--
+the first two 
+- Overview of MH - Chib & Greenberg (1995, The American Statistician).
+
+--
+
+- We will get to Metropolis and Metropolis-Hastings later in the course.
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
+
+
+

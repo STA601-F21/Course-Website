@@ -1,0 +1,387 @@
+---
+title: "STA 360/602L: Module 3.7"
+subtitle: "MCMC and Gibbs sampling I"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(MASS)
+library(mvtnorm)
+library(lattice)
+```
+
+
+
+## Bayesian inference (conjugacy recap)
+
+- As we've seen so far, Bayesian inference is based on posterior distributions, that is,
+.block[
+.small[
+$$
+\begin{split}
+\pi(\theta | y) & = \frac{\pi(\theta) \cdot p(y|\theta)}{\int_{\Theta}\pi(\tilde{\theta}) \cdot p(y| \tilde{\theta}) \textrm{d}\tilde{\theta}} = \frac{\pi(\theta) \cdot L(\theta | y)}{L(y)},
+\end{split}
+$$
+]
+]
+  
+  where $y = (y_1, \ldots, y_n)$.
+
+--
+
+- .hlight[Good news]: we have the numerator in this expression.
+
+
+--
+
+- .hlight[Bad news]: the denominator is typically not available (may involve high dimensional integral)!
+  
+--
+
+- How have we been getting by? Conjugacy! For conjugate priors, the posterior distribution of $\theta$ is available analytically.
+
+--
+
+- What if a conjugate prior does not represent our prior information well, or we have a more complex model, and our posterior is no longer in a convenient distributional form?
+
+
+
+
+---
+## Some conjugate models
+
+- For example, the most common conjugate models are
+
+Prior        |  Likelihood | Posterior  |
+:----------- | :---------: |:---------: |
+beta | binomial | beta
+gamma | Poisson | gamma
+gamma | exponential | gamma
+normal-gamma | normal | normal-gamma
+beta | negative-binomial | beta
+beta | geometric | beta
+
+--
+
+- There are a few more we have not covered yet, for example, the Dirichlet-multinomial model.
+
+--
+
+- However, clearly, we cannot restrict ourselves to conjugate models only.
+
+
+
+---
+## Back to the normal model
+
+
+- For example, for conjugacy in the normal model, we had
+.block[
+.small[
+$$
+\begin{split}
+\pi(\mu|\tau) & = \mathcal{N}\left(\mu_0, \dfrac{1}{\kappa_0 \tau}\right).\\
+\pi(\tau) \ & = \textrm{Gamma}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0}{2\tau_0}\right)\\
+\end{split}
+$$
+]
+]
+
+--
+
+- Suppose we instead wish to specify our uncertainty about $\mu$ as independent of $\tau$, that is, we want $\pi(\mu,\tau) = \pi(\mu)\pi(\tau)$. For example,
+.block[
+.small[
+$$
+\begin{split}
+\pi(\mu) & = \mathcal{N}\left(\mu_0, \sigma_0^2\right).\\
+\pi(\tau) \ & = \textrm{Gamma}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0}{2\tau_0}\right).\\
+\end{split}
+$$
+]
+]
+
+--
+
+- When $\sigma_0^2$ is not proportional to $\dfrac{1}{\tau}$, the marginal density of $\tau$ is not a gamma density (or a density we can easily sample from).
+
+--
+
+- Side note: for conjugacy, the joint posterior should also be a product of two independent Normal and Gamma densities in $\mu$ and $\tau$ respectively.
+
+
+
+---
+## Non-conjugate priors
+
+- In general, conjugate priors are not available for generalized linear models (GLMs) other than the normal linear model.
+
+--
+
+- One can potentially rely on an asymptotic normal approximation.
+
+--
+
+- As $n \rightarrow \infty$, the posterior distribution is normal centered on MLE.
+
+--
+
+- However, even for moderate sample sizes, asymptotic approximations may be inaccurate.
+
+--
+
+- In logistic regression for example, for rare outcomes or rare binary exposures, posterior can be highly skewed.
+
+--
+
+- It is appealing to avoid any reliance on large sample assumptions and base inferences on **exact posterior**.
+
+
+
+---
+## Non-conjugate priors
+
+- Even though we may not be able to sample from the marginal posterior of a particular parameter when using a non-conjugate prior, sometimes, we may still be able to sample from conditional distributions of those parameters given all other parameters and the data.
+
+--
+
+- These conditional distributions, known as .hlight[full conditionals], will be very important for us.
+
+--
+
+- In our normal example with
+.block[
+.small[
+$$
+\begin{split}
+\mu & \sim \mathcal{N}\left(\mu_0, \sigma_0^2\right).\\
+\tau \ & \sim \textrm{Gamma}\left(\dfrac{\nu_0}{2}, \dfrac{\nu_0}{2\tau_0}\right),\\
+\end{split}
+$$
+]
+]
+
+  turns out we will not be able sample easily from $\tau | Y$, 
+  
+--
+
+- However, as you will see, we will be able to sample from $\tau | \mu, Y$. That is the .hlight[full conditional] for $\tau$.
+  
+--
+
+- By the way, note that we already know the full conditional for $\mu$, i.e., $\mu | \tau, Y$ from previous modules.
+
+
+
+---
+## Full conditional distributions
+
+- .hlight[Goal]: try to take advantage of those full conditional distributions (without sampling directly from the marginal posteriors) to obtain samples from the said marginal posteriors.
+
+--
+
+- In our example, with $\pi(\mu) = \mathcal{N}\left(\mu_0, \sigma_0^2\right)$, we have
+.block[
+.small[
+$$\mu|Y,\tau \sim \mathcal{N}(\mu_n, \tau_n^{-1}),$$
+]
+]
+
+--
+  where
+  + $\mu_n = \dfrac{\frac{\mu_0}{\sigma^2_0} + n\tau\bar{y}}{\frac{1}{\sigma^2_0} + n\tau}$; and 
+  + $\tau_n = \frac{1}{\sigma^2_0} + n\tau$.
+  
+--
+
+- Review results from previous modules on the normal model if you are not sure why this holds.
+  
+--
+
+- Let's see if we can figure out the other full conditional $\tau | \mu, Y$.
+
+
+
+
+---
+## Full conditional distributions
+
+.block[
+.small[
+$$
+\begin{split}
+p(\tau| \mu,Y) & \boldsymbol{=} \dfrac{\Pr[\tau,\mu,Y]}{\Pr[\mu,Y]} = \dfrac{p(y|\mu,\tau)\pi(\mu,\tau)}{p[\mu,y]}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+& \boldsymbol{=} \dfrac{p(y|\mu,\tau)\pi(\mu)\pi(\tau)}{p[\mu,y]}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+& \boldsymbol{\propto} p(y|\mu,\tau)\pi(\tau)\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+& \boldsymbol{\propto} \underbrace{\tau^{\dfrac{n}{2}} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau \sum^n_{i=1} (y_i - \mu)^2 \right\}}_{\propto \ p(y|\mu,\tau)} \times \underbrace{\tau^{\dfrac{\nu_0}{2}-1} \textrm{exp}\left\{-\dfrac{\tau\nu_0}{2\tau_0}\right\}}_{\propto \ \pi(\tau)}\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+& \boldsymbol{=} \underbrace{\tau^{\dfrac{\nu_0 + n}{2} - 1} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau \left[ \dfrac{\nu_0}{\tau_0} + \sum^n_{i=1} (y_i - \mu)^2 \right] \right\}}_{\textrm{Gamma Kernel}}.
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Full conditional distributions
+
+.block[
+.small[
+$$
+\begin{split}
+p(\tau| \mu,Y) & \boldsymbol{\propto} \underbrace{\tau^{\dfrac{\nu_0 + n}{2} - 1} \ \textrm{exp}\left\{-\dfrac{1}{2} \tau \left[ \dfrac{\nu_0}{\tau_0} + \sum^n_{i=1} (y_i - \mu)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
+& \boldsymbol{=} \textrm{Gamma}\left(\dfrac{\nu_n}{2}, \dfrac{\nu_n}{2 \tau_n(\mu)}\right) \ \ \ \textrm{OR} \ \ \ \textrm{Gamma}\left(\dfrac{\nu_n}{2}, \dfrac{\nu_n\sigma_n^2(\mu)}{2}\right),
+\end{split}
+$$
+]
+]
+
+  where
+.block[
+.small[
+$$
+\begin{split}
+\nu_n & = \nu_0 + n\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+\sigma_n^2(\mu) & = \dfrac{1}{\nu_n} \left[ \dfrac{\nu_0}{\tau_0} + \sum^n_{i=1} (y_i - \mu)^2 \right] = \dfrac{1}{\nu_n}\left[ \dfrac{\nu_0}{\tau_0} + ns^2_n(\mu) \right]\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+\ \ \textrm{OR} \ \ \tau_n(\mu) & = \dfrac{\nu_n}{\left[ \dfrac{\nu_0}{\tau_0} + \sum^n_{i=1} (y_i - \mu)^2 \right]} = \dfrac{\nu_n}{\left[ \dfrac{\nu_0}{\tau_0} + ns^2_n(\mu) \right]};\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \\
+\textrm{with} \ \ \ s^2_n(\mu) & = \dfrac{1}{n} \sum^n_{i=1} (y_i - \mu)^2.\\
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Iterative scheme
+
+- Now we have two full conditional distributions but what we really need is to sample from $\pi(\tau | Y)$.
+
+--
+
+- Actually, if we could sample from $\pi(\mu, \tau| Y)$, we already know that the draws for $\mu$ and $\tau$ will be from the two marginal posterior distributions. So, we just need a scheme to sample from $\pi(\mu, \tau| Y)$.
+
+--
+
+- Suppose we had a single sample, say $\tau^{(1)}$ from the marginal posterior distribution $\pi(\tau | Y)$. Then we could sample
+.block[
+.small[
+$$\mu^{(1)} \sim p(\mu | \tau^{(1)}, Y).$$
+]
+]
+
+--
+
+- This is what we did in the last class, so that the pair $\{\mu^{(1)},\tau^{(1)}\}$ is a sample from the joint posterior $\pi(\mu, \tau| Y)$.
+
+--
+
+- $\Rightarrow \ \mu^{(1)}$ can be considered a sample from the marginal distribution of $\mu$, which again means we can use it to sample
+.block[
+.small[
+$$\tau^{(2)}  \sim p(\tau | \mu^{(1)}, Y),$$
+]
+]
+
+  and so forth.
+
+
+
+---
+## Gibbs sampling
+
+- So, we can use two **full conditional distributions** to generate samples from the **joint distribution**, once we have a starting value $\tau^{(1)}$.
+
+--
+
+- Formally, this sampling scheme is known as .hlight[Gibbs sampling].
+
+--
+  + .hlight[Purpose]: Draw from a joint distribution, say $p(\mu, \tau| Y)$.
+
+--
+  + .hlight[Method]: Iterative conditional sampling
+      - Draw $\tau^{(1)}  \sim p(\tau | \mu^{(0)}, Y)$
+      - Draw $\mu^{(1)} \sim p(\mu | \tau^{(1)}, Y)$
+
+--
+  + .hlight[Purpose]: Full conditional distributions have known forms, with sampling from the full conditional distributions fairly easy.
+
+--
+
+- More generally, we can use this method to generate samples of $\theta = (\theta_1, \ldots, \theta_p)$, the vector of $p$ parameters of interest, from the joint density.
+
+---
+## Gibbs sampling
+
+- .hlight[Procedure]:
+  + Start with initial value $\theta^{(0)} = (\theta_1^{(0)}, \ldots, \theta_p^{(0)})$.
+
+--
+  + For iterations $s = 1, \ldots, S$,
+      1. Sample $\theta_1^{(s)}$ from the conditional posterior distribution
+.block[
+.small[
+$$\pi(\theta_1 | \theta_2 = \theta_2^{(s-1)}, \ldots, \theta_p = \theta_p^{(s-1)}, Y)$$
+]
+]
+
+      2. Sample $\theta_2^{(s)}$ from the conditional posterior distribution
+.block[
+.small[
+$$\pi(\theta_2 | \theta_1 = \theta_1^{(s)}, \theta_3 = \theta_3^{(s-1)}, \ldots, \theta_p = \theta_p^{(s-1)}, Y)$$
+]
+]
+
+      3. Similarly, sample $\theta_3^{(s)}, \ldots, \theta_p^{(s)}$ from the conditional posterior
+distributions given current values of other parameters.
+  
+--
+  + This generates a **dependent** sequence of parameter values.
+
+--
+
+- In the next module, we will look into a simple example of how this works, before going back to the normal model.
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
+
+
+

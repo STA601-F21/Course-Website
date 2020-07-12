@@ -190,12 +190,31 @@ lessons:
   
   - date: "Mon, July 13"
     title: "Module 3.7: MCMC and Gibbs sampling I"
-    #reading: "37-reading.html"
+    reading: "37-reading.html"
+    slides: "37-gibbs-sampling-I.html"
+    slidespdf: "37-gibbs-sampling-I.pdf"
     #video: " "
     
   - date: " "
     title: "Module 3.8: MCMC and Gibbs sampling II"
-    #reading: "38-reading.html"
+    reading: "38-reading.html"
+    slides: "38-gibbs-sampling-II.html"
+    slidespdf: "38-gibbs-sampling-II.pdf"
+    #video: " "
+    
+  - date: " "
+    title: "Lab 5: Truncated data"
+    lab: "lab-05-truncated-data-blank.html"
+    
+    
+  - date: "Tues, July 14"
+    title: "Module 3.9: MCMC and Gibbs sampling III"
+    reading: "39-reading.html"
+    #video: " "
+    
+  - date: " "
+    title: "Module 3.10: MCMC and Gibbs sampling IV"
+    reading: "310-reading.html"
     #video: " "
     
     
@@ -203,23 +222,19 @@ lessons:
   - title: "MODULE 4: MULTIVARIATE DATA"
   
   
-  - date: "Tues, July 14"
+  - date: "Wed, July 15"
     title: "Module 4.1: Multivariate normal model I"
-    #reading: "41-reading.html"
+    reading: "41-reading.html"
     #video: " "
     
   - date: " "
     title: "Module 4.2: Multivariate normal model II"
-    #reading: "42-reading.html"
+    reading: "42-reading.html"
     #video: " "
     
-  - date: "Wed, July 15"
-    title: "Module 4.3: Multivariate normal model III"
-    #reading: "43-reading.html"
-    
   - date: " "
-    title: "Module 4.4: Missing data and imputation"
-    #reading: "44-reading.html"
+    title: "Lab 6: Gibbs sampling with block updates"
+    lab: "lab-06-block-gibbs-blank.html"
     
   - date: "Thurs, July 16"
     title: "Review for midterm exam"
@@ -233,42 +248,49 @@ lessons:
   - date: " "
   
   
+  - date: "Mon, July 20"
+    title: "Module 4.3: Multivariate normal model III"
+    #reading: "43-reading.html"
+    
+  - date: " "
+    title: "Module 4.4: Multivariate normal model IV"
+    #reading: "44-reading.html"
+    
+  - date: "Tues, July 21"
+    title: "Module 4.5: Missing data and imputation I"
+    #reading: "43-reading.html"
+    
+  - date: " "
+    title: "Module 4.6: Missing data and imputation II"
+    #reading: "44-reading.html"
+    
+  
+  - title: " "
   - title: "MODULE 5: HIERARCHICAL MODELS"
     
     
-  - date: "Mon, July 20"
+  - date: "Wed, July 22"
     title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
     
   - date: " "
     title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
     
-  - date: "Tues, July 21"
+  - date: "Thurs, July 23"
     title: "Module 5.3: Hierarchical normal modeling of means and variances I"
     
   - date: " "
     title: "Module 5.4: Hierarchical normal modeling of means and variances II"
     
   
+  - title: " "
   - title: "MODULE 6: BAYESIAN LINEAR REGRESSION"
     
     
-  - date: "Wed, July 22"
+  - date: "Fri, July 24"
     title: "Module 6.1: Bayesian linear regression"
     
   - date: " "
     title: "Module 6.2: Bayesian linear regression: illustration"
-    
-  - date: "Thurs, July 23"
-    title: "Module 6.3: Bayesian linear regression: weakly informative priors"
-    
-  - date: " "
-    title: "Module 6.4: Bayesian hypothesis testing"
-    
-  - date: "Fri, July 24"
-    title: "Module 6.5: Bayesian model selection"
-    
-  - date: " "
-    title: "Module 6.6: Bayesian model selection: illustration"
     
     
   - date: " "
@@ -276,10 +298,27 @@ lessons:
   - date: " "
   
   
+  - date: "Mon, July 27"
+    title: "Module 6.3: Bayesian linear regression: weakly informative priors"
+    
+  - date: " "
+    title: "Module 6.4: Bayesian hypothesis testing"
+  
+  - date: "Tues, July 28"
+    title: "Module 6.5: Bayesian model selection"
+    
+  - date: " "
+    title: "Module 6.6: Bayesian model selection: illustration"
+  
+  
+  - title: " "  
   - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
     
     
-  - date: "Mon, July 27"
+  - date: "Wed, July 29"
+    title: "Quiz II"
+    
+  - date: "Thurs, July 30"
     title: "Last day to withdraw with W"
   
   - date: " "
@@ -288,30 +327,17 @@ lessons:
   - date: " "
     title: "Module 7.2: Metropolis in action"
     
-  - date: "Tues, July 28"
+  
+  - date: "Fri, July 31"
     title: "Module 7.3: The Metropolis-Hastings algorithm"
     
   - date: " "
     title: "Module 7.4: Metropolis-Hastings within Gibbs"
     
-  - date: "Wed, July 29"
-    title: "Quiz II"
-    
-    
+   
+  - title: " "  
   - title: "MODULE 8: CATEGORICAL DATA AND MIXTURE MODELS"
     
-  
-  - date: "Thurs, July 30"
-    title: "Module 8.1: The multinomial model"
-    
-  - date: " "
-    title: " "
-    
-  - date: "Fri, July 31"
-    title: " "
-    
-  - date: " "
-    title: " "
     
   - date: " "
   - date: "WEEK 6"
@@ -319,7 +345,7 @@ lessons:
     
     
   - date: "Mon, Aug 3"
-    title: " "
+    title: "Module 8.1: The multinomial model"
     
   - title: " "
     

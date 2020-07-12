@@ -1,8 +1,8 @@
 ---
-title: "STA 602L Lab 5: Truncated data"
-author: "STA 602L: Bayesian and Modern Statistics"
+title: "Lab 5: Truncated data"
+author: "STA 360/602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "Feb 17, 2020"
+#date: "Feb 17, 2020"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -35,7 +35,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 11:59pm, Feb 17, 2020
+**Due:** 11:59pm, July 14, 2020
 
 
 # Housekeeping
@@ -46,11 +46,12 @@ You all should have R and RStudio installed on your computers by now. If you do 
 
 ## R Markdown
 
-You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-360-602l-su20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
 
 ## Gradescope
 
-You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/77790/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/141314//assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+
 
 
 
@@ -217,7 +218,7 @@ If you are seeing the truncated normal distribution for the first time, take a f
 
 Now we are ready to write a Gibbs sampler using truncated full conditional distributions to make inferences about the radius parameter $R$.
 
-```{r, eval=F}
+```{r, eval=F, cache=T}
 # hyper-parameters
 m <- 3
 k <- 1
