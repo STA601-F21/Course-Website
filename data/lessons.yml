@@ -212,14 +212,14 @@ lessons:
     reading: "39-reading.html"
     slides: "39-gibbs-sampling-III.html"
     slidespdf: "39-gibbs-sampling-III.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/751448/1403540/914922/0/Module-39-MCMC-and-Gibbs-sampling-III"
     
   - date: " "
     title: "Module 3.10: MCMC and Gibbs sampling IV"
     reading: "310-reading.html"
     slides: "310-gibbs-sampling-IV.html"
     slidespdf: "310-gibbs-sampling-IV.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/751515/1403540/914922/0/Module-310-MCMC-and-Gibbs-sampling-IV"
     
     
   - title: " " 

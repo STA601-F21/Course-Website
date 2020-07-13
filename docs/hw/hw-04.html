@@ -1728,8 +1728,7 @@ div.tocify {
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
-<ol style="list-style-type: decimal">
-<li><p>Hoff problem 6.1</p></li>
+<ol start="2" style="list-style-type: decimal">
 <li><font color="blue"><strong>Continuation of question 4 from homework 3.</strong></font> Suppose we have count data <span class="math inline">\(y_i\)</span> with <span class="math inline">\((i = 1,\ldots, n)\)</span>, where <span class="math inline">\(x_i = 0\)</span> for control subjects and <span class="math inline">\(x_i = 1\)</span> for treated subjects. Consider the following model for the data: <span class="math display">\[y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),\]</span> where <span class="math inline">\(\lambda = \mathbb{E}[y_i | x_i = 0]\)</span> and <span class="math inline">\(\gamma\)</span> is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\gamma\)</span>, <span class="math display">\[\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).\]</span> You should already have the correct posterior density from homework 3.
 <ul>
 <li><font color="green"><strong>Part (a):</strong></font> Show the exact steps involved in an algorithm for sampling from the posterior distribution for <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\gamma\)</span>.</li>
