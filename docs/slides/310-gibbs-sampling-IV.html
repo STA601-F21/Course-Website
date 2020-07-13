@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 3.10</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 3.10
+## MCMC and Gibbs sampling IV
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Some MCMC terminology
+
+- .hlight[Convergence]: bypassing initial drift in the samples towards a stationary distribution.
+
+--
+
+- .hlight[Burn-in]: samples at start of the chain that are discarded to allow convergence.
+
+--
+
+- .hlight[Trace plot]: plot of sampled values of a parameter vs iterations.
+
+--
+
+- .hlight[Slow mixing]: tendency for high autocorrelation in the samples.
+
+--
+
+- .hlight[Thinning]: practice of collecting every `\(k\)`th iteration to reduce autocorrelation.
+
+  It gets you a little closer to iid draws and saves memory (you don't store all draws), but unless memory is a major issue or autocorrelation is very high, thinning is usually not needed.
+
+
+
+---
+## Burn-in
+
+- Because convergence often occurs regardless of our starting point (in not-too-complex problems at least), we can usually pick any reasonable values in the parameter space as a starting point.
+
+--
+
+- The time it takes for the chain to converge may vary depending on how close the starting values are to a high probability region of the posterior.
+
+--
+
+- Generally, we throw out a certain number of the first draws, known as the **burn-in**, as an attempt to make our draws closer to the
+stationary distribution and less dependent on any single set of starting values. 
+
+--
+
+- However, we don't know exactly when convergence occurs, so it is not always clear how much burn-in we would need.
+
+
+
+
+---
+## Trace plot with bad mixing
+
+- .hlight[Trace plot]: plot of sampled values of a parameter vs iterations.
+
+&lt;img src="img/traceplot_bad.png" width="550px" height="450px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Poor mixing
+
+- Exhibits "snaking" behavior in trace plot with cyclic local trends in the mean.
+
+--
+
+- Poor mixing in the Gibbs sampler caused by high posterior correlation in the parameters.
+
+--
+
+- Decreases efficiency &amp; many more samples need to be collected to maintain low Monte Carlo error in posterior summaries.
+
+--
+
+- For very poor mixing chain, may even need millions of iterations.
+
+--
+
+- Routinely examine trace plots!
+
+
+
+---
+## Trace plot with good mixing
+
+&lt;img src="img/traceplot_good.png" width="550px" height="500px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Convergence diagnostics
+
+- Diagnostics available to help decide on number of burn-in &amp; collected samples.
+
+--
+
+- **Note**: no definitive tests of convergence but you should do as many diagnostics as you can, on all parameters in your model.
+
+--
+
+- With "experience", visual inspection of trace plots perhaps most useful approach.
+
+--
+
+- There are a number of useful automated tests in R.
+
+
+
+---
+## Diagnostics in R
+
+
+
+
+- The most popular package for MCMC diagnostics in R is `coda`.
+
+--
+
+- `coda` uses a special MCMC format so you must always convert your posterior matrix into an MCMC object. 
+
+--
+
+- Continuing with the posterior samples for the Pygmalion study, we have the following in R.
+  
+  ```r
+  #library(coda)
+  phi.mcmc &lt;- mcmc(PHI,start=1) #no burn-in (simple problem!)
+  ```
+
+
+
+---
+## Diagnostics in R
+
+
+```r
+summary(phi.mcmc)
+```
+
+```
+## 
+## Iterations = 1:10000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 10000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##            Mean       SD  Naive SE Time-series SE
+## mu     13.98961  2.94748 0.0294748      0.0341435
+## tau     0.02839  0.01646 0.0001646      0.0001855
+## sigma2 53.34388 53.27616 0.5327616      0.6502608
+## 
+## 2. Quantiles for each variable:
+## 
+##             2.5%      25%      50%      75%     97.5%
+## mu      7.519819 12.36326 14.21682 15.84203  19.27701
+## tau     0.005744  0.01626  0.02526  0.03726   0.06886
+## sigma2 14.522591 26.83933 39.59569 61.49382 174.10833
+```
+
+The naive SE is the **standard error of the mean**, which captures simulation error of the mean rather than the posterior uncertainty. 
+
+The time-series SE adjusts the naive SE for **autocorrelation**.
+
+
+
+---
+## Effective sample size
+
+- The .hlight[effective sample size] translates the number of MCMC samples `\(S\)` into an equivalent number of independent samples.
+
+--
+
+- It is defined as
+.block[
+.small[
+`$$\textrm{ESS} = \dfrac{S}{1 + 2 \sum_k \rho_k},$$`
+]
+]
+
+  where `\(S\)` is the sample size and `\(\rho_k\)` is the lag `\(k\)` autocorrelation.
+  
+--
+
+- For our data, we have
+  
+  ```r
+  effectiveSize(phi.mcmc)
+  ```
+  
+  ```
+  ##       mu      tau   sigma2 
+  ## 7452.197 7877.721 6712.600
+  ```
+
+--
+
+- So our 10,000 samples are equivalent to 7452 independent samples for `\(\mu\)`, 7878 independent samples for `\(\tau\)`, and 6713 independent samples for `\(\sigma^2\)`.
+
+
+
+
+---
+## Trace plot for mean
+
+
+```r
+plot(phi.mcmc[,"mu"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks great!
+
+
+
+---
+## Trace plot for precision
+
+
+```r
+plot(phi.mcmc[,"tau"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks great!
+
+
+
+---
+## Trace plot for variance
+
+
+```r
+plot(phi.mcmc[,"sigma2"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+We do see a few wacky samples that we did not see with `\(\tau\)`, due to the scale. Generally, still looks great!
+
+
+
+---
+## Autocorrelation
+
+- Another way to evaluate convergence is to look at the autocorrelation between draws of our Markov chain.
+
+--
+
+- The lag `\(k\)` autocorrelation, `\(\rho_k\)`, is the correlation between each draw and its `\(k\)`th lag, defined as
+.block[
+.small[
+`$$\rho_k = \dfrac{\sum_{s=1}^{S-k}(\theta_s - \bar{\theta})(\theta_{s+k} - \bar{\theta})}{\sum_{s=1}^{S-k}(\theta_s - \bar{\theta})^2}.$$`
+]
+]
+
+--
+
+- We expect the autocorrelation to decrease as `\(k\)` increases. 
+
+--
+
+- If autocorrelation remains high as `\(k\)` increases, we have slow mixing due to the inability of the sampler to move around the space well.
+
+
+
+---
+## Autocorrelation for mean
+
+
+```r
+autocorr.plot(phi.mcmc[,"mu"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+This looks great! Look how quickly autocorrelation goes to 0.
+
+
+---
+## Autocorrelation for precision
+
+
+```r
+autocorr.plot(phi.mcmc[,"tau"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+Also great!
+
+
+
+---
+## Autocorrelation for variance
+
+
+```r
+autocorr.plot(phi.mcmc[,"sigma2"])
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+Also great!
+
+
+
+
+---
+## Gelman and Rubin Statistic
+
+- Andrew Gelman and Don Rubin suggested a diagnostic statistic based on taking separate sets of Gibbs samples (multiple chains) with dispersed initial values to test convergence. 
+
+--
+
+- The algorithm proceeds as follows.
+  + Run m &gt; 2 chains of length 2S from overdispersed starting values.
+  + Discard the first S draws in each chain.
+  + Calculate the within-chain and between-chain variance.
+  + Calculate the estimated variance of the parameter as a weighted sum of the within-chain and between-chain variance.
+  + Calculate the potential scale reduction factor
+.block[
+.small[
+`$$\hat{R} = \sqrt{\dfrac{\hat{\textrm{Var}(\theta)}}{W}},$$`
+]
+]
+
+  where `\(\hat{\textrm{Var}(\theta)}\)` is the weighted sum of the within-chain and between-chain variance and `\(W\)` is the mean of the variances of each chain (average within-chain variance).
+
+
+
+---
+## Geweke statistic
+
+- Geweke proposed taking two non-overlapping parts of a single Markov chain (usually the first 10% and the last 50%) and comparing the mean of both parts, using a difference of means test.
+
+--
+
+- The null hypothesis would be that the two parts of the chain are from the same distribution. 
+
+--
+
+- The test statistic is a z-score with standard errors adjusted for autocorrelation, and if the p-value is significant for a variable, you need more draws. 
+
+--
+
+- The output is the z-score itself (not the p-value).
+
+
+```r
+geweke.diag(phi.mcmc)
+```
+
+```
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      mu     tau  sigma2 
+##  0.9521  2.0088 -1.9533
+```
+
+
+---
+## Practical advice on diagnostics
+
+- There are more tests we can use: Raftery and Lewis diagnostic, Heidelberger and Welch, etc.
+
+--
+
+- The Gelman-Rubin approach is quite appealing in using multiple chains
+
+--
+
+- Geweke (and Heidelberger and Welch) sometimes reject even when the trace plots look good.
+
+--
+
+- Overly sensitive to minor departures from stationarity that do not impact inferences.
+
+--
+
+- Sometimes this can be solved with more iterations. Otherwise, you may want to try multiple chains.
+
+--
+
+- Most common method of assessing convergence is visual examination of trace plots.
+
+--
+
+- **CAUTION**: diagnostics cannot guarantee that a chain has converged, but they can indicate it has not converged.
+
+
+
+
+---
+## HPD interval for Pygmalion data
+
+
+```r
+#library(hdrcde)
+hdr.den(PHI[,1],prob=95,main="95% HPD region", xlab=expression(mu),
+        ylab=expression(paste(pi,"(", mu, "|y)")))
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## HPD interval for Pygmalion data
+
+
+```r
+hdr.den(PHI[,2],prob=95,main="95% HPD region", xlab=expression(tau),
+        ylab=expression(paste(pi,"(", tau, "|y)")))
+```
+
+&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## HPD interval for Pygmalion data
+
+
+```r
+hdr(PHI[,1],prob=95)$hdr
+```
+
+```
+##         [,1]     [,2]
+## 95% 8.080022 19.87699
+```
+
+```r
+hdr(PHI[,2],prob=95)$hdr
+```
+
+```
+##              [,1]       [,2]
+## 95% -0.0006954123 0.06023567
+```
+
+We can compare the HPD intervals to the equal tailed credible intervals.
+
+
+```r
+quantile(PHI[,1],c(0.025,0.975))
+```
+
+```
+##      2.5%     97.5% 
+##  7.519819 19.277013
+```
+
+```r
+quantile(PHI[,2],c(0.025,0.975))
+```
+
+```
+##        2.5%       97.5% 
+## 0.005743552 0.068858238
+```
+
+Intervals are closer for `\(\mu\)` (symmetric density) compared to `\(\tau\)` (not symmetric).
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -210,11 +210,15 @@ lessons:
   - date: "Tues, July 14"
     title: "Module 3.9: MCMC and Gibbs sampling III"
     reading: "39-reading.html"
+    slides: "39-gibbs-sampling-III.html"
+    slidespdf: "39-gibbs-sampling-III.pdf"
     #video: " "
     
   - date: " "
     title: "Module 3.10: MCMC and Gibbs sampling IV"
     reading: "310-reading.html"
+    slides: "310-gibbs-sampling-IV.html"
+    slidespdf: "310-gibbs-sampling-IV.pdf"
     #video: " "
     
     
