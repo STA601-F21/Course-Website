@@ -274,9 +274,9 @@ z &lt;- matrix(0,nrow=100,ncol=100)
 for (i in 1:100) {
   for (j in 1:100) {
     z[i,j] &lt;- dmvnorm(c(x.points[i],y.points[j]),mean=Mu,sigma=Sigma)
-  }
+  } 
 }
-contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),"orange2",
+contour(x.points,y.points,z,xlim=c(-3,10),ylim=c(-3,10),col="orange2",
         xlab=expression(theta[1]),ylab=expression(theta[2]))
 
 S &lt;- #set number of MCMC samples;
