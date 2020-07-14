@@ -158,7 +158,7 @@ $$\rho_{1,2} = \dfrac{\mathbb{Cov}[Y_1,Y_2]}{\sqrt{\mathbb{Var}[Y_1]}\sqrt{\math
 
 --
 
-- Second, while generally, **independence implies zero covariance**, for the normal family, the converse is also true. That is, **independence implies zero covariance**.
+- Second, while generally, **independence implies zero covariance**, for the normal family, the converse is also true. That is, **zero covariance also implies independence**.
 
 --
 

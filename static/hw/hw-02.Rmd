@@ -44,10 +44,10 @@ Please make sure your final output file is a pdf document. You can submit handwr
     <font color="red">*You can find the data mentioned in the question here: http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/. Clearly, you don't need to download and load the data, you can just enter it manually in R.* </font>
     
 4. <font color="blue">**Jeffreys' prior distributions (From BDA3).**</font> Suppose $y|\theta \sim \textrm{Po}(\theta)$.
-    + Find the Jeffreys' prior density for $\theta$. Recall that for single parameter models, the Jeffreys' prior is $\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$, where $\mathcal{I}(\theta)$ is the Fisher information for $\theta$. Use one of the two definitions of Fisher information on the slides to find $\mathcal{I}(\theta)$, then set $\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$.  
+    + <font color="green">**Part (a):**</font> Find the Jeffreys' prior density for $\theta$. Recall that for single parameter models, the Jeffreys' prior is $\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$, where $\mathcal{I}(\theta)$ is the Fisher information for $\theta$. Use one of the two definitions of Fisher information on the slides to find $\mathcal{I}(\theta)$, then set $\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}$.  
     <font color="blue">**(2 points for all students)**</font>
 
-    + What values of $a$ and $b$ for the gamma density $\textrm{Ga}(a,b)$ will result in a close match to the Jeffreys' density you found?  
+    + <font color="green">**Part (b):**</font> What values of $a$ and $b$ for the gamma density $\textrm{Ga}(a,b)$ will result in a close match to the Jeffreys' density you found?  
     <font color="blue">**(0.5 points for all students)**</font>
 5. Suppose we have $n$ independent observations $Y = (y_1,y_2,\ldots,y_n)$, where each $y_i \sim \mathcal{N}(\theta, \sigma^2)$, and the parameters $\theta$ and $\sigma^2$ are unknown. Jeffreys' prior for $\theta$ and $\sigma^2$ (jointly) is $$\pi(\theta,\sigma^2) \propto (\sigma^2)^{-3/2}.$$ Derive the posterior under this prior and state whether it is proper. What happens when $n=1$ versus $n>1$?  
 <font color="blue">**(2.5 points for all students)**</font>
@@ -60,13 +60,13 @@ Please make sure your final output file is a pdf document. You can submit handwr
 7. <font color="green">**How many samples is enough?**</font> Recall the birth rates example from the slides.  
 <font color="blue">**(Not graded for students in STA 360; you can attempt for practice but you don't need to submit. Graded for students in STA 602)**</font>
     + <font color="green">**Part (a):**</font> Sample from the posterior distribution for women who are college educated using $m$ = 10, 100, and 1000 Monte Carlo samples. For each $m$, make a plot of the random draws and on the same plot, mark the points corresponding to the posterior mean and the 95% equal-tailed credible interval (quantile-based). How do those compare to the true posterior mean and 95% quantile-based CI?  
-    <font color="blue">**(1 point for all students)**</font>
+    <font color="blue">**(1 point)**</font>
     
     +  <font color="green">**Part (b):**</font> In addition, calculate the posterior probability that $\theta_2 < 1.5$ in each case.  
-    <font color="blue">**(0.5 points for all students)**</font>
+    <font color="blue">**(0.5 points)**</font>
     
     + <font color="green">**Part (c):**</font> How large should $m$ be if $95\%$ of the time we want the difference between the Monte Carlo estimate of the posterior mean and the true posterior mean (which we know in this case) to be $\leq 0.001$?  
-    <font color="blue">**(1 point for all students)**</font>
+    <font color="blue">**(1 point)**</font>
 
 
 ## Grading

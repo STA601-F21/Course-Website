@@ -1758,9 +1758,9 @@ div.tocify {
 <p><font color="red"><em>You can find the data mentioned in the question here: <a href="http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/" class="uri">http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/</a>. Clearly, you don’t need to download and load the data, you can just enter it manually in R.</em> </font></p></li>
 <li><font color="blue"><strong>Jeffreys’ prior distributions (From BDA3).</strong></font> Suppose <span class="math inline">\(y|\theta \sim \textrm{Po}(\theta)\)</span>.
 <ul>
-<li><p>Find the Jeffreys’ prior density for <span class="math inline">\(\theta\)</span>. Recall that for single parameter models, the Jeffreys’ prior is <span class="math inline">\(\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}\)</span>, where <span class="math inline">\(\mathcal{I}(\theta)\)</span> is the Fisher information for <span class="math inline">\(\theta\)</span>. Use one of the two definitions of Fisher information on the slides to find <span class="math inline">\(\mathcal{I}(\theta)\)</span>, then set <span class="math inline">\(\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}\)</span>.<br />
+<li><p><font color="green"><strong>Part (a):</strong></font> Find the Jeffreys’ prior density for <span class="math inline">\(\theta\)</span>. Recall that for single parameter models, the Jeffreys’ prior is <span class="math inline">\(\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}\)</span>, where <span class="math inline">\(\mathcal{I}(\theta)\)</span> is the Fisher information for <span class="math inline">\(\theta\)</span>. Use one of the two definitions of Fisher information on the slides to find <span class="math inline">\(\mathcal{I}(\theta)\)</span>, then set <span class="math inline">\(\pi(\theta) \propto \sqrt{\mathcal{I}(\theta)}\)</span>.<br />
 <font color="blue"><strong>(2 points for all students)</strong></font></p></li>
-<li>What values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the gamma density <span class="math inline">\(\textrm{Ga}(a,b)\)</span> will result in a close match to the Jeffreys’ density you found?<br />
+<li><font color="green"><strong>Part (b):</strong></font> What values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the gamma density <span class="math inline">\(\textrm{Ga}(a,b)\)</span> will result in a close match to the Jeffreys’ density you found?<br />
 <font color="blue"><strong>(0.5 points for all students)</strong></font></li>
 </ul></li>
 <li><p>Suppose we have <span class="math inline">\(n\)</span> independent observations <span class="math inline">\(Y = (y_1,y_2,\ldots,y_n)\)</span>, where each <span class="math inline">\(y_i \sim \mathcal{N}(\theta, \sigma^2)\)</span>, and the parameters <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown. Jeffreys’ prior for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2\)</span> (jointly) is <span class="math display">\[\pi(\theta,\sigma^2) \propto (\sigma^2)^{-3/2}.\]</span> Derive the posterior under this prior and state whether it is proper. What happens when <span class="math inline">\(n=1\)</span> versus <span class="math inline">\(n&gt;1\)</span>?<br />
@@ -1772,11 +1772,11 @@ div.tocify {
 <font color="blue"><strong>(Not graded for students in STA 360; you can attempt for practice but you don’t need to submit. Graded for students in STA 602)</strong></font>
 <ul>
 <li><p><font color="green"><strong>Part (a):</strong></font> Sample from the posterior distribution for women who are college educated using <span class="math inline">\(m\)</span> = 10, 100, and 1000 Monte Carlo samples. For each <span class="math inline">\(m\)</span>, make a plot of the random draws and on the same plot, mark the points corresponding to the posterior mean and the 95% equal-tailed credible interval (quantile-based). How do those compare to the true posterior mean and 95% quantile-based CI?<br />
-<font color="blue"><strong>(1 point for all students)</strong></font></p></li>
+<font color="blue"><strong>(1 point)</strong></font></p></li>
 <li><p><font color="green"><strong>Part (b):</strong></font> In addition, calculate the posterior probability that <span class="math inline">\(\theta_2 &lt; 1.5\)</span> in each case.<br />
-<font color="blue"><strong>(0.5 points for all students)</strong></font></p></li>
+<font color="blue"><strong>(0.5 points)</strong></font></p></li>
 <li><p><font color="green"><strong>Part (c):</strong></font> How large should <span class="math inline">\(m\)</span> be if <span class="math inline">\(95\%\)</span> of the time we want the difference between the Monte Carlo estimate of the posterior mean and the true posterior mean (which we know in this case) to be <span class="math inline">\(\leq 0.001\)</span>?<br />
-<font color="blue"><strong>(1 point for all students)</strong></font></p></li>
+<font color="blue"><strong>(1 point)</strong></font></p></li>
 </ul></li>
 </ol>
 </div>

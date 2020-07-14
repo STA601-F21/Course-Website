@@ -227,7 +227,7 @@ lessons:
   
   - date: " "
     title: "Homework 3"
-    #hw: "hw-03.html"
+    hw: "hw-03.html"
     
     
   - title: " " 
@@ -239,14 +239,14 @@ lessons:
     reading: "4-1-reading.html"
     slides: "4-1-multivariate-normal-I.html"
     slidespdf: "4-1-multivariate-normal-I.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/752934/1403540/914922/0/Module-41-Multivariate-normal-model-I"
     
   - date: " "
     title: "Module 4.2: Multivariate normal model II"
     reading: "4-2-reading.html"
     slides: "4-2-multivariate-normal-II.html"
     slidespdf: "4-2-multivariate-normal-II.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/753022/1403540/914922/0/Module-42-Multivariate-normal-model-II"
     
   - date: " "
     title: "Lab 6: Gibbs sampling with block updates"
