@@ -26,6 +26,19 @@ Please make sure your final output file is a pdf document. You can submit handwr
     + <font color="green">**Part (c):**</font> Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.
     + <font color="green">**Part (d):**</font> Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?
     + <font color="green">**Part (e):**</font> Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?
+    
+3. <font color="green">**Rejection sampling.**</font>  
+<font color="blue">**(Not graded for students in STA 360; you can attempt for practice but you don't need to submit. Graded for students in STA 602)**</font>  
+Recall from class that the idea of rejection sampling is to create an importance/proposal/envelope function which is greater than or equal to the distribution we wish to sample from at all points, and which we can sample from easily. Suppose we end up with the following form for our posterior: $$f(\theta) \propto sin^2(\pi \theta), \ \ \ \theta \in [0,1],$$ where $\pi = 3.141593$.
+This density looks like:
+```{r fig.height=5.5, echo=F}
+curve(sin(x*pi)^2,col="red3",
+      xlab=expression(theta),ylab=expression(paste("sin(",pi,"",theta,")"^2)))
+```
+    + Implement a rejection sampler in R to sample from this density using a Unif(0,1) density as your proposal function, since it is greater than or equal to the given density (up to proportionality) at all points and is easy to sample from.
+    + Propose a different envelope function and implement a rejection sampler for it in R.
+    + How does the efficiency of your envelope function compare to the uniform envelope function?
+    + Provide plots (histograms or density estimates) of the samples from the two approaches.
 
 ## Grading
 
