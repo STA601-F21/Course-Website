@@ -227,7 +227,7 @@ lessons:
   
   - date: " "
     title: "Homework 3"
-    hw: "hw-03.html"
+    #hw: "hw-03.html"
     
     
   - title: " " 
