@@ -243,7 +243,7 @@ Y_2
   we have
 .block[
 .small[
-$$Y_1 | Y_2 = y_2 \sim \mathcal{N}\left(\mu_1 + \dfrac{\sigma_{12}}{\sigma_2} (y_2-\mu_2), \sigma_1 - \dfrac{\sigma_{12}^2}{\sigma_2}\right).$$
+$$Y_1 | Y_2 = y_2 \sim \mathcal{N}\left(\mu_1 + \dfrac{\sigma_{12}}{\sigma_2^2} (y_2-\mu_2), \sigma_1^2 - \dfrac{\sigma_{12}^2}{\sigma_2^2}\right).$$
 ]
 ]
 
