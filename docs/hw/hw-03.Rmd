@@ -25,7 +25,7 @@ Please make sure your final output file is a pdf document. You can submit handwr
     + <font color="blue">**Part (d): Students in STA 360: 3 points; Students in STA 602: 2 points**</font>
 
 2. Suppose we have count data $y_i$ with $(i = 1,\ldots, n)$, where $x_i = 0$ for control subjects and $x_i = 1$ for treated subjects. Consider the following model for the data: $$y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),$$ where $\lambda = \mathbb{E}[y_i | x_i = 0]$ and $\gamma$ is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters $\lambda$ and $\gamma$, $$\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).$$
-    + <font color="green">**Part (a):**</font>  Is the joint posterior for $\lambda$ and $\gamma$, that is, $\pi(\lambda,\gamma)$, conjugate? Why or why not?  
+    + <font color="green">**Part (a):**</font>  Is the joint posterior for $\lambda$ and $\gamma$, that is, $\pi(\lambda,\gamma | X, Y)$, conjugate? Why or why not?  
     <font color="blue">**(Students in STA 360: 4 points; Students in STA 602: 3 points)**</font>
     + <font color="green">**Part (b):**</font>  Derive the full conditional distributions for $\lambda$ and $\gamma$.  
     <font color="blue">**(3 points for all students)**</font>
