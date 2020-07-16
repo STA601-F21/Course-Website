@@ -156,7 +156,7 @@ $$
 - So, we have
 .block[
 .small[
-$$\pi(\mu|\tau) = \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau}\right)\propto \ \textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}.$$
+$$\pi(\mu|\tau) = \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau}\right)\propto \ \tau^{\frac{1}{2}} \cdot \ \textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}.$$
 ]
 ]
 
@@ -175,7 +175,7 @@ $$\pi(\tau) = \textrm{Ga}\left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right)
 $$
 \begin{split}
 \Rightarrow \pi(\mu,\tau) \ & \boldsymbol{ =} \ \pi(\mu|\tau) \cdot \pi(\tau) = \mathcal{N}\left(\mu_0, \frac{1}{\kappa_0 \tau} \right) \cdot \textrm{Gamma}\left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right)\\
-& \boldsymbol{ \propto} \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\tau)} \cdot \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}.\\
+& \boldsymbol{ \propto} \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\tau)} \cdot \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}.\\
 \end{split}
 $$
 ]
@@ -230,13 +230,13 @@ $$
 \begin{split}
 \text{Then, } \ \ \ \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \pi(\mu|\tau) \times \pi(\tau) \times P(Y| \mu,\tau)\\
 \\
-& \boldsymbol{ \propto} \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\sigma^2)} \times \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}\\
+& \boldsymbol{ \propto} \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\}}_{\propto \ \pi(\mu|\sigma^2)} \times \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\}}_{\propto \ \pi(\tau)}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \underbrace{\tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\propto \ P(Y| \mu,\tau)}\\
 \\
 & \boldsymbol{=}  \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu - \mu_0)^2 \right\} \ \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu - \bar{y})^2 \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\} \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}}\tau^{\frac{\nu_0}{2}-1} \textrm{exp}\left\{-\frac{\tau\nu_0\sigma_0^2}{2}\right\} \tau^{\frac{n}{2}} \ \textrm{exp}\left\{-\frac{1}{2} \tau s^2(n-1) \right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 \end{split}
 $$
 ]
@@ -254,13 +254,13 @@ $$
 \begin{split}
 \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto}  \underbrace{\textrm{exp}\left\{-\frac{1}{2} \kappa_0 \tau (\mu^2 - 2\mu\mu_0 + \mu_0^2) \right\}\  \textrm{exp}\left\{-\frac{1}{2} \tau n(\mu^2 - 2\mu\bar{y} + \bar{y}^2) \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}}\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 & \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[\kappa_0 \tau (\mu^2 - 2\mu\mu_0)  + \tau n(\mu^2 - 2\mu\bar{y}) \right] \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 & \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \mu^2(n\tau + \kappa_0 \tau) - 2\mu(n\tau \bar{y} + \kappa_0 \tau\mu_0)   \right] \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 \end{split}
 $$
 ]
@@ -309,7 +309,7 @@ $$
 \begin{split}
 \pi(\mu,\tau | Y) \ & \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ (n\tau + \kappa_0 \tau)\mu^2 - 2\mu(n\tau \bar{y} + \kappa_0 \tau\mu_0)   \right] \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 \end{split}
 $$
 ]
@@ -323,7 +323,7 @@ $$
 \begin{split}
 \Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ a^\star \mu^2 - 2 b^\star \mu   \right] \right\}}_{\textrm{Terms involving } \mu}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
-\times \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
+\times \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\} \ \cdot  \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}}_{\text{Terms involving } \tau \text{ but NOT } \mu}\\
 \end{split}
 $$
 ]
@@ -338,15 +338,15 @@ $$
 .small[
 $$
 \begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 + \frac{(b^\star)^2}{2a^\star} \right\} \ \cdot \ \textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 + \frac{(b^\star)^2}{2a^\star} \right\} \ \cdot \ \textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2\right] \right\}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
 \\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(b^\star)^2}{a^\star}\right] \right\}}_{\textrm{Next, substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}}\\\
+& \boldsymbol{=} \ \ \ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(b^\star)^2}{a^\star}\right] \right\}}_{\textrm{Next, substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
 \\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp} \underbrace{\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)^2}{(n\tau + \kappa_0 \tau)}\right] \right\}}_{\textrm{Next, expand terms and recombine}} \\
+& \boldsymbol{=} \ \ \ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp} \underbrace{\left\{-\frac{1}{2} \left[ \kappa_0 \tau \mu_0^2 + \tau n \bar{y}^2 - \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)^2}{(n\tau + \kappa_0 \tau)}\right] \right\}}_{\textrm{Next, expand terms and recombine}} \\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
 \end{split}
@@ -362,15 +362,15 @@ $$
 .small[
 $$
 \begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{1}{2} \left[\frac{n\kappa_0\tau^2 (\mu_0^2- 2\mu_0\bar{y} + \bar{y}^2)}{\tau(\kappa_0 + n)}\right] \right\}\\\
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{1}{2} \left[\frac{n\kappa_0\tau^2 (\mu_0^2- 2\mu_0\bar{y} + \bar{y}^2)}{\tau(\kappa_0 + n)}\right] \right\}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
 \\
-& \boldsymbol{=} \ \ \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{\tau}{2} \left[\frac{n\kappa_0 (\bar{y} - \mu_0)^2}{(\kappa_0 + n)}\right] \right\}\\
+& \boldsymbol{=} \ \ \ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\} \ \textrm{exp}\left\{-\frac{\tau}{2} \left[\frac{n\kappa_0 (\bar{y} - \mu_0)^2}{(\kappa_0 + n)}\right] \right\}\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\}\\
  \\
-& \boldsymbol{=} \ \ \textrm{exp} \underbrace{\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\}}_{\textrm{Substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}} \\
+& \boldsymbol{=} \ \ \ \tau^{\frac{1}{2}}\textrm{exp} \underbrace{\left\{-\frac{1}{2} a^\star \left[ \mu- \frac{b^\star}{a^\star} \right]^2 \right\}}_{\textrm{Substitute the values for } a^\star \textrm{ and } b^\star \textrm{ back}} \\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau \left[\nu_0\sigma_0^2 + s^2(n-1) \right] }{2}\right\} \textrm{exp}\left\{-\frac{\tau}{2} \left[\frac{n\kappa_0 (\bar{y} - \mu_0)^2}{(\kappa_0 + n)}\right] \right\}\\
 \end{split}
@@ -388,11 +388,11 @@ $$
 .small[
 $$
 \begin{split}
-\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} (n\tau + \kappa_0 \tau) \left[ \mu- \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)}{(n\tau + \kappa_0 \tau)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
+\Rightarrow \ \pi(\mu,\tau | Y) \ & \boldsymbol{ \propto} \ \ \underbrace{\ \tau^{\frac{1}{2}}\textrm{exp}\left\{-\frac{1}{2} (n\tau + \kappa_0 \tau) \left[ \mu- \frac{(n\tau \bar{y} + \kappa_0 \tau\mu_0)}{(n\tau + \kappa_0 \tau)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \frac{n\kappa_0}{(\kappa_0 + n)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
 \\
-& \boldsymbol{=} \ \ \underbrace{\textrm{exp}\left\{-\frac{1}{2} \tau(\kappa_0 + n) \left[ \mu - \frac{(\kappa_0 \mu_0 + n \bar{y})}{(\kappa_0 + n)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
+& \boldsymbol{=} \ \ \underbrace{\ \tau^{\frac{1}{2}} \textrm{exp}\left\{-\frac{1}{2} \tau(\kappa_0 + n) \left[ \mu - \frac{(\kappa_0 \mu_0 + n \bar{y})}{(\kappa_0 + n)} \right]^2 \right\}}_{\textrm{Normal Kernel}}\\\
 & \ \ \ \ \ \ \ \ \ \ \ \ 
 \times \underbrace{\tau^{\frac{\nu_0 + n}{2}-1} \textrm{exp}\left\{-\frac{\tau}{2} \left[\nu_0\sigma_0^2 + s^2(n-1) + \frac{n\kappa_0}{(\kappa_0 + n)} (\bar{y} - \mu_0)^2 \right] \right\}}_{\textrm{Gamma Kernel}}\\
 \end{split}
