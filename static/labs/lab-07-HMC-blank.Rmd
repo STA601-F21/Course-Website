@@ -1,8 +1,8 @@
 ---
-title: "STA 602L Lab 7: Introduction to Hamiltonian Monte Carlo"
-author: "STA 602L: Bayesian and Modern Statistics"
+title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
+author: "STA 360/602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "Mar 2, 2020"
+#date: "Mar 2, 2020"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -35,7 +35,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 5:00pm, Mar 3, 2020
+**Due:** 11:59pm, July 21, 2020
 
 
 # Housekeeping
@@ -46,11 +46,11 @@ You all should have R and RStudio installed on your computers by now. If you do 
 
 ## R Markdown
 
-You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-360-602l-su20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
 
 ## Gradescope
 
-You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/77790/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/141314//assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
 
 
 
@@ -72,7 +72,7 @@ require(plyr)
 
 For this lab, you will need one stan file. Download here:
 
-  + https://sta-602l-s20.github.io/Course-Website/labs/lab-07-hmc_norm_example.stan.
+  + https://sta-360-602l-su20.github.io/Course-Website/labs/lab-07-hmc_norm_example.stan.
   
 Download and make sure to save the file in the same folder as the R script or R markdown file you are working from. 
 
@@ -192,7 +192,7 @@ Before building the Gibbs sampler to make inferences on $\theta_1, \theta_2$, fi
 
 ***
 
-While you have derived similar conditional normal distributions a few times now, **doing it yet again is very good practice for the midterm**!
+While you have derived similar conditional normal distributions a few times now, **doing it yet again is very good practice**!
 
 Now that you have derived the full condition densities, write some code to implement a Gibbs sampler for this model.
 

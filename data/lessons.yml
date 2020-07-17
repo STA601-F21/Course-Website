@@ -266,22 +266,26 @@ lessons:
   
   - date: "Mon, July 20"
     title: "Module 4.3: Multivariate normal model III"
-    #reading: "4-3-reading.html"
+    reading: "4-3-reading.html"
     #video: " "
     
   - date: " "
     title: "Module 4.4: Multivariate normal model IV"
-    #reading: "4-4-reading.html"
+    reading: "4-4-reading.html"
     #video: " "
+    
+  - date: " "
+    title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
+    lab: "lab-07-HMC-blank.html"
     
   - date: "Tues, July 21"
     title: "Module 4.5: Missing data and imputation I"
-    #reading: "4-5-reading.html"
+    reading: "4-5-reading.html"
     #video: " "
     
   - date: " "
     title: "Module 4.6: Missing data and imputation II"
-    #reading: "4-6-reading.html"
+    reading: "4-6-reading.html"
     #video: " "
     
   
@@ -291,15 +295,19 @@ lessons:
     
   - date: "Wed, July 22"
     title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
+    #reading: "5-1-reading.html"
     
   - date: " "
     title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
+    #reading: "5-2-reading.html"
     
   - date: "Thurs, July 23"
     title: "Module 5.3: Hierarchical normal modeling of means and variances I"
+    #reading: "5-3-reading.html"
     
   - date: " "
     title: "Module 5.4: Hierarchical normal modeling of means and variances II"
+    #reading: "5-4-reading.html"
     
   
   - title: " "
@@ -308,9 +316,11 @@ lessons:
     
   - date: "Fri, July 24"
     title: "Module 6.1: Bayesian linear regression"
+    #reading: "6-1-reading.html"
     
   - date: " "
     title: "Module 6.2: Bayesian linear regression: illustration"
+    #reading: "6-2-reading.html"
     
     
   - date: " "
