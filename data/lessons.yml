@@ -267,11 +267,15 @@ lessons:
   - date: "Mon, July 20"
     title: "Module 4.3: Multivariate normal model III"
     reading: "4-3-reading.html"
+    slides: "4-3-multivariate-normal-III.html"
+    slidespdf: "4-3-multivariate-normal-III.pdf"
     #video: " "
     
   - date: " "
     title: "Module 4.4: Multivariate normal model IV"
     reading: "4-4-reading.html"
+    slides: "4-4-multivariate-normal-IV.html"
+    slidespdf: "4-4-multivariate-normal-IV.pdf"
     #video: " "
     
   - date: " "

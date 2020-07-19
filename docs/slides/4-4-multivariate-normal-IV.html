@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 4.4</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 4.4
+## Multivariate normal model IV
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+
+
+## Reading example: posterior computation
+
+- Recall that we have
+
+  .block[
+.small[
+$$
+`\begin{split}
+\pi(\boldsymbol{\theta} | \Sigma, \boldsymbol{Y}) = \mathcal{N}_2(\boldsymbol{\mu}_n, \Lambda_n)
+\end{split}`
+$$
+]
+]
+
+  where
+.block[
+.small[
+$$
+`\begin{split}
+\Lambda_n &amp; = \left[\Lambda_0^{-1} + n\Sigma^{-1}\right]^{-1}\\
+\\
+\boldsymbol{\mu}_n &amp; = \Lambda_n \left[\Lambda_0^{-1}\boldsymbol{\mu}_0 + n\Sigma^{-1} \bar{\boldsymbol{y}} \right],\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- For our reading example,
+.block[
+.small[
+`$$\boldsymbol{\mu}_0 = (\mu_{0(1)},\mu_{0(2)})^T = (50,50)^T$$`
+]
+]
+
+  .block[
+.small[
+`\begin{eqnarray*}
+\Lambda_0 = \left(\begin{array}{cc}
+156 &amp; 78 \\
+78 &amp; 156
+\end{array}\right)\\
+\end{eqnarray*}`
+]
+]
+
+
+---
+## Reading example: posterior computation
+
+- We also have
+
+  .block[
+.small[
+$$
+`\begin{split}
+\pi(\Sigma | \boldsymbol{\theta} \boldsymbol{Y}) = \mathcal{IW}_2(\nu_n, \boldsymbol{S}_n)
+\end{split}`
+$$
+]
+]
+
+  or using the notation in the book, `\(\mathcal{IW}_2(\nu_n, \boldsymbol{S}_n^{-1} )\)`, where
+.block[
+.small[
+$$
+`\begin{split}
+\nu_n &amp; = \nu_0 + n\\
+\\
+\boldsymbol{S}_n &amp; = \left[\boldsymbol{S}_0 + \boldsymbol{S}_\theta \right]\\
+&amp; = \left[\boldsymbol{S}_0 + \sum^n_{i=1}(\boldsymbol{y}_i - \boldsymbol{\theta})(\boldsymbol{y}_i - \boldsymbol{\theta})^T \right].
+\end{split}`
+$$
+]
+]
+
+--
+
+- Again, for our reading example,
+.block[
+.small[
+`$$\nu_0 = p + 2 = 4$$`
+]
+]
+
+  .block[
+.small[
+`\begin{eqnarray*}
+\Sigma_0 = \left(\begin{array}{cc}
+625 &amp; 312.5 \\
+312.5 &amp; 625
+\end{array}\right)\\
+\end{eqnarray*}`
+]
+]
+
+
+
+---
+## Posterior computation
+
+
+```r
+#Data summaries
+n &lt;- nrow(Y)
+ybar &lt;- apply(Y,2,mean)
+
+#Hyperparameters for the priors
+mu_0 &lt;- c(50,50)
+Lambda_0 &lt;- matrix(c(156,78,78,156),nrow=2,ncol=2)
+nu_0 &lt;- 4
+S_0 &lt;- matrix(c(625,312.5,312.5,625),nrow=2,ncol=2)
+
+#Initial values for Gibbs sampler
+#No need to set initial value for theta, we can simply sample it first
+Sigma &lt;- cov(Y)
+
+#Set null matrices to save samples
+THETA &lt;- SIGMA &lt;- NULL
+```
+
+
+Next, the code for the Gibbs sampler.
+
+
+
+---
+## Posterior computation
+
+
+```r
+#Now, to the Gibbs sampler
+#library(mvtnorm) for multivariate normal
+#library(MCMCpack) for inverse-Wishart
+
+#first set number of iterations and burn-in, then set seed
+n_iter &lt;- 10000; burn_in &lt;- 0.3*n_iter
+set.seed(1234)
+
+for (s in 1:(n_iter+burn_in)){
+##update theta using its full conditional
+Lambda_n &lt;- solve(solve(Lambda_0) + n*solve(Sigma))
+mu_n &lt;- Lambda_n %*% (solve(Lambda_0)%*%mu_0 + n*solve(Sigma)%*%ybar)
+theta &lt;- rmvnorm(1,mu_n,Lambda_n)
+
+#update Sigma
+S_theta &lt;- (t(Y)-c(theta))%*%t(t(Y)-c(theta))
+S_n &lt;- S_0 + S_theta
+nu_n &lt;- nu_0 + n
+Sigma &lt;- riwish(nu_n, S_n)
+
+#save results only past burn-in
+if(s &gt; burn_in){
+  THETA &lt;- rbind(THETA,theta)
+  SIGMA &lt;- rbind(SIGMA,c(Sigma))
+  }
+}
+colnames(THETA) &lt;- c("theta_1","theta_2")
+colnames(SIGMA) &lt;- c("sigma_11","sigma_12","sigma_21","sigma_22") #symmetry in sigma
+```
+
+Note that the text also has a function to sample from the Wishart distribution.
+
+
+
+---
+## Diagnostics
+
+
+```r
+#library(coda)
+THETA.mcmc &lt;- mcmc(THETA,start=1); summary(THETA.mcmc)
+```
+
+```
+## 
+## Iterations = 1:10000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 10000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##          Mean    SD Naive SE Time-series SE
+## theta_1 47.30 2.956  0.02956        0.02956
+## theta_2 53.69 3.290  0.03290        0.03290
+## 
+## 2. Quantiles for each variable:
+## 
+##          2.5%   25%   50%   75% 97.5%
+## theta_1 41.55 45.35 47.36 49.23 53.08
+## theta_2 47.08 51.53 53.69 55.82 60.13
+```
+
+```r
+effectiveSize(THETA.mcmc)
+```
+
+```
+## theta_1 theta_2 
+##   10000   10000
+```
+
+
+
+---
+## Diagnostics
+
+
+```r
+SIGMA.mcmc &lt;- mcmc(SIGMA,start=1); summary(SIGMA.mcmc)
+```
+
+```
+## 
+## Iterations = 1:10000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 10000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean    SD Naive SE Time-series SE
+## sigma_11 202.3 63.39   0.6339         0.6511
+## sigma_12 155.3 60.92   0.6092         0.6244
+## sigma_21 155.3 60.92   0.6092         0.6244
+## sigma_22 260.1 81.96   0.8196         0.8352
+## 
+## 2. Quantiles for each variable:
+## 
+##            2.5%   25%   50%   75% 97.5%
+## sigma_11 113.50 158.2 190.8 234.8 357.3
+## sigma_12  67.27 113.2 144.7 186.5 305.4
+## sigma_21  67.27 113.2 144.7 186.5 305.4
+## sigma_22 145.84 203.2 244.6 300.9 461.0
+```
+
+```r
+effectiveSize(SIGMA.mcmc)
+```
+
+```
+## sigma_11 sigma_12 sigma_21 sigma_22 
+## 9478.710 9517.989 9517.989 9629.352
+```
+
+
+
+---
+## Diagnostics: trace plots
+
+
+```r
+plot(THETA.mcmc[,"theta_1"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: trace plots
+
+
+```r
+plot(THETA.mcmc[,"theta_2"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: trace plots
+
+
+```r
+plot(SIGMA.mcmc[,"sigma_11"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: trace plots
+
+
+```r
+plot(SIGMA.mcmc[,"sigma_12"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: trace plots
+
+
+```r
+plot(SIGMA.mcmc[,"sigma_22"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: autocorrelation
+
+
+```r
+autocorr.plot(THETA.mcmc[,"theta_1"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: autocorrelation
+
+
+```r
+autocorr.plot(THETA.mcmc[,"theta_2"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: autocorrelation
+
+
+```r
+autocorr.plot(SIGMA.mcmc[,"sigma_11"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: autocorrelation
+
+
+```r
+autocorr.plot(SIGMA.mcmc[,"sigma_12"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+---
+## Diagnostics: autocorrelation
+
+
+```r
+autocorr.plot(SIGMA.mcmc[,"sigma_22"])
+```
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+Looks good!
+
+
+
+---
+## Posterior distribution of the mean
+
+&lt;img src="4-4-multivariate-normal-IV_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Answering questions of interest
+
+- Questions of interest:
+  + Do students improve in reading comprehension on average?
+  
+--
+
+- Need to compute `\(\Pr[\theta_2 &gt; \theta_1 | \boldsymbol{Y}]\)`. In R,
+  
+  ```r
+  mean(THETA[,2]&gt;THETA[,1])
+  ```
+  
+  ```
+  ## [1] 0.992
+  ```
+
+--
+
+- That is, posterior probability `\(&gt; 0.99\)` and indicates strong evidence that test scores are higher in the second administration.
+
+
+
+---
+## Answering questions of interest
+
+- Questions of interest:
+  + If so, by how much?
+  
+--
+
+- Need posterior summaries `\(\Pr[\theta_2 - \theta_1 | \boldsymbol{Y}]\)`. In R,
+  
+  ```r
+  mean(THETA[,2] - THETA[,1])
+  ```
+  
+  ```
+  ## [1] 6.385515
+  ```
+  
+  ```r
+  quantile(THETA[,2] - THETA[,1], prob=c(0.025, 0.5, 0.975))
+  ```
+  
+  ```
+  ##      2.5%       50%     97.5% 
+  ##  1.233154  6.385597 11.551304
+  ```
+
+--
+
+- Mean (and median) improvement is `\(\approx 6.39\)` points with 95% credible interval (1.23, 11.55).
+
+
+
+
+---
+## Answering questions of interest
+
+- Questions of interest:
+  + How correlated (positively) are the post-test and pre-test scores?
+  
+--
+
+- We can compute `\(\Pr[\sigma_{12} &gt; 0 | \boldsymbol{Y}]\)`. In R,
+  
+  ```r
+  mean(SIGMA[,2]&gt;0)
+  ```
+  
+  ```
+  ## [1] 1
+  ```
+
+--
+
+- Posterior probability that the covariance between them is positive is basically 1. 
+
+
+
+---
+## Answering questions of interest
+
+- Questions of interest:
+  + How correlated (positively) are the post-test and pre-test scores?
+  
+--
+
+- We can also look at the distribution of `\(\rho\)` instead. In R,
+  
+  ```r
+  CORR &lt;- SIGMA[,2]/(sqrt(SIGMA[,1])*sqrt(SIGMA[,4]))
+  quantile(CORR,prob=c(0.025, 0.5, 0.975))
+  ```
+  
+  ```
+  ##      2.5%       50%     97.5% 
+  ## 0.4046817 0.6850218 0.8458880
+  ```
+
+--
+
+- Median correlation between the 2 scores is 0.69 with a 95% quantile-based credible interval of (0.40, 0.85) 
+
+--
+
+- Because density is skewed, we may prefer the 95% HPD interval, which is (0.45, 0.88).
+  
+  ```r
+  #library(hdrcde)
+  hdr(CORR,prob=95)$hdr
+  ```
+  
+  ```
+  ##          [,1]      [,2]
+  ## 95% 0.4468522 0.8761174
+  ```
+
+
+
+---
+## Jeffreys' prior
+
+- Clearly, there's a lot of work to be done in specifying the hyperparameters (two or which are `\(p \times p\)` matrices).
+
+--
+
+- What if we want to specify the priors so that we put in as little information as possible?
+
+--
+
+- We already know how to do that somewhat with Jeffreys' priors.
+
+--
+
+- For the multivariate normal model, turns out that the Jeffreys' rule for generating a prior distribution on `\((\boldsymbol{\theta}, \Sigma)\)` gives
+.block[
+.small[
+`$$\pi(\boldsymbol{\theta}, \Sigma) \propto \left|\Sigma\right|^{-\frac{(p+2)}{2}}.$$`
+]
+]
+
+--
+
+- Can we derive the full conditionals under this prior?
+
+--
+
+- **To be done during discussion session.**
+
+
+
+
+---
+## Jeffreys' prior
+
+- We will leverage previous work. For the likelihood we have both
+.block[
+.small[
+$$
+`\begin{split}
+L(\boldsymbol{Y}; \boldsymbol{\theta}, \Sigma) &amp; \propto \textrm{exp} \left\{-\dfrac{1}{2} \boldsymbol{\theta}^T(n\Sigma^{-1})\boldsymbol{\theta} + \boldsymbol{\theta}^T (n\Sigma^{-1} \bar{\boldsymbol{y}})  \right\}
+\end{split}`
+$$
+]
+]
+
+  and
+.block[
+.small[
+$$
+`\begin{split}
+L(\boldsymbol{Y}; \boldsymbol{\theta}, \Sigma) &amp; \propto \left|\Sigma\right|^{-\frac{n}{2}} \ \textrm{exp} \left\{-\dfrac{1}{2}\text{tr}\left[\boldsymbol{S}_\theta \Sigma^{-1} \right] \right\},\\
+\end{split}`
+$$
+]
+]
+
+  where `\(\boldsymbol{S}_\theta = \sum^n_{i=1}(\boldsymbol{y}_i - \boldsymbol{\theta})(\boldsymbol{y}_i - \boldsymbol{\theta})^T\)`.
+
+--
+
+- Also, we can rewrite any `\(\mathcal{N}_p(\boldsymbol{\mu}_0, \Lambda_0)\)` as
+.block[
+.small[
+$$
+`\begin{split}
+p(\boldsymbol{\theta}) &amp; \propto \textrm{exp} \left\{-\dfrac{1}{2} \boldsymbol{\theta}^T\Lambda_0^{-1}\boldsymbol{\theta} + \boldsymbol{\theta}^T\Lambda_0^{-1}\boldsymbol{\mu}_0 \right\}.\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- Finally, `\(\Sigma \sim \mathcal{IW}_p(\nu_0, \boldsymbol{S}_0)\)`,
+.block[
+.small[
+$$
+`\begin{split}
+\Rightarrow \ \ p(\Sigma) \ \propto \ \left|\Sigma\right|^{\frac{-(\nu_0 + p + 1)}{2}} \textrm{exp} \left\{-\dfrac{1}{2} \text{tr}(\boldsymbol{S}_0\Sigma^{-1}) \right\}.
+\end{split}`
+$$
+]
+]
+
+
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
