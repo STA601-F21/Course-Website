@@ -269,14 +269,14 @@ lessons:
     reading: "4-3-reading.html"
     slides: "4-3-multivariate-normal-III.html"
     slidespdf: "4-3-multivariate-normal-III.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/759262/1403540/914922/0/Module-43-Multivariate-normal-model-III"
     
   - date: " "
     title: "Module 4.4: Multivariate normal model IV"
     reading: "4-4-reading.html"
     slides: "4-4-multivariate-normal-IV.html"
     slidespdf: "4-4-multivariate-normal-IV.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/759282/1403540/914922/0/Module-44-Multivariate-normal-model-IV"
     
   - date: " "
     title: "Lab 7: Introduction to Hamiltonian Monte Carlo"

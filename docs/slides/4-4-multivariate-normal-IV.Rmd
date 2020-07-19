@@ -98,7 +98,7 @@ $$\boldsymbol{\mu}_0 = (\mu_{0(1)},\mu_{0(2)})^T = (50,50)^T$$
 .small[
 $$
 \begin{split}
-\pi(\Sigma | \boldsymbol{\theta} \boldsymbol{Y}) = \mathcal{IW}_2(\nu_n, \boldsymbol{S}_n)
+\pi(\Sigma | \boldsymbol{\theta}, \boldsymbol{Y}) = \mathcal{IW}_2(\nu_n, \boldsymbol{S}_n)
 \end{split}
 $$
 ]
@@ -365,7 +365,7 @@ mean(THETA[,2]>THETA[,1])
   
 --
 
-- Need posterior summaries $\Pr[\theta_2 - \theta_1 | \boldsymbol{Y}]$. In R,
+- Need posterior summaries of $\pi[\theta_2 - \theta_1 | \boldsymbol{Y}]$. In R,
   ```{r}
 mean(THETA[,2] - THETA[,1])
 quantile(THETA[,2] - THETA[,1], prob=c(0.025, 0.5, 0.975))
@@ -428,7 +428,7 @@ hdr(CORR,prob=95)$hdr
 ---
 ## Jeffreys' prior
 
-- Clearly, there's a lot of work to be done in specifying the hyperparameters (two or which are $p \times p$ matrices).
+- Clearly, there's a lot of work to be done in specifying the hyperparameters (two of which are $p \times p$ matrices).
 
 --
 
