@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 4.5</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 4.5
+## Missing data and imputation I
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Introduction to missing data
+
+- Missing data/nonresponse is fairly common in real data. For example,
+  + Failure to respond to survey question
+  + Subject misses some clinic visits out of all possible
+  + Only subset of subjects asked certain questions
+  
+--
+
+- Recall that our posterior computation usually depends on the data through `\(\mathcal{p}(Y| \theta)\)`, which cannot be
+computed (at least directly) when some of the `\(y_i\)` values are missing.
+
+--
+
+- The most common software packages often throw away all subjects with incomplete data (can lead to bias and precision loss).
+
+--
+
+- Some individuals impute missing values with a mean or some other fixed value (ignores uncertainty).
+
+--
+
+- As you will see, imputing missing data is actually quite natural in the Bayesian context.
+
+
+
+&lt;!-- --- --&gt;
+&lt;!-- ## Main types of nonresponse --&gt;
+
+&lt;!-- - .hlight[Unit nonresponse]: the individual has no values recorded for any of the variables. For example, when participants do not complete a survey questionnaire at all. --&gt;
+
+&lt;!-- - .hlight[Item nonresponse]: the individual has values recorded for at least one variable, but not all variables. --&gt;
+
+&lt;!-- &lt;table&gt; --&gt;
+&lt;!--   &lt;caption&gt;Unit nonresponse vs item nonresponse&lt;/caption&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;th&gt; &lt;/th&gt; --&gt;
+&lt;!--     &lt;th height="30px" colspan="3"&gt;Variables&lt;/th&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;th&gt;  &lt;/th&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:center" width="100px"&gt; Y&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center" width="100px"&gt; Y&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center" width="100px"&gt; Y&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:left"&gt; Complete cases &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;td rowspan="3"&gt; Item nonresponse &lt;/td&gt; --&gt;
+&lt;!--     &lt;td rowspan="3" style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10004 &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!--   &lt;tr&gt; --&gt;
+&lt;!--     &lt;td height="30px" style="text-align:left"&gt; Unit nonresponse &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--     &lt;td style="text-align:center"&gt; &amp;#10067 &lt;/td&gt; --&gt;
+&lt;!--   &lt;/tr&gt; --&gt;
+&lt;!-- &lt;/table&gt; --&gt;
+
+
+
+---
+## Missing data mechanisms
+
+- Data are said to be .hlight[missing completely at random (MCAR)] if the reason for missingness does not depend on the values of the observed data or missing data.
+
+--
+
+- For example, suppose
+  - you handed out a double-sided survey questionnaire of 20 questions to a sample of participants;
+  - questions 1-15 were on the first page but questions 16-20 were at the back; and
+  - some of the participants did not respond to questions 16-20.
+ 
+--
+ 
+- Then, the values for questions 16-20 for those people who did not respond would be .hlight[MCAR] if they simply did not realize the pages were double-sided; they had no reason to ignore those questions.
+ 
+--
+ 
+- **This is rarely plausible in practice!**
+
+
+---
+## Missing data mechanisms
+
+- Data are said to be .hlight[missing at random (MAR)] if, conditional on the values of the observed data, the reason for missingness does not depend on the missing data.
+
+--
+
+- Using our previous example, suppose
+  - questions 1-15 include demographic information such as age and education;
+  - questions 16-20 include income related questions; and
+  - once again, some participants did not respond to questions 16-20.
+
+--
+  
+- Then, the values for questions 16-20 for those people who did not respond would be .hlight[MAR] if younger people are more likely not to respond to those income related questions than old people, where age is observed for all participants.
+  
+--
+
+- **This is the most commonly assumed mechanism in practice!**
+
+
+---
+## Missing data mechanisms
+
+- Data are said to be .hlight[missing not at random (MNAR or NMAR)] if the reason for missingness depends on the actual values of the missing (unobserved) data.
+
+--
+
+- Continuing with our previous example, suppose again that
+  - questions 1-15 include demographic information such as age and education;
+  - questions 16-20 include income related questions; and
+  - once again, some of the participants did not respond to questions 16-20.
+
+--
+  
+- Then, the values for questions 16-20 for those people who did not respond would be .hlight[MNAR] if people who earn more money are less likely to respond to those income related questions than old people.
+
+--
+  
+- **This is usually the case in real data, but analysis can be complex!**
+
+
+---
+## Mathematical formulation
+
+- Consider the multivariate data scenario with `\(\boldsymbol{Y}_i = (\boldsymbol{Y}_1,\ldots,\boldsymbol{Y}_n)^T\)`, where `\(\boldsymbol{Y}_i = (Y_{i1},\ldots,Y_{ip})^T\)`, for `\(i = 1,\ldots, n\)`.
+
+--
+
+- For now, we will assume the multivariate normal model as the sampling model, so that each `\(\boldsymbol{Y}_i = (Y_{i1},\ldots,Y_{ip})^T \sim \mathcal{N}_p(\boldsymbol{\theta}, \Sigma)\)`.
+
+--
+	
+- Suppose now that `\(\boldsymbol{Y}\)` contains missing values.
+
+--
+
+- We can separate `\(\boldsymbol{Y}\)` into the observed and missing parts, that is, `\(\boldsymbol{Y} = (\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis})\)`.
+
+--
+
+- Then for each individual, `\(\boldsymbol{Y}_i = (\boldsymbol{Y}_{i,obs},\boldsymbol{Y}_{i,mis})\)`.
+
+
+
+---
+## Mathematical Formulation
+
+- Let
+  + `\(j\)` index variables (where `\(i\)` already indexes individuals),
+  + `\(r_{ij} = 1\)` when `\(y_{ij}\)` is missing,
+  + `\(r_{ij} = 0\)` when `\(y_{ij}\)` is observed.
+
+--
+
+- Here, `\(r_{ij}\)` is known as the missingness indicator of variable `\(j\)` for person `\(i\)`. 
+
+--
+
+- Also, let 
+  + `\(\boldsymbol{R}_i = (r_{i1},\ldots,r_{ip})^T\)` be the vector of missing indicators for person `\(i\)`.
+  + `\(\boldsymbol{R} = (\boldsymbol{R}_1,\ldots,\boldsymbol{R}_n)\)` be the matrix of missing indicators for everyone.
+  + `\(\boldsymbol{\psi}\)` be the set of parameters associated with `\(\boldsymbol{R}\)`.
+
+--
+
+- Assume `\(\boldsymbol{\psi}\)` and `\((\boldsymbol{\theta}, \Sigma)\)` are distinct.
+
+
+---
+## Mathematical Formulation
+
+- MCAR:
+.block[
+`$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{\Psi})$$`
+]
+
+--
+
+- MAR:
+.block[
+`$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\Psi})$$`
+]
+
+--
+
+- MNAR:
+.block[
+`$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\Psi})$$`
+]
+
+
+
+---
+## Implications for likelihood function
+
+- Each type of mechanism has a different implication on the likelihood of the observed data `\(\boldsymbol{Y}_{obs}\)`, and the missing data indicator `\(\boldsymbol{R}\)`.
+
+--
+
+- Without missingness in `\(\boldsymbol{Y}\)`, the likelihood of the observed data is
+.block[
+`$$p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma)$$`
+]
+
+--
+
+- With missingness in `\(\boldsymbol{Y}\)`, the likelihood of the observed data is instead
+.block[
+$$
+`\begin{split}
+p(\boldsymbol{Y}_{obs}, \boldsymbol{R} |\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) &amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+\end{split}`
+$$
+]
+
+ &lt;!-- = \prod^n_{i=1}  p(\boldsymbol{Y}_{i,obs} | \boldsymbol{\theta}, \Sigma) --&gt;
+
+&lt;!-- &amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi}) \prod^n_{i=1}  p(\boldsymbol{Y}_{i,obs}, \boldsymbol{Y}_{i,mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\ --&gt;
+
+--
+
+- Since we do not actually observe `\(\boldsymbol{Y}_{mis}\)`, we would like to be able to integrate it out so we don't have to deal with it.
+
+--
+
+- That is, we would like to infer `\((\boldsymbol{\theta}, \Sigma)\)` (and sometimes, `\(\boldsymbol{\psi}\)`) using only the observed data.
+
+
+
+---
+## Likelihood function: MCAR
+
+- For MCAR, we have:
+.block[
+$$
+`\begin{split}
+p(\boldsymbol{Y}_{obs}, \boldsymbol{R} |\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) &amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = \int p(\boldsymbol{R} | \boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = p(\boldsymbol{R} | \boldsymbol{\psi}) \cdot \int p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = p(\boldsymbol{R} | \boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma). \\
+\end{split}`
+$$
+]
+
+--
+
+- For inference on `\((\boldsymbol{\theta}, \Sigma)\)`, we can simply focus on `\(p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma)\)` in the likelihood function, since `\((\boldsymbol{R} | \boldsymbol{\psi})\)` does not include any `\(\boldsymbol{Y}\)`.
+
+
+
+---
+## Likelihood function: MAR
+
+- For MAR, we have:
+.block[
+$$
+`\begin{split}
+p(\boldsymbol{Y}_{obs}, \boldsymbol{R} |\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) &amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs}, \boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\psi}) \cdot \int p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+&amp; = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma). \\
+\end{split}`
+$$
+]
+
+--
+
+- For inference on `\((\boldsymbol{\theta}, \Sigma)\)`, we can once again focus on `\(p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma)\)` in the likelihood function,  although there can be some bias if we do not account for `\(p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta})\)`, since it contains observed data.
+
+--
+
+- Also, if we want to infer the missingness mechanism through `\(\boldsymbol{\psi}\)`, we would need to deal with `\(p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta})\)` anyway.
+
+
+---
+## Likelihood function: MNAR
+
+- For MNAR, we have:
+.block[
+$$
+`\begin{split}
+p(\boldsymbol{Y}_{obs}, \boldsymbol{R} |\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) &amp; = \int p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi}) \cdot p(\boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis} | \boldsymbol{\theta}, \Sigma) \textrm{d}\boldsymbol{Y}_{mis} \\
+\end{split}`
+$$
+]
+
+--
+
+- The likelihood under MNAR cannot simplify any further.
+  
+--
+
+- In this case, we cannot ignore the missing data when making inferences about `\((\boldsymbol{\theta}, \Sigma)\)`.
+  
+--
+
+- We must include the model for `\(\boldsymbol{R}\)` and also infer the missing data `\(\boldsymbol{Y}_{mis}\)`.
+  
+  
+
+---
+## How to tell in practice?
+
+- So how can we tell the type of mechanism we are dealing with? 
+
+--
+
+- In general, we don't know!!!
+
+--
+
+- Rare that data are MCAR (unless planned beforehand); more likely that data are MNAR.
+
+--
+
+- **Compromise**: assume data are MAR if we include enough variables in model for the missing data indicator `\(\boldsymbol{R}\)`.
+
+--
+
+- Whenever we talk about missing data in this course, we will do so in the context of MCAR and MAR.
+  
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
