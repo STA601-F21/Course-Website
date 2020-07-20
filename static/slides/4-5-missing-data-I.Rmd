@@ -224,21 +224,21 @@ computed (at least directly) when some of the $y_i$ values are missing.
 
 - MCAR:
 .block[
-$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{\Psi})$$
+$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{\psi})$$
 ]
 
 --
 
 - MAR:
 .block[
-$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\Psi})$$
+$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\psi})$$
 ]
 
 --
 
 - MNAR:
 .block[
-$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\Psi})$$
+$$p(\boldsymbol{R} | \boldsymbol{Y},\boldsymbol{\theta}, \Sigma, \boldsymbol{\psi}) = p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{Y}_{mis},\boldsymbol{\psi})$$
 ]
 
 
@@ -318,11 +318,11 @@ $$
 
 --
 
-- For inference on $(\boldsymbol{\theta}, \Sigma)$, we can once again focus on $p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma)$ in the likelihood function,  although there can be some bias if we do not account for $p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta})$, since it contains observed data.
+- For inference on $(\boldsymbol{\theta}, \Sigma)$, we can once again focus on $p(\boldsymbol{Y}_{obs} | \boldsymbol{\theta}, \Sigma)$ in the likelihood function,  although there can be some bias if we do not account for $p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\psi})$, since it contains observed data.
 
 --
 
-- Also, if we want to infer the missingness mechanism through $\boldsymbol{\psi}$, we would need to deal with $p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{X},\boldsymbol{\theta})$ anyway.
+- Also, if we want to infer the missingness mechanism through $\boldsymbol{\psi}$, we would need to deal with $p(\boldsymbol{R} | \boldsymbol{Y}_{obs},\boldsymbol{\psi})$ anyway.
 
 
 ---

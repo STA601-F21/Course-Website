@@ -287,14 +287,14 @@ lessons:
     slides: "4-5-missing-data-I.html"
     slidespdf: "4-5-missing-data-I.pdf"
     reading: "4-5-reading.html"
-    #video: " "
+    video: "https://api.playposit.com/go/play/760758/1403540/914922/0/Module-45-Missing-data-and-imputation-I"
     
   - date: " "
     title: "Module 4.6: Missing data and imputation II"
     reading: "4-6-reading.html"
     slides: "4-6-missing-data-II.html"
     slidespdf: "4-6-missing-data-II.pdf"
-    #video: " "
+    video: "https://api.playposit.com/go/play/760786/1403540/914922/0/Module-46-Missing-data-and-imputation-II"
     
   
   - title: " "
