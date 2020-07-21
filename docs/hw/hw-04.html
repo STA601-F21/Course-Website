@@ -1717,45 +1717,57 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Homework 4</h1>
-<h4 class="date">Due: 11:59pm, Thursday, Feb 13</h4>
+<h4 class="date">Due: 11:59pm, Monday, July 27</h4>
 
 </div>
 
 
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
-<p>Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises MUST be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 4.</p>
+<p>Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments <span class="math inline">\(\rightarrow\)</span> Homework 4.</p>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
 <ol style="list-style-type: decimal">
-<li>Simulate data assuming <span class="math inline">\(\boldsymbol{y_i} = (y_{i1},y_{i2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)\)</span>, <span class="math inline">\(i = 1, \ldots, 100\)</span>, with <span class="math inline">\(\boldsymbol{\theta} = (0,0)^T\)</span> and <span class="math inline">\(\Sigma\)</span> chosen so that the marginal variances are one and <span class="math inline">\(\rho = 0.8\)</span>.
+<li>Hoff problem 7.4.
 <ul>
-<li><font color="green"><strong>Part (a):</strong></font> Estimate the MLE of <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>. Make two contour plots, one using the true values of <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>, and the other using the MLEs. Comment on the differences, if any.</li>
-<li><font color="green"><strong>Part (b):</strong></font> Assuming independent normal &amp; inverse-Wishart priors for <span class="math inline">\(\boldsymbol{\theta}\)</span> and <span class="math inline">\(\Sigma\)</span>, that is, <span class="math inline">\(\pi(\boldsymbol{\theta}, \Sigma) = \pi(\boldsymbol{\theta}) \pi(\Sigma)\)</span>, run Gibbs sampler (hyperparameters up to you but you must justify your choices) to generate posterior samples for <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>.</li>
-<li><font color="green"><strong>Part (c):</strong></font> Compare Bayes estimates of <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span> to MLE and truth. Comment on the similarities and differences. How much influence do you think your prior had on the Bayes estimates in particular?</li>
-<li><p><font color="green"><strong>Part (d):</strong></font> Given <span class="math inline">\(y_{i2}\)</span> values for 50 new (test) subjects, describe in as much detail as possible, how you would use the Gibbs sampler to predict new <span class="math inline">\(y_{i1}\)</span> values, given the <span class="math inline">\(y_{i2}\)</span> values, from the “conditional posterior predictive distribution” of <span class="math inline">\((y_{i1} | y_{i2})\)</span>.</p>
-<p><font color="red"><em>You are not expected to derive the maximum likelihood estimators for the two parameters. If you don’t know what the MLEs are, you can look up the forms (just the forms!) online.</em> </font></p></li>
-</ul></li>
-<li><p><font color="blue"><strong>Continuation of question 1 from homework 5.</strong></font> <!-- Recall that in part (d) of question 1 from homework 5, you were asked: given $y_{i,2}$ values for 50 new (test) subjects, describe in as much detail as possible, how you would use the Gibbs sampler to predict new $y_{i,1}$ values, given the $y_{i,2}$ values, from the "conditional posterior predictive distribution" of $(y_{i,1} | y_{i,2})$. --> Generate 50 “test” subjects from the same sampling distribution as question 1 from homework 5, that is, <span class="math inline">\(\boldsymbol{y_i}^\star = (y_{i,1}^\star,y_{i,2}^\star)^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)\)</span>, <span class="math inline">\(i = 1, \ldots, 50\)</span>, with <span class="math inline">\(\boldsymbol{\theta} = (0,0)^T\)</span> and <span class="math inline">\(\Sigma\)</span> chosen so that the marginal variances are one and <span class="math inline">\(\rho = 0.8\)</span>. Keep the <span class="math inline">\(y_{i,2}^\star\)</span> values but treat the <span class="math inline">\(y_{i,1}^\star\)</span> values as unknown/missing (set them to NA but save the “true” values somewhere!).</p>
-Now, re-run the Gibbs sampler from the last homework to obtain the posterior samples for <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span> based only on the 100 “train” subjects from the last homework (that is, <span class="math inline">\(\boldsymbol{y_i} = (y_{i,1},y_{i,2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)\)</span>, <span class="math inline">\(i = 1, \ldots, 100\)</span>, with the same <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>). Using the posterior samples, answer the following questions:
+<li><font color="blue"><strong>Part (a): 1 point for all students</strong></font></li>
+<li><font color="blue"><strong>Part (b): 1 point for all students</strong></font></li>
+<li><font color="blue"><strong>Part (c): 2 points for all students</strong></font></li>
+<li><font color="blue"><strong>Part (d)(i): 2 points for all students</strong></font></li>
+<li><font color="blue"><strong>Part (e): 1 points for all students</strong></font></li>
+</ul>
+<p><font color="red"><em>You can find the data mentioned in the question here: <a href="http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/" class="uri">http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/</a>.</em> </font></p>
+<p><font color="red"><strong>For 7.4(d), parts (ii) and (iii) are NOT required but feel free to attempt for practice; you are only required to submit answers to part (i). For 7.4(d)(i), there is no need to read or complete the entire Exercise 7.1, simply rely on the form of the Jeffrey’s prior (from class slides) and the corresponding full conditionals (from the discussion session).</strong></font></p></li>
+<li>Simulate data assuming <span class="math inline">\(\boldsymbol{y_i} = (y_{i1},y_{i2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)\)</span>, <span class="math inline">\(i = 1, \ldots, 100\)</span>, with <span class="math inline">\(\boldsymbol{\theta} = (0,0)^T\)</span> and <span class="math inline">\(\Sigma\)</span> chosen so that the marginal variances are <span class="math inline">\(1\)</span> and correlation <span class="math inline">\(\rho = 0.8\)</span>. Assuming independent normal &amp; inverse-Wishart priors for <span class="math inline">\(\boldsymbol{\theta}\)</span> and <span class="math inline">\(\Sigma\)</span>, that is, <span class="math inline">\(\pi(\boldsymbol{\theta}, \Sigma) = \pi(\boldsymbol{\theta}) \pi(\Sigma)\)</span>, run Gibbs sampler (hyperparameters up to you but you must justify your choices) to generate posterior samples for <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>.<br />
+Now, generate 50 new “test” data from the same sampling distribution, that is, <span class="math inline">\(\boldsymbol{y_i}^\star = (y_{i,1}^\star,y_{i,2}^\star)^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)\)</span>, <span class="math inline">\(i = 1, \ldots, 50\)</span>. Keep the <span class="math inline">\(y_{i,2}^\star\)</span> values but set the <span class="math inline">\(y_{i,1}^\star\)</span> values to NA (make sure to save the “true” values somewhere!).<br />
+Using the posterior samples for <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>, based on the 100 “train” data, answer the following questions:
 <ul>
 <li><p><font color="green"><strong>Part (a):</strong></font> Generate predictive samples of <span class="math inline">\(y_{i,1}^\star\)</span> given each <span class="math inline">\(y_{i,2}^\star\)</span> value you kept, for the 50 test subjects. Show your sampler.<br />
-<font color="red"><em>You should view this as a “train –&gt; test” prediction problem rather than a missing data problem on an original data. That is, given the posterior samples of your parameters, and the test values for <span class="math inline">\(y_{i2}^\star\)</span>, draw from the posterior predictive distribution of <span class="math inline">\((y_{i,1}^\star | y_{i,2}^\star, \{(y_{1,1},y_{1,2}), \ldots, (y_{100,1},y_{100,2})\})\)</span>,. You may find it useful to think of this in terms of compositional sampling, that is, for each posterior sample of <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>, sample from <span class="math inline">\((y_{i,1} | y_{i,2}, \boldsymbol{\theta}, \Sigma)\)</span>, which is just from the form of the sampling distribution. Don’t incorporate the prediction problem into your original Gibbs sampler!</em></font></p></li>
-<li><font color="green"><strong>Part (b):</strong></font> Using the samples from the predictive density obtained above, obtain <span class="math inline">\(\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]\)</span> for each of the test subjects, as well as a 95% posterior predictive interval. Make a plot containing all the intervals for each of the 50 subjects. In the plot, indicate where each <span class="math inline">\(\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]\)</span> falls within each interval.</li>
-<li><font color="green"><strong>Part (c):</strong></font> What is the coverage of the 95% predictive intervals out of sample? That is, how many of the 95% predictive intervals contain the true <span class="math inline">\(y_{i,1}^\star\)</span> values?</li>
-<li><font color="green"><strong>Part (d):</strong></font> Fit a (frequentist) linear model to the original 100 train subjects (see <code>lm</code> in R if you have never done this in R, which I hope is not the case), using <span class="math inline">\(y_{i,1}\)</span> as the response variable and <span class="math inline">\(y_{i,2}\)</span> as the predictor. Now, use the results from the fitted model to predict <span class="math inline">\(y_{i,1}^\star\)</span> values given the <span class="math inline">\(y_{i,2}^\star\)</span> values for 50 new test subjects. Show your R code.</li>
-<li><p><font color="green"><strong>Part (e):</strong></font> Generate and make a plot of the predictive intervals for the frequentist predictions (<code>lm</code> predictions are very easy to do in R). Comment on the differences between your results and the Bayesian approach.</p></li>
+<font color="blue"><strong>(2 points for all students)</strong></font><br />
+<font color="red"><em>You should view this as a “train –&gt; test” prediction problem rather than a missing data problem on an original data. That is, given the posterior samples of your parameters, and the test values for <span class="math inline">\(y_{i2}^\star\)</span>, draw from the posterior predictive distribution of <span class="math inline">\((y_{i,1}^\star | y_{i,2}^\star, \{(y_{1,1},y_{1,2}), \ldots, (y_{100,1},y_{100,2})\})\)</span>,. You may find it useful to think of this in terms of compositional sampling, that is, for each posterior sample of <span class="math inline">\((\boldsymbol{\theta}, \Sigma)\)</span>, sample from <span class="math inline">\((y_{i,1} | y_{i,2}, \boldsymbol{\theta}, \Sigma)\)</span>, which is just from the form of the sampling distribution. Do not incorporate the prediction problem into your original Gibbs sampler!</em></font></p></li>
+<li><font color="green"><strong>Part (b):</strong></font> Using the samples from the predictive density obtained above, obtain <span class="math inline">\(\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]\)</span> for each of the test subjects, as well as a 95% posterior predictive interval. Make a plot containing all the intervals for each of the 50 subjects. In the plot, indicate where each <span class="math inline">\(\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]\)</span> falls within each interval.<br />
+<font color="blue"><strong>(2 points for all students)</strong></font></li>
+<li><p><font color="green"><strong>Part (c):</strong></font> What is the coverage of the 95% predictive intervals out of sample? That is, how many of the 95% predictive intervals contain the true <span class="math inline">\(y_{i,1}^\star\)</span> values?<br />
+<font color="blue"><strong>(2 points for all students)</strong></font></p></li>
 </ul></li>
-<li><p>Hoff problem 7.4.</p>
-<p><font color="red"><em>You can find the data mentioned in the question here: <a href="http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/" class="uri">http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/</a>.</em> </font></p>
-<p><font color="red"><strong>For 7.4(d), part (ii) is NOT required but feel free to attempt it for practice; you are only required to submit answers to parts (i) and (iii). For 7.4(d)(i), there is no need to read or complete the entire Exercise 7.1, simply take the Jeffrey’s prior (same as the prior on the class slides) and find the corresponding full conditionals.</strong></font></p></li>
+<li>Suppose data consist of reaction times <span class="math inline">\(y_{ij}\)</span> for subjects <span class="math inline">\(i = 1, \ldots, n_j\)</span> in experimental conditions <span class="math inline">\(j = 1, \ldots, J\)</span>. Researchers inform you that it is reasonable to assume that reaction times follow an exponential distribution.
+<ul>
+<li><font color="green"><strong>Part (a):</strong></font> Describe a Bayesian hierarchical model for borrowing information across experimental conditions. Specify priors that will allow you to borrow information across the <span class="math inline">\(J\)</span> conditions.<br />
+<font color="blue"><strong>(2 point for all students)</strong></font><br />
+<font color="red"><em>When setting the priors, make sure you select priors that respect the support/parameter space of each parameter. Also, think about specifying conjugate or semi-conjugate priors will make your life much easier.</em></font></li>
+<li><font color="green"><strong>Part (b):</strong></font> Derive the Gibbs sampling algorithm for fitting your hierarchical model. What are the full conditionals?<br />
+<font color="blue"><strong>(2 point for all students)</strong></font></li>
+<li><font color="green"><strong>Part (c):</strong></font> Simulate data from the assumed model with <span class="math inline">\(J = 5\)</span> and the <span class="math inline">\(n_j\)</span>’s set to your preferred values, but with each set to at most 25. Also, set all parameter values as you like, but make sure they are reasonable (that is, avoid very extreme values). Implement the Gibbs sampler, present point and interval estimates of the group-specific mean reaction times.<br />
+<font color="blue"><strong>(2 point for all students)</strong></font></li>
+<li><font color="green"><strong>Part (d):</strong></font> Compare results from hierarchical specification to the true parameter values that you set. How well does your Gibbs sampler perform?<br />
+<font color="blue"><strong>(1 point for all students)</strong></font></li>
+</ul></li>
 </ol>
-<!-- We will actual derive the full conditionals in class on Wednesday, February 26, but I STRONGLY suggest attempting it on your own before then, so the in-class results would only confirm your solution. -->
 </div>
 <div id="grading" class="section level2">
 <h2>Grading</h2>
-<p>15 points.</p>
+<p>20 points.</p>
 </div>
 
 

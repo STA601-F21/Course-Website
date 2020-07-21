@@ -18,35 +18,6 @@ Please make sure your final output file is a pdf document. You can submit handwr
 
 ## Questions
 
-<!-- 1. <font color="blue">**Rejection sampling.**</font> Recall that the idea of rejection sampling is to create an importance/proposal/envelope function which is greater than or equal to the distribution we wish to sample from at all points, and which we can sample from easily. Suppose we end up with the following form for our posterior: $$f(\theta) \propto sin^2(\pi \theta), \ \ \ \theta \in [0,1],$$ where $\pi = 3.141593$. -->
-<!-- This density (unnormalized kernel) looks like: -->
-<!-- ```{r fig.height=5.5, echo=F} -->
-<!-- curve(sin(x*pi)^2,col="red3", -->
-<!--       xlab=expression(theta),ylab=expression(paste("sin(",pi,"",theta,")"^2))) -->
-<!-- ``` -->
-<!--     + <font color="green">**Part (a):**</font> Implement a rejection sampler in R to sample from this density using a Unif(0,1) density as your proposal function, since it is greater than or equal to the given density (up to proportionality) at all points and is easy to sample from. -->
-<!--     + <font color="green">**Part (b):**</font> Propose a different envelope function and implement a rejection sampler for it in R. -->
-<!--     + <font color="green">**Part (c):**</font> How does the efficiency of your envelope function compare to the uniform envelope function? -->
-<!--     + <font color="green">**Part (d):**</font> Provide plots (histograms or density estimates) of the samples from the two approaches. -->
-
-
-1. Simulate data assuming $\boldsymbol{y_i} = (y_{i1},y_{i2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)$, $i = 1, \ldots, 100$, with $\boldsymbol{\theta} = (0,0)^T$ and $\Sigma$ chosen so that the marginal variances are one and $\rho = 0.8$.
-    + <font color="green">**Part (a):**</font> Estimate the MLE of $(\boldsymbol{\theta}, \Sigma)$. Make two contour plots, one using the true values of $(\boldsymbol{\theta}, \Sigma)$, and the other using the MLEs. Comment on the differences, if any.
-    + <font color="green">**Part (b):**</font> Assuming independent normal & inverse-Wishart priors for $\boldsymbol{\theta}$ and $\Sigma$, that is, $\pi(\boldsymbol{\theta}, \Sigma) = \pi(\boldsymbol{\theta}) \pi(\Sigma)$, run Gibbs sampler (hyperparameters up to you but you must justify your choices) to generate posterior samples for $(\boldsymbol{\theta}, \Sigma)$.
-    + <font color="green">**Part (c):**</font> Compare Bayes estimates of $(\boldsymbol{\theta}, \Sigma)$ to MLE and truth. Comment on the similarities and differences. How much influence do you think your prior had on the Bayes estimates in particular?
-    + <font color="green">**Part (d):**</font> Given $y_{i2}$ values for 50 new (test) subjects, describe in as much detail as possible, how you would use the Gibbs sampler to predict new $y_{i1}$ values, given the $y_{i2}$ values, from the "conditional posterior predictive distribution" of $(y_{i1} | y_{i2})$.
-
-        <font color="red">*You are not expected to derive the maximum likelihood estimators for the two parameters. If you don't know what the MLEs are, you can look up the forms (just the forms!) online.* </font>  
-
-
-2.  Hoff problem 7.4.
-
-    <font color="red">*You can find the data mentioned in the question here: http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/.* </font>
-    
-    <font color="red">**For 7.4(d), part (ii) is NOT required but feel free to attempt it for practice; you are only required to submit answers to parts (i) and (iii). For 7.4(d)(i), there is no need to read or complete the entire Exercise 7.1, simply take the Jeffrey's prior (same as the prior on the class slides) and find the corresponding full conditionals.**</font>
-    
-<!-- We will actual derive the full conditionals in class on Wednesday, February 26, but I STRONGLY suggest attempting it on your own before then, so the in-class results would only confirm your solution. -->
-    
 
   
 ## Grading
