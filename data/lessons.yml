@@ -306,23 +306,36 @@ lessons:
     
     
   - date: "Wed, July 22"
-    title: "Module 5.1a: Hierarchical normal models with constant variance: two groups"
+    title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
     reading: "5-1-reading.html"
+    slides: "5-1-hierarchical-models-two-groups-I.html"
+    slidespdf: "5-1-hierarchical-models-two-groups-I.pdf"
+    #video: ""
     
   - date: " "
-    title: "Module 5.1b: Hierarchical normal models with constant variance: two groups (application)"
+    title: "Module 5.2: Hierarchical normal models with constant variance: two groups (illustration)"
+    slides: "5-2-hierarchical-models-two-groups-II.html"
+    slidespdf: "5-2-hierarchical-models-two-groups-II.pdf"
+    #video: ""
     
   - date: " "
-    title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
-    reading: "5-2-reading.html"
+    title: "No lab"
+    
+  - date: " "
+    title: "Module 5.3: Hierarchical normal models with constant variance: multiple groups"
+    reading: "5-3-reading.html"
+    slides: "5-3-hierarchical-models-multiple-groups-constant-var.html"
+    slidespdf: "5-3-hierarchical-models-multiple-groups-constant-var.pdf"
+    #video: ""
     
   - date: "Thurs, July 23"
-    title: "Module 5.3: Hierarchical normal modeling of means and variances I"
-    reading: "5-3-reading.html"
+    title: "Module 5.4: Hierarchical normal modeling of means and variances"
+    reading: "5-4-reading.html"
+    #video: ""
     
   - date: " "
-    title: "Module 5.4: Hierarchical normal modeling of means and variances II"
-    reading: "5-4-reading.html"
+    title: "Module 5.5: Hierarchical normal modeling of means and variances (illustration)"
+    #video: ""
     
   
   - title: " "
@@ -332,10 +345,12 @@ lessons:
   - date: "Fri, July 24"
     title: "Module 6.1: Bayesian linear regression"
     reading: "6-1-reading.html"
+    #video: ""
     
   - date: " "
     title: "Module 6.2: Bayesian linear regression: illustration"
     reading: "6-2-reading.html"
+    #video: ""
     
     
   - date: " "
