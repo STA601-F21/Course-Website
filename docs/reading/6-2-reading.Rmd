@@ -1,0 +1,26 @@
+---
+title: "Module 6.2: Bayesian linear regression: illustration"
+output: 
+  html_document:
+    css: reading.css
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
+    + Section 9.1: The linear regression model
+    + Section 9.2: Bayesian estimation for a regression model
+    
+
+## Optional:
+
+- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 14.2: Bayesian analysis of the classical regression model
+    + Section 14.4: Goals of regression analysis
+    + Section 14.5: Assembling the matrix of explanatory variables

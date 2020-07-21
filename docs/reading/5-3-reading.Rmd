@@ -1,0 +1,26 @@
+---
+title: "Module 5.3: Hierarchical normal modeling of means and variances I"
+output: 
+  html_document:
+    css: reading.css
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
+    + Section 8.4: Example: Math scores in U.S. public schools
+    + Section 8.5: Hierarchical modeling of means and variances
+    
+
+## Optional:
+
+- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 5.3: Fully Bayesian analysis of conjugate hierarchical models
+    + Section 5.4: Estimating exchangeable parameters for a normal model
+    + Section 5.5: Example: parallel experiments in eight schools

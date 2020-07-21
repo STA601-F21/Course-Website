@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Required:
 
-- [A First Course in Bayesian Statistical Methods](https://www.amazon.com/Bayesian-Statistical-Methods-Springer-Statistics/dp/0387922997) by Peter D. Hoff.:
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
     + Section 5.1: The normal model
 
 ## Optional:

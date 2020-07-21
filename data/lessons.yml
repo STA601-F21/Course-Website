@@ -296,26 +296,33 @@ lessons:
     slidespdf: "4-6-missing-data-II.pdf"
     video: "https://api.playposit.com/go/play/760786/1403540/914922/0/Module-46-Missing-data-and-imputation-II"
     
+  - date: " "
+    title: "Homework 4"
+    #hw: "hw-04.html"
+    
   
   - title: " "
   - title: "MODULE 5: HIERARCHICAL MODELS"
     
     
   - date: "Wed, July 22"
-    title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
-    #reading: "5-1-reading.html"
+    title: "Module 5.1a: Hierarchical normal models with constant variance: two groups"
+    reading: "5-1-reading.html"
+    
+  - date: " "
+    title: "Module 5.1b: Hierarchical normal models with constant variance: two groups (application)"
     
   - date: " "
     title: "Module 5.2: Hierarchical normal models with constant variance: multiple groups"
-    #reading: "5-2-reading.html"
+    reading: "5-2-reading.html"
     
   - date: "Thurs, July 23"
     title: "Module 5.3: Hierarchical normal modeling of means and variances I"
-    #reading: "5-3-reading.html"
+    reading: "5-3-reading.html"
     
   - date: " "
     title: "Module 5.4: Hierarchical normal modeling of means and variances II"
-    #reading: "5-4-reading.html"
+    reading: "5-4-reading.html"
     
   
   - title: " "
@@ -324,11 +331,11 @@ lessons:
     
   - date: "Fri, July 24"
     title: "Module 6.1: Bayesian linear regression"
-    #reading: "6-1-reading.html"
+    reading: "6-1-reading.html"
     
   - date: " "
     title: "Module 6.2: Bayesian linear regression: illustration"
-    #reading: "6-2-reading.html"
+    reading: "6-2-reading.html"
     
     
   - date: " "
@@ -338,9 +345,11 @@ lessons:
   
   - date: "Mon, July 27"
     title: "Module 6.3: Bayesian linear regression: weakly informative priors"
+    #reading: "6-3-reading.html"
     
   - date: " "
     title: "Module 6.4: Bayesian hypothesis testing"
+    #reading: "6-4-reading.html"
   
   - date: "Tues, July 28"
     title: "Module 6.5: Bayesian model selection"
@@ -348,13 +357,13 @@ lessons:
   - date: " "
     title: "Module 6.6: Bayesian model selection: illustration"
   
-  
-  - title: " "  
-  - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
-    
-    
   - date: "Wed, July 29"
     title: "Quiz II"
+    
+    
+  - title: " "
+  - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
+    
     
   - date: "Thurs, July 30"
     title: "Last day to withdraw with W"
