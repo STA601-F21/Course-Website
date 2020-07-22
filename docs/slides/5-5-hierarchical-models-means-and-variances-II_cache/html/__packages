@@ -1,0 +1,11 @@
+base
+knitr
+mvtnorm
+lattice
+coda
+MASS
+MCMCpack
+hdrcde
+ggplot2
+dplyr
+plotrix

@@ -1,0 +1,571 @@
+---
+title: "STA 360/602L: Module 5.5"
+subtitle: "Hierarchical normal modeling of means and variances (illustration)"
+author: "Dr. Olanrewaju Michael Akande"
+date: " "
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    logo: img/class_logo.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+knitr::opts_chunk$set(fig.height = 2.65, dpi = 300,fig.align='center',fig.show='hold',size='footnotesize', small.mar=TRUE) 
+# For nonsese...
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(mvtnorm)
+library(lattice)
+library(MCMCpack)
+library(hdrcde)
+library(coda)
+library(ggplot2)
+library(dplyr)
+require(plotrix)
+```
+
+
+## ELS data
+
+- We have data from the 2002 Educational Longitudinal Survey (ELS). This survey includes a random sample of 100 large urban public high schools, and 10th graders randomly sampled within these high schools.
+  ```{r}
+Y <- as.matrix(dget("http://www2.stat.duke.edu/~pdh10/FCBS/Inline/Y.school.mathscore"))
+dim(Y)
+head(Y)
+length(unique(Y[,"school"]))
+```
+
+
+---
+## ELS data
+
+
+```{r echo=FALSE, out.height="480px",out.width="800px"}
+knitr::include_graphics("img/ELS2002.png")
+```
+
+
+
+---
+## ELS data
+
+First, some EDA:
+```{r fig.height=2.8}
+Data <- as.data.frame(Y); Data$school <- as.factor(Data$school)
+Data %>% 
+  group_by(school) %>% 
+  na.omit()%>%
+  summarise(avg_mathscore = mean(mathscore)) %>%
+  dplyr::ungroup() %>%
+  ggplot(aes(x = avg_mathscore)) +
+  geom_histogram(binwidth=1.5)
+```
+
+---
+## ELS data
+
+There does appear to be school-related differences in means and in variances, some of which are actually related to the sample sizes.
+
+```{r fig.height=3.6}
+plot(c(table(Data$school)),c(by(Data$mathscore,Data$school,mean)),
+     ylab="Average means",xlab="Sample size",col="red4",pch=12)
+```
+
+
+
+---
+## ELS hypotheses
+
+- Investigators may be interested in the following:
+  
+  + Differences in mean scores across schools
+  
+  + Differences in school-specific variances
+  
+- How do we evaluate these questions in a statistical model?
+
+
+
+---
+## Hierarchical model
+
+- We can write out the model described in the previous module as:
+.block[
+.small[
+$$
+\begin{split}
+y_{ij} | \theta_j, \sigma^2 & \sim \mathcal{N} \left( \theta_j, \sigma^2_j \right); \ \ \ i = 1,\ldots, n_j\\
+\\
+\\
+\theta_j | \mu, \tau^2 & \sim \mathcal{N} \left( \mu, \tau^2 \right); \ \ \ j = 1, \ldots, J\\
+\sigma^2_1, \ldots, \sigma^2_J | \nu_0, \sigma_0^2 & \sim \mathcal{IG} \left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)\\
+\\
+\\
+\mu & \sim \mathcal{N}\left(\mu_0, \gamma^2_0\right)\\
+\tau^2 & \sim \mathcal{IG} \left(\dfrac{\eta_0}{2}, \dfrac{\eta_0\tau_0^2}{2}\right).\\
+\\
+\\
+\pi(\nu_0) & \propto e^{-\alpha \nu_0} \\
+\sigma_0^2 & \sim \mathcal{Ga} \left(a,b\right).\\
+\end{split}
+$$
+]
+]
+
+--
+
+- Now, we need to specify hyperparameters. That should be fun!
+
+
+
+---
+## Prior specification
+
+- This exam was designed to have a national mean of 50 and standard deviation of 10. Suppose we don't have any other information.
+
+--
+
+- Then, we can specify
+.block[
+.small[
+$$
+\begin{split}
+\mu & \sim \mathcal{N}\left(\mu_0 = 50, \gamma^2_0 = 25\right)\\
+\\
+\tau^2 & \sim \mathcal{IG} \left(\dfrac{\eta_0}{2} = \dfrac{1}{2}, \dfrac{\eta_0\tau_0^2}{2} = \dfrac{100}{2}\right).\\
+\\
+\pi(\nu_0) & \propto e^{-\alpha \nu_0} \propto e^{- \nu_0} \\
+\\
+\sigma_0^2 & \sim \mathcal{Ga} \left(a = 1,b = \dfrac{1}{100} \right).\\
+\end{split}
+$$
+]
+]
+
+--
+
+- <div class="question">
+Are these prior distributions overly informative?
+</div>
+
+
+---
+## Full conditionals (recap)
+
+- 
+.block[
+.small[
+$$
+\begin{split}
+& \pi(\theta_j | \cdots \cdots ) = \mathcal{N}\left(\mu_j^\star, \tau_j^\star \right) \ \ \ \ \textrm{where}\\
+\\
+& \tau_j^\star = \dfrac{1}{ \dfrac{n_j}{\sigma^2_j} + \dfrac{1}{\tau^2}  } ; \ \ \ \ \ \ \ \mu_j^\star = \tau_j^\star \left[ \dfrac{n_j}{\sigma^2_j} \bar{y}_j + \dfrac{1}{\tau^2} \mu \right]
+\end{split}
+$$
+]
+]
+
+--
+
+- 
+.block[
+.small[
+$$
+\begin{split}
+& \pi(\sigma^2_j | \cdots \cdots ) = \mathcal{IG} \left(\dfrac{\nu_{j}^\star}{2}, \dfrac{\nu_{j}^\star\sigma_{j}^{2(\star)}}{2}\right) \ \ \ \ \textrm{where}\\
+\\
+& \nu_{j}^\star = \nu_0 + n_j ; \ \ \ \ \ \ \ \sigma_{j}^{2(\star)} = \dfrac{1}{\nu_{j}^\star} \left[\nu_0\sigma_0^2 + \sum\limits_{i=1}^{n_j} (y_{ij} - \theta_j)^2 \right].\\
+\end{split}
+$$
+]
+]
+
+--
+
+- 
+.block[
+.small[
+$$
+\begin{split}
+& \pi(\mu | \cdots \cdots ) = \mathcal{N}\left(\mu_n, \gamma^2_n \right) \ \ \ \ \textrm{where}\\
+\\
+& \gamma^2_n = \dfrac{1}{ \dfrac{J}{\tau^2} + \dfrac{1}{\gamma_0^2}  } ; \ \ \ \ \ \ \ \  \mu_n = \gamma^2_n \left[ \dfrac{J}{\tau^2} \bar{\theta} + \dfrac{1}{\gamma_0^2} \mu_0 \right]
+\end{split}
+$$
+]
+]
+
+
+---
+## Full conditionals (recap)
+
+- .block[
+.small[
+$$
+\begin{split}
+& \pi(\tau^2 | \cdots \cdots ) = \mathcal{IG} \left(\dfrac{\eta_n}{2}, \dfrac{\eta_n\tau_n^2}{2}\right) \ \ \ \ \textrm{where}\\
+\\
+& \eta_n = \eta_0 + J ; \ \ \ \ \ \ \ \tau_n^2 = \dfrac{1}{\eta_n} \left[\eta_0\tau_0^2 + \sum\limits_{j=1}^{J} (\theta_j - \mu)^2 \right].\\
+\end{split}
+$$
+]
+]
+
+--
+
+- 
+.block[
+.small[
+$$
+\begin{split}
+\text{ln} \pi(\nu_0 | \cdots \cdots ) &  \boldsymbol{\propto} \left(\dfrac{J\nu_0}{2} \right) \text{ln} \left( \dfrac{\nu_0\sigma_0^2}{2} \right) - J\text{ln}\left[ \Gamma\left(\dfrac{\nu_0}{2} \right) \right] \\
+& \ \ \ \ + \left(\dfrac{\nu_0}{2}+1 \right) \left(\sum_{j=1}^{J} \text{ln} \left[\dfrac{1}{\sigma^2_j} \right] \right) \\
+& \ \ \ \ - \nu_0 \left[ \alpha +  \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right] \\
+\end{split}
+$$
+]
+]
+
+--
+
+- 
+.block[
+.small[
+$$
+\begin{split}
+& \pi(\sigma_0^2 | \cdots \cdots ) = \mathcal{Ga} \left(\sigma_0^2 ; a_n ,b_n \right) \ \ \ \ \textrm{where}\\
+\\
+& a_n = a + \dfrac{J \nu_0}{2}; \ \ \ \ b_n = b +  \dfrac{\nu_0}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j}.\\
+\end{split}
+$$
+]
+]
+
+
+
+---
+## Side note
+
+- We can simply use Stan (or JAGS, BUGS) to fit these models without needing to do any of this ourselves.
+
+--
+
+- The point here (as you should already know by now) is to learn and understand all the details, including the math!
+  
+
+
+---
+## Gibbs sampler
+
+```{r, eval=F}
+#Data summaries
+J <- length(unique(Y[,"school"]))
+ybar <- c(by(Y[,"mathscore"],Y[,"school"],mean))
+s_j_sq <- c(by(Y[,"mathscore"],Y[,"school"],var))
+n <- c(table(Y[,"school"]))
+
+
+#Hyperparameters for the priors
+mu_0 <- 50
+gamma_0_sq <- 25
+eta_0 <- 1
+tau_0_sq <- 100
+alpha <- 1
+a <- 1
+b <- 1/100
+
+
+#Grid values for sampling nu_0_grid
+nu_0_grid<-1:5000
+
+
+#Initial values for Gibbs sampler
+theta <- ybar
+sigma_sq <- s_j_sq
+mu <- mean(theta)
+tau_sq <- var(theta)
+nu_0 <- 1
+sigma_0_sq <- 100
+
+```
+
+
+
+---
+## Gibbs sampler
+
+```{r, eval=F}
+#first set number of iterations and burn-in, then set seed
+n_iter <- 10000; burn_in <- 0.3*n_iter
+set.seed(1234)
+
+
+#Set null matrices to save samples
+SIGMA_SQ <- THETA <- matrix(nrow=n_iter, ncol=J)
+OTHER_PAR <- matrix(nrow=n_iter, ncol=4)
+
+
+#Now, to the Gibbs sampler
+for(s in 1:(n_iter+burn_in)){
+  
+  #update the theta vector (all the theta_j's)
+  tau_j_star <- 1/(n/sigma_sq + 1/tau_sq)
+  mu_j_star <- tau_j_star*(ybar*n/sigma_sq + mu/tau_sq)
+  theta <- rnorm(J,mu_j_star,sqrt(tau_j_star))
+  
+  #update the sigma_sq vector (all the sigma_sq_j's)
+  nu_j_star <- nu_0 + n
+  theta_long <- rep(theta,n)
+  nu_j_star_sigma_j_sq_star <- 
+    nu_0*sigma_0_sq + c(by((Y[,"mathscore"] - theta_long)^2,Y[,"school"],sum))
+  sigma_sq <- 1/rgamma(J,(nu_j_star/2),(nu_j_star_sigma_j_sq_star/2))
+  
+  #update mu
+  gamma_n_sq <- 1/(J/tau_sq + 1/gamma_0_sq)
+  mu_n <- gamma_n_sq*(J*mean(theta)/tau_sq + mu_0/gamma_0_sq)
+  mu <- rnorm(1,mu_n,sqrt(gamma_n_sq))
+
+```
+
+
+
+---
+## Gibbs sampler
+
+```{r, eval=F}
+  #update tau_sq
+  eta_n <- eta_0 + J
+  eta_n_tau_n_sq <- eta_0*tau_0_sq + sum((theta-mu)^2)
+  tau_sq <- 1/rgamma(1,eta_n/2,eta_n_tau_n_sq/2)
+  
+  #update sigma_0_sq
+  sigma_0_sq <- rgamma(1,(a + J*nu_0/2),(b + nu_0*sum(1/sigma_sq)/2))
+  
+  #update nu_0
+  log_prob_nu_0 <- (J*nu_0_grid/2)*log(nu_0_grid*sigma_0_sq/2) -
+    J*lgamma(nu_0_grid/2) +
+    (nu_0_grid/2+1)*sum(log(1/sigma_sq)) -
+    nu_0_grid*(alpha + sigma_0_sq*sum(1/sigma_sq)/2)
+  nu_0 <- sample(nu_0_grid,1, prob = exp(log_prob_nu_0 - max(log_prob_nu_0)) )
+  #this last step substracts the maximum logarithm from all logs
+  #it is a neat trick that throws away all results that are so negative
+  #they will screw up the exponential
+  #note that the sample function will renormalize the probabilities internally
+  
+  
+  #save results only past burn-in
+  if(s > burn_in){
+    THETA[(s-burn_in),] <- theta
+    SIGMA_SQ[(s-burn_in),] <- sigma_sq
+    OTHER_PAR[(s-burn_in),] <- c(mu,tau_sq,sigma_0_sq,nu_0)
+  }
+}
+colnames(OTHER_PAR) <- c("mu","tau_sq","sigma_0_sq","nu_0")
+```
+
+
+
+---
+## Posterior inference
+
+The blue lines indicate the posterior median and a 95% for $\mu$. The red asterisks indicate the data values $\bar{y}_j$.
+
+```{r, echo=F, cache=T, fig.height=4.5}
+#Data summaries
+J <- length(unique(Y[,"school"]))
+ybar <- c(by(Y[,"mathscore"],Y[,"school"],mean))
+s_j_sq <- c(by(Y[,"mathscore"],Y[,"school"],var))
+n <- c(table(Y[,"school"]))
+
+
+#Hyperparameters for the priors
+mu_0 <- 50
+gamma_0_sq <- 25
+eta_0 <- 1
+tau_0_sq <- 100
+alpha <- 1
+a <- 1
+b <- 1/100
+
+
+#Grid values for sampling nu_0_grid
+nu_0_grid<-1:5000
+
+
+#Initial values for Gibbs sampler
+theta <- ybar
+sigma_sq <- s_j_sq
+mu <- mean(theta)
+tau_sq <- var(theta)
+nu_0 <- 1
+sigma_0_sq <- 100
+
+
+#first set number of iterations and burn-in, then set seed
+n_iter <- 10000; burn_in <- 0.3*n_iter
+set.seed(1234)
+
+
+#Set null matrices to save samples
+SIGMA_SQ <- THETA <- matrix(nrow=n_iter, ncol=J)
+OTHER_PAR <- matrix(nrow=n_iter, ncol=4)
+
+
+#Now, to the Gibbs sampler
+for(s in 1:(n_iter+burn_in)){
+  
+  #update the theta vector (all the theta_j's)
+  tau_j_star <- 1/(n/sigma_sq + 1/tau_sq)
+  mu_j_star <- tau_j_star*(ybar*n/sigma_sq + mu/tau_sq)
+  theta <- rnorm(J,mu_j_star,sqrt(tau_j_star))
+  
+  #update the sigma_sq vector (all the sigma_sq_j's)
+  nu_j_star <- nu_0 + n
+  theta_long <- rep(theta,n)
+  nu_j_star_sigma_j_sq_star <- 
+    nu_0*sigma_0_sq + c(by((Y[,"mathscore"] - theta_long)^2,Y[,"school"],sum))
+  sigma_sq <- 1/rgamma(J,(nu_j_star/2),(nu_j_star_sigma_j_sq_star/2))
+  
+  #update mu
+  gamma_n_sq <- 1/(J/tau_sq + 1/gamma_0_sq)
+  mu_n <- gamma_n_sq*(J*mean(theta)/tau_sq + mu_0/gamma_0_sq)
+  mu <- rnorm(1,mu_n,sqrt(gamma_n_sq))
+  
+  #update tau_sq
+  eta_n <- eta_0 + J
+  eta_n_tau_n_sq <- eta_0*tau_0_sq + sum((theta-mu)^2)
+  tau_sq <- 1/rgamma(1,eta_n/2,eta_n_tau_n_sq/2)
+  
+  #update sigma_0_sq
+  sigma_0_sq <- rgamma(1,(a + J*nu_0/2),(b + nu_0*sum(1/sigma_sq)/2))
+  
+  #update nu_0
+  log_prob_nu_0 <- (J*nu_0_grid/2)*log(nu_0_grid*sigma_0_sq/2) -
+    J*lgamma(nu_0_grid/2) +
+    (nu_0_grid/2-1)*sum(log(1/sigma_sq)) -
+    nu_0_grid*(alpha + sigma_0_sq*sum(1/sigma_sq)/2)
+  nu_0 <- sample(nu_0_grid,1, prob = exp(log_prob_nu_0 - max(log_prob_nu_0)) )
+  #this last step substracts the maximum logarithm from all logs
+  #it is a neat trick that throws away all results that are so negative
+  #they will screw up the exponential
+  #note that the sample function will renormalize the probabilities internally
+  
+  
+  #save results only past burn-in
+  if(s > burn_in){
+    THETA[(s-burn_in),] <- theta
+    SIGMA_SQ[(s-burn_in),] <- sigma_sq
+    OTHER_PAR[(s-burn_in),] <- c(mu,tau_sq,sigma_0_sq,nu_0)
+  }
+}
+colnames(OTHER_PAR) <- c("mu","tau_sq","sigma_0_sq","nu_0")
+
+qmat <- apply(THETA,2,quantile, probs=c(0.025,.5,0.975))
+scoremed <- quantile(OTHER_PAR[,"mu"],probs=c(0.025,.5,0.975))
+rmat <- apply(SIGMA_SQ,2,quantile, probs=c(0.025,.5,0.975))
+
+###plot of school-specific medians
+idvec <- seq(1:J)
+plotCI(idvec,qmat[2,],li=qmat[1,],ui=qmat[3,],
+       main='Posterior medians and 95% CI for schools',
+       xlab='School index',ylab='Math score')
+points(idvec,ybar,col=2,pch='*')
+abline(h=scoremed[2],col=4,lty=1)
+abline(h=scoremed[1],col=4,lty=2)
+abline(h=scoremed[3],col=4,lty=2)
+```
+
+
+
+---
+## Posterior inference
+
+Posterior summaries of $\sigma^2_j$.
+
+```{r fig.height=4.5, echo=F}
+##plot of school-specific variances
+plotCI(idvec,rmat[2,],li=rmat[1,],ui=rmat[3,],
+       main='Posterior medians and 95% CI for schools',
+       xlab='School index',ylab='Variance',ylim=c(0,500))
+```
+
+
+
+---
+## Posterior inference
+
+Shrinkage as a function of sample size.
+
+```{r echo=F}
+resmat <- cbind(n,ybar,qmat[2,],scoremed[2])
+colnames(resmat) <- c("n","Sample group mean","Post. est. of group mean", "Post. est. of overall mean")
+resmat[1:5,]
+resmat[15:18,]
+resmat[67:72,]
+```
+
+
+
+---
+## How about non-normal models?
+
+- Suppose we have $y_{ij} \in \{0,1,\ldots\}$ being a count for subject $i$ in group $j$.
+
+--
+
+- For count data, it is natural to use a Poisson likelihood, that is,
+.block[
+.small[
+$$
+y_{ij} \sim \text{Poisson}(\theta_j)
+$$
+]
+]
+
+  where each $\theta_j = \mathbb{E}[y_{ij}]$ is a group specific mean.
+  
+--
+
+- When there are limited data within each group, it is natural to borrow information.
+
+--
+
+- How can we accomplish this with a hierarchical model?
+
+--
+
+- We can assume all the $\theta_j$'s come from the same distribution, then place priors on the parameters of the distribution.
+
+--
+
+- See homework for a similar setup!
+
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+
+
+
+

@@ -330,12 +330,16 @@ lessons:
     
   - date: "Thurs, July 23"
     title: "Module 5.4: Hierarchical normal modeling of means and variances"
+    slides: "5-4-hierarchical-models-means-and-variances-I.html"
+    slidespdf: "5-4-hierarchical-models-means-and-variances-I.pdf"
     reading: "5-4-reading.html"
-    #video: ""
+    video: ""
     
   - date: " "
     title: "Module 5.5: Hierarchical normal modeling of means and variances (illustration)"
-    #video: ""
+    slides: "5-5-hierarchical-models-means-and-variances-II.html"
+    slidespdf: "5-5-hierarchical-models-means-and-variances-II.pdf"
+    video: ""
     
   
   - title: " "
