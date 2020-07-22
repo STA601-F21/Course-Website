@@ -133,7 +133,7 @@ $$
 &amp; \ \ \ \ \times p(\sigma^2_1, \ldots, \sigma^2_J | \mu, \tau^2,\nu_0, \sigma_0^2)\\
 &amp; \ \ \ \ \times \pi(\mu, \tau^2,\nu_0, \sigma_0^2)\\
 \\
-&amp; \boldsymbol{=} p(y | \theta_1, \ldots, \theta_J, \sigma^2 )\\
+&amp; \boldsymbol{=} p(y | \theta_1, \ldots, \theta_J, \sigma^2_1, \ldots, \sigma^2_J )\\
 &amp; \ \ \ \ \times p(\theta_1, \ldots, \theta_J | \mu,\tau^2)\\
 &amp; \ \ \ \ \times p(\sigma^2_1, \ldots, \sigma^2_J | \nu_0, \sigma_0^2)\\
 &amp; \ \ \ \ \times \pi(\mu) \cdot \pi(\tau^2) \cdot \pi(\nu_0) \cdot \pi(\sigma_0^2)\\
@@ -292,7 +292,7 @@ $$
 $$
 `\begin{split}
 &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} p(\sigma^2_j | \nu_0, \sigma_0^2) \right\} \cdot \pi(\sigma_0^2)\\
-&amp; \boldsymbol{\propto} \ \mathcal{IG} \left(\sigma^2_j; \dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right) \  \cdot \ \mathcal{Ga} \left(\sigma_0^2 ; a,b\right) \\
+&amp; \boldsymbol{\propto} \ \prod_{j=1}^{J} \ \mathcal{IG} \left(\sigma^2_j; \dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right) \  \cdot \ \mathcal{Ga} \left(\sigma_0^2 ; a,b\right) \\
 &amp; \boldsymbol{=} \left[ \prod_{j=1}^{J} \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} (\sigma^2_j)^{-\left(\dfrac{\nu_0}{2}+1 \right)} e^{-\dfrac{\nu_0\sigma_0^2}{2 (\sigma^2_j)}} \right]  \cdot \left[ \dfrac{b^a}{\Gamma(a)} (\sigma_0^2)^{a - 1} e^{-b \sigma_0^2} \right] \\
 &amp; \boldsymbol{\propto} \left[ \prod_{j=1}^{J} \left( \sigma_0^2 \right)^\left(\dfrac{\nu_0}{2} \right)  e^{-\dfrac{\nu_0\sigma_0^2}{2 (\sigma^2_j)}} \right]  \cdot \left[  (\sigma_0^2)^{a - 1} e^{-b \sigma_0^2} \right] \\
 &amp; \boldsymbol{\propto} \left[ \left( \sigma_0^2 \right)^\left(\dfrac{J \nu_0}{2} \right)  e^{- \sigma_0^2 \left[ \dfrac{\nu_0}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right]  \cdot \left[  (\sigma_0^2)^{a - 1} e^{-b \sigma_0^2} \right] \\
@@ -365,7 +365,7 @@ $$
 $$
 `\begin{split}
 &amp; \boldsymbol{\propto} \left\{ \prod_{j=1}^{J} p(\sigma^2_j | \nu_0, \sigma_0^2) \right\} \cdot \pi(\nu_0)\\
-&amp; \propto \ \mathcal{IG} \left(\sigma^2_j; \dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right) \  \cdot \ e^{-\alpha \nu_0} \\
+&amp; \propto \ \prod_{j=1}^{J} \ \mathcal{IG} \left(\sigma^2_j; \dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right) \  \cdot \ e^{-\alpha \nu_0} \\
 &amp; \boldsymbol{=} \left[ \prod_{j=1}^{J} \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \left(\sigma^2_j\right)^{-\left(\dfrac{\nu_0}{2}+1 \right)} e^{-\dfrac{\nu_0\sigma_0^2}{2 (\sigma^2_j)}} \right]  \cdot e^{-\alpha \nu_0} \\
 &amp; \boldsymbol{\propto} \left[ \left( \dfrac{\left( \dfrac{\nu_0\sigma_0^2}{2} \right)^\left(\dfrac{\nu_0}{2} \right)}{\Gamma\left(\dfrac{\nu_0}{2} \right)} \right)^J \cdot \left(\prod_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right)^{\left(\dfrac{\nu_0}{2}+1 \right)} \cdot  e^{- \nu_0 \left[ \dfrac{\sigma_0^2}{2} \sum\limits_{j=1}^{J} \dfrac{1}{\sigma^2_j} \right]} \right]  \cdot e^{-\alpha \nu_0} \\
 \end{split}`

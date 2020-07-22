@@ -333,13 +333,13 @@ lessons:
     slides: "5-4-hierarchical-models-means-and-variances-I.html"
     slidespdf: "5-4-hierarchical-models-means-and-variances-I.pdf"
     reading: "5-4-reading.html"
-    video: ""
+    video: "https://api.playposit.com/go/play/763931/1403540/914922/0/Module-54-Hierarchical-normal-modeling-of-means-and-variances"
     
   - date: " "
     title: "Module 5.5: Hierarchical normal modeling of means and variances (illustration)"
     slides: "5-5-hierarchical-models-means-and-variances-II.html"
     slidespdf: "5-5-hierarchical-models-means-and-variances-II.pdf"
-    video: ""
+    video: "https://api.playposit.com/go/play/763971/1403540/914922/0/Module-55-Hierarchical-normal-modeling-of-means-and-variances-illustration"
     
   
   - title: " "
