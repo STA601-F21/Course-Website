@@ -1,5 +1,5 @@
 ---
-title: "Module 6.2: Bayesian linear regression: illustration"
+title: "Module 6.2: Bayesian linear regression (illustration)"
 output: 
   html_document:
     css: reading.css

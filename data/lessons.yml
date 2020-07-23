@@ -349,12 +349,16 @@ lessons:
   - date: "Fri, July 24"
     title: "Module 6.1: Bayesian linear regression"
     reading: "6-1-reading.html"
-    #video: ""
+    slides: "6-1-linear-regression-I.html"
+    slidespdf: "6-1-linear-regression-I.pdf"
+    video: ""
     
   - date: " "
-    title: "Module 6.2: Bayesian linear regression: illustration"
+    title: "Module 6.2: Bayesian linear regression (illustration)"
     reading: "6-2-reading.html"
-    #video: ""
+    slides: "6-2-linear-regression-II.html"
+    slidespdf: "6-2-linear-regression-II.pdf"
+    video: ""
     
     
   - date: " "
