@@ -351,14 +351,14 @@ lessons:
     reading: "6-1-reading.html"
     slides: "6-1-linear-regression-I.html"
     slidespdf: "6-1-linear-regression-I.pdf"
-    video: ""
+    video: "https://api.playposit.com/go/play/765610/1403540/914922/0/Module-61-Bayesian-linear-regression"
     
   - date: " "
     title: "Module 6.2: Bayesian linear regression (illustration)"
     reading: "6-2-reading.html"
     slides: "6-2-linear-regression-II.html"
     slidespdf: "6-2-linear-regression-II.pdf"
-    video: ""
+    video: "https://api.playposit.com/go/play/765629/1403540/914922/0/Module-62-Bayesian-linear-regression-illustration"
     
     
   - date: " "

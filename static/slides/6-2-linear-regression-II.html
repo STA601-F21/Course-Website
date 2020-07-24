@@ -24,7 +24,75 @@ class: center, middle, inverse, title-slide
 
 
 
+## Bayesian linear regression recap
 
+- Sampling model:
+.block[
+`$$\boldsymbol{Y} \sim \mathcal{N}_n(\boldsymbol{X}\boldsymbol{\beta}, \sigma^2\boldsymbol{I}_{n\times n}).$$`
+]
+
+--
+
+- Semi-conjugate prior for `\(\boldsymbol{\beta}\)`:
+.block[
+`$$\pi(\boldsymbol{\beta}) = \mathcal{N}_p(\boldsymbol{\mu}_0, \Sigma_0).$$`
+]
+
+--
+
+- Semi-conjugate prior for `\(\sigma^2\)`:
+.block[
+`$$\pi(\sigma^2) = \mathcal{IG} \left(\dfrac{\nu_0}{2}, \dfrac{\nu_0\sigma_0^2}{2}\right)$$`
+]
+
+
+
+---
+## Full conditional
+
+.block[
+$$
+`\begin{split}
+\pi(\boldsymbol{\beta} | \boldsymbol{y}, \boldsymbol{X}, \sigma^2) &amp; = \ \mathcal{N}_p(\boldsymbol{\mu}_n, \Sigma_n),\\
+\end{split}`
+$$
+]
+
+--
+  where
+.block[
+$$
+`\begin{split}
+\Sigma_n &amp; = \left[\Sigma_0^{-1} + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{X} \right]^{-1}\\
+\boldsymbol{\mu}_n &amp; = \Sigma_n \left[\Sigma_0^{-1}\boldsymbol{\mu}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{y} \right],
+\end{split}`
+$$
+]
+
+--
+  and
+.block[
+$$
+`\begin{split}
+\pi(\sigma^2 | \boldsymbol{y}, \boldsymbol{X}, \boldsymbol{\beta}) &amp; = \mathcal{IG} \left(\dfrac{\nu_n}{2}, \dfrac{\nu_n\sigma_n^2}{2}\right), \\
+\end{split}`
+$$
+]
+
+--
+  where
+.block[
+$$
+`\begin{split}
+\nu_n &amp; = \nu_0 + n\\
+\sigma_n^2  &amp; = \dfrac{1}{\nu_n} \left[ \nu_0 \sigma_0^2 + (\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\beta})^T (\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\beta}) \right] = \dfrac{1}{\nu_n} \left[ \nu_0 \sigma_0^2 + \text{SSR}(\boldsymbol{\beta}) \right].
+\end{split}`
+$$
+]
+
+
+
+---
 ## Swimming data
 
 - Back to the swimming example. The data is from Exercise 9.1 in Hoff.
@@ -78,7 +146,7 @@ class: center, middle, inverse, title-slide
 .small[
 `\begin{eqnarray*}
 \pi(\boldsymbol{\beta}) =
-\mathcal{N}_2\left(\boldsymbol{\beta}_0 = \left(\begin{array}{c}
+\mathcal{N}_2\left(\boldsymbol{\mu}_0 = \left(\begin{array}{c}
 23\\
 0
 \end{array}\right),\Sigma_0 = \left(\begin{array}{cc}
@@ -109,7 +177,7 @@ X &lt;- cbind(rep(1,n),(W-mean(W)))
 p &lt;- ncol(X)
 
 #Hyperparameters for the priors
-beta_0 &lt;- matrix(c(23,0),ncol=1)
+mu_0 &lt;- matrix(c(23,0),ncol=1)
 Sigma_0 &lt;- matrix(c(5,0,0,2),nrow=2,ncol=2)
 nu_0 &lt;- 1
 sigma_0_sq &lt;- 1/10
@@ -152,7 +220,7 @@ for(s in 1:(n_iter+burn_in)){
     
     #update beta
     Sigma_n &lt;- solve(solve(Sigma_0) + (t(X)%*%X)/sigma_sq[j])
-    mu_n &lt;- Sigma_n %*% (solve(Sigma_0)%*%beta_0 + (t(X)%*%Y[,j])/sigma_sq[j])
+    mu_n &lt;- Sigma_n %*% (solve(Sigma_0)%*%mu_0 + (t(X)%*%Y[,j])/sigma_sq[j])
     beta[,j] &lt;- rmvnorm(1,mu_n,Sigma_n)
     
     #save results only past burn-in
@@ -191,22 +259,13 @@ for(s in 1:(n_iter+burn_in)){
 
 &lt;/br&gt;
 - &lt;div class="question"&gt;
-Give an interpretation for the parameters.
+Can you interpret the parameters?
 &lt;/div&gt;
 &lt;/br&gt;
 
 --
 
-- &lt;div class="question"&gt;
-Any thoughts on who the coach should recommend based on this alone?
-&lt;/div&gt;
-&lt;/br&gt;
-
---
-
-- &lt;div class="question"&gt;
-Is this how we should be answering the question?
-&lt;/div&gt;
+- Any thoughts on who the coach should recommend based on this alone? Is this how we should be answering the question?
 
 
 
@@ -250,13 +309,6 @@ Is this how we should be answering the question?
   ## 97.5%  0.002288246  0.08956464  0.06789081  0.01940960
   ```
 
---
-
-- &lt;div class="question"&gt;
-Is there any evidence that the times matter?
-&lt;/div&gt;
-
-
 ---
 ## Posterior inference
 
@@ -267,26 +319,28 @@ Is there any evidence that the times matter?
   ```r
   beta_pr_great_0 &lt;- t(apply(BETA,c(1,3),function(x) mean(x &gt; 0)))
   colnames(beta_pr_great_0) &lt;- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
+  rownames(beta_pr_great_0) &lt;- c("beta_0","beta_1")
   beta_pr_great_0
   ```
   
   ```
-  ##      Swimmer 1 Swimmer 2 Swimmer 3 Swimmer 4
-  ## [1,]    1.0000    1.0000    1.0000    1.0000
-  ## [2,]    0.0287    0.9044    0.8335    0.0957
+  ##        Swimmer 1 Swimmer 2 Swimmer 3 Swimmer 4
+  ## beta_0    1.0000    1.0000    1.0000    1.0000
+  ## beta_1    0.0287    0.9044    0.8335    0.0957
   ```
   
   ```r
   #or alternatively,
   beta_pr_less_0 &lt;- t(apply(BETA,c(1,3),function(x) mean(x &lt; 0)))
   colnames(beta_pr_less_0) &lt;- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
+  rownames(beta_pr_less_0) &lt;- c("beta_0","beta_1")
   beta_pr_less_0
   ```
   
   ```
-  ##      Swimmer 1 Swimmer 2 Swimmer 3 Swimmer 4
-  ## [1,]    0.0000    0.0000    0.0000    0.0000
-  ## [2,]    0.9713    0.0956    0.1665    0.9043
+  ##        Swimmer 1 Swimmer 2 Swimmer 3 Swimmer 4
+  ## beta_0    0.0000    0.0000    0.0000    0.0000
+  ## beta_1    0.9713    0.0956    0.1665    0.9043
   ```
 
 

@@ -242,7 +242,7 @@ $$
 - We can start with the following semi-conjugate prior for `\(\boldsymbol{\beta}\)`:
 .block[
 .small[
-`$$\pi(\boldsymbol{\beta}) = \mathcal{N}_p(\boldsymbol{\beta}_0, \Sigma_0).$$`
+`$$\pi(\boldsymbol{\beta}) = \mathcal{N}_p(\boldsymbol{\mu}_0, \Sigma_0).$$`
 ]
 ]
 
@@ -377,7 +377,7 @@ $$
 `\begin{split}
 \pi(\boldsymbol{\beta} | \boldsymbol{y}, \boldsymbol{X}, \sigma^2) &amp; \propto p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}, \sigma^2) \cdot \pi(\boldsymbol{\beta}) \\
 \\
-&amp; \propto \textrm{exp} \left\{-\dfrac{1}{2} \boldsymbol{\beta}^T \left[\Sigma_0^{-1} + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{X} \right] \boldsymbol{\beta} + \boldsymbol{\beta}^T \left[\Sigma_0^{-1}\boldsymbol{\beta}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{y} \right] \right\}\\
+&amp; \propto \textrm{exp} \left\{-\dfrac{1}{2} \boldsymbol{\beta}^T \left[\Sigma_0^{-1} + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{X} \right] \boldsymbol{\beta} + \boldsymbol{\beta}^T \left[\Sigma_0^{-1}\boldsymbol{\mu}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{y} \right] \right\}\\
 \\
 &amp; \equiv \ \mathcal{N}_p(\boldsymbol{\mu}_n, \Sigma_n).
 \end{split}`
@@ -404,7 +404,7 @@ $$
 $$
 `\begin{split}
 \Sigma_n &amp; = \left[\Sigma_0^{-1} + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{X} \right]^{-1}\\
-\boldsymbol{\mu}_n &amp; = \Sigma_n \left[\Sigma_0^{-1}\boldsymbol{\beta}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{y} \right].
+\boldsymbol{\mu}_n &amp; = \Sigma_n \left[\Sigma_0^{-1}\boldsymbol{\mu}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{y} \right].
 \end{split}`
 $$
 ]
