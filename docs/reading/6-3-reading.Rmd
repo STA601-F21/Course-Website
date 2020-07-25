@@ -1,0 +1,24 @@
+---
+title: "Module 6.3: Bayesian linear regression: weakly informative priors"
+output: 
+  html_document:
+    css: reading.css
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
+    + Section 9.2.2: Default and weakly informative prior distributions
+    
+
+## Optional:
+
+- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 14.6: Regularization and dimension reduction for multiple predictors
+    + Section 14.7: Unequal variances and correlations

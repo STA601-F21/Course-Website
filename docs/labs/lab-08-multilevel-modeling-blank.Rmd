@@ -1,8 +1,8 @@
 ---
-title: "STA 602L Lab 8: Hierarchical modeling"
-author: "STA 602L: Bayesian and Modern Statistics"
+title: "Lab 8: Hierarchical modeling"
+author: "STA 360/602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "Mar 23, 2020"
+#date: "Mar 23, 2020"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -34,7 +34,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 5:00pm, Mar 24, 2020
+**Due:** 11:59pm, July 29, 2020
 
 
 # Housekeeping
@@ -45,11 +45,11 @@ You all should have R and RStudio installed on your computers by now. If you do 
 
 ## R Markdown
 
-You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-360-602l-su20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
 
 ## Gradescope
 
-You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/77790/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/141314//assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
 
 ## Getting started
 
@@ -74,7 +74,7 @@ remove.packages("rstan")
 if (file.exists(".RData")) file.remove(".RData")
 ```
 
-Next, restart R. Then, re-install a fresh copy of `rstan` first, then `rstanarm` afterwards. Make sure to install version 2.19.3 for both packages.
+Next, restart R. Then, re-install a fresh copy of `rstan` first, then `rstanarm` afterwards. Make sure to install version $\geq$ 2.19.3 for both packages.
 
 <!-- For this lab, you will need one stan file. Download here: -->
 
@@ -106,7 +106,7 @@ N <- nrow(GCSE)
 ```
 
 
-We will use a slightly different notation from what we used in class. Here, each individual $i$, with $i = 1,\ldots, n$, belongs to a certain school $j$, with $j = 1,\ldots, m$, and $m =$ `r m`. We also have the gender variable which we can use as a regressor/predictor/covariate for the response. A natural first step may be to model course work with a linear regression model with the gender variable as a covariate. Actually let's start with a bit of explanatory analysis. 
+We will use a slightly different notation from what we used in class. Here, each individual $i$, with $i = 1,\ldots, n$, belongs to a certain school $j$, with $j = 1,\ldots, m$, and $m =$ `r m`. We also have the gender variable which we can use as a regressor/predictor/covariate/feature for the response. A natural first step may be to model course work with a linear regression model with the gender variable as a covariate. Actually let's start with a bit of explanatory analysis. 
 
 ***
 
@@ -129,7 +129,7 @@ $$y_i \sim N(\alpha + x_i^T \beta, \sigma).$$
 
 We call this model a *pooled model* because we are ignoring differences between the groups and use the common $\beta$ coefficient. The pooled model estimates a single model, with inference performed on $\alpha, \beta,$ and $\sigma$.
 
-The other extreme is an *unpooled model* where we fit a separate model for each group/school. So for individual $i$ in school $j$, we fit the model
+The other extreme is an *unpooled model* where we fit a separate model for each group/school. So for school $j$, we fit the model
 $$y_{ij} \sim N(\alpha_{j} + x_i^T \beta_j, \sigma_j).$$
 
 In the unpooled framework, we estimate $m$ models, but \textit{no} information is shared between groups. That is, we estimate the coefficients for the first school independently of the coefficients for the second school. Both are fit here:
@@ -189,7 +189,6 @@ print(mod1, digits = 3)
 
 We can obtain posterior summaries and credible intervals as follows: 
 ```{r}
-print(mod1, digits = 3)
 summary(mod1,
         pars = c("(Intercept)", "sigma", "Sigma[school:(Intercept),(Intercept)]"),
         probs = c(0.025, 0.975),
@@ -332,7 +331,7 @@ Cov(\beta_j, \theta_j) & \sigma^2_\beta
 $$
 
 We will now have to specify a prior for the covariance matrix, which we will call $\Sigma$. 
-Setting priors for covariance parameters is always a tricky task, and we here we will explain the default priors used in `stan_lmer()`. We will discuss this a bit more when we get to Bayesian linear regression. The method used in `stan_lmer()` decomposes a covariance matrix into a correlation matrix $R$ and a matrix of variances $V$:
+Setting priors for covariance parameters is always a tricky task, and we here we will explain the default priors used in `stan_lmer()`. The method used in `stan_lmer()` decomposes a covariance matrix into a correlation matrix $R$ and a matrix of variances $V$:
 
 $$
 \begin{align*}
@@ -426,14 +425,12 @@ loo_compare(loo1,loo2,loo3)
 ```
 
 Here, we plot the regression lines for some of the schools using the following models:
-\begin{enumerate}
-  \item Pooled (red)
-  \item Unpooled (blue)
-  \item Varying intercept, fixed slope (green)
-  \item Varying intercept, varying slope (orange)
-\end{enumerate}
+  + Pooled (red)
+  + Unpooled (blue)
+  + Varying intercept, fixed slope (green)
+  + Varying intercept, varying slope (orange)
 
-```{r, echo = F}
+```{r}
 pooled.sim <- as.matrix(pooled)
 unpooled.sim <- as.matrix(unpooled)
 m1.sim <- as.matrix(mod1)
@@ -486,7 +483,7 @@ Now that you have seen a multilevel model implemented with some of the `rstanarm
 
 We have an additional dataset on the radon levels in houses in the state of Minnesota. Specifically, for each house we have the radon measurement on the log scale (log_radon), an indicator from whether the measurement was take in the basement or the first floor (floor, where 0 = basement, 1 = first floor), and which of 85 counties the house belongs to. We have an additional fourth variable which gives the county-level uranium level (log_uranium). 
 
-Download the data (named `radon.txt`) from Sakai and save it locally to the same directory as your R markdown file. To find the data file on Sakai, go to Resources $\rightarrow$ Datasets $\rightarrow$ Lab Datasets $\rightarrow$ Lab 8. Once you have downloaded the data file into the SAME folder as your R markdown file, load the data by using the following R code. 
+Download the data (here: https://sta-360-602l-su20.github.io/Course-Website/labs/radon.txt) and save it locally to the same directory as your R markdown file. Once you have downloaded the data file into the SAME folder as your R markdown file, load the data by using the following R code. 
 
 ```{r}
 radon <- read.csv("radon.txt", header = T,sep="")

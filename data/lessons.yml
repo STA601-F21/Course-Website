@@ -368,20 +368,29 @@ lessons:
   
   - date: "Mon, July 27"
     title: "Module 6.3: Bayesian linear regression: weakly informative priors"
-    #reading: "6-3-reading.html"
+    reading: "6-3-reading.html"
     
   - date: " "
     title: "Module 6.4: Bayesian hypothesis testing"
-    #reading: "6-4-reading.html"
+    reading: "6-4-reading.html"
+    
+  - date: " "
+    title: "Lab 8: Hierarchical modeling"
+    lab: "lab-08-multilevel-modeling-blank.html"
   
   - date: "Tues, July 28"
     title: "Module 6.5: Bayesian model selection"
+    reading: "6-5-reading.html"
     
   - date: " "
-    title: "Module 6.6: Bayesian model selection: illustration"
+    title: "Module 6.6: Bayesian model selection (illustration)"
   
   - date: "Wed, July 29"
     title: "Quiz II"
+    
+  - date: " "
+    title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
+    lab: "lab-09-glms-blank.html"
     
     
   - title: " "
