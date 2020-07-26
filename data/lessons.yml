@@ -369,10 +369,16 @@ lessons:
   - date: "Mon, July 27"
     title: "Module 6.3: Bayesian linear regression: weakly informative priors"
     reading: "6-3-reading.html"
+    slides: "6-3-linear-regression-III.html"
+    slidespdf: "6-3-linear-regression-III.pdf"
+    video: "https://api.playposit.com/go/play/768503/1403540/914922/0/Module-63-Bayesian-linear-regression-weakly-informative-priors"
     
   - date: " "
     title: "Module 6.4: Bayesian hypothesis testing"
     reading: "6-4-reading.html"
+    slides: "6-4-hypothesis-testing.html"
+    slidespdf: "6-4-hypothesis-testing.pdf"
+    video: "https://api.playposit.com/go/play/768507/1403540/914922/0/Module-64-Bayesian-hypothesis-testing"
     
   - date: " "
     title: "Lab 8: Hierarchical modeling"
@@ -381,9 +387,11 @@ lessons:
   - date: "Tues, July 28"
     title: "Module 6.5: Bayesian model selection"
     reading: "6-5-reading.html"
+    #video: ""
     
   - date: " "
     title: "Module 6.6: Bayesian model selection (illustration)"
+    #video: ""
   
   - date: "Wed, July 29"
     title: "Quiz II"

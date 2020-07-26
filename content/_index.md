@@ -74,7 +74,7 @@ TA               | [Christine Shen](https://stat.duke.edu/people/christine-shen)
  <span></span>     | <span></span> | <span></span> 
 -----------|---------------------------------|----------------------------------
 [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) | Peter D. Hoff, 2009, New York: Springer. | Required (available online from Duke library)
-[Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) | Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. | Optional
+[Bayesian Data Analysis (Third Edition)](https://find.library.duke.edu/catalog/DUKE006588051?utm_campaign=bento&utm_content=bento_result_link&utm_source=library.duke.edu&utm_medium=referral) | Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. | Optional
 
 
 ### Materials

@@ -19,6 +19,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Optional:
 
-- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+- [Bayesian Data Analysis (Third Edition)](https://find.library.duke.edu/catalog/DUKE006588051?utm_campaign=bento&utm_content=bento_result_link&utm_source=library.duke.edu&utm_medium=referral) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
     + Section 14.6: Regularization and dimension reduction for multiple predictors
     + Section 14.7: Unequal variances and correlations
