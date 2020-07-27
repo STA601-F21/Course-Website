@@ -387,11 +387,13 @@ lessons:
   - date: "Tues, July 28"
     title: "Module 6.5: Bayesian model selection"
     reading: "6-5-reading.html"
-    #video: ""
+    slides: "6-5-model-selection.html"
+    slidespdf: "6-5-model-selection.pdf"
+    video: "https://api.playposit.com/go/play/769990/1403540/914922/0/Module-65-Bayesian-model-selection"
     
   - date: " "
     title: "Module 6.6: Bayesian model selection (illustration)"
-    #video: ""
+    video: "https://api.playposit.com/go/play/770039/1403540/914922/0/Module-66-Bayesian-model-selection-illustration"
   
   - date: "Wed, July 29"
     title: "Quiz II"
@@ -410,9 +412,11 @@ lessons:
   
   - date: " "
     title: "Module 7.1: The Metropolis algorithm"
+    #video: ""
     
   - date: " "
     title: "Module 7.2: Metropolis in action"
+    #video: ""
     
   
   - date: "Fri, July 31"

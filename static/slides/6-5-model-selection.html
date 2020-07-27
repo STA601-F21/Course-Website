@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 6.5</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 6.5
+## Bayesian model selection
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Bayesian model selection
+
+- Now that we have a general sense of how Bayesian hypothesis works, let's get into model selection, and use some of the same ideas.
+
+--
+
+- .hlight[General setting]:
+
+  1. Define a list of models. That is, let `\(\Gamma\)` be a "finite" set of different possible models. 
+  
+--
+  2. Each model `\(\gamma\)` is in `\(\Gamma\)`, including the "true" model. Also, let `\(\theta_\gamma\)` represent the parameters in model `\(\gamma\)`.
+  
+--
+  3. Put a prior over the set `\(\Gamma\)`. Let `\(\Pi_\gamma = p[\gamma] = \Pr[\gamma \text{ is true}]\)`, for all `\(\gamma \in \Gamma\)`.
+  
+      Most common choice is the uniform prior, that is, `\(\Pi_\gamma = \frac{1}{\#\Gamma}\)`, for all `\(\gamma \in \Gamma\)`, where `\(\#\Gamma\)` is the total number of models in `\(\Gamma\)`.
+  
+--
+  4. Put a prior on the parameters in each model, that is, each `\(\pi(\theta_\gamma)\)`.
+
+--
+  5. Compute marginal posterior probabilities `\(\Pr[\gamma | Y]\)` for each model, and select a model based on the posterior probabilities
+
+
+
+---
+## Bayesian model selection
+
+- For each model `\(\gamma \in \Gamma\)`, we need to compute `\(\Pr[\gamma | Y]\)`. 
+
+--
+
+- Let `\(p_\gamma(Y)\)` denote the marginal likelihood of the data under model `\(\gamma\)`, that is, `\(\mathcal{p}[Y | \gamma]\)`. As before,
+.block[
+.small[
+$$
+`\begin{split}
+\hat{\Pi}_\gamma = \Pr[\gamma | Y] &amp; = \frac{\mathcal{p}[Y | \gamma] \cdot p[\gamma]}{\sum_{\gamma^\star \in \Gamma} \mathcal{p}[Y | \gamma^\star] \cdot p[\gamma^\star]} = \frac{ p_\gamma(Y) \Pi_\gamma }{ \sum_{\gamma^\star \in \Gamma} p_{\gamma^\star}(Y) \Pi_{\gamma^\star} }\\
+\\
+&amp; = \frac{ \Pi_\gamma \cdot \left[ \int_{\Theta_\gamma} p_\gamma(Y | \theta_\gamma) \cdot \pi(\theta_\gamma) \text{d}\theta_\gamma \right] }{ \sum_{\gamma^\star \in \Gamma} \Pi_{\gamma^\star} \cdot \left[ \int_{\Theta_{\gamma^\star}} p_{\gamma^\star}(Y | \theta_{\gamma^\star}) \cdot \pi(\theta_{\gamma^\star}) \text{d}\theta_{\gamma^\star} \right] }.\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- If we assume a uniform prior on `\(\Gamma\)`, that is, `\(\Pi_\gamma = \frac{1}{\#\Gamma}\)`, for all `\(\gamma \in \Gamma\)`, then
+.block[
+.small[
+$$
+`\begin{split}
+\hat{\Pi}_\gamma &amp; = \frac{ p_\gamma(Y) }{ \sum_{\gamma^\star \in \Gamma} p_{\gamma^\star}(Y)  }\\
+\\
+&amp; = \frac{ \left[ \int_{\Theta_\gamma} p_\gamma(Y | \theta_\gamma) \cdot \pi(\theta_\gamma) \text{d}\theta_\gamma \right] }{ \sum_{\gamma^\star \in \Gamma} \left[ \int_{\Theta_{\gamma^\star}} p_{\gamma^\star}(Y | \theta_{\gamma^\star}) \cdot \pi(\theta_{\gamma^\star}) \text{d}\theta_{\gamma^\star} \right]  }.\\
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Bayesian model selection
+
+- &lt;div class="question"&gt;
+How should we choose the Bayes optimal model?
+&lt;/div&gt;
+
+--
+
+- We can specify a loss function. The most natural is
+.block[
+.small[
+$$
+`\begin{split}
+L(\hat{\gamma},\gamma) = \boldsymbol{1(\hat{\gamma} \neq \gamma)},
+\end{split}`
+$$
+]
+]
+
+  that is,
+  1. Loss equals zero if the correct model is chosen; and
+  2. Loss equals one if incorrect model is chosen.
+  
+--
+
+- Next, select `\(\hat{\gamma}\)` to minimize Bayes risk. Here, Bayes risk (expected loss over posterior) is
+.block[
+.small[
+$$
+`\begin{split}
+R(\hat{\gamma}) = \sum_{\gamma \in \Gamma} \boldsymbol{1(\hat{\gamma} \neq \gamma)} \cdot \hat{\Pi}_\gamma = 0 \cdot \hat{\Pi}_{\gamma_{\text{true}}} +   \sum_{\gamma \neq \gamma_{\text{true}}} \hat{\Pi}_\gamma = \sum_{\gamma \neq \hat{\gamma}} \hat{\Pi}_\gamma = 1 - \hat{\Pi}_{\hat{\gamma}}
+\end{split}`
+$$
+]
+]
+
+--
+
+- To minimize `\(R(\hat{\gamma})\)`, choose `\(\hat{\gamma}\)` such that `\(\hat{\Pi}_{\hat{\gamma}}\)` is the largest! That is, select the model with the largest posterior probability.
+
+
+
+---
+## Inference vs prediction
+
+- What if the goal is prediction? Then maybe we should care more about predictive accuracy, rather than selecting specific variables.
+
+--
+
+- For predictions, we care about the posterior predictive distribution, that is
+.block[
+.small[
+$$
+`\begin{split}
+p(y_{n+1}|Y = (y_1, \ldots, y_n)) &amp; = \int_\Gamma \int_{\Theta_\gamma} p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\gamma, \theta_\gamma | Y)  \ \text{d}\theta_\gamma \text{d}\gamma  \\
+&amp; = \int_\Gamma \int_{\Theta_\gamma} p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma) \cdot \Pr[\gamma | Y]  \ \text{d}\theta_\gamma \text{d}\gamma  \\
+&amp; = \sum_{\gamma \in \Gamma} \int_{\Theta_\gamma} p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma) \cdot \hat{\Pi}_\gamma  \ \text{d}\theta_\gamma \\
+&amp; = \sum_{\gamma \in \Gamma} \hat{\Pi}_\gamma \cdot \int_{\Theta_\gamma} p(y_{n+1}|\gamma, \theta_\gamma) \cdot \pi(\theta_\gamma | Y, \gamma)  \ \text{d}\theta_\gamma \\
+&amp; = \sum_{\gamma \in \Gamma} \hat{\Pi}_\gamma \cdot p(y_{n+1} | Y, \gamma), \\
+\end{split}`
+$$
+]
+]
+
+  which is just averaging out the predictions from each model, over all possible models in `\(\Gamma\)`, with the posterior probability of each model, and this is known as .hlight[Bayesian model averaging (BMA)].
+
+
+
+---
+## Back to Bayesian linear regression
+
+- So what does this mean specifically in the context of linear regression?
+
+--
+
+- First, recall that for model `\(\gamma\)`, the posterior probability that the model is the right model is
+.block[
+.small[
+$$
+`\begin{split}
+\hat{\Pi}_\gamma &amp; = \frac{ \Pi_\gamma p_\gamma(Y) }{ \sum_{\gamma^\star \in \Gamma} \Pi_{\gamma^\star} p_{\gamma^\star}(Y)  }.\\
+\end{split}`
+$$
+]
+]
+
+--
+
+- *Practical issues*
+
+  + We need to calculate marginal likelihoods for ALL models in `\(\Gamma\)`.
+  
+--
+
+  + In general for, we cannot calculate the marginal likelihoods unless we have a proper or conjugate priors.
+  
+--
+
+  + For linear regression, that would mean looking to priors like Zellner's g-prior, the horseshoe prior you were introduced to in the lab, and so on.
+
+
+
+---
+## Bayesian variable selection
+
+- To explore Bayesian variable selection, rewrite each model `\(\gamma \in \Gamma\)` as
+.block[
+`$$\boldsymbol{Y} \sim \mathcal{N}_n(\boldsymbol{X}_{\gamma}\boldsymbol{\beta}_{\gamma}, \sigma^2\boldsymbol{I}_{n\times n}).$$`
+]
+
+--
+
+- `\(\gamma\)` represents the set of predictors we want to throw into our model.
+
+--
+
+- Using the notation as before, each `\(\gamma = (\gamma_0, \gamma_1, \ldots, \gamma_{p-1}) \in \{0,1\}^p\)`, so that the cardinality of `\(\Gamma\)` is `\(2^p\)`, that is, the number of models in `\(\Gamma\)`.
+
+--
+
+- That is,
+  + `\(\gamma_j = 1\)` means the `\(j\)`'th predictor is included in the model, but `\(\gamma_j = 0\)` means it is not;
+  + `\(\boldsymbol{X}_{\gamma}\)` is the matrix of predictors with `\(\gamma_j = 1\)`;
+  + `\(\boldsymbol{\beta}_{\gamma}\)` is the corresponding vector of predictors with `\(\gamma_j = 1\)`.
+  
+--
+
+- Set `\(p_\gamma = \sum^p_{j=1} \gamma_j\)`, so that `\(p_\gamma\)` is the number of predictors included in model `\(\gamma\)`, then `\(\boldsymbol{X}_{\gamma}\)` is `\(n \times p_\gamma\)` and `\(\boldsymbol{\beta}_{\gamma}\)` is `\(p_\gamma \times 1\)`.
+
+
+
+---
+## Bayesian variable selection
+
+- Recall that we can also write each model as
+.block[
+.small[
+`$$Y_i = \boldsymbol{\beta}^T_{\gamma} \boldsymbol{x}_{i\gamma} + \epsilon_i; \ \ \ \  \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2).$$`
+]
+]
+  
+--
+
+- As an example, suppose we had data with 6 potential predictors including the intercept, so that each `\(\boldsymbol{x}_i = (1, x_{i1}, x_{i2}, x_{i3},x_{i4},x_{i5})\)`, and `\(\boldsymbol{\beta} = (\beta_0, \beta_1, \beta_2, \beta_3, \beta_4, \beta_5)\)`.
+
+--
+
+- Then for model with `\(\gamma = (1,1,0,0,0,0)\)`, `\(Y_i = \boldsymbol{\beta}^T_{\gamma} \boldsymbol{x}_{i\gamma} + \epsilon_i\)`
+.block[
+.small[
+`$$\implies Y_i = \beta_0 + \beta_1 x_{i1} + \epsilon_i; \ \ \ \  \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2),$$`
+]
+]
+
+  with `\(p_\gamma = 2\)`.
+
+- Whereas for model with `\(\gamma = (1,0,0,1,1,0)\)`, `\(Y_i = \boldsymbol{\beta}^T_{\gamma} \boldsymbol{x}_{i\gamma} + \epsilon_i\)`
+.block[
+.small[
+`$$\implies Y_i = \beta_0 + \beta_3 x_{i3} + \beta_4 x_{i4} + \epsilon_i; \ \ \ \  \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2),$$`
+]
+]
+
+  with `\(p_\gamma = 3\)`.
+
+
+
+---
+## Bayesian variable selection
+
+- The outline for variable selection would be as follows:
+
+  1. Write down likelihood under model `\(\gamma\)`. That is,
+.block[
+.small[
+$$
+`\begin{split}
+p(\boldsymbol{y} | \boldsymbol{X}, \gamma, \boldsymbol{\beta}_{\gamma}, \sigma^2) &amp; \propto (\sigma^2)^{-\frac{n}{2}} \ \textrm{exp} \left\{-\frac{1}{2\sigma^2} (\boldsymbol{y} - \boldsymbol{X}_{\gamma}\boldsymbol{\beta}_{\gamma})^T (\boldsymbol{y} - \boldsymbol{X}_{\gamma}\boldsymbol{\beta}_{\gamma})\right\}\\
+\end{split}`
+$$
+]
+]
+
+--
+
+  2. Define a prior for `\(\gamma\)`, `\(\Pi_\gamma = \Pr[\gamma]\)`. For example, (i) uniform over all `\(2^p\)` possible models, or even (ii) beta prior (since each `\(\gamma_j \in \{0,1\}\)`).
+  
+--
+
+  3. Put a prior on the parameters in each model. Using the g-prior, we have
+.block[
+.small[
+$$
+`\begin{split}
+\pi(\boldsymbol{\beta}_{\gamma} | \sigma^2) &amp; = \mathcal{N}_p\left(\boldsymbol{\beta}_{0\gamma}= \boldsymbol{0}, \Sigma_{0\gamma} = g\sigma^2 \left[\boldsymbol{X}^T_{\gamma} \boldsymbol{X}_{\gamma} \right]^{-1} \right)\\
+\pi(\sigma^2) &amp; = \mathcal{IG} \left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right)\\
+\end{split}`
+$$
+]
+]
+
+
+
+---
+## Bayesian variable selection
+
+- With those pieces, the conditional posteriors are straightforward. 
+
+--
+
+- We can then compute marginal posterior probabilities `\(\Pr[\gamma | Y]\)` for each model and select model with the highest posterior probability.
+
+--
+
+- We can also compute posterior `\(\Pr[\gamma_j = 1| Y]\)`, the posterior probability of including the `\(j\)`'the predictor, often called .hlight[marginal inclusion probability (MIP)], allowing for uncertainty in the other predictors.
+
+--
+
+- Also straightforward to do model averaging once we all have posterior samples.
+
+--
+
+- The Hoff book works through one example and you can find the Gibbs sampler for doing inference there. I strongly recommend you go through it carefully!
+
+--
+
+- In this course however, we will focus on using R packages for doing the same.
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
