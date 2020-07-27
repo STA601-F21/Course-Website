@@ -132,7 +132,7 @@ We call this model a *pooled model* because we are ignoring differences between 
 The other extreme is an *unpooled model* where we fit a separate model for each group/school. So for school $j$, we fit the model
 $$y_{ij} \sim N(\alpha_{j} + x_i^T \beta_j, \sigma_j).$$
 
-In the unpooled framework, we estimate $m$ models, but \textit{no} information is shared between groups. That is, we estimate the coefficients for the first school independently of the coefficients for the second school. Both are fit here:
+In the unpooled framework, we estimate $m$ models, but **no** information is shared between groups. That is, we estimate the coefficients for the first school independently of the coefficients for the second school. Both are fit here:
 
 ```{r, cache=T}
 pooled <- stan_glm(course ~ 1 + female, data = GCSE, refresh = 0)
@@ -179,6 +179,8 @@ Notice that the priors have been scaled (we could set `autoscale = F` in the fun
 ```{r}
 sd(GCSE$course, na.rm = T)
 ```
+
+Basically, by setting `autoscale = T`, `rstanarm` attempts to make the default priors weakly informative by internally adjusting the scales of the priors. When setting your own "informative priors", you should disable this option.  For more information on this, see http://mc-stan.org/rstanarm/articles/priors.html. 
 
 Let's look at the output of the model fitting. The output contains summaries for $\mu_\theta$, $\sigma^2$, and $\tau^2$. Can you identify which is which? If you cannot, ask the TA.
 ```{r}
@@ -283,7 +285,7 @@ mod2 <- stan_lmer(formula = course ~ 1 + female + (1 | school),
                   data = GCSE, 
                   prior = normal(location = 0,
                                         scale = 100,
-                                        autoscale = FALSE),
+                                        autoscale = F),
                   prior_intercept = normal(location = 0,
                                         scale = 100,
                                         autoscale = F),
