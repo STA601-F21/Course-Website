@@ -1,0 +1,26 @@
+---
+title: "Module 7.1: The Metropolis algorithm"
+output: 
+  html_document:
+    css: reading.css
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Required:
+
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
+    + Section 10.1: Generalized linear models
+    + Section 10.2: The Metropolis algorithm
+    + Section 10.3: The Metropolis algorithm for Poisson regression
+    
+
+## Optional:
+
+- [Bayesian Data Analysis (Third Edition)](https://find.library.duke.edu/catalog/DUKE006588051?utm_campaign=bento&utm_content=bento_result_link&utm_source=library.duke.edu&utm_medium=referral) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 11.2: Metropolis and Metropolis-Hastings algorithms
+    + Section 11.3: Using Gibbs and Metropolis as building blocks
