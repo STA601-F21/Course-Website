@@ -394,6 +394,10 @@ lessons:
   - date: " "
     title: "Module 6.6: Bayesian model selection (illustration)"
     video: "https://api.playposit.com/go/play/770039/1403540/914922/0/Module-66-Bayesian-model-selection-illustration"
+    
+  - date: " "
+    title: "Homework 5"
+    hw: "hw-05.html"
   
   - date: "Wed, July 29"
     title: "Quiz II"
