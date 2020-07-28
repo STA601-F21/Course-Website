@@ -464,11 +464,11 @@ lessons:
     #video: ""
     
   - date: "Wed, Aug 5"
-    title: "Module 8.5: Multivariate categorical data"
+    title: "Module 8.5: Finite mixture models: multivariate categorical data"
     #video: ""
     
   - date: " "
-    title: "Module 8.6: Multivariate continuous data"
+    title: "Module 8.6: Finite mixture models: multivariate continuous data"
     #video: ""
     
   - date: " "
