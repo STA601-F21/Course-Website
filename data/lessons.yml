@@ -419,13 +419,13 @@ lessons:
     reading: "7-1-reading.html"
     slides: "7-1-metropolis-I.html"
     slidespdf: "7-1-metropolis-I.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/773431/1403540/914922/0/Module-71-The-Metropolis-algorithm"
     
   - date: " "
     title: "Module 7.2: Metropolis in action"
     slides: "7-2-metropolis-II.html"
     slidespdf: "7-2-metropolis-II.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/773485/1403540/914922/0/Module-72-Metropolis-in-action"
     
   
   - date: "Fri, July 31"
