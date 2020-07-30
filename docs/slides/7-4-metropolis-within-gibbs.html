@@ -215,7 +215,7 @@ $$
 .small[
 $$
 `\begin{split}
-r &amp; = \frac{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^\star) \cdot \pi(\theta^\star)}{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^{(s)}) \cdot \pi(\theta^{(s)})}.
+r &amp; = \frac{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^\star) \cdot \pi(\rho^\star)}{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^{(s)}) \cdot \pi(\rho^{(s)})}.
 \end{split}`
 $$
 ]
@@ -223,7 +223,7 @@ $$
 
 --
 
-  3. Set
+  3. Sample `\(u \sim U(0,1)\)` independently and set
   .block[
 .small[
 `\begin{eqnarray*}

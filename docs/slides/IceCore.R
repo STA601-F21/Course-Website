@@ -7,7 +7,6 @@
 
 ###### Clear environment and load libraries
 rm(list = ls())
-#library(nlme)
 library(coda)
 library(mvtnorm)
 #library(psych)
@@ -47,9 +46,9 @@ rho <- acf(lmfit$res,plot=FALSE)$acf[2]
 
 
 #First set number of iterations and burn-in, thinning, then set seed
-n_iter <- 20000
+n_iter <- 1000
 burn_in <- 0.1*n_iter
-thin <- 20
+thin <- 1
 #set.seed(1234)
 set.seed(121372)
 
@@ -68,15 +67,15 @@ for(s in 1:(n_iter+burn_in)){
   #sample beta
   C_p <- rho^DY
   C_p_inv <- solve(C_p)
-  Sigma_n <- solve( t(X)%*%C_p_inv%*%X/sigma_sq + Lambda_0_inv)
-  mu_n <- Sigma_n%*%( t(X)%*%C_p_inv%*%Y/sigma_sq + Lambda_0_inv%*%mu_0)
-  beta <- t(rmvnorm(1,mu_n,Sigma_n))
+  Lambda_n <- solve( t(X)%*%C_p_inv%*%X/sigma_sq + Lambda_0_inv)
+  mu_n <- Lambda_n%*%( t(X)%*%C_p_inv%*%Y/sigma_sq + Lambda_0_inv%*%mu_0)
+  beta <- t(rmvnorm(1,mu_n,Lambda_n))
   
   
   #sample sigma_sq
   nu_n <- nu_0 + n
-  SSR_rho <- t(Y-X%*%beta)%*%C_p_inv%*%(Y-X%*%beta)
-  nu_n_sigma_n_sq <- nu_0*sigma_0_sq + SSR_rho
+  SSR_beta_rho <- t(Y-X%*%beta)%*%C_p_inv%*%(Y-X%*%beta)
+  nu_n_sigma_n_sq <- nu_0*sigma_0_sq + SSR_beta_rho
   sigma_sq <- 1/rgamma(1,(nu_n/2),(nu_n_sigma_n_sq/2))
   
   

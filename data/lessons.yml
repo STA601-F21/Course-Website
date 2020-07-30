@@ -433,13 +433,13 @@ lessons:
     reading: "7-3-reading.html"
     slides: "7-3-metropolis-hastings.html"
     slidespdf: "7-3-metropolis-hastings.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/774989/1403540/914922/0/Module-73-The-Metropolis-Hastings-algorithm"
     
   - date: " "
     title: "Module 7.4: Metropolis within Gibbs"
     slides: "7-4-metropolis-within-gibbs.html"
     slidespdf: "7-4-metropolis-within-gibbs.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/774997/1403540/914922/0/Module-74-Metropolis-within-Gibbs"
     
    
   - title: " "  

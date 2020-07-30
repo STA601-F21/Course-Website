@@ -136,7 +136,7 @@ $$
 
   + Define one joint proposal density $g_{u,v}[u^\star, v^\star | u^{(s)}, v^{(s)}]$ for $U$ and $V$ if possible; or
   
-  + Define two proposal densities, one for $U$ and the other for $V$. That is, $g_u[u^\star | u^{(s)}, v^{(s)}]$ and $g_u[v^\star | u^{(s)}, v^{(s)}]$.
+  + Define two proposal densities, one for $U$ and the other for $V$. That is, $g_u[u^\star | u^{(s)}, v^{(s)}]$ and $g_v[v^\star | u^{(s)}, v^{(s)}]$.
   
 --
 
