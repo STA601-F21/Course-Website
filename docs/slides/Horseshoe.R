@@ -32,7 +32,7 @@ p <- ncol(X)
 
 
 #Hyperparameters for the prior
-beta_0 <- matrix(0,nrow=p)
+mu_0 <- matrix(0,nrow=p)
 Sigma_0 <- diag(1,p)
 
 
@@ -43,7 +43,7 @@ var_prop <- delta*var(log(Y+c))*solve(t(X)%*%X)
 
 
 #Initial values for sampler
-beta <- beta_0
+beta <- mu_0
 
 #First set number of iterations and burn-in, then set seed
 n_iter <- 10000
@@ -66,9 +66,9 @@ for(s in 1:(n_iter+burn_in)){
   #compute acceptance ratio/probability
   #do so on log scale because r can be numerically unstable
   log_r <- sum(dpois(Y,exp(X%*%beta_star),log=T)) + 
-    dmvnorm(c(beta_star),beta_0,Sigma_0,log=T) -
+    dmvnorm(c(beta_star),mu_0,Sigma_0,log=T) -
     sum(dpois(Y,exp(X%*%beta),log=T)) - 
-    dmvnorm(c(beta),beta_0,Sigma_0,log=T)
+    dmvnorm(c(beta),mu_0,Sigma_0,log=T)
   
   if(log(runif(1)) < log_r){
     accept_counter <- accept_counter + 1

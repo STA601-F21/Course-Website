@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 360/602L: Module 7.4</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 360/602L: Module 7.4
+## Metropolis within Gibbs
+### Dr. Olanrewaju Michael Akande
+
+---
+
+
+
+
+
+
+
+## Combining Metropolis and Gibbs
+
+- It is often the case that full conditionals are available for some parameters but not all.
+
+--
+
+- Very useful trick is to combine Gibbs and Metropolis.
+
+--
+
+- We will illustrate this by analyzing time series data on global warming.
+
+--
+
+
+---
+## Carbon dioxide and temperature
+
+- Data are from analysis of ice cores from East Antarctica
+
+--
+
+- Temperature (recorded in terms of difference from current present temp in degrees `\(C\)`) and `\(\text{CO}_2\)` (measured in ppm by volume) are standardized to have mean `\(0\)` and variance `\(1\)`.
+
+--
+
+- `\(200\)` values, each roughly `\(2000\)` years apart.
+
+--
+
+- `\(\text{CO}_2\)` values matched with temperature values roughly `\(1000\)` years later.
+
+
+
+---
+## Data
+
+&lt;img src="7-4-metropolis-within-gibbs_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+`\(\text{CO}_2\)` and temperature follow similar patterns over time.
+
+
+
+---
+## Inference
+
+- Interest lies in predicting temperature as a function of `\(\text{CO}_2\)`.
+
+--
+
+- In these data, the error terms are temporally correlated so that a reasonable model for temperature is
+.block[
+`$$\boldsymbol{Y} \sim \mathcal{N}_n(\boldsymbol{X}\boldsymbol{\beta}, \Sigma),$$`
+]
+
+--
+
+  where `\(\boldsymbol{X}\)` contains a column for the intercept plus a column for `\(\text{CO}_2\)`, and `\(\Sigma\)` has a first-order autoregressive structure so that:
+.small[
+$$
+\Sigma = \sigma^2 \boldsymbol{C}_\rho = \sigma^2
+`\begin{bmatrix}
+1 &amp; \rho &amp; \rho^2 &amp; \ldots &amp; \rho^{n-1} \\
+\rho &amp; 1 &amp; \rho &amp; \ldots &amp; \rho^{n-2} \\
+\rho^2 &amp; \rho &amp; 1 &amp; \ldots &amp; \rho^{n-3} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+\rho^{n-1} &amp; \rho^{n-2} &amp; \rho^{n-3} &amp; \ldots &amp; 1 \\
+\end{bmatrix}`
+$$
+]
+
+--
+
+- The covariance model assumes constant variance but a decreasing correlation as the time between temperature measures is greater.
+
+
+---
+## Posterior inference
+
+- We need to specify prior distributions for `\(\boldsymbol{\beta}\)`, `\(\sigma^2\)` and `\(\rho\)`.
+
+--
+
+- If we assume
+.block[
+`$$\pi(\boldsymbol{\beta}) = \mathcal{N}_p(\boldsymbol{\mu}_0, \Lambda_0),$$`
+]
+
+--
+
+  then
+.block[
+$$
+`\begin{split}
+\pi(\boldsymbol{\beta} | \boldsymbol{y}, \boldsymbol{X}, \sigma^2, \rho) &amp; = \ \mathcal{N}_p(\boldsymbol{\mu}_n, \Lambda_n),\\
+\end{split}`
+$$
+]
+
+--
+  where
+.block[
+$$
+`\begin{split}
+\Lambda_n &amp; = \left[\Lambda_0^{-1} + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{C}_\rho^{-1}\boldsymbol{X} \right]^{-1}\\
+\\
+\boldsymbol{\mu}_n &amp; = \Lambda_n \left[\Lambda_0^{-1}\boldsymbol{\mu}_0 + \frac{1}{\sigma^2} \boldsymbol{X}^T \boldsymbol{C}_\rho^{-1}\boldsymbol{y} \right].
+\end{split}`
+$$
+]
+
+
+
+---
+## Posterior inference
+
+- If we assume
+.block[
+`$$\pi(\sigma^2) = \mathcal{IG} \left(\frac{\nu_0}{2}, \frac{\nu_0\sigma_0^2}{2}\right),$$`
+]
+
+--
+
+  then
+.block[
+$$
+`\begin{split}
+\pi(\sigma^2 | \boldsymbol{y}, \boldsymbol{X}, \boldsymbol{\beta}, \rho) &amp; = \mathcal{IG} \left(\dfrac{\nu_n}{2}, \dfrac{\nu_n\sigma_n^2}{2}\right), \\
+\end{split}`
+$$
+]
+
+--
+  where
+.block[
+$$
+`\begin{split}
+\nu_n &amp; = \nu_0 + n\\
+\\
+\sigma_n^2  &amp; = \dfrac{1}{\nu_n} \left[ \nu_0 \sigma_0^2 + (\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\beta})^T \boldsymbol{C}_\rho^{-1} (\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\beta}) \right] = \dfrac{1}{\nu_n} \left[ \nu_0 \sigma_0^2 + \text{SSR}(\boldsymbol{\beta},\rho) \right].
+\end{split}`
+$$
+]
+
+--
+
+- Therefore, given `\(\rho\)`, we can use Gibbs sampling to cycle through the full conditionals for `\(\boldsymbol{\beta}\)` and `\(\sigma^2\)`.
+
+
+
+---
+## Posterior inference
+
+- Next, we need a prior for the correlation `\(\rho\)`. There is no semi-conjugate option here.
+
+--
+
+- Since we expect `\(\rho\)` to be positive, we could use `\(\pi(\rho) = \text{Unif}(0,1)\)`.
+
+--
+
+- Unfortunately, this does not lead to a standard full conditional.
+
+--
+
+- However, we can use Metropolis-Hastings for the resulting full conditional for `\(\rho\)`. Actually, if we could come up with a symmetric proposal for `\(\rho\)`, we can just use the Metropolis algorithm.
+
+--
+
+- So, technically, we have a Gibbs sampler since we will cycle through full conditionals. However, the sampling step for `\(\rho\)` will rely on Metropolis. 
+--
+
+- Therefore, we have a .hlight[Metropolis within Gibbs] sampler.
+
+
+---
+## Posterior inference
+
+- Update for  `\(\rho\)` (Metropolis) at iteration `\((s+1)\)`:
+  
+  1. Generate a _candidate_ value `\(\rho^\star \sim \text{Unif}(\rho^{(s)} - \delta, \rho^{(s)} + \delta)\)`. If `\(\rho^\star &lt; 0\)`, reassign as `\(|\rho^\star|\)`. If `\(\rho^\star &gt; 1\)`, reassign as `\(2-\rho^\star\)`.
+  
+      *I leave the proof that this "reflecting random walk" is symmetric to you.*
+  
+--
+
+  2. Compute the acceptance ratio
+  .block[
+.small[
+$$
+`\begin{split}
+r &amp; = \frac{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^\star) \cdot \pi(\theta^\star)}{p(\boldsymbol{y} | \boldsymbol{X}, \boldsymbol{\beta}^{(s+1)}, \sigma^{2(s+1)}, \rho^{(s)}) \cdot \pi(\theta^{(s)})}.
+\end{split}`
+$$
+]
+]
+
+--
+
+  3. Set
+  .block[
+.small[
+`\begin{eqnarray*}
+\rho^{(s+1)} = \left\{ \begin{array}{ll}
+\rho^\star &amp; \quad \text{if} \quad u &lt; r \\
+\rho^{(s)} &amp; \quad \text{if} \quad \text{otherwise} \\
+\end{array} \right. .
+\end{eqnarray*}`
+]
+]
+
+--
+
+- So, for each iteration, we first sample from the full conditionals for `\(\boldsymbol{\beta}\)` and `\(\sigma^2\)`, and then use this step to update `\(\rho\)`.
+
+
+
+---
+class: center, middle
+
+# Move to the R script [here](https://sta-360-602l-su20.github.io/Course-Website/slides/IceCore.R).
+
+
+
+---
+
+class: center, middle
+
+# What's next? 
+
+### Move on to the readings for the next module!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

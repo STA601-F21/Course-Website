@@ -367,6 +367,9 @@ lessons:
   
   
   - date: "Mon, July 27"
+    title: "Last day to withdraw with W"
+    
+  - date: ""
     title: "Module 6.3: Bayesian linear regression: weakly informative priors"
     reading: "6-3-reading.html"
     slides: "6-3-linear-regression-III.html"
@@ -409,12 +412,9 @@ lessons:
     
   - title: " "
   - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
-    
-    
-  - date: "Thurs, July 30"
-    title: "Last day to withdraw with W"
   
-  - date: " "
+  
+  - date: "Thurs, July 30"
     title: "Module 7.1: The Metropolis algorithm"
     reading: "7-1-reading.html"
     slides: "7-1-metropolis-I.html"
@@ -431,10 +431,14 @@ lessons:
   - date: "Fri, July 31"
     title: "Module 7.3: The Metropolis-Hastings algorithm"
     reading: "7-3-reading.html"
+    slides: "7-3-metropolis-hastings.html"
+    slidespdf: "7-3-metropolis-hastings.pdf"
     #video: ""
     
   - date: " "
-    title: "Module 7.4: Metropolis-Hastings in action"
+    title: "Module 7.4: Metropolis within Gibbs"
+    slides: "7-4-metropolis-within-gibbs.html"
+    slidespdf: "7-4-metropolis-within-gibbs.pdf"
     #video: ""
     
    

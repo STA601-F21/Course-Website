@@ -159,3 +159,44 @@ sum(Howell1$age > 75 & Howell1$male==0)
 
 
 
+
+#########
+###### Data
+#Load data
+dtmp <- as.matrix(read.table("http://www2.stat.duke.edu/~pdh10/FCBS/Inline/vostok.1999.temp.dat",header=TRUE))
+dco2 <- as.matrix(read.table("http://www2.stat.duke.edu/~pdh10/FCBS/Inline/vostok.icecore.co2.dat",header=TRUE))
+
+
+#Data manipulation to get data to the right format
+dtmp[,2] <- -dtmp[,2]
+dco2[,2] <- -dco2[,2]
+
+ymin <- max( c(min(dtmp[,2]),min(dco2[,2])))
+ymax <- min( c(max(dtmp[,2]),max(dco2[,2])))
+n <- 200
+syear <- seq(ymin,ymax,length=n)
+
+dat <- NULL
+
+for(i in 1:n) {
+  tmp<-dtmp[ dtmp[,2]>=syear[i] ,]
+  dat<-rbind(dat, tmp[dim(tmp)[1],c(2,4)] )
+}
+dat<-as.matrix(dat)
+
+dct<-NULL
+for(i in 1:n) {
+  xc<-dco2[ dco2[,2] < dat[i,1] ,,drop=FALSE]
+  xc<-xc[ 1, ]
+  dct<-rbind(dct, c( xc[c(2,4)], dat[i,] ) )
+}
+
+#mean(dct[,3]-dct[,1])
+dct <- dct[,c(3,2,4)]
+colnames(dct) <- c("year","co2","tmp")
+rownames(dct) <- NULL
+dct <- as.data.frame(dct)
+
+write.table(dct,"data/icecore.txt",col.names = T,row.names = F)
+
+

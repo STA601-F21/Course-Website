@@ -13,7 +13,7 @@ X <- cbind(rep(1,n),(W-mean(W)))
 p <- ncol(X)
 
 #Hyperparameters for the priors
-beta_0 <- matrix(c(23,0),ncol=1)
+mu_0 <- matrix(c(23,0),ncol=1)
 Sigma_0 <- matrix(c(5,0,0,2),nrow=2,ncol=2)
 nu_0 <- 1
 sigma_0_sq <- 1/10
@@ -50,7 +50,7 @@ for(s in 1:(n_iter+burn_in)){
     
     #update beta
     Sigma_n <- solve(solve(Sigma_0) + (t(X)%*%X)/sigma_sq[j])
-    mu_n <- Sigma_n %*% (solve(Sigma_0)%*%beta_0 + (t(X)%*%Y[,j])/sigma_sq[j])
+    mu_n <- Sigma_n %*% (solve(Sigma_0)%*%mu_0 + (t(X)%*%Y[,j])/sigma_sq[j])
     beta[,j] <- rmvnorm(1,mu_n,Sigma_n)
     
     #save results only past burn-in
@@ -70,7 +70,7 @@ for(j in 1:n_swimmers){
   beta_ols[,j] <- solve(t(X)%*%X)%*%t(X)%*%Y[,j]
 }
 colnames(beta_ols) <- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
-rownames(beta_ols) <- c("beta_0","beta_1")
+rownames(beta_ols) <- c("mu_0","beta_1")
 beta_ols
 
 
@@ -78,7 +78,7 @@ beta_ols
 beta_postmean <- apply(BETA,c(1,3),mean)
 beta_postmean <- t(beta_postmean)
 colnames(beta_postmean) <- c("Swimmer 1","Swimmer 2","Swimmer 3","Swimmer 4")
-rownames(beta_postmean) <- c("beta_0","beta_1")
+rownames(beta_postmean) <- c("mu_0","beta_1")
 beta_postmean
 
 
