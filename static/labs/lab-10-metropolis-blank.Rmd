@@ -1,8 +1,8 @@
 ---
-title: "STA 602L Lab 10: Metropolis-Hastings"
-author: "STA 602L: Bayesian and Modern Statistics"
+title: "Lab 10: Metropolis-Hastings"
+author: "STA 360/602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "Apr 6, 2020"
+#date: "Apr 6, 2020"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -37,7 +37,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 5:00pm, Apr 7, 2020
+**Due:** 11:59pm, August 5, 2020
 
 
 # Housekeeping
@@ -48,11 +48,11 @@ You all should have R and RStudio installed on your computers by now. If you do 
 
 ## R Markdown
 
-You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-360-602l-su20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
 
 ## Gradescope
 
-You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/77790/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/141314//assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
 
 ## Getting started
 
@@ -76,17 +76,15 @@ library(caret)
 
 
 
-# Background on Metropolis Hastings
+# Metropolis Hastings (Recap)
 
-We will cover the Metropolis algorithm (and more generally, the Metropolis Hastings algorithm) in class this week. For now, this lab is meant to get you to start thinking about implementing the algorithm for logistic regression. In particular, today, focus on "what" you can do with the Metropolis Hastings algorithm, rather than "why" it works. We will review the why in class.
+Here is the general idea for Metropolis Hastings: suppose we have a target density function $p_0(x)$ and a proposal distribution $g_x(x^* | x^{(s)})$, both defined on a random variable $X$. To produce draws from $p_0(x)$, the update steps in a Metropolis-Hastings algorithm can be written as:
 
-Here is the general idea for Metropolis Hastings: suppose we have a target density function $p_0(x)$ and a proposal distribution $J_s(x^* | x^{(s)})$, both defined on a random variable $X$. To produce draws from $p_0(x)$, the update steps in a Metropolis-Hastings algorithm can be written as:
-
-+ Generate $x^*$ from $J_s\left( x^* | ~x^{(s)}\right)$
-+ Compute the acceptance ratio $r = \frac{p_0\left(x^*\right)}{p_0\left(x^{(s)}\right)} \times \frac{J_s\left( x^{(s)} |~ x^*\right)}{J_s\left( x^* | ~x^{(s)}\right)}$
++ Generate $x^*$ from $g_x\left( x^* | ~x^{(s)}\right)$
++ Compute the acceptance ratio $r = \frac{p_0\left(x^*\right)}{p_0\left(x^{(s)}\right)} \times \frac{g_x\left( x^{(s)} |~ x^*\right)}{g_x\left( x^* | ~x^{(s)}\right)}$
 + Accept the new sample $x^*$ with probability $r$: sample $u \sim U(0, 1)$ and set $x^{(s+1)} = x^*$ if $u < r$; else set $x^{(s+1)} = x^{(s)}$.
 
-The Metropolis-Hastings algorithm gives us a way to sample from the posterior distribution of random variables. The power of Metropolis-Hastings for doing posterior inference is that we only need to be able to *evaluate* the likelihood density function and the prior density functions. We are only truly generating candidate samples from the proposal density $J_s(x^* | x^{(s)})$, which often has a simple form.
+The Metropolis-Hastings algorithm gives us a way to sample from the posterior distribution of random variables. The power of Metropolis-Hastings for doing posterior inference is that we only need to be able to *evaluate* the likelihood density function and the prior density functions. We are only truly generating candidate samples from the proposal density $g_x(x^* | x^{(s)})$, which often has a simple form.
 
 
 
@@ -117,7 +115,7 @@ Though the logistic regression model is easy to write down, the task of doing Ba
 
 ***
 
-1. Suppose you specify a normal prior for $\boldsymbol{\beta}$. Try to find the full conditional density function $p(\boldsymbol{\beta} | Y)$. Can you sample from it directly? You don't need to simplify completely.
+1. Suppose you specify a multivariate normal prior for $\boldsymbol{\beta}$. Try to find the full conditional density function $p(\boldsymbol{\beta} | Y)$. Can you sample from it directly? You don't need to simplify completely.
 
 ***
 
@@ -171,7 +169,7 @@ $$
 To run Metropolis-Hastings, we need to choose a proposal density from which to draw candidate posterior samples. Here, we will use the following density:
 
 $$
-\boldsymbol{\beta}_k^* | \boldsymbol{\beta}_k^{(s)} \sim N(0, \delta^2 I),
+\boldsymbol{\beta}_k^* | \boldsymbol{\beta}_k^{(s)} \sim N(\boldsymbol{\beta}_k^{(s)}, \delta^2 I),
 $$
 with $\delta = 0.05$.
 

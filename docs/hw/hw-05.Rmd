@@ -43,7 +43,7 @@ Please make sure your final output file is a pdf document. You can submit handwr
 3. <font color="green">**Metropolis-Hastings.**</font> Consider the following sampling model: $$y_1, \ldots, y_n | \theta_1, \theta_2 \sim p(y | \theta_1, \theta_2),$$
 with the priors on $\theta_1$ and $\theta_2$ set as $\pi_1(\theta_1)$ and $\pi_2(\theta_2)$ respectively, where $\theta_1, \theta_2 \in \mathbb{R}$.
 
-    Suppose we are interested in generating random samples from the posterior distribution $\pi(\theta_1, \theta_2 | y_1, \ldots, y_n)$. For each of the following proposal distributions, write down the acceptance ratio for using Metropolis-Hastings to generate the samples we desire. Make sure to simplify the ratios as much as possible for each proposal! Also, comment on whether or not the proposals are intuitive.
+    Suppose we are interested in generating random samples from the posterior distribution $\pi(\theta_1, \theta_2 | y_1, \ldots, y_n)$. For each of the following proposal distributions, write down the acceptance ratio for using Metropolis-Hastings to generate the samples we desire. Make sure to simplify the ratios as much as possible for each proposal! Also, comment on whether or not the resulting acceptance ratios are intuitive, that is, what do the resulting acceptance ratios tell about the different samplers.
     + <font color="green">**Part (a):**</font> Full conditionals: 
     $$
     \begin{split}

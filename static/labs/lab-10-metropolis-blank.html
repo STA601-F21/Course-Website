@@ -10,10 +10,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="STA 602L: Bayesian and Modern Statistics" />
+<meta name="author" content="STA 360/602L: Bayesian and Modern Statistics" />
 
 
-<title>STA 602L Lab 10: Metropolis-Hastings</title>
+<title>Lab 10: Metropolis-Hastings</title>
 
 <style type="text/css">
 @charset "UTF-8";
@@ -467,9 +467,8 @@ background-color: #bf4f22;
 
 
 
-<h1 class="title toc-ignore">STA 602L Lab 10: Metropolis-Hastings</h1>
-<h4 class="author">STA 602L: Bayesian and Modern Statistics</h4>
-<h4 class="date">Apr 6, 2020</h4>
+<h1 class="title toc-ignore">Lab 10: Metropolis-Hastings</h1>
+<h4 class="author">STA 360/602L: Bayesian and Modern Statistics</h4>
 
 
 <div id="TOC">
@@ -480,7 +479,7 @@ background-color: #bf4f22;
 <li><a href="#gradescope">Gradescope</a></li>
 <li><a href="#getting-started">Getting started</a></li>
 </ul></li>
-<li><a href="#background-on-metropolis-hastings">Background on Metropolis Hastings</a></li>
+<li><a href="#metropolis-hastings-recap">Metropolis Hastings (Recap)</a></li>
 <li><a href="#logistic-regression">Logistic regression</a><ul>
 <li><a href="#multiclass-logistic-regression">Multiclass logistic regression</a></li>
 </ul></li>
@@ -492,7 +491,7 @@ background-color: #bf4f22;
 </ul>
 </div>
 
-<p><strong>Due:</strong> 5:00pm, Apr 7, 2020</p>
+<p><strong>Due:</strong> 11:59pm, August 5, 2020</p>
 <div id="housekeeping" class="section level1">
 <h1>Housekeeping</h1>
 <div id="rrstudio" class="section level2">
@@ -501,11 +500,11 @@ background-color: #bf4f22;
 </div>
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
-<p>You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: <a href="https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd" class="uri">https://sta-602l-s20.github.io/Course-Website/labs/resources/LabReport.Rmd</a>. Refer to the resources tab of the course website (here: <a href="https://sta-602l-s20.github.io/Course-Website/resources/" class="uri">https://sta-602l-s20.github.io/Course-Website/resources/</a> ) for links to help you learn how to use R markdown.</p>
+<p>You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: <a href="https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd" class="uri">https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd</a>. Refer to the resources tab of the course website (here: <a href="https://sta-360-602l-su20.github.io/Course-Website/resources/" class="uri">https://sta-360-602l-su20.github.io/Course-Website/resources/</a> ) for links to help you learn how to use R markdown.</p>
 </div>
 <div id="gradescope" class="section level2">
 <h2>Gradescope</h2>
-<p>You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: <a href="https://www.gradescope.com/courses/77790/assignments" class="uri">https://www.gradescope.com/courses/77790/assignments</a>. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.</p>
+<p>You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: <a href="https://www.gradescope.com/courses/141314//assignments" class="uri">https://www.gradescope.com/courses/141314//assignments</a>. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
@@ -524,16 +523,15 @@ background-color: #bf4f22;
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(caret)</a></code></pre></div>
 </div>
 </div>
-<div id="background-on-metropolis-hastings" class="section level1">
-<h1>Background on Metropolis Hastings</h1>
-<p>We will cover the Metropolis algorithm (and more generally, the Metropolis Hastings algorithm) in class this week. For now, this lab is meant to get you to start thinking about implementing the algorithm for logistic regression. In particular, today, focus on “what” you can do with the Metropolis Hastings algorithm, rather than “why” it works. We will review the why in class.</p>
-<p>Here is the general idea for Metropolis Hastings: suppose we have a target density function <span class="math inline">\(p_0(x)\)</span> and a proposal distribution <span class="math inline">\(J_s(x^* | x^{(s)})\)</span>, both defined on a random variable <span class="math inline">\(X\)</span>. To produce draws from <span class="math inline">\(p_0(x)\)</span>, the update steps in a Metropolis-Hastings algorithm can be written as:</p>
+<div id="metropolis-hastings-recap" class="section level1">
+<h1>Metropolis Hastings (Recap)</h1>
+<p>Here is the general idea for Metropolis Hastings: suppose we have a target density function <span class="math inline">\(p_0(x)\)</span> and a proposal distribution <span class="math inline">\(g_x(x^* | x^{(s)})\)</span>, both defined on a random variable <span class="math inline">\(X\)</span>. To produce draws from <span class="math inline">\(p_0(x)\)</span>, the update steps in a Metropolis-Hastings algorithm can be written as:</p>
 <ul>
-<li>Generate <span class="math inline">\(x^*\)</span> from <span class="math inline">\(J_s\left( x^* | ~x^{(s)}\right)\)</span></li>
-<li>Compute the acceptance ratio <span class="math inline">\(r = \frac{p_0\left(x^*\right)}{p_0\left(x^{(s)}\right)} \times \frac{J_s\left( x^{(s)} |~ x^*\right)}{J_s\left( x^* | ~x^{(s)}\right)}\)</span></li>
+<li>Generate <span class="math inline">\(x^*\)</span> from <span class="math inline">\(g_x\left( x^* | ~x^{(s)}\right)\)</span></li>
+<li>Compute the acceptance ratio <span class="math inline">\(r = \frac{p_0\left(x^*\right)}{p_0\left(x^{(s)}\right)} \times \frac{g_x\left( x^{(s)} |~ x^*\right)}{g_x\left( x^* | ~x^{(s)}\right)}\)</span></li>
 <li>Accept the new sample <span class="math inline">\(x^*\)</span> with probability <span class="math inline">\(r\)</span>: sample <span class="math inline">\(u \sim U(0, 1)\)</span> and set <span class="math inline">\(x^{(s+1)} = x^*\)</span> if <span class="math inline">\(u &lt; r\)</span>; else set <span class="math inline">\(x^{(s+1)} = x^{(s)}\)</span>.</li>
 </ul>
-<p>The Metropolis-Hastings algorithm gives us a way to sample from the posterior distribution of random variables. The power of Metropolis-Hastings for doing posterior inference is that we only need to be able to <em>evaluate</em> the likelihood density function and the prior density functions. We are only truly generating candidate samples from the proposal density <span class="math inline">\(J_s(x^* | x^{(s)})\)</span>, which often has a simple form.</p>
+<p>The Metropolis-Hastings algorithm gives us a way to sample from the posterior distribution of random variables. The power of Metropolis-Hastings for doing posterior inference is that we only need to be able to <em>evaluate</em> the likelihood density function and the prior density functions. We are only truly generating candidate samples from the proposal density <span class="math inline">\(g_x(x^* | x^{(s)})\)</span>, which often has a simple form.</p>
 </div>
 <div id="logistic-regression" class="section level1">
 <h1>Logistic regression</h1>
@@ -554,7 +552,7 @@ y_i \sim \text{Bernoulli} \left( \frac{e^{ \boldsymbol{x}_i^T \boldsymbol{\beta}
 <p>Though the logistic regression model is easy to write down, the task of doing Bayesian inference on the regression coefficients <span class="math inline">\(\boldsymbol{\beta}\)</span> is comparatively difficult. The reason is that there is no closed-form for the full-conditional density function <span class="math inline">\(p(\boldsymbol{\beta} | Y)\)</span>.</p>
 <hr />
 <ol style="list-style-type: decimal">
-<li>Suppose you specify a normal prior for <span class="math inline">\(\boldsymbol{\beta}\)</span>. Try to find the full conditional density function <span class="math inline">\(p(\boldsymbol{\beta} | Y)\)</span>. Can you sample from it directly? You don’t need to simplify completely.</li>
+<li>Suppose you specify a multivariate normal prior for <span class="math inline">\(\boldsymbol{\beta}\)</span>. Try to find the full conditional density function <span class="math inline">\(p(\boldsymbol{\beta} | Y)\)</span>. Can you sample from it directly? You don’t need to simplify completely.</li>
 </ol>
 <hr />
 <div id="multiclass-logistic-regression" class="section level2">
@@ -598,7 +596,7 @@ y_i &amp;\sim \text{Multinomial} \left( \frac{e^{ \boldsymbol{x}_i^T \boldsymbol
 <hr />
 <p>To run Metropolis-Hastings, we need to choose a proposal density from which to draw candidate posterior samples. Here, we will use the following density:</p>
 <p><span class="math display">\[
-\boldsymbol{\beta}_k^* | \boldsymbol{\beta}_k^{(s)} \sim N(0, \delta^2 I),
+\boldsymbol{\beta}_k^* | \boldsymbol{\beta}_k^{(s)} \sim N(\boldsymbol{\beta}_k^{(s)}, \delta^2 I),
 \]</span> with <span class="math inline">\(\delta = 0.05\)</span>.</p>
 <p>Below, we define functions that return the three ingredients of an M-H step: (1) the proposal density, (2) the prior density, and (3) the likelihood density. In order to avoid numerical issues, we will first work in terms of the logarithm of the probability densities and exponentiate them later.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">proposal_sd &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
@@ -731,16 +729,16 @@ y_i &amp;\sim \text{Multinomial} \left( \frac{e^{ \boldsymbol{x}_i^T \boldsymbol
 <pre><code>##             Reference
 ## Prediction   setosa versicolor virginica
 ##   setosa         50          0         0
-##   versicolor      0         36        12
-##   virginica       0         14        38</code></pre>
+##   versicolor      0         33        13
+##   virginica       0         17        37</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">Conf_mat<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>];</a></code></pre></div>
 <pre><code>## Accuracy 
-##     0.83</code></pre>
+##      0.8</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">Conf_mat<span class="op">$</span>byClass[,<span class="kw">c</span>(<span class="st">&quot;Sensitivity&quot;</span>,<span class="st">&quot;Specificity&quot;</span>)]</a></code></pre></div>
 <pre><code>##                   Sensitivity Specificity
 ## Class: setosa            1.00        1.00
-## Class: versicolor        0.72        0.88
-## Class: virginica         0.76        0.86</code></pre>
+## Class: versicolor        0.66        0.87
+## Class: virginica         0.74        0.83</code></pre>
 <div id="laplace-prior" class="section level2">
 <h2>Laplace prior</h2>
 <p>Above, we used a normal prior. In general, we saw that the coefficients corresponding to the simulated predictors had values that were small, as desired. What if we used a prior that placed higher density at zero? Would we see different shrinkage effects?</p>
