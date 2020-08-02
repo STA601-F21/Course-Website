@@ -456,13 +456,13 @@ lessons:
     reading: "8-1-reading.html"
     slides: "8-1-multinomial-model.html"
     slidespdf: "8-1-multinomial-model.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/777565/1403540/914922/0/Module-81-The-multinomial-model"
     
   - date: " "
     title: "Module 8.2: Finite mixture models: univariate categorical data"
     slides: "8-2-finite-mixture-univariate-categorical.html"
     slidespdf: "8-2-finite-mixture-univariate-categorical.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/777578/1403540/914922/0/Module-82-Finite-mixture-models-univariate-categorical-data"
     
   - date: " "
     title: "Lab 10: Metropolis-Hastings"

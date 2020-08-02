@@ -107,7 +107,7 @@ $$
 `\begin{split}
 \theta_d &amp; = \Pr(y_i = d)\\
 &amp; = \sum_{k=1}^K \Pr(y_i = d | z_i = k) \cdot \Pr(z_i = k)\\
-&amp; = \sum_{k=1}^K \lambda_k \cdot \psi_{h,d}, \\
+&amp; = \sum_{k=1}^K \lambda_k \cdot \psi_{k,d}, \\
 \end{split}`
 $$
 ]
@@ -287,7 +287,7 @@ $$
 \\
 &amp; \propto \left( \prod\limits_{k=1}^K \lambda_k^{\alpha_k + n_k - 1} \right)\\
 \\
-&amp; \equiv \textrm{Dirichlet}\left(a_1 + n_1,\ldots,a_d + n_d\right),\\
+&amp; \equiv \textrm{Dirichlet}\left(\alpha_1 + n_1,\ldots,\alpha_d + n_d\right),\\
 \end{split}`
 $$
 ]

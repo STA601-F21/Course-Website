@@ -190,7 +190,7 @@ bivt.contour(draws)
 ---
 ## Dirichlet examples
 
-$\textrm{Dirichlet}(10,10,10)$
+$\textrm{Dirichlet}(100,100,100)$
 
 ```{r fig.height=4.7, echo=F}
 draws <- rdirichlet(1000, c(100,100,100))
