@@ -25,6 +25,7 @@ require(ggrepel)
 library(cowplot)
 require(ggtern)
 library(caret)
+library(e1071)
 
 options(
   htmltools.dir.version = FALSE, # for blogdown
@@ -71,6 +72,7 @@ require(ggrepel)
 library(cowplot)
 require(ggtern)
 library(caret)
+library(e1071)
 ```
 
 

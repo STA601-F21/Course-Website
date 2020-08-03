@@ -520,7 +520,8 @@ background-color: #bf4f22;
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">require</span>(ggrepel)</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">library</span>(cowplot)</a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">require</span>(ggtern)</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(caret)</a></code></pre></div>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw">library</span>(e1071)</a></code></pre></div>
 </div>
 </div>
 <div id="metropolis-hastings-recap" class="section level1">
@@ -728,17 +729,17 @@ y_i &amp;\sim \text{Multinomial} \left( \frac{e^{ \boldsymbol{x}_i^T \boldsymbol
 <a class="sourceLine" id="cb8-8" data-line-number="8">Conf_mat<span class="op">$</span>table</a></code></pre></div>
 <pre><code>##             Reference
 ## Prediction   setosa versicolor virginica
-##   setosa         50          0         0
-##   versicolor      0         33        13
-##   virginica       0         17        37</code></pre>
+##   setosa         49          0         0
+##   versicolor      1         28        17
+##   virginica       0         22        33</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">Conf_mat<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>];</a></code></pre></div>
 <pre><code>## Accuracy 
-##      0.8</code></pre>
+##     0.73</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">Conf_mat<span class="op">$</span>byClass[,<span class="kw">c</span>(<span class="st">&quot;Sensitivity&quot;</span>,<span class="st">&quot;Specificity&quot;</span>)]</a></code></pre></div>
 <pre><code>##                   Sensitivity Specificity
-## Class: setosa            1.00        1.00
-## Class: versicolor        0.66        0.87
-## Class: virginica         0.74        0.83</code></pre>
+## Class: setosa            0.98        1.00
+## Class: versicolor        0.56        0.82
+## Class: virginica         0.66        0.78</code></pre>
 <div id="laplace-prior" class="section level2">
 <h2>Laplace prior</h2>
 <p>Above, we used a normal prior. In general, we saw that the coefficients corresponding to the simulated predictors had values that were small, as desired. What if we used a prior that placed higher density at zero? Would we see different shrinkage effects?</p>
