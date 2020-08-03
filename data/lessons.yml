@@ -472,13 +472,13 @@ lessons:
     title: "Module 8.3: Finite mixture models: univariate continuous data"
     slides: "8-3-finite-mixture-univariate-continuous.html"
     slidespdf: "8-3-finite-mixture-univariate-continuous.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/778998/1403540/914922/0/Module-83-Finite-mixture-models-univariate-continuous-data"
     
   - date: " "
     title: "Module 8.4: Finite mixture models: univariate continuous data (illustration)"
     slides: "8-4-finite-mixture-univariate-continuous-illustration.html"
     slidespdf: "8-4-finite-mixture-univariate-continuous-illustration.pdf"
-    #video: ""
+    video: "https://api.playposit.com/go/play/779007/1403540/914922/0/Module-84-Finite-mixture-models-univariate-continuous-data-illustration"
     
   - date: "Wed, Aug 5"
     title: "Module 8.5: Finite mixture models: multivariate categorical data"

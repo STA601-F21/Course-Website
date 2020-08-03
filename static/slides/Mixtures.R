@@ -115,7 +115,8 @@ fit_mixture <- function(Y,K,n_iter,burn_in,thin){
 #First generate data
 set.seed(1234)
 Z_true <- sample(1:3,500,replace=T,prob=c(0.55,0.30,0.15))
-mu_true <- c(-5,3,15)
+mu_true <- c(-5,3,9)
+#mu_true <- c(-5,3,15)
 Y <- matrix(rnorm(length(Z_true),mu_true[Z_true],2.5),ncol=1)
 plot(density(Y))
 
