@@ -59,7 +59,7 @@ $$\pi[\boldsymbol{\theta}] \propto \prod_{d=1}^D \theta_j^{\alpha_j-1}, \ \ \ \a
 .small[
 $$
 \begin{split}
-\pi(\boldsymbol{\theta} | Y) = \textrm{Dirichlet}(\alpha_1 + n_1,\ldots,\alpha_d + n_d)
+\pi(\boldsymbol{\theta} | Y) = \textrm{Dirichlet}(\alpha_1 + n_1,\ldots,\alpha_D + n_D)
 \end{split}
 $$
 ]
@@ -269,7 +269,7 @@ $$
 \\
 & = \left(  \prod\limits_{d=1}^D \psi_{k,d}^{a_d + n_{k,d} - 1} \right) \\
 \\
-& \equiv \textrm{Dirichlet}\left(a_1 + n_{k,1},\ldots,a_d + n_{k,D}\right).
+& \equiv \textrm{Dirichlet}\left(a_1 + n_{k,1},\ldots,a_D + n_{k,D}\right).
 \end{split}
 $$
 ]
@@ -297,7 +297,7 @@ $$
 \\
 & \propto \left( \prod\limits_{k=1}^K \lambda_k^{\alpha_k + n_k - 1} \right)\\
 \\
-& \equiv \textrm{Dirichlet}\left(\alpha_1 + n_1,\ldots,\alpha_d + n_d\right),\\
+& \equiv \textrm{Dirichlet}\left(\alpha_1 + n_1,\ldots,\alpha_K + n_K\right),\\
 \end{split}
 $$
 ]

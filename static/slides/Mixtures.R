@@ -51,6 +51,10 @@ fit_mixture <- function(Y,K,n_iter,burn_in,thin){
       post_prob_z[,k] <- lambda[k]*dnorm(Y,mu[k],sqrt(sigma_sq))
     }
     post_prob_z <- post_prob_z/matrix(rowSums(post_prob_z),nrow=n,ncol=K)
+    
+    #for(obs in 1:n){
+    #  Z[obs] <- sample(1:K,1,prob=post_prob_z[obs,])
+    #}
     Ran_unif_z <- runif(nrow(post_prob_z))
     cumul_z <- post_prob_z%*%upper.tri(diag(ncol(post_prob_z)),diag=TRUE)
     Z <- rowSums(Ran_unif_z>cumul_z) + 1L
