@@ -27,11 +27,11 @@ By the end of this course, students should be able to
 
 ### Playposit
 
-To gain access to the pre-recorded lecture videos, you will have to enroll in Playposit via Duke. There are participation quizzes embedded within the videos. These quizzes make up 5% of your final grade (see: [course policies](https://sta-360-602l-su20.github.io/Course-Website/policies/)) so take them seriously. To join the class on Playposit, you need create a new account as a student [here](https://www.playposit.com/join), then use the class link [here](https://www.playposit.com/join-class/1403540-914922) or class code (1403540-914922) to join the class.
+To gain access to the pre-recorded lecture videos, you will have to enroll in Playposit via Duke. There are participation quizzes embedded within the videos. These quizzes make up 5% of your final grade (see: [course policies](https://sta-360-602l-su20.github.io/Course-Website/policies/)) so take them seriously. To join the class on Playposit, you need create a new account as a student [here](https://www.playposit.com/join).  Next, you will use the class link, which I will send out via email, to join the class site.
 
 #### Zoom meetings
 
-The easiest way for you to join the different Zoom meetings is to log in to Sakai, go to the "Zoom meetings" tab, and click "Upcoming Meetings". For the recordings (for lab and discussion sessions), also log in to Sakai, go to the "Zoom meetings" tab, and click "Cloud Recordings". Those will be available few minutes after the sessions. If you prefer to use meeting IDs, there are a bunch to keep track of. You'll find the meeting IDs under the corresponding sessions below.
+The easiest way for you to join the different Zoom meetings is to log in to Sakai, go to the "Zoom meetings" tab, and click "Upcoming Meetings". For the recordings (for lab and discussion sessions), also log in to Sakai, go to the "Zoom meetings" tab, and click "Cloud Recordings". Those will be available few minutes after the sessions.
 
 #### Meeting Times
 
@@ -39,7 +39,7 @@ There will be no **fully synchronous** meetings. There will be pre-recorded lect
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; Monday - Friday: 10:00am - 11:00am
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **970 7809 2053** (email instructor for password).</font>  
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**.</font>  
 
 #### Online Labs
 
@@ -50,12 +50,12 @@ These are live **optional** lab sessions on Zoom  for students who wish to atten
 ##### Mondays:
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; 2:45pm - 4:00pm
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **963 6634 3191**
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**
 
 ##### Wednesdays:
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; 11:30am - 12:45pm
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **986 2005 4617**
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**
 
 
 ### Teaching Team and Office Hours 
@@ -63,9 +63,9 @@ These are live **optional** lab sessions on Zoom  for students who wish to atten
 {.table .table-condensed .table-striped .text-left}
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
-Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Mondays: 6:00pm - 7:00pm <br /> Wednesdays: 9:00am - 10:00am <br /> Thursdays: 12:00pm - 1:00pm | Zoom Meeting ID: **999 2149 8333** <br /> Zoom Meeting ID: **973 5493 7865** <br /> Zoom Meeting ID: **945 4429 7659**
-TA               | [Christine Shen](https://stat.duke.edu/people/christine-shen) | <a href="mailto:yueming.shen@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Mondays: 4:00pm - 5:00pm <br /> Tuesdays: 8:00pm - 10:00pm | Zoom Meeting ID: **940 1015 0151** <br /> Zoom Meeting ID: **979 7461 3863**
-                 | [Bo Liu](https://stat.duke.edu/people/bo-liu-0) | <a href="mailto:bo.liu1997@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Fridays: 3:00pm - 5:00pm | Zoom Meeting ID: **944 2882 0384**
+Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Mondays: 6:00pm - 7:00pm <br /> Wednesdays: 9:00am - 10:00am <br /> Thursdays: 12:00pm - 1:00pm | Zoom Meeting ID: **See Sakai** <br /> Zoom Meeting ID: **See Sakai** <br /> Zoom Meeting ID: **See Sakai**
+TA               | [Christine Shen](https://stat.duke.edu/people/christine-shen) | <a href="mailto:yueming.shen@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Mondays: 4:00pm - 5:00pm <br /> Tuesdays: 8:00pm - 10:00pm | Zoom Meeting ID: **See Sakai** <br /> Zoom Meeting ID: **See Sakai**
+                 | [Bo Liu](https://stat.duke.edu/people/bo-liu-0) | <a href="mailto:bo.liu1997@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Fridays: 3:00pm - 5:00pm | Zoom Meeting ID: **See Sakai**
 
 
 ### Texts
@@ -103,7 +103,7 @@ Fri, August 7 - Sun, August 9 | Final exam period
 ### Green Classroom
 
 <img style="float: left;" src="/img/DukeGreenClassroomCertification-Logo.png">
-This course has achieved Duke’s Green Classroom Certification. The certification indicates that the faculty member teaching this course has taken significant steps to green the delivery of this course. Your faculty member has completed a checklist indicating their common practices in areas of this course that have an environmental impact, such as paper and energy consumption. Some common practices implemented by faculty to reduce the environmental impact of their course include allowing electronic submission of assignments, providing online readings and turning off lights and electronics in the classroom when they are not in use. The eco-friendly aspects of course delivery may vary by faculty, by course and throughout the semester. Learn more at [https://sustainability.duke.edu/action/certification/classroom](https://sustainability.duke.edu/action/certification/classroom).
+This course has achieved Duke’s Green Classroom Certification. The certification indicates that the faculty member teaching this course has taken significant steps to green the delivery of this course. Your faculty member has completed a checklist indicating their common practices in areas of this course that have an environmental impact, such as paper and energy consumption. Some common practices implemented by faculty to reduce the environmental impact of their course include allowing electronic submission of assignments, providing online readings and turning off lights and electronics in the classroom when they are not in use. The eco-friendly aspects of course delivery may vary by faculty, by course and throughout the semester. Learn more at [http://sustainability.duke.edu/action/certifications/classroom/index.php](http://sustainability.duke.edu/action/certifications/classroom/index.php).
 
 ### Acknowledgement
 
