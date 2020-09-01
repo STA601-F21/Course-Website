@@ -101,7 +101,7 @@ How should we approach data analysis in general?
 0.20 with an average of 0.10. So maybe a standard deviation of roughly 0.05?
   + What is a good prior? The **expected value** of `\(\theta\)` close to 0.10 and the **standard deviation** close to 0.05.
   + Possible option: `\(\mbox{Beta}(3.5,31.5)\)` or maybe even `\(\mbox{Beta}(3,32)\)`?
-  &lt;img src="22-selecting-priors_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+  &lt;img src="2-2-selecting-priors_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -149,7 +149,7 @@ How should we approach data analysis in general?
   + Under `\(\mbox{Beta}(3,32)\)`, `\(\Pr(\theta &lt; 0.1) \approx 0.67\)`.
   + Posterior distribution for the model: `\(\pi(\theta | Y=y) = \textrm{Beta}(a+y,b+n-y)\)`
   + Suppose `\(Y=0\)`. Then, `\(\pi(\theta | Y=y) = \textrm{Beta}(3,32+20)\)`
-&lt;img src="22-selecting-priors_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="2-2-selecting-priors_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -239,7 +239,7 @@ $$
 ---
 ## Potential prior distributions
 
-&lt;img src="22-selecting-priors_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="2-2-selecting-priors_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -247,7 +247,7 @@ $$
 
 Let's zoom in:
 
-&lt;img src="22-selecting-priors_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="2-2-selecting-priors_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 
 

@@ -231,7 +231,7 @@ The time-series SE adjusts the naive SE for **autocorrelation**.
 plot(phi.mcmc[,"mu"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 Looks great!
 
@@ -245,7 +245,7 @@ Looks great!
 plot(phi.mcmc[,"tau"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 Looks great!
 
@@ -259,7 +259,7 @@ Looks great!
 plot(phi.mcmc[,"sigma2"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 We do see a few wacky samples that we did not see with `\(\tau\)`, due to the scale. Generally, still looks great!
 
@@ -297,7 +297,7 @@ We do see a few wacky samples that we did not see with `\(\tau\)`, due to the sc
 autocorr.plot(phi.mcmc[,"mu"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 This looks great! Look how quickly autocorrelation goes to 0.
 
@@ -310,7 +310,7 @@ This looks great! Look how quickly autocorrelation goes to 0.
 autocorr.plot(phi.mcmc[,"tau"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 Also great!
 
@@ -324,7 +324,7 @@ Also great!
 autocorr.plot(phi.mcmc[,"sigma2"])
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 Also great!
 
@@ -428,7 +428,7 @@ hdr.den(PHI[,1],prob=95,main="95% HPD region", xlab=expression(mu),
         ylab=expression(paste(pi,"(", mu, "|y)")))
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -441,7 +441,7 @@ hdr.den(PHI[,2],prob=95,main="95% HPD region", xlab=expression(tau),
         ylab=expression(paste(pi,"(", tau, "|y)")))
 ```
 
-&lt;img src="310-gibbs-sampling-IV_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="3-10-gibbs-sampling-IV_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
