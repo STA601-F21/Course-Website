@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>STA 360/602L: SUMMER II 2020</title>
+    <title>STA 602L: SPRING 2021</title>
     <link>/</link>
-    <description>Recent content on STA 360/602L: SUMMER II 2020</description>
+    <description>Recent content on STA 602L: SPRING 2021</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,12 +14,12 @@
     <item>
       <title></title>
       <link>/syllabus/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/syllabus/</guid>
       <description>Note: Please check this page frequently for updates and always remember to refresh the page.
 
- Date Lesson Reading Video Slides Slides (pdf) Lab HW    Module 0.1: Course overview                   WEEK 1                     MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE         Mon, June 29 Module 1.</description>
+ Week Date Lesson Reading Video Slides Slides (pdf) Class Activity Homework     Module 0.1: Course overview                     WEEK 1                       MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE          Mon, June 29 Module 1.</description>
     </item>
     
     <item>

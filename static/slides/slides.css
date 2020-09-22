@@ -2,31 +2,35 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
 
 body { 
-  font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+  /*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+  font-family:'Trebuchet MS', sans-serif;
   color: #333333;
 }
 h2 {
-  font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+  /*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+  font-family:'Trebuchet MS', sans-serif;
   font-weight: normal;
   font-variant: small-caps;
-  color: #075767;
+  color: #522700;
   font-size: 12px;
   margin: 0.25em 0 0.5em 0; 
 }
 h1, h3 {
- font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+ /*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+  font-family:'Trebuchet MS', sans-serif;
   font-weight: normal;
   font-variant: small-caps;
-  color: #0087A2;
+  color: #914601;
 }
 a, a > code {
-  font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+  /*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+  font-family:'Trebuchet MS', sans-serif;
   color: #6CA0DC;
   text-decoration: none;
 }
 
 a, a:hover, a:focus {
-  color: #bf4f22;
+  color: #8c765b;
 }
 
 .footnote {
@@ -37,7 +41,8 @@ a, a:hover, a:focus {
 }
 .remark-code, .remark-inline-code { 
   font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
-  font-size: 64%; 
+  font-size: 65%;
+  color: #4a290a;
 }
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
@@ -47,7 +52,7 @@ a, a:hover, a:focus {
   /* text-shadow: 0 0 20px #333; */
 }
 .inverse h1, .inverse h2, .inverse h3 {
-  color: #075767;
+  color: #522700;
 }
 /* Two-column layout */
 .left-column {
@@ -79,7 +84,7 @@ a, a:hover, a:focus {
   clear: both;
 }
 .question {
-  background-color: #ffc5ad;
+  background-color: #e8e4c3;
   padding: 0.25px;
 }
 ul {
@@ -128,9 +133,9 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     bottom: 5px;
     right: 810px;
     height: 70px;
-    width: 90px;
+    width: 81px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-image: url("img/class_logo.png");
 }
 
@@ -148,17 +153,17 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
 
 .tiny { font-size: 25% }
 
-.large { font-size: 90% }  
+.large { font-size: 90% } 
 
 .midsmall { font-size: 68% } 
 
-.block {background-color: #c0f4fc;}
+.block {background-color: #ffd7b3;}
 
 .remark-slide-content {
     font-size: 21px;
     font-weight: lighter;
 }
 
-.hlight{color: #cf814a;}
+.hlight{color: #d92e2e;}
 
 

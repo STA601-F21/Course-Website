@@ -12,7 +12,8 @@ html {
 }
 
 body {
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
 	font-weight: lighter;
 	background-color: #fefefe;
 	color: #222;
@@ -23,42 +24,46 @@ body {
 h1.title {
 	font-weight: 400;
 	font-variant: small-caps;
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
-	color: #075767;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
+	color: #522700;
 }
 
 h1 {
 	font-style: normal;
 	font-variant: small-caps;
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
-	color: #075767;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
+	color: #522700;
 }
 
 h2 {
 	font-style: normal;
 	font-variant: small-caps;
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
 	font-weight: 400;
-	color: #075767;
+	color: #522700;
 }
 
 h3.subtitle {
 	font-style: normal;
 	font-variant: small-caps;
-	color: #075767;
+	color: #522700;
 }
 
 h3 {
 	font-style: normal;
 	font-variant: small-caps;
-	color: #075767;
+	color: #522700;
 }
 
 h4 {
 	font-style: normal;
 	font-variant: small-caps;
 	font-weight: 200;
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
 	margin-top: 1.5rem;
 	margin-bottom: 0;
 	line-height: 1;
@@ -66,7 +71,8 @@ h4 {
 
 h4.author,
 h4.date {
-	font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;
+	/*!font-family: 'Century Gothic',Futura,'URW Gothic L',sans-serif;*/
+	font-family:'Trebuchet MS', sans-serif;
 	font-weight: 200;
 	font-variant: small-caps;
 }
@@ -143,7 +149,7 @@ ol>li:before {
 	/* Increment the counter by 1 */
 	counter-increment: li;
 	position: absolute;
-	color: #075767;
+	color: #522700;
 	left: -12px;
 	font-weight: normal;
 }
@@ -153,7 +159,7 @@ ol ol {
 }
 
 a, a:hover, a:focus {
-  color: #bf4f22;
+  color: #AF5500;
 }
 
 .tocify {
@@ -161,7 +167,7 @@ a, a:hover, a:focus {
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-  background-color: #bf4f22;
+  background-color: #AF5500;
 }
 
 
