@@ -1,6 +1,6 @@
 ---
 title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
-author: "STA 360/602L: Bayesian and Modern Statistics"
+author: "STA 602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
 #date: "Mar 2, 2020"
 output: 
@@ -35,7 +35,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 11:59pm, July 21, 2020
+**Due:** 11:59pm, Monday, March 22
 
 
 # Housekeeping

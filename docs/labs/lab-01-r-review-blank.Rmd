@@ -1,6 +1,6 @@
 ---
 title: "Lab 1: R review"
-author: "STA 360/602L: Bayesian and Modern Statistics"
+author: "STA 602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
 #date: "Jan 13, 2020"
 output: 
@@ -24,7 +24,7 @@ options(
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-**Due:** 11:59pm, June 30, 2020
+**Due:** 11:59pm, Monday, January 25
 
 
 # Housekeeping

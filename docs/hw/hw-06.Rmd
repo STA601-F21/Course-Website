@@ -1,0 +1,51 @@
+---
+title: "Homework 6"
+date: "Due: 11:59pm, Friday, April 2"
+output: 
+  html_document: 
+    css: hw.css
+    theme: yeti
+    toc: true
+    fig_caption: false
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+---
+
+## Instructions
+
+Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments $\rightarrow$ Homework 6.
+
+## Questions
+
+1. <font color="green">**Continuation of question 1 from homework 5.**</font>
+Generate 50 new "test" data from the same sampling distribution,  that is, $\boldsymbol{y_i}^\star = (y_{i,1}^\star,y_{i,2}^\star)^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)$, $i = 1, \ldots, 50$. Keep the $y_{i,2}^\star$ values but set the $y_{i,1}^\star$ values to NA (make sure to save the "true" values somewhere!).  
+    Now, re-run the Gibbs sampler from the last homework to obtain the posterior samples for $(\boldsymbol{\theta}, \Sigma)$, based on the 100 "train" data, from that homework (that is, $\boldsymbol{y_i} = (y_{i,1},y_{i,2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)$, $i = 1, \ldots, 100$, with the same $(\boldsymbol{\theta}, \Sigma)$). Using the posterior samples, answer the following questions:
+    + <font color="green">**Part (a):**</font> Generate predictive samples of $y_{i,1}^\star$ given each $y_{i,2}^\star$ value you kept, for the 50 test subjects. Show your sampler.  
+    <font color="blue">**(4 points)**</font>  
+    <font color="red">*You should view this as a "train --> test" prediction problem rather than a missing data problem on an original data. That is, given the posterior samples of your parameters, and the test values for $y_{i2}^\star$, draw from the posterior predictive distribution of $(y_{i,1}^\star | y_{i,2}^\star, \{(y_{1,1},y_{1,2}), \ldots, (y_{100,1},y_{100,2})\})$,. You may find it useful to think of this in terms of compositional sampling, that is, for each posterior sample of $(\boldsymbol{\theta}, \Sigma)$, sample from $(y_{i,1} | y_{i,2}, \boldsymbol{\theta}, \Sigma)$, which is just from the form of the sampling distribution. Do not incorporate the prediction problem into your original Gibbs sampler!*</font>
+      
+    + <font color="green">**Part (b):**</font> Using the samples from the predictive density obtained above, obtain $\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]$ for each of the test subjects, as well as a 95% posterior predictive interval. Make a plot containing all the intervals for each of the 50 subjects. In the plot, indicate where each $\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]$ falls within each interval.  
+    <font color="blue">**(4 points)**</font>
+    + <font color="green">**Part (c):**</font> What is the coverage of the 95% predictive intervals out of sample? That is, how many of the 95% predictive intervals contain the true $y_{i,1}^\star$ values?  
+    <font color="blue">**(2 points)**</font>
+
+
+2. Suppose data consist of reaction times $y_{ij}$ for subjects $i = 1, \ldots, n_j$ in experimental conditions $j = 1, \ldots, J$. Researchers inform you that it is reasonable to assume that reaction times follow an exponential distribution.
+    + <font color="green">**Part (a):**</font> Describe a Bayesian hierarchical model for borrowing information across experimental conditions. Specify priors that will allow you to borrow information across the $J$ conditions.  
+    <font color="blue">**(3 points)**</font>  
+    <font color="red">*When setting the priors, make sure you select priors that respect the support/parameter space of each parameter. Also, think about specifying conjugate or semi-conjugate priors will make your life much easier.*</font>
+    + <font color="green">**Part (b):**</font> Derive the Gibbs sampling algorithm for fitting your hierarchical model. What are the full conditionals?  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (c):**</font> Simulate data from the assumed model with $J = 5$ and the $n_j$'s set to your preferred values, but with each set to at most 25. Also, set all parameter values as you like, but make sure they are reasonable (that is, avoid very extreme values). Implement the Gibbs sampler, present point and interval estimates of the group-specific mean reaction times.  
+    <font color="blue">**(2 points)**</font>
+    + <font color="green">**Part (d):**</font> Compare results from hierarchical specification to the true parameter values that you set. How well does your Gibbs sampler perform?  
+    <font color="blue">**(2 points)**</font>
+    
+
+  
+  
+## Grading
+
+20 points.
+  

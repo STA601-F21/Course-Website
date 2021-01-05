@@ -63,7 +63,7 @@ class: center, middle
 
 --
 
-<i class="fa fa-clock fa-2x"></i> We will follow the Hoff book closely -- roughly two chapters per week.
+<i class="fa fa-clock fa-2x"></i> We will follow the Hoff book closely.
 
 --
 

@@ -1,0 +1,64 @@
+---
+title: "Homework 8"
+date: "Due: 11:59pm, Friday, April 16"
+output: 
+  html_document: 
+    css: hw.css
+    theme: yeti
+    toc: true
+    fig_caption: false
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+---
+
+## Instructions
+
+Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments $\rightarrow$ Homework 8.
+
+## Questions
+
+1. <font color="green">**Continuation of the biased coin problem from class.**</font> Suppose we have univariate data $y_1, \ldots, y_n | \theta \sim \text{Bernoulli}(\theta)$ and wish to test: $\mathcal{H}_0: \theta = 0.5 \ \ \text{vs. } \mathcal{H}_1: \theta \neq 0.5$. We already derived the Bayes factors in class, so you should leverage that.
+    
+    Study the asymptotic behavior of the Bayes factor in favor of $\mathcal{H}_1$. For $\theta \in \{0.25, 0.46, 0.5, 0.54\}$, make a plot of the Bayes factor (y-axis) against sample size (x-axis). You should have four plots. Comment (in detail) on the implications of the true value of $\theta$ on the behavior of the Bayes factor in favor of $\mathcal{H}_1$, as a function of sample size. When answering this question, remind yourself of what Bayes factors actually mean and represent! One line answers will not be sufficient here; explain clearly and in detail what you think the plots mean or represent.  
+    <font color="blue">**(10 points)**</font>
+    
+    <font color="red">*When you are making the plots, generate the data sequentially. That is, the way the data will be generated as Bernoulli outcomes 0 or 1 for each $y_i$ in a real experiment. For example, for $n = 1$, sample $y_1 = 0$ or $y_1 = 1$. For $n = 2$, sample $y_2 = 0$ or $y_2 = 1$ and add it to the existing $y_1$. For $n = 3$, sample $y_3 = 0$ or $y_3 = 1$ and add it to the existing $y_1$ and $y_2$. Keep doing that for a sequence of $n$ values, as $n$ gets very large, until you see a very discernible pattern in your plots.* </font>
+    
+
+2. <font color="green">**Metropolis-Hastings.**</font> Consider the following sampling model: $$y_1, \ldots, y_n | \theta_1, \theta_2 \sim p(y | \theta_1, \theta_2),$$
+with the priors on $\theta_1$ and $\theta_2$ set as $\pi_1(\theta_1)$ and $\pi_2(\theta_2)$ respectively, where $\theta_1, \theta_2 \in \mathbb{R}$.
+
+    Suppose we are interested in generating random samples from the posterior distribution $\pi(\theta_1, \theta_2 | y_1, \ldots, y_n)$. For each of the following proposal distributions, write down the acceptance ratio for using Metropolis-Hastings to generate the samples we desire. Make sure to simplify the ratios as much as possible for each proposal! Also, comment on whether or not the resulting acceptance ratios are intuitive, that is, what do the resulting acceptance ratios tell about the different samplers.
+    + <font color="green">**Part (a):**</font> Full conditionals: 
+    $$
+    \begin{split}
+    g_{\theta_1}[\theta_1^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = p(\theta_1^\star | y_1, \ldots, y_n, \theta_2^{(s)});\\
+    g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = p(\theta_2^\star | y_1, \ldots, y_n, \theta_1^{(s)}).
+    \end{split}
+    $$  
+    <font color="blue">**(4 points for all students)**</font>
+    + <font color="green">**Part (b):**</font> Priors:
+    $$
+    \begin{split}
+    g_{\theta_1}[\theta_1^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \pi_1(\theta_1^\star);\\
+    g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \pi_2(\theta_2^\star).
+    \end{split}
+    $$  
+    <font color="blue">**(3 points for all students)**</font>
+    + <font color="green">**Part (c):**</font> Random walk:
+    $$
+    \begin{split}
+    g_{\theta_1}[\theta_1^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \mathcal{N}(\theta_1^{(s)}, \delta^2);\\
+    g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \mathcal{N}(\theta_2^{(s)}, \delta^2).
+    \end{split}
+    $$  
+    <font color="blue">**(3 points for all students)**</font>
+    
+    <font color="red">*In each case, you only need to spend time working through the acceptance ratio for one of the two parameters. The other one should become obvious once you've completed the first.* </font>
+
+  
+## Grading
+
+20 points.
+  

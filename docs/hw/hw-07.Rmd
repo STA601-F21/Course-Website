@@ -1,0 +1,46 @@
+---
+title: "Homework 7"
+date: "Due: 11:59pm, Friday, April 9"
+output: 
+  html_document: 
+    css: hw.css
+    theme: yeti
+    toc: true
+    fig_caption: false
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+---
+
+## Instructions
+
+Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments $\rightarrow$ Homework 7.
+
+## Questions
+
+1. <font color="green">**Continuation of the swimming data from class.**</font> Recall the problem from class on swimming times. Download the data here: [http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/swim.dat](http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/swim.dat). You can also create the data by manually typing it into R from the link.
+
+    The file contains data on the amount of time in seconds it takes each of 4 high school swimmers to swim 50 yards. There are 6 times for each student, taken every two weeks. That is, each swimmer has six measurements at $W = 2, 4, 6, 8, 10, 12$ weeks. Each row corresponds to a swimmer and a higher column index indicates a later date. Assume again that the model for each swimmer is
+    $$T_{i} = \beta_0 + \beta_1 (W_i - \bar{W}) + \epsilon_i,$$
+    where $T_i$ represents the swimming times and $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
+    + <font color="green">**Part (a):**</font> Using the g-prior with g = n = 6, generate samples/realizations from the prior predictive distribution for a single swimmer over the 12 weeks $(W = 2, 4, 6, 8, 10, 12)$ and create a density plot of the predictive draws (one for each $W$). Are the values plausible?  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (b):**</font> Using the data, and the g-prior with g = n = 6 for each swimmer, give the posterior distributions of $\beta_0$, $\beta_1$ and $\sigma^2$ for each swimmer.  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (c):**</font> For each swimmer $j$, plot their posterior predictive distributions for a future time $T^\star$ two weeks after the last recorded observation (overlay the 4 densities in a single plot).  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (d):**</font> The coach of the team has to recommend which of the swimmers to compete in a swim meet in two weeks time. Using draws from the predictive distributions, compute $P(Y_j^\star = \text{max}(Y_1^\star,Y_2^\star,Y_3^\star,Y_4^\star))$ for each swimmer $j$, and based on this make a recommendation to the coach.  
+    <font color="blue">**(2 points)**</font>
+
+    
+2. Hoff 9.2.
+    + <font color="blue">**Part (a): 5 points**</font>
+    + <font color="blue">**Part (b): 4 points**</font>
+
+    <font color="red">*You must write your own sampler for part (a). For part (b), you don't need to write your own Gibbs sampler. Just follow our approach from class and use the packages. Be sure to compare your results to the results from part (a). You can find the data file `azdiabetes.dat` mentioned  in the question here: http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/.* </font>
+
+
+## Grading
+
+20 points.
+  

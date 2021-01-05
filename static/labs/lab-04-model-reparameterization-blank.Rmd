@@ -1,6 +1,6 @@
 ---
 title: "Lab 4: Prior selection and model reparameterization"
-author: "STA 360/602L: Bayesian and Modern Statistics"
+author: "STA 602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
 #date: "Feb 10, 2020"
 output: 
@@ -33,7 +33,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 11:59pm, July 10, 2020
+**Due:** 11:59pm, Monday, February 15
 
 
 # Housekeeping

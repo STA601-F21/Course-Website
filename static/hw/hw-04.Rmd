@@ -1,6 +1,6 @@
 ---
 title: "Homework 4"
-date: "Due: 11:59pm, Monday, July 27"
+date: "Due: 11:59pm, Friday, March 5"
 output: 
   html_document: 
     css: hw.css
@@ -18,40 +18,22 @@ Please make sure your final output file is a pdf document. You can submit handwr
 
 ## Questions
 
-1.  Hoff problem 7.4.
-    + <font color="blue">**Part (a): 1 point for all students**</font>
-    + <font color="blue">**Part (b): 1 point for all students**</font>
-    + <font color="blue">**Part (c): 2 points for all students**</font>
-    + <font color="blue">**Part (d)(i): 2 points for all students**</font>
-    + <font color="blue">**Part (e): 1 points for all students**</font>
+1. Hoff problem 6.1
+    + <font color="blue">**Part (a): 2 points**</font>
+    + <font color="blue">**Part (b): 3 points**</font>
+    + <font color="blue">**Part (c): 3 points**</font>
+    + <font color="blue">**Part (d): 3 points**</font>
 
-    <font color="red">*You can find the data mentioned in the question here: http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/.* </font>
-    
-    <font color="red">**For 7.4(d), parts (ii) and (iii) are NOT required but feel free to attempt for practice; you are only required to submit answers to part (i). For 7.4(d)(i), there is no need to read or complete the entire Exercise 7.1, simply rely on the form of the Jeffrey's prior (from class slides) and the corresponding full conditionals (from the discussion session).**</font>
-
-2. Simulate data assuming $\boldsymbol{y_i} = (y_{i1},y_{i2})^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)$, $i = 1, \ldots, 100$, with $\boldsymbol{\theta} = (0,0)^T$ and $\Sigma$ chosen so that the marginal variances are $1$ and correlation $\rho = 0.8$. Assuming independent normal & inverse-Wishart priors for $\boldsymbol{\theta}$ and $\Sigma$, that is, $\pi(\boldsymbol{\theta}, \Sigma) = \pi(\boldsymbol{\theta}) \pi(\Sigma)$, run Gibbs sampler (hyperparameters up to you but you must justify your choices) to generate posterior samples for $(\boldsymbol{\theta}, \Sigma)$.  
-Now, generate 50 new "test" data from the same sampling distribution,  that is, $\boldsymbol{y_i}^\star = (y_{i,1}^\star,y_{i,2}^\star)^T \sim \mathcal{N}_2(\boldsymbol{\theta}, \Sigma)$, $i = 1, \ldots, 50$. Keep the $y_{i,2}^\star$ values but set the $y_{i,1}^\star$ values to NA (make sure to save the "true" values somewhere!).  
-    Using the posterior samples for $(\boldsymbol{\theta}, \Sigma)$, based on the 100 "train" data, answer the following questions:
-    + <font color="green">**Part (a):**</font> Generate predictive samples of $y_{i,1}^\star$ given each $y_{i,2}^\star$ value you kept, for the 50 test subjects. Show your sampler.  
-    <font color="blue">**(2 points for all students)**</font>  
-    <font color="red">*You should view this as a "train --> test" prediction problem rather than a missing data problem on an original data. That is, given the posterior samples of your parameters, and the test values for $y_{i2}^\star$, draw from the posterior predictive distribution of $(y_{i,1}^\star | y_{i,2}^\star, \{(y_{1,1},y_{1,2}), \ldots, (y_{100,1},y_{100,2})\})$,. You may find it useful to think of this in terms of compositional sampling, that is, for each posterior sample of $(\boldsymbol{\theta}, \Sigma)$, sample from $(y_{i,1} | y_{i,2}, \boldsymbol{\theta}, \Sigma)$, which is just from the form of the sampling distribution. Do not incorporate the prediction problem into your original Gibbs sampler!*</font>
-      
-    + <font color="green">**Part (b):**</font> Using the samples from the predictive density obtained above, obtain $\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]$ for each of the test subjects, as well as a 95% posterior predictive interval. Make a plot containing all the intervals for each of the 50 subjects. In the plot, indicate where each $\mathbb{E}[y_{i,1}^\star | y_{i,2}^\star]$ falls within each interval.  
-    <font color="blue">**(2 points for all students)**</font>
-    + <font color="green">**Part (c):**</font> What is the coverage of the 95% predictive intervals out of sample? That is, how many of the 95% predictive intervals contain the true $y_{i,1}^\star$ values?  
-    <font color="blue">**(2 points for all students)**</font>
-
-
-3. Suppose data consist of reaction times $y_{ij}$ for subjects $i = 1, \ldots, n_j$ in experimental conditions $j = 1, \ldots, J$. Researchers inform you that it is reasonable to assume that reaction times follow an exponential distribution.
-    + <font color="green">**Part (a):**</font> Describe a Bayesian hierarchical model for borrowing information across experimental conditions. Specify priors that will allow you to borrow information across the $J$ conditions.  
-    <font color="blue">**(2 point for all students)**</font>  
-    <font color="red">*When setting the priors, make sure you select priors that respect the support/parameter space of each parameter. Also, think about specifying conjugate or semi-conjugate priors will make your life much easier.*</font>
-    + <font color="green">**Part (b):**</font> Derive the Gibbs sampling algorithm for fitting your hierarchical model. What are the full conditionals?  
-    <font color="blue">**(2 point for all students)**</font>
-    + <font color="green">**Part (c):**</font> Simulate data from the assumed model with $J = 5$ and the $n_j$'s set to your preferred values, but with each set to at most 25. Also, set all parameter values as you like, but make sure they are reasonable (that is, avoid very extreme values). Implement the Gibbs sampler, present point and interval estimates of the group-specific mean reaction times.  
-    <font color="blue">**(2 point for all students)**</font>
-    + <font color="green">**Part (d):**</font> Compare results from hierarchical specification to the true parameter values that you set. How well does your Gibbs sampler perform?  
-    <font color="blue">**(1 point for all students)**</font>
+2. font color="green">**Continuation of question 4 from homework 3.**</font> Suppose we have count data $y_i$ with $(i = 1,\ldots, n)$, where $x_i = 0$ for control subjects and $x_i = 1$ for treated subjects. Consider the following model for the data: $$y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),$$ where $\lambda = \mathbb{E}[y_i | x_i = 0]$ and $\gamma$ is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters $\lambda$ and $\gamma$, $$\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).$$
+You should already have the correct posterior density from homework 3.
+    + <font color="green">**Part (a):**</font>  Derive the full conditional distributions for $\lambda$ and $\gamma$.  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (b):**</font>  Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.  
+    <font color="blue">**(3 points)**</font>
+    + <font color="green">**Part (c):**</font>  Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?  
+    <font color="blue">**(2 points)**</font>
+    + <font color="green">**Part (d):**</font>  Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?  
+    <font color="blue">**(1 point)**</font>
     
 
   

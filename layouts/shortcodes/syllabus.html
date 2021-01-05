@@ -11,8 +11,8 @@
     <th style="width:5%;text-align:center">Video</th>
     <th style="width:5%;text-align:center">Slides</th>
     <th style="width:5%;text-align:center">Slides (pdf)</th>
-    <th style="width:5%;text-align:center">Class Activity</th>
-    <th style="width:5%;text-align:center">Homework</th>
+    <th style="width:5%;text-align:center">Lab</th>
+    <th style="width:5%;text-align:center">Problem Sets</th>
   </tr>
 
   {{ range $.Site.Data.lessons }}
@@ -55,7 +55,7 @@
       {{ end }}
       
       {{ if .lab }}
-      <td align="center"><a href="{{ .Site.baseurl }}/in-class-analysis/{{ .lab }}">
+      <td align="center"><a href="{{ .Site.baseurl }}/labs/{{ .lab }}">
           <i class="fa fa-code fa-lg"></i></a></td>
       {{ else }}
         <td align="center"><font color="f1f1f1">

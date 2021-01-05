@@ -1,6 +1,6 @@
 ---
 title: "Lab 10: Metropolis-Hastings"
-author: "STA 360/602L: Bayesian and Modern Statistics"
+author: "STA 602L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
 #date: "Apr 6, 2020"
 output: 
@@ -38,7 +38,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-**Due:** 11:59pm, August 5, 2020
+**Due:** 11:59pm, Monday, April 19
 
 
 # Housekeeping
