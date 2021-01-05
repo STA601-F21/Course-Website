@@ -147,15 +147,15 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     width: 700px;
 }
 
-.small { font-size: 80% } 
+.small { font-size: 70% } 
 
-.mini { font-size: 60% } 
+.mini { font-size: 50% } 
 
-.tiny { font-size: 25% }
+.tiny { font-size: 20% }
 
-.large { font-size: 90% } 
+.large { font-size: 80% } 
 
-.midsmall { font-size: 68% } 
+.midsmall { font-size: 58% } 
 
 .block {background-color: #ffd7b3;}
 
