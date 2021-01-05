@@ -163,7 +163,7 @@ $$
 ---
 class: center, middle
 
-# Move to the R script [here](https://sta-360-602l-su20.github.io/Course-Website/slides/Mixtures.R).
+# Move to the R script [here](https://sta-602l-s21.github.io/Course-Website/slides/Mixtures.R).
 
 
 ---

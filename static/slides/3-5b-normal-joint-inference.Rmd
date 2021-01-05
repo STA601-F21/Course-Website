@@ -155,6 +155,7 @@ $$
 
 - So our joint posterior is
 .block[
+.small[
 $$
 \begin{split}
 \mu_A | Y_A, \tau_A & \sim \ \mathcal{N}\left(\mu_{nA}, \frac{1}{\kappa_{nA}\tau_A} \right) = \mathcal{N}\left(13.03, \frac{1}{7\tau_A} \right)\\
@@ -166,6 +167,7 @@ $$
 \tau_N | Y_N & \sim \textrm{Gamma}\left(\frac{\nu_{nN}}{2}, \frac{\nu_{nN} \sigma_{nN}^2}{2}\right) = \textrm{Gamma}\left(\frac{7}{2}, \frac{7 (28.54)}{2}\right)\\
 \end{split}
 $$
+]
 ]
 
 

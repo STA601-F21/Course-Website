@@ -528,15 +528,14 @@ lessons:
     
   - title: "Course wrap-up and review for final exam"
   
-  #- date: "Wed, Aug 5"
-  #  title: "Module 8.5: Finite mixture models: multivariate categorical data"
-  #  slides: "8-5-finite-mixture-multivariate-categorical.html"
-  #  slidespdf: "8-5-finite-mixture-multivariate-categorical.pdf"
+  - date: "Fri, Apr 23 | OPTIONAL MATERIAL:"
+    title: "Module 8.5: Finite mixture models: multivariate categorical data"
+    slides: "8-5-finite-mixture-multivariate-categorical.html"
+    slidespdf: "8-5-finite-mixture-multivariate-categorical.pdf"
     
-  #- date: " "
-  #  title: "Module 8.6: Finite mixture models: multivariate continuous data"
-  #  slides: "8-6-finite-mixture-multivariate-continuous.html"
-  #  slidespdf: "8-6-finite-mixture-multivariate-continuous.pdf"
+  - title: "Module 8.6: Finite mixture models: multivariate continuous data"
+    slides: "8-6-finite-mixture-multivariate-continuous.html"
+    slidespdf: "8-6-finite-mixture-multivariate-continuous.pdf"
   
   
   - week: "WEEK 14"

@@ -312,7 +312,7 @@ $$
 
 --
 
-- We can also compute posterior $\Pr[\gamma_j = 1| Y]$, the posterior probability of including the $j$'the predictor, often called .hlight[marginal inclusion probability (MIP)], allowing for uncertainty in the other predictors.
+- We can also compute posterior $\Pr[\gamma_j = 1| Y]$, the posterior probability of including the $j$'th predictor, often called .hlight[marginal inclusion probability (MIP)], allowing for uncertainty in the other predictors.
 
 --
 
