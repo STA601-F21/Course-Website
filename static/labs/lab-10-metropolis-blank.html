@@ -597,11 +597,11 @@ background-color: #AF5500;
 </div>
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
-<p>You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: <a href="https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd" class="uri">https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd</a>. Refer to the resources tab of the course website (here: <a href="https://sta-360-602l-su20.github.io/Course-Website/resources/" class="uri">https://sta-360-602l-su20.github.io/Course-Website/resources/</a> ) for links to help you learn how to use R markdown.</p>
+<p>You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: <a href="https://sta-602l-s21.github.io/Course-Website/labs/resources/LabReport.Rmd" class="uri">https://sta-602l-s21.github.io/Course-Website/labs/resources/LabReport.Rmd</a>. Refer to the resources tab of the course website (here: <a href="https://sta-602l-s21.github.io/Course-Website/resources/" class="uri">https://sta-602l-s21.github.io/Course-Website/resources/</a> ) for links to help you learn how to use R markdown.</p>
 </div>
 <div id="gradescope" class="section level2">
 <h2>Gradescope</h2>
-<p>You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: <a href="https://www.gradescope.com/courses/141314//assignments" class="uri">https://www.gradescope.com/courses/141314//assignments</a>. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.</p>
+<p>You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: <a href="https://www.gradescope.com/courses/190490/assignments" class="uri">https://www.gradescope.com/courses/190490/assignments</a>. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
@@ -827,16 +827,16 @@ y_i &amp;\sim \text{Multinomial} \left( \frac{e^{ \boldsymbol{x}_i^T \boldsymbol
 <pre><code>##             Reference
 ## Prediction   setosa versicolor virginica
 ##   setosa         50          1         0
-##   versicolor      0         35        12
-##   virginica       0         14        38</code></pre>
+##   versicolor      0         28        10
+##   virginica       0         21        40</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Conf_mat<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>];</span></code></pre></div>
 <pre><code>## Accuracy 
-##     0.82</code></pre>
+##     0.79</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>Conf_mat<span class="op">$</span>byClass[,<span class="kw">c</span>(<span class="st">&quot;Sensitivity&quot;</span>,<span class="st">&quot;Specificity&quot;</span>)]</span></code></pre></div>
 <pre><code>##                   Sensitivity Specificity
 ## Class: setosa            1.00        0.99
-## Class: versicolor        0.70        0.88
-## Class: virginica         0.76        0.86</code></pre>
+## Class: versicolor        0.56        0.90
+## Class: virginica         0.80        0.79</code></pre>
 <div id="laplace-prior" class="section level2">
 <h2>Laplace prior</h2>
 <p>Above, we used a normal prior. In general, we saw that the coefficients corresponding to the simulated predictors had values that were small, as desired. What if we used a prior that placed higher density at zero? Would we see different shrinkage effects?</p>

@@ -45,11 +45,11 @@ You all should have R and RStudio installed on your computers by now. If you do 
 
 ## R Markdown
 
-You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-360-602l-su20.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-360-602l-su20.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
+You are required to use R Markdown to type up this lab report. If you do not already know how to use R markdown, here is a very basic R Markdown template: https://sta-602l-s21.github.io/Course-Website/labs/resources/LabReport.Rmd. Refer to the resources tab of the course website (here: https://sta-602l-s21.github.io/Course-Website/resources/ ) for links to help you learn how to use R markdown. 
 
 ## Gradescope
 
-You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/141314//assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
+You MUST submit both your .Rmd and .pdf files to the course site on Gradescope here: https://www.gradescope.com/courses/190490/assignments. Make sure to knit to pdf and not html; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry.
 
 ## Getting started
 
@@ -485,7 +485,7 @@ Now that you have seen a multilevel model implemented with some of the `rstanarm
 
 We have an additional dataset on the radon levels in houses in the state of Minnesota. Specifically, for each house we have the radon measurement on the log scale (log_radon), an indicator from whether the measurement was take in the basement or the first floor (floor, where 0 = basement, 1 = first floor), and which of 85 counties the house belongs to. We have an additional fourth variable which gives the county-level uranium level (log_uranium). 
 
-Download the data (here: https://sta-360-602l-su20.github.io/Course-Website/labs/radon.txt) and save it locally to the same directory as your R markdown file. Once you have downloaded the data file into the SAME folder as your R markdown file, load the data by using the following R code. 
+Download the data (here: https://sta-602l-s21.github.io/Course-Website/labs/radon.txt) and save it locally to the same directory as your R markdown file. Once you have downloaded the data file into the SAME folder as your R markdown file, load the data by using the following R code. 
 
 ```{r}
 radon <- read.csv("radon.txt", header = T,sep="")
