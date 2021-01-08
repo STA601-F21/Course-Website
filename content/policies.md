@@ -11,7 +11,7 @@ ALL students are expected to be familiar with all the topics covered within the 
 
 ### Workload
 
-You are expected to put in approximately 18-25 hours of work per week. The work hours will include time spent going through the preassigned readings, watching the lecture videos, watching or attending the lab sessions, and doing all graded work. Please note that the more focused and engaged you are, the quicker you will be able to get through all the materials.
+Work hours will include time spent going through the preassigned readings, watching the lecture videos, watching or attending the lab sessions, and doing all graded work. Please note that the more focused and engaged you are, the quicker you will be able to get through all the materials.
 
 ### Graded Work
 
