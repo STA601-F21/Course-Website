@@ -64,7 +64,7 @@ The easiest way for you to join the different Zoom meetings is to log in to Saka
 ------------------|-------------------|------------------|------------------|------------------ 
 Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Mondays: 6:00pm - 7:00pm <br /> Thursdays: 9:00am - 10:00am | Zoom Meeting ID: **See Sakai**
 TA               | [Jennifer Kampe](https://scholars.duke.edu/person/jennifer.kampe) | <a href="mailto:jennifer.kampe@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tuesdays: 5:00pm - 6:30pm <br /> Fridays: 5:00pm - 6:30pm | Zoom Meeting ID: **See Sakai**
-                 | [Ziang Wang](https://scholars.duke.edu/person/ziang.wang) | <a href="mailto:ziang.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Times TBD | Zoom Meeting ID: **See Sakai**
+                 | [Ziang Wang](https://scholars.duke.edu/person/ziang.wang) | <a href="mailto:ziang.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wednesdays: 3:00pm - 5:00pm <br /> Thursdays: 3:00pm - 4pm | Zoom Meeting ID: **See Sakai**
 
 
 ### Texts
