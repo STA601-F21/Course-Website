@@ -279,7 +279,7 @@ lessons:
     title: "Review for midterm exam"
     
     
-  - week: "WEEK 8"
+  - week: "WEEK 9"
     date: "Mon, Mar 15"
     title: "Midterm exam"
   
@@ -318,7 +318,7 @@ lessons:
     
     
     
-  - week: "WEEK 9"
+  - week: "WEEK 10"
     date: "Mon, Mar 22"
     title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
     lab: "lab-07-HMC-blank.html"
@@ -371,7 +371,7 @@ lessons:
     
     
     
-  - week: "WEEK 10"
+  - week: "WEEK 11"
     date: "Mon, Mar 29"
     title: "Lab 8: Hierarchical modeling"
     lab: "lab-08-multilevel-modeling-blank.html"
@@ -420,7 +420,7 @@ lessons:
     
     
     
-  - week: "WEEK 11"
+  - week: "WEEK 12"
     date: "Mon, Apr 5"
     title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
     lab: "lab-09-glms-blank.html"
@@ -450,7 +450,7 @@ lessons:
     
     
     
-  - week: "WEEK 12"
+  - week: "WEEK 13"
     date: "Mon, Apr 12"
     title: "Wellness day; no lab"
     
@@ -491,7 +491,7 @@ lessons:
     
     
     
-  - week: "WEEK 13"
+  - week: "WEEK 14"
     date: "Mon, Apr 19"
     title: "Lab 10: Metropolis-Hastings"
     lab: "lab-10-metropolis-blank.html"
@@ -538,7 +538,7 @@ lessons:
     slidespdf: "8-6-finite-mixture-multivariate-continuous.pdf"
   
   
-  - week: "WEEK 14"
+  - week: "WEEK 15"
     date: "Tue, Apr 27"
     title: "Reading week; no class"
     
