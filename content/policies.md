@@ -32,12 +32,12 @@ Participation Quizzes | 5%
 
 There are no make-ups for any of the graded work except for medical or familial emergencies or for reasons approved by the instructor BEFORE the due date. See the instructor in advance of relevant due dates to discuss possible alternatives. 
 	
-Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined after the final exam.
+Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined at the end of the course.
 
 
 ### Descriptions of graded work
 
-#### Problem sets and lab exercises
+#### Problem sets
 Problem sets will be handed out on a weekly basis. They will be based on both the lectures and labs and will be announced every Thursday or Friday -- be sure to check the website regularly!  **Also, please note that any work that is not legible by the instructor or TAs will not be graded (given a score  of 0). Every write-up must be clearly written in full sentences and clear English. Any assignment that is completely unclear to the instructors and/or TAs, may result in a grade of a 0.** For programming exercises, you are required to use R and you must submit ALL of the code as an appendix.  
 
 Each student MUST write up and turn in her or his own answers. You are encouraged to talk to each other regarding homework problems or to the instructor/TA. However, the write-up, solution, and code must be entirely your own work. The assignments must be submitted on [Gradescope](https://www.gradescope.com/courses/190490/assignments) under ``Assignments''. Note that you will not be able to make online submissions after the due date, so be sure to submit before or by the Gradescope-specified deadline.
