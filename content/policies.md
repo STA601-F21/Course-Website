@@ -34,8 +34,6 @@ There are no make-ups for any of the graded work except for medical or familial 
 	
 Grades **may** be curved at the end of the semester. Cumulative averages of 90% -- 100% are guaranteed at least an A-, 80% -- 89% at least a B-, and 70% -- 79% at least a C-, however the exact ranges for letter grades will be determined after the final exam.
 
-**If grades are curved, grades for students in STA 360 will be curved differently in comparison to the grades for students in STA 602.**
-
 
 ### Descriptions of graded work
 
