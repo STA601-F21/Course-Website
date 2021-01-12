@@ -3,7 +3,7 @@ lessons:
   - week: "WEEK 1"
     date: "Thur, Jan 21"
     title: "Module 0.1: Course overview and introduction"
-    #slides: "0-1-course-overview.html"
+    slides: "0-1-course-overview.html"
     #slidespdf: "0-1-course-overview.pdf"
   
   
