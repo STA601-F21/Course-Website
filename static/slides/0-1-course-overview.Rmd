@@ -130,7 +130,7 @@ All materials and information will be posted on the course webpage:
 
 --
 
-- What if I don't know R? This course assumes you already know R but you can still learn on the fly (you must be self-motivated). Here are some resources for you: [https://sta-602l-su21.github.io/Course-Website/resources/](https://sta-602l-s21.github.io/Course-Website/resources/).
+- What if I don't know R? This course assumes you already know R but you can still learn on the fly (you must be self-motivated). Here are some resources for you: [https://sta-602l-s21.github.io/Course-Website/resources/](https://sta-602l-s21.github.io/Course-Website/resources/).
 
 
 
@@ -180,7 +180,7 @@ class: center, middle
 ---
 ## Other details
 
-- What topics will we cover? Refer to Section 11 of the syllabus (here: [Syllabus](https://sta-602l-s21.github.io/Course-Website/syllabus_pdf/Syllabus.pdf)).
+- What topics will we cover? Refer to Section 12 of the syllabus (here: [Syllabus](https://sta-602l-s21.github.io/Course-Website/syllabus_pdf/Syllabus.pdf)).
 
 --
 
