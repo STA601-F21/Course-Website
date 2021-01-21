@@ -22,13 +22,13 @@ lessons:
     reading: "1-1-reading.html"
     slides: "1-1-building-blocks-bayes.html"
     slidespdf: "1-1-building-blocks-bayes.pdf"
-    video: "https://api.playposit.com/go/play/735956/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-11-Building-blocks-of-Bayesian-inference"
+    video: "https://api.playposit.com/go/play/735956/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-11-Building-blocks-of-Bayesian-inference"
     
   - title: "Module 1.2: Probability review"
     reading: "1-2-reading.html"
     slides: "1-2-prob-review.html"
     slidespdf: "1-2-prob-review.pdf"
-    video: "https://api.playposit.com/go/play/736001/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-12-Probability-review"
+    video: "https://api.playposit.com/go/play/736001/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-12-Probability-review"
     
     
   - title: " "
@@ -41,14 +41,14 @@ lessons:
     reading: "2-1-reading.html"
     slides: "2-1-beta-binomial.html"
     slidespdf: "2-1-beta-binomial.pdf"
-    video: "https://api.playposit.com/go/play/736861/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-21-Conjugacy-Beta-Bernoulli-and-beta-binomial-models"
+    video: "https://api.playposit.com/go/play/736861/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-21-Conjugacy-Beta-Bernoulli-and-beta-binomial-models"
     
     
   - title: "Module 2.2: Operationalizing data analysis; selecting priors"
     reading: "2-2-reading.html"
     slides: "2-2-selecting-priors.html"
     slidespdf: "2-2-selecting-priors.pdf"
-    video: "https://api.playposit.com/go/play/736899/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-22-Operationalizing-data-analysis-selecting-priors"
+    video: "https://api.playposit.com/go/play/736899/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-22-Operationalizing-data-analysis-selecting-priors"
   
   
   - date: "Fri, Jan 29 | NEW ASSIGNMENT:"
@@ -67,13 +67,13 @@ lessons:
     reading: "2-3-reading.html"
     slides: "2-3-posterior-prediction.html"
     slidespdf: "2-3-posterior-prediction.pdf"
-    video: "https://api.playposit.com/go/play/738165/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-23-Marginal-likelihood-and-posterior-prediction"
+    video: "https://api.playposit.com/go/play/738165/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-23-Marginal-likelihood-and-posterior-prediction"
     
   - title: "Module 2.4: Truncated priors and the inverse cdf method"
     reading: "2-4-reading.html"
     slides: "2-4-inverse-cdf.html"
     slidespdf: "2-4-inverse-cdf.pdf"
-    video: "https://api.playposit.com/go/play/738212/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-24-Truncated-priors-and-the-inverse-cdf-method"
+    video: "https://api.playposit.com/go/play/738212/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-24-Truncated-priors-and-the-inverse-cdf-method"
   
   - title: "Drop/Add ends"
     
@@ -83,13 +83,13 @@ lessons:
     reading: "2-5-reading.html"
     slides: "2-5-intervals.html"
     slidespdf: "2-5-intervals.pdf"
-    video: "https://api.playposit.com/go/play/739070/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-25-Frequentist-vs-Bayesian-intervals"
+    video: "https://api.playposit.com/go/play/739070/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-25-Frequentist-vs-Bayesian-intervals"
     
   - title: "Module 2.6: Loss functions and Bayes risk"
     reading: "2-6-reading.html"
     slides: "2-6-bayes-risk.html"
     slidespdf: "2-6-bayes-risk.pdf"
-    video: "https://api.playposit.com/go/play/739082/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-26-Loss-functions-and-Bayes-risk"
+    video: "https://api.playposit.com/go/play/739082/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-26-Loss-functions-and-Bayes-risk"
     
   
   - week: "WEEK 4"
@@ -103,13 +103,13 @@ lessons:
     reading: "2-7-reading.html"
     slides: "2-7-gamma-poisson.html"
     slidespdf: "2-7-gamma-poisson.pdf"
-    video: "https://api.playposit.com/go/play/742730/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-27-Gamma-Poisson-model-I"
+    video: "https://api.playposit.com/go/play/742730/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-27-Gamma-Poisson-model-I"
     
   - title: "Module 2.8: Gamma-Poisson model II; finding conjugate distributions"
     reading: "2-8-reading.html"
     slides: "2-8-derive-conjugacy.html"
     slidespdf: "2-8-derive-conjugacy.pdf"
-    video: "https://api.playposit.com/go/play/742747/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-28-Gamma-Poisson-model-II-finding-conjugate-distributions"
+    video: "https://api.playposit.com/go/play/742747/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-28-Gamma-Poisson-model-II-finding-conjugate-distributions"
     
     
   - date: "Thur, Feb 11"
@@ -140,13 +140,13 @@ lessons:
     reading: "3-1-reading.html"
     slides: "3-1-monte-carlo.html"
     slidespdf: "3-1-monte-carlo.pdf"
-    video: "https://api.playposit.com/go/play/745244/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-31-Monte-Carlo-approximation-and-sampling"
+    video: "https://api.playposit.com/go/play/745244/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-31-Monte-Carlo-approximation-and-sampling"
     
   - title: "Module 3.2: Rejection sampling; Importance sampling"
     reading: "3-2-reading.html"
     slides: "3-2-rejection-importance-sampling.html"
     slidespdf: "3-2-rejection-importance-sampling.pdf"
-    video: "https://api.playposit.com/go/play/745281/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-32-Rejection-sampling-Importance-sampling"
+    video: "https://api.playposit.com/go/play/745281/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-32-Rejection-sampling-Importance-sampling"
 
     
   - date: "Thur, Feb 18"
@@ -154,13 +154,13 @@ lessons:
     reading: "3-3-reading.html"
     slides: "3-3-normal-intro.html"
     slidespdf: "3-3-normal-intro.pdf"
-    video: "https://api.playposit.com/go/play/746405/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-33-The-normal-model-introduction-and-motivating-examples"
+    video: "https://api.playposit.com/go/play/746405/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-33-The-normal-model-introduction-and-motivating-examples"
     
   - title: "Module 3.4: The normal model: conditional inference for the mean"
     reading: "3-4-reading.html"
     slides: "3-4-normal-cond-inference.html"
     slidespdf: "3-4-normal-cond-inference.pdf"
-    video: "https://api.playposit.com/go/play/746431/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-34-The-normal-model-conditional-inference-for-the-mean"
+    video: "https://api.playposit.com/go/play/746431/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-34-The-normal-model-conditional-inference-for-the-mean"
     
     
   - date: "Fri, Feb 19 | DELIVERABLES:"
@@ -183,18 +183,18 @@ lessons:
     reading: "3-5-reading.html"
     slides: "3-5-normal-joint-inference.html"
     slidespdf: "3-5-normal-joint-inference.pdf"
-    video: "https://api.playposit.com/go/play/747833/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-35-The-normal-model-joint-inference-for-mean-and-variance"
+    video: "https://api.playposit.com/go/play/747833/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-35-The-normal-model-joint-inference-for-mean-and-variance"
     
   - title: "Module 3.5b: The normal model: joint inference for mean and variance (illustration)"
     slides: "3-5b-normal-joint-inference.html"
     slidespdf: "3-5b-normal-joint-inference.pdf"
-    video: "https://api.playposit.com/go/play/747835/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-35b-The-normal-model-joint-inference-for-mean-and-variance-illustration"
+    video: "https://api.playposit.com/go/play/747835/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-35b-The-normal-model-joint-inference-for-mean-and-variance-illustration"
     
   - title: "Module 3.6: Noninformative and improper priors"
     reading: "3-6-reading.html"
     slides: "3-6-noninformative-priors.html"
     slidespdf: "3-6-noninformative-priors.pdf"
-    video: "https://api.playposit.com/go/play/747838/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-36-Noninformative-and-improper-priors"
+    video: "https://api.playposit.com/go/play/747838/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-36-Noninformative-and-improper-priors"
   
   
   - date: "Thur, Feb 25"
@@ -202,13 +202,13 @@ lessons:
     reading: "3-7-reading.html"
     slides: "3-7-gibbs-sampling-I.html"
     slidespdf: "3-7-gibbs-sampling-I.pdf"
-    video: "https://api.playposit.com/go/play/750338/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-37-MCMC-and-Gibbs-sampling-I"
+    video: "https://api.playposit.com/go/play/750338/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-37-MCMC-and-Gibbs-sampling-I"
     
   - title: "Module 3.8: MCMC and Gibbs sampling II"
     reading: "3-8-reading.html"
     slides: "3-8-gibbs-sampling-II.html"
     slidespdf: "3-8-gibbs-sampling-II.pdf"
-    video: "https://api.playposit.com/go/play/750358/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-38-MCMC-and-Gibbs-sampling-II"
+    video: "https://api.playposit.com/go/play/750358/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-38-MCMC-and-Gibbs-sampling-II"
     
     
   - date: "Fri, Feb 26 | DELIVERABLES:"
@@ -230,13 +230,13 @@ lessons:
     reading: "3-9-reading.html"
     slides: "3-9-gibbs-sampling-III.html"
     slidespdf: "3-9-gibbs-sampling-III.pdf"
-    video: "https://api.playposit.com/go/play/751448/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-39-MCMC-and-Gibbs-sampling-III"
+    video: "https://api.playposit.com/go/play/751448/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-39-MCMC-and-Gibbs-sampling-III"
     
   - title: "Module 3.10: MCMC and Gibbs sampling IV"
     reading: "3-10-reading.html"
     slides: "3-10-gibbs-sampling-IV.html"
     slidespdf: "3-10-gibbs-sampling-IV.pdf"
-    video: "https://api.playposit.com/go/play/751515/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-310-MCMC-and-Gibbs-sampling-IV"
+    video: "https://api.playposit.com/go/play/751515/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-310-MCMC-and-Gibbs-sampling-IV"
     
   - title: "Module 3.11: Discussion session exercise"
     slides: "3-11-in-class-exercise.html"
@@ -252,13 +252,13 @@ lessons:
     reading: "4-1-reading.html"
     slides: "4-1-multivariate-normal-I.html"
     slidespdf: "4-1-multivariate-normal-I.pdf"
-    video: "https://api.playposit.com/go/play/752934/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-41-Multivariate-normal-model-I"
+    video: "https://api.playposit.com/go/play/752934/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-41-Multivariate-normal-model-I"
     
   - title: "Module 4.2: Multivariate normal model II"
     reading: "4-2-reading.html"
     slides: "4-2-multivariate-normal-II.html"
     slidespdf: "4-2-multivariate-normal-II.pdf"
-    video: "https://api.playposit.com/go/play/753022/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-42-Multivariate-normal-model-II"
+    video: "https://api.playposit.com/go/play/753022/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-42-Multivariate-normal-model-II"
     
     
   - date: "Fri, Mar 5 | DELIVERABLES:"
@@ -288,13 +288,13 @@ lessons:
     reading: "4-3-reading.html"
     slides: "4-3-multivariate-normal-III.html"
     slidespdf: "4-3-multivariate-normal-III.pdf"
-    video: "https://api.playposit.com/go/play/759262/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-43-Multivariate-normal-model-III"
+    video: "https://api.playposit.com/go/play/759262/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-43-Multivariate-normal-model-III"
     
   - title: "Module 4.4: Multivariate normal model IV"
     reading: "4-4-reading.html"
     slides: "4-4-multivariate-normal-IV.html"
     slidespdf: "4-4-multivariate-normal-IV.pdf"
-    video: "https://api.playposit.com/go/play/759282/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-44-Multivariate-normal-model-IV"
+    video: "https://api.playposit.com/go/play/759282/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-44-Multivariate-normal-model-IV"
     
     
   - date: "Thur, Mar 18"
@@ -302,13 +302,13 @@ lessons:
     slides: "4-5-missing-data-I.html"
     slidespdf: "4-5-missing-data-I.pdf"
     reading: "4-5-reading.html"
-    video: "https://api.playposit.com/go/play/760758/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-45-Missing-data-and-imputation-I"
+    video: "https://api.playposit.com/go/play/760758/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-45-Missing-data-and-imputation-I"
     
   - title: "Module 4.6: Missing data and imputation II"
     reading: "4-6-reading.html"
     slides: "4-6-missing-data-II.html"
     slidespdf: "4-6-missing-data-II.pdf"
-    video: "https://api.playposit.com/go/play/760786/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-46-Missing-data-and-imputation-II"
+    video: "https://api.playposit.com/go/play/760786/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-46-Missing-data-and-imputation-II"
     
     
   - date: "Fri, Mar 19 | NEW ASSIGNMENT:"
@@ -334,7 +334,7 @@ lessons:
     reading: "5-1-reading.html"
     slides: "5-1-hierarchical-models-two-groups-I.html"
     slidespdf: "5-1-hierarchical-models-two-groups-I.pdf"
-    video: "https://api.playposit.com/go/play/762753/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-51-Hierarchical-normal-models-with-constant-variance-two-groups"
+    video: "https://api.playposit.com/go/play/762753/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-51-Hierarchical-normal-models-with-constant-variance-two-groups"
     
   - title: "Module 5.2: Hierarchical normal models with constant variance: two groups (illustration)"
     slides: "5-2-hierarchical-models-two-groups-II.html"
@@ -345,7 +345,7 @@ lessons:
     reading: "5-3-reading.html"
     slides: "5-3-hierarchical-models-multiple-groups-constant-var.html"
     slidespdf: "5-3-hierarchical-models-multiple-groups-constant-var.pdf"
-    video: "https://api.playposit.com/go/play/762815/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-53-Hierarchical-normal-models-with-constant-variance-multiple-groups"
+    video: "https://api.playposit.com/go/play/762815/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-53-Hierarchical-normal-models-with-constant-variance-multiple-groups"
     
     
   - date: "Thur, Mar 25"
@@ -353,12 +353,12 @@ lessons:
     slides: "5-4-hierarchical-models-means-and-variances-I.html"
     slidespdf: "5-4-hierarchical-models-means-and-variances-I.pdf"
     reading: "5-4-reading.html"
-    video: "https://api.playposit.com/go/play/763931/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-54-Hierarchical-normal-modeling-of-means-and-variances"
+    video: "https://api.playposit.com/go/play/763931/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-54-Hierarchical-normal-modeling-of-means-and-variances"
     
   - title: "Module 5.5: Hierarchical normal modeling of means and variances (illustration)"
     slides: "5-5-hierarchical-models-means-and-variances-II.html"
     slidespdf: "5-5-hierarchical-models-means-and-variances-II.pdf"
-    video: "https://api.playposit.com/go/play/763971/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-55-Hierarchical-normal-modeling-of-means-and-variances-illustration"
+    video: "https://api.playposit.com/go/play/763971/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-55-Hierarchical-normal-modeling-of-means-and-variances-illustration"
     
     
   - date: "Fri, Mar 25 | DELIVERABLES:"
@@ -387,13 +387,13 @@ lessons:
     reading: "6-1-reading.html"
     slides: "6-1-linear-regression-I.html"
     slidespdf: "6-1-linear-regression-I.pdf"
-    video: "https://api.playposit.com/go/play/765610/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-61-Bayesian-linear-regression"
+    video: "https://api.playposit.com/go/play/765610/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-61-Bayesian-linear-regression"
     
   - title: "Module 6.2: Bayesian linear regression (illustration)"
     reading: "6-2-reading.html"
     slides: "6-2-linear-regression-II.html"
     slidespdf: "6-2-linear-regression-II.pdf"
-    video: "https://api.playposit.com/go/play/765629/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-62-Bayesian-linear-regression-illustration"
+    video: "https://api.playposit.com/go/play/765629/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-62-Bayesian-linear-regression-illustration"
     
     
   - date: "Thur, Apr 1"
@@ -401,13 +401,13 @@ lessons:
     reading: "6-3-reading.html"
     slides: "6-3-linear-regression-III.html"
     slidespdf: "6-3-linear-regression-III.pdf"
-    video: "https://api.playposit.com/go/play/768503/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-63-Bayesian-linear-regression-weakly-informative-priors"
+    video: "https://api.playposit.com/go/play/768503/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-63-Bayesian-linear-regression-weakly-informative-priors"
     
   - title: "Module 6.4: Bayesian hypothesis testing"
     reading: "6-4-reading.html"
     slides: "6-4-hypothesis-testing.html"
     slidespdf: "6-4-hypothesis-testing.pdf"
-    video: "https://api.playposit.com/go/play/768507/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-64-Bayesian-hypothesis-testing"
+    video: "https://api.playposit.com/go/play/768507/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-64-Bayesian-hypothesis-testing"
     
     
   - date: "Fri, Apr 2 | DELIVERABLES:"
@@ -430,10 +430,10 @@ lessons:
     reading: "6-5-reading.html"
     slides: "6-5-model-selection.html"
     slidespdf: "6-5-model-selection.pdf"
-    video: "https://api.playposit.com/go/play/769990/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-65-Bayesian-model-selection"
+    video: "https://api.playposit.com/go/play/769990/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-65-Bayesian-model-selection"
     
   - title: "Module 6.6: Bayesian model selection (illustration)"
-    video: "https://api.playposit.com/go/play/770039/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-66-Bayesian-model-selection-illustration"
+    video: "https://api.playposit.com/go/play/770039/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-66-Bayesian-model-selection-illustration"
     
   
   - date: "Thur, Apr 8"
@@ -464,12 +464,12 @@ lessons:
     reading: "7-1-reading.html"
     slides: "7-1-metropolis-I.html"
     slidespdf: "7-1-metropolis-I.pdf"
-    video: "https://api.playposit.com/go/play/773431/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-71-The-Metropolis-algorithm"
+    video: "https://api.playposit.com/go/play/773431/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-71-The-Metropolis-algorithm"
     
   - title: "Module 7.2: Metropolis in action"
     slides: "7-2-metropolis-II.html"
     slidespdf: "7-2-metropolis-II.pdf"
-    video: "https://api.playposit.com/go/play/773485/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-72-Metropolis-in-action"
+    video: "https://api.playposit.com/go/play/773485/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-72-Metropolis-in-action"
     
   
   - date: "Thur, Apr 15"
@@ -477,12 +477,12 @@ lessons:
     reading: "7-3-reading.html"
     slides: "7-3-metropolis-hastings.html"
     slidespdf: "7-3-metropolis-hastings.pdf"
-    video: "https://api.playposit.com/go/play/774989/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-73-The-Metropolis-Hastings-algorithm"
+    video: "https://api.playposit.com/go/play/774989/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-73-The-Metropolis-Hastings-algorithm"
     
   - title: "Module 7.4: Metropolis within Gibbs"
     slides: "7-4-metropolis-within-gibbs.html"
     slidespdf: "7-4-metropolis-within-gibbs.pdf"
-    video: "https://api.playposit.com/go/play/774997/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-74-Metropolis-within-Gibbs"
+    video: "https://api.playposit.com/go/play/774997/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-74-Metropolis-within-Gibbs"
     
     
   - date: "Fri, Apr 16 | DELIVERABLES:"
@@ -506,24 +506,24 @@ lessons:
     reading: "8-1-reading.html"
     slides: "8-1-multinomial-model.html"
     slidespdf: "8-1-multinomial-model.pdf"
-    video: "https://api.playposit.com/go/play/777565/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-81-The-multinomial-model"
+    video: "https://api.playposit.com/go/play/777565/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-81-The-multinomial-model"
     
   - title: "Module 8.2: Finite mixture models: univariate categorical data"
     slides: "8-2-finite-mixture-univariate-categorical.html"
     slidespdf: "8-2-finite-mixture-univariate-categorical.pdf"
-    video: "https://api.playposit.com/go/play/777578/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-82-Finite-mixture-models-univariate-categorical-data"
+    video: "https://api.playposit.com/go/play/777578/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-82-Finite-mixture-models-univariate-categorical-data"
     
     
   - date: "Thur, Apr 22"
     title: "Module 8.3: Finite mixture models: univariate continuous data"
     slides: "8-3-finite-mixture-univariate-continuous.html"
     slidespdf: "8-3-finite-mixture-univariate-continuous.pdf"
-    video: "https://api.playposit.com/go/play/778998/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-83-Finite-mixture-models-univariate-continuous-data"
+    video: "https://api.playposit.com/go/play/778998/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-83-Finite-mixture-models-univariate-continuous-data"
     
   - title: "Module 8.4: Finite mixture models: univariate continuous data (illustration)"
     slides: "8-4-finite-mixture-univariate-continuous-illustration.html"
     slidespdf: "8-4-finite-mixture-univariate-continuous-illustration.pdf"
-    video: "https://api.playposit.com/go/play/779007/1403540/914922/0/Bayesian-and-Modern-Statistics--Module-84-Finite-mixture-models-univariate-continuous-data-illustration"
+    video: "https://api.playposit.com/go/play/779007/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-84-Finite-mixture-models-univariate-continuous-data-illustration"
     
   - title: "Course wrap-up and review for final exam"
   
