@@ -190,7 +190,7 @@ PlotPriorPlusPosterior(a=3,b=32,ones=0,zeros=20)
 .small[
 $$
 \begin{split}
-\mathbb{E}(\theta | y) & = \dfrac{a+y}{a+b+n} = \dfrac{3}{52} = 0.058.\\
+\mathbb{E}(\theta | y) & = \dfrac{a+y}{a+b+n} = \dfrac{3}{55} = 0.055.\\
 \end{split}
 $$
 ]
@@ -202,7 +202,7 @@ $$
 \begin{split}
 \mathbb{E}(\theta | y) & = \dfrac{a+b}{a+b+n} \times \textrm{prior mean} + \dfrac{n}{a+b+n} \times \textrm{sample mean}\\
 & = \dfrac{a+b}{a+b+n} \times \dfrac{a}{a+b} + \dfrac{n}{a+b+n} \times \dfrac{y}{n}\\
-& = \dfrac{35}{52} \times \dfrac{3}{35} + \dfrac{20}{52} \times \dfrac{0}{n} = \dfrac{3}{52} = 0.058.\\
+& = \dfrac{35}{55} \times \dfrac{3}{35} + \dfrac{20}{55} \times \dfrac{0}{n} = \dfrac{3}{55} = 0.055.\\
 \end{split}
 $$
 ]
@@ -217,7 +217,7 @@ $$
   + People with low prior expectations are generally at least $90\%$ certain that the infection rate is below 0.10.
   + $\pi(\theta | Y)$ is to the left of $\pi(\theta)$ because the observation $Y=0$ provides evidence of a low value of $\theta$.
   + $\pi(\theta | Y)$ is more peaked than $\pi(\theta)$ because it combines information and so contains more information than $\pi(\theta)$ alone.
-  + The posterior expectation is 0.058.
+  + The posterior expectation is 0.055.
   + The posterior mode is 0.04.
       - Note, for $\mbox{Beta}(a,b)$, the mode is $(a-1)/(a+b-2)$.
   + The posterior probability that $\theta < 0.1$ is 0.92.
