@@ -136,7 +136,7 @@ knitr::include_graphics("img/hpd.png")
 
   1. $\Pr(\theta \in s(y) | Y=y) = 1-\alpha$; and
   
-  2. If $\theta_a \in s(y)$ and $\theta_b \notin s(y)$, then $\Pr(\theta_a | Y=y) > \Pr(\theta_b | Y=y)$.
+  2. If $\theta_a \in s(y)$ and $\theta_b \notin s(y)$, then $p(\theta_a | Y=y) > p(\theta_b | Y=y)$.
 
 --
 
