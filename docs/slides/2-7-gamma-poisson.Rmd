@@ -225,7 +225,7 @@ $$\mathbb{E}(\theta | \{y_i\}) = \dfrac{a+\sum y_i}{b+n} = \dfrac{b}{b+n} \times
 
 --
 
-- **Goal**: compare birth rate $\theta_1$ for women with bachelor's degrees to the rate $\theta_2$ for women without.
+- **Goal**: compare birth rate $\theta_1$ for women without bachelor's degrees to the rate $\theta_2$ for women with.
 
 --
 
