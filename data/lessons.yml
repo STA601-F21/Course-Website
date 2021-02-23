@@ -221,8 +221,7 @@ lessons:
     
   - week: "WEEK 7"
     date: "Mon, Mar 1"
-    title: "Lab 6: Gibbs sampling with block updates"
-    lab: "lab-06-block-gibbs-blank.html"
+    title: "No lab: mini-break"
     
     
   - date: "Tue, Mar 2"
@@ -319,6 +318,10 @@ lessons:
     
   - week: "WEEK 10"
     date: "Mon, Mar 22"
+    title: "Lab 6: Gibbs sampling with block updates"
+    lab: "lab-06-block-gibbs-blank.html"
+  
+  - date: "OPTIONAL MATERIAL:"
     title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
     lab: "lab-07-HMC-blank.html"
     
