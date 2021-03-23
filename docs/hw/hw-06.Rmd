@@ -34,12 +34,12 @@ Generate 50 new "test" data from the same sampling distribution,  that is, $\bol
 2. Suppose data consist of reaction times $y_{ij}$ for subjects $i = 1, \ldots, n_j$ in experimental conditions $j = 1, \ldots, J$. Researchers inform you that it is reasonable to assume that reaction times follow an exponential distribution.
     + <font color="green">**Part (a):**</font> Describe a Bayesian hierarchical model for borrowing information across experimental conditions. Specify priors that will allow you to borrow information across the $J$ conditions.  
     <font color="blue">**(3 points)**</font>  
-    <font color="red">*When setting the priors, make sure you select priors that respect the support/parameter space of each parameter. Also, think about specifying conjugate or semi-conjugate priors will make your life much easier.*</font>
+    <font color="red">*When setting the priors, make sure you select priors that respect the support/parameter space of each parameter. Also, you may want to consider conjugate or semi-conjugate priors that will be relatively straightforward to work with.*</font>
     + <font color="green">**Part (b):**</font> Derive the Gibbs sampling algorithm for fitting your hierarchical model. What are the full conditionals?  
     <font color="blue">**(3 points)**</font>
-    + <font color="green">**Part (c):**</font> Simulate data from the assumed model with $J = 5$ and the $n_j$'s set to your preferred values, but with each set to at most 25. Also, set all parameter values as you like, but make sure they are reasonable (that is, avoid very extreme values). Implement the Gibbs sampler, present point and interval estimates of the group-specific mean reaction times.  
+    + <font color="green">**Part (c):**</font> Simulate data from the assumed model with $J = 5$ and the $n_j$'s set to your preferred values, but with each $n_j$ set to at most 25. Also, make the $n_j$'s different. Set all parameter values as you like, but make sure they are reasonable (that is, avoid very extreme values). Implement the Gibbs sampler, present point and interval estimates of the group-specific mean reaction times.  
     <font color="blue">**(2 points)**</font>
-    + <font color="green">**Part (d):**</font> Compare results from hierarchical specification to the true parameter values that you set. How well does your Gibbs sampler perform?  
+    + <font color="green">**Part (d):**</font> Compare results from hierarchical specification to the true parameter values that you set. How well does your Gibbs sampler recover the true values?  
     <font color="blue">**(2 points)**</font>
     
 

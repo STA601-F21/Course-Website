@@ -4,6 +4,7 @@
     <title>STA 360/602L: Module 5.4</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Olanrewaju Michael Akande" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="slides.css" type="text/css" />
@@ -389,7 +390,7 @@ $$
 ]
 ]
 
-  which is not a known kernel and is thus unnormalized (i.e., does not integrate to 1 in its current form).
+  which is not a well known kernel and is unnormalized (i.e., does not integrate to 1 in its current form).
 
 --
 
@@ -397,15 +398,18 @@ $$
 
 --
 
-- Now, technically, the support is `\(\nu_0 = 1, 2, 3, \ldots\)`, however, we can compute this to compute the unnormalized distribution across a grid
-of `\(\nu_0\)` values, say, `\(\nu_0 = 1, 2, 3, \ldots, K\)` for some large `\(K\)`, and then sample.
+- Now, technically, the support is `\(\nu_0 = 1, 2, 3, \ldots\)`.
+
+--
+
+- However, at every iteration, we can compute this unnormalized density across a grid of `\(\nu_0\)` values, say, `\(\nu_0 = 1, 2, 3, \ldots, K\)` for some large `\(K\)`, and then sample.
 
 
 
 ---
 ## Final full conditional
 
-- One more thing, computing these probabilities on the raw scale can be problematic particularly because of the product inside. Good idea to transform to the log scale instead. 
+- One more thing, computing these probabilities on the raw scale can be problematic especially because of the product inside. Good idea to transform to the log scale instead. 
 
 --
 
@@ -465,6 +469,10 @@ class: center, middle
 # What's next? 
 
 ### Move on to the readings for the next module!
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -512,6 +520,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -529,17 +563,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {

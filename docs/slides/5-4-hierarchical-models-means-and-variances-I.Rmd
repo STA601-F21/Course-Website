@@ -399,7 +399,7 @@ $$
 ]
 ]
 
-  which is not a known kernel and is thus unnormalized (i.e., does not integrate to 1 in its current form).
+  which is not a well known kernel and is unnormalized (i.e., does not integrate to 1 in its current form).
 
 --
 
@@ -407,15 +407,18 @@ $$
 
 --
 
-- Now, technically, the support is $\nu_0 = 1, 2, 3, \ldots$, however, we can compute this to compute the unnormalized distribution across a grid
-of $\nu_0$ values, say, $\nu_0 = 1, 2, 3, \ldots, K$ for some large $K$, and then sample.
+- Now, technically, the support is $\nu_0 = 1, 2, 3, \ldots$.
+
+--
+
+- However, at every iteration, we can compute this unnormalized density across a grid of $\nu_0$ values, say, $\nu_0 = 1, 2, 3, \ldots, K$ for some large $K$, and then sample.
 
 
 
 ---
 ## Final full conditional
 
-- One more thing, computing these probabilities on the raw scale can be problematic particularly because of the product inside. Good idea to transform to the log scale instead. 
+- One more thing, computing these probabilities on the raw scale can be problematic especially because of the product inside. Good idea to transform to the log scale instead. 
 
 --
 
