@@ -306,7 +306,7 @@ quantile((MU+DELTA),probs=c(0.025,0.5,0.975))
 #mean for girls
 quantile((MU-DELTA),probs=c(0.025,0.5,0.975))
 
-#posterior probability girls have larger BMI than boys
+#posterior probability boys have larger BMI than girls
 mean(DELTA > 0)
 ```
 
