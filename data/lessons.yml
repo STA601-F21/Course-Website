@@ -363,13 +363,12 @@ lessons:
     slidespdf: "5-5-hierarchical-models-means-and-variances-II.pdf"
     video: "https://api.playposit.com/go/play/763971/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-55-Hierarchical-normal-modeling-of-means-and-variances-illustration"
     
-    
-  - date: "Fri, Mar 26 | DELIVERABLES:"
-    title: "Homework 5 due!"
-    
-  - date: "NEW ASSIGNMENT:"
+  - date: "Fri, Mar 26 | NEW ASSIGNMENT:"
     title: "Homework 6"
     hw: "hw-06.html"
+    
+  - date: "Sun, Mar 28 | DELIVERABLES:"
+    title: "Homework 5 due!"
     
     
     
