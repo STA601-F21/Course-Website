@@ -412,12 +412,12 @@ lessons:
     video: "https://api.playposit.com/go/play/768507/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-64-Bayesian-hypothesis-testing"
     
     
-  - date: "Fri, Apr 2 | DELIVERABLES:"
-    title: "Homework 6 due!"
-    
-  - date: "NEW ASSIGNMENT:"
+  - date: "Fri, Apr 2 | NEW ASSIGNMENT:"
     title: "Homework 7"
     hw: "hw-07.html"
+    
+  - date: "Sun, Apr 4 | DELIVERABLES:"
+    title: "Homework 6 due!"
     
     
     
@@ -442,12 +442,12 @@ lessons:
     title: "Quiz II"
     
     
-  - date: "Fri, Apr 9 | DELIVERABLES:"
-    title: "Homework 7 due!"
-    
-  - date: "NEW ASSIGNMENT:"
+  - date: "Fri, Apr 9 | NEW ASSIGNMENT:"
     title: "Homework 8"
     hw: "hw-08.html"
+    
+  - date: "Sun, Apr 11 | DELIVERABLES:"
+    title: "Homework 7 due!"
     
     
     
@@ -487,7 +487,7 @@ lessons:
     video: "https://api.playposit.com/go/play/774997/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-74-Metropolis-within-Gibbs"
     
     
-  - date: "Fri, Apr 16 | DELIVERABLES:"
+  - date: "Sun, Apr 18 | DELIVERABLES:"
     title: "Homework 8 due!"
     
     
