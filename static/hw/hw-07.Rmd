@@ -29,7 +29,7 @@ Please make sure your final output file is a pdf document. You can submit handwr
     <font color="blue">**(3 points)**</font>
     + <font color="green">**Part (c):**</font> For each swimmer $j$, plot their posterior predictive distributions for a future time $T^\star$ two weeks after the last recorded observation (overlay the 4 densities in a single plot).  
     <font color="blue">**(3 points)**</font>
-    + <font color="green">**Part (d):**</font> The coach of the team has to recommend which of the swimmers to compete in a swim meet in two weeks time. Using draws from the predictive distributions, compute $P(Y_j^\star = \text{max}(Y_1^\star,Y_2^\star,Y_3^\star,Y_4^\star))$ for each swimmer $j$, and based on this make a recommendation to the coach.  
+    + <font color="green">**Part (d):**</font> The coach of the team has to recommend which of the swimmers to compete in a swim meet in two weeks time. Using draws from the predictive distributions, compute $P(T_j^\star = \text{max}(T_1^\star,T_2^\star,T_3^\star,T_4^\star))$ for each swimmer $j$, and based on this make a recommendation to the coach.  
     <font color="blue">**(2 points)**</font>
 
     
