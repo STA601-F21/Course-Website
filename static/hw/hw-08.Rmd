@@ -37,7 +37,7 @@ with the priors on $\theta_1$ and $\theta_2$ set as $\pi_1(\theta_1)$ and $\pi_2
     g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = p(\theta_2^\star | y_1, \ldots, y_n, \theta_1^{(s)}).
     \end{split}
     $$  
-    <font color="blue">**(4 points for all students)**</font>
+    <font color="blue">**(4 points)**</font>
     + <font color="green">**Part (b):**</font> Priors:
     $$
     \begin{split}
@@ -45,7 +45,7 @@ with the priors on $\theta_1$ and $\theta_2$ set as $\pi_1(\theta_1)$ and $\pi_2
     g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \pi_2(\theta_2^\star).
     \end{split}
     $$  
-    <font color="blue">**(3 points for all students)**</font>
+    <font color="blue">**(3 points)**</font>
     + <font color="green">**Part (c):**</font> Random walk:
     $$
     \begin{split}
@@ -53,7 +53,7 @@ with the priors on $\theta_1$ and $\theta_2$ set as $\pi_1(\theta_1)$ and $\pi_2
     g_{\theta_2}[\theta_2^\star | \theta_1^{(s)}, \theta_2^{(s)}] & = \mathcal{N}(\theta_2^{(s)}, \delta^2).
     \end{split}
     $$  
-    <font color="blue">**(3 points for all students)**</font>
+    <font color="blue">**(3 points)**</font>
     
     <font color="red">*In each case, you only need to spend time working through the acceptance ratio for one of the two parameters. The other one should become obvious once you've completed the first.* </font>
 
