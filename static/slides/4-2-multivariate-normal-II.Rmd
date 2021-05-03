@@ -380,9 +380,9 @@ $$
 .small[
 $$
 \begin{split}
-\pi(\Sigma| \boldsymbol{\theta}, \boldsymbol{Y}) & \propto p(\boldsymbol{Y} | \boldsymbol{\theta}, \Sigma) \cdot \pi(\boldsymbol{\theta}) \\
+\pi(\Sigma| \boldsymbol{\theta}, \boldsymbol{Y}) & \propto p(\boldsymbol{Y} | \boldsymbol{\theta}, \Sigma) \cdot \pi(\Sigma) \\
 \\
-& \propto \underbrace{\left|\Sigma\right|^{-\frac{n}{2}} \ \textrm{exp} \left\{-\dfrac{1}{2}\text{tr}\left[\boldsymbol{S}_\theta \Sigma^{-1} \right] \right\}}_{p(\boldsymbol{Y} | \boldsymbol{\theta}, \Sigma)} \cdot \underbrace{\left|\Sigma\right|^{\frac{-(\nu_0 + p + 1)}{2}} \textrm{exp} \left\{-\dfrac{1}{2} \text{tr}(\boldsymbol{S}_0\Sigma^{-1}) \right\}}_{\pi(\boldsymbol{\theta})} \\
+& \propto \underbrace{\left|\Sigma\right|^{-\frac{n}{2}} \ \textrm{exp} \left\{-\dfrac{1}{2}\text{tr}\left[\boldsymbol{S}_\theta \Sigma^{-1} \right] \right\}}_{p(\boldsymbol{Y} | \boldsymbol{\theta}, \Sigma)} \cdot \underbrace{\left|\Sigma\right|^{\frac{-(\nu_0 + p + 1)}{2}} \textrm{exp} \left\{-\dfrac{1}{2} \text{tr}(\boldsymbol{S}_0\Sigma^{-1}) \right\}}_{\pi(\Sigma)} \\
 \\
 & \propto \left|\Sigma\right|^{\frac{-(\nu_0 + p + n + 1)}{2}} \textrm{exp} \left\{-\dfrac{1}{2} \text{tr}\left[\boldsymbol{S}_0\Sigma^{-1} + \boldsymbol{S}_\theta \Sigma^{-1} \right] \right\} ,\\
 \\
