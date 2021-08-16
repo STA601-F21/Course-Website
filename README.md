@@ -1,11 +1,11 @@
 # Website
-Website for "STA 602L - Bayesian and Modern Statistics" at Duke University, for Spring 2021.
+Website for "STA 601 - Bayesian and Modern Statistics" at Duke University, for Fall 2021.
 
-Course website is at https://sta-602l-s21.github.io/Course-Website/
+Course website is at https://sta-601-F21.github.io/Course-Website/
 
 # Attribution
 
-- This website design is based on [STA 199 by Mine Centikaya-Rundel](https://www2.stat.duke.edu/courses/Spring18/Sta199/) and [ESPM-157 by Carl Boettinger](https://espm-157.carlboettiger.info/).
+- This website design is based on [STA 199 by Mine Centikaya-Rundel](https://www2.stat.duke.edu/courses/Spring18/Sta199/) [ESPM-157 by Carl Boettinger](https://espm-157.carlboettiger.info/)  and [STA 602L](https://github.com/sta-602L-S21/)
 
 # Notes for building the website:
 
