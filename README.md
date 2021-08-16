@@ -5,7 +5,7 @@ Course website is at https://sta-601-F21.github.io/Course-Website/
 
 # Attribution
 
-- This website design is based on [STA 199 by Mine Centikaya-Rundel](https://www2.stat.duke.edu/courses/Spring18/Sta199/) [ESPM-157 by Carl Boettinger](https://espm-157.carlboettiger.info/)  and [STA 602L](https://github.com/sta-602L-S21/)
+- This website design is based on [STA 199 by Mine Centikaya-Rundel](https://www2.stat.duke.edu/courses/Spring18/Sta199/), [ESPM-157 by Carl Boettinger](https://espm-157.carlboettiger.info/)  and [STA 602L by Olanrewaju Akande](https://github.com/sta-602L-S21/)
 
 # Notes for building the website:
 
