@@ -1,7 +1,7 @@
 # Website
 Website for "STA 601 - Bayesian and Modern Statistics" at Duke University, for Fall 2021.
 
-Course website is at https://sta-601-F21.github.io/Course-Website/
+Course website is at https://sta601-F21.github.io/Course-Website/
 
 # Attribution
 
