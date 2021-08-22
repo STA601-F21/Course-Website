@@ -91,5 +91,5 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
   dateFormat = "January 2, 2006"
-  background = "https://sta601-F21.github.io./img/Bayes_Theorem.jpg" 
-  favicon = "https://sta601-F21.github.io./icon-192.png"
+  background = "https://github.com/sta601-F21/Course\ Website/static/img/Bayes_Theorem.jpg" 
+  favicon = "https://github.com/sta601-F21/Course\ Website/static/img/icon-192.png"
