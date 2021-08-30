@@ -19,6 +19,7 @@ setwd("/Users/clyde/Dropbox/sta601/Course-Website/static/slides")
 # Lectures
 
 #convert("00-course-overview")
-convert("01-basics-of-bayes")
+#convert("01-basics-of-bayes")
+convert("02-loss-functions")
 
 setwd(basedir)

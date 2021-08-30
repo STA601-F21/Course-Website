@@ -1,0 +1,26 @@
+---
+title: "Lecture 2: Optimal Bayesian  Point and Interval Estimation"
+output: 
+  html_document:
+
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+##  Readings
+
+- [A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) by Peter D. Hoff.:
+    + Section 3.1.2: Confidence regions
+
+
+- [Bayesian Data Analysis (Third Edition)](http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954/) by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin.:
+    + Section 2.3: Summarizing posterior inference
+    
+- [The Bayesian Choice (Second Edition)](https://link-springer-com.proxy.lib.duke.edu/content/pdf/10.1007%2F0-387-71599-1.pdf)    by Christian Robert
+  + Chapter 2 (skip Section 2.4 for now)
+  + Chapter 4.1, 4.2
+  + Chapter 5.5
