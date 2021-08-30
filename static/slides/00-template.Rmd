@@ -1,7 +1,7 @@
 ---
-title: "STA 360/602L: Module 0.0"
+title: "STA 601: Module 0.0"
 subtitle: "Template"
-author: "Dr. Olanrewaju Michael Akande"
+author: "Dr. Merlise Clyde"
 date: " "
 output:
   xaringan::moon_reader:

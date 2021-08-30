@@ -3,11 +3,8 @@ markup: "mmark"
 ---
 
 ### Course Overview
-Bayesian methods are increasingly important in both industry and academia. This is a graduate-level course that introduces students to the basics of Bayesian inference and provides students with the tools needed to fit Bayesian models.
+This course provides an introduction to Bayesian statistics targeted towards building a foundation for later research in developing models appropriate to complex data applications and to methodology research developing new modeling/inferential frameworks and algorithms.  Topics include the basic foundations of Bayesian inferences – prior distributions, likelihood functions, posterior  distributions, loss functions, and Bayes estimators/decisions with illustration in simple cases.  Posterior computation in non-conjugate models with Markov chain Monte Carlo (MCMC) algorithms in addition to approximations to posteriors based on Laplace and variational approaches will be covered.  We will build (and critique) models for a variety of data types and structures including regression, classification, and dependent data,  hierarchical models for the borrowing of information, and methods for dealing with model uncertainty. Throughout we will discuss the difference between classical and Bayesian  paradigms as well as advantages/disadvantages of Bayes. Time permitting we will discuss generalized Bayes. 
 
-In this course, you will learn the importance of Bayesian methods and inference. You will be introduced to Bayesian theory, with particular emphasis on conceptual foundations as well as implementation and model fitting. You will learn the essential distinctions between classical and Bayesian methods and become familiar with the origins of Bayesian inference. You will also learn about conjugate families of distributions and why they are very convenient, and how to conduct Bayesian inference with intractable posterior distributions,  when you do not have conjugate distributions.
-
-Although this course emphasizes the mathematical theory behind Bayesian inference, data analysis and interpretation of results are also important components. Students who wish to explore the mathematical theory in more detail than what is covered in class are welcome to engage with and request further reading materials from the instructor. Also, all students must have the theoretical background covered in the prerequisites to be able to keep up with and understand the materials. 
 
 
 ### Learning Objectives
@@ -23,48 +20,48 @@ By the end of this course, students should be able to
 
 
 
-### Course Info
+## Course Info
 
-#### Meeting Times
+### Meeting Times
+
+#### Lecture
+<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; **[Merlise Clyde](https://scholars.duke.edu/person/clyde)**
+
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; **Tuesdays and Thursdays (10:15am - 11:30am)**
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**.</font>
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Perkins LINK 065 (Classroom 2)</font>
 
 
 #### Labs
 
-##### Section 01:
-<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; **[Ziang Wang](https://scholars.duke.edu/person/ziang.wang)**
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; **Mondays (12:00pm - 1:15pm)**
-
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**
-
-##### Section 02:
-<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; **[Jennifer Kampe](https://scholars.duke.edu/person/jennifer.kampe)**
+<font color="#6CA0DC"><i class="fas fa-user fa-lg"></i></font> &nbsp; **[Rick Presman](https://scholars.duke.edu/person/rick.presman)**
 
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; **Mondays (1:45pm - 3:00pm)**
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Zoom Meeting ID: **See Sakai**
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Perkins LINK 065 (Classroom 2)
+
+
+
 
 **Recordings will be made available afterwards for students who are unable not to attend the live sessions.**
 
 
-#### Playposit
-To gain access to the pre-recorded lecture videos, you will have to create a Playposit account. There are participation quizzes embedded within the videos. These quizzes make up a part of your final grade (see: [course policies](https://sta-602l-s21.github.io/Course-Website/policies/}{course policies)) so take them seriously. To join the class on Playposit, you first need to create a new account as a student [here](https://www.playposit.com/join). Next, you will use the class link, which I will send out via email, to join the class site. While you need not create an account with your Duke email, I strongly suggest you do.
 
 #### Zoom meetings
-The easiest way for you to join the different Zoom meetings is to log in to Sakai, go to the "Zoom meetings" tab, and click "Upcoming Meetings". For the recordings (for lab and discussion sessions), also log in to Sakai, go to the "Zoom meetings" tab, and click "Cloud Recordings". Those will be available few minutes after the sessions.
+
+Occasionally we may need to meet over Zoom for class/lab or Office hours.
+The easiest way for you to join the different Zoom meetings is to log in to Sakai, go to the "Zoom meetings" tab, and click "Upcoming Meetings". For the recordings (for lecture/lab and discussion sessions were recorded), also log in to Sakai, go to the "Zoom meetings" tab, and click "Cloud Recordings". Those will be available few minutes after the sessions.
 
 
-### Teaching Team and Office Hours 
+### Instructional Team and Office Hours 
 
 {.table .table-condensed .table-striped .text-left}
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
-Instructor        | [Dr. Olanrewaju Michael Akande](https://akandelanre.github.io.) | <a href="mailto:olanrewaju.akande@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/akandelanre" title="GitHub"><i class="fa fa-github"></i></a> | Mondays: 6:00pm - 7:00pm <br /> Thursdays: 9:00am - 10:00am | Zoom Meeting ID: **See Sakai**
-TA               | [Jennifer Kampe](https://scholars.duke.edu/person/jennifer.kampe) | <a href="mailto:jennifer.kampe@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Tuesdays: 5:00pm - 6:30pm <br /> Fridays: 5:00pm - 6:30pm | Zoom Meeting ID: **See Sakai**
-                 | [Ziang Wang](https://scholars.duke.edu/person/ziang.wang) | <a href="mailto:ziang.wang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | Wednesdays: 3:00pm - 5:00pm <br /> Thursdays: 3:00pm - 4pm | Zoom Meeting ID: **See Sakai**
+Instructor        | [Dr Merlise Clyde](https://www2.stat.duke.edu/~clyde) | <a href="mailto:clyde@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/merliseclyde" title="GitHub"><i class="fa fa-github"></i></a> | TBA <br /> TBA | Zoom Meeting ID: **See Sakai** <br />  223E Old Chem
+TA               | [Rick Presman](https://scholars.duke.edu/person/rick.presman) | <a href="mailto:rick.presman@duke.edu" title="email"><i class="fa fa-envelope"></i></a> | TBA <br /> TBA | Zoom Meeting ID: **See Sakai**
+
 
 
 ### Texts
@@ -72,36 +69,27 @@ TA               | [Jennifer Kampe](https://scholars.duke.edu/person/jennifer.ka
 {.table .table-condensed .table-striped .text-left}
  <span></span>     | <span></span> | <span></span> 
 -----------|---------------------------------|----------------------------------
-[A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) | Peter D. Hoff, 2009, New York: Springer. | Required (available online from Duke library)
+[A First Course in Bayesian Statistical Methods](https://find.library.duke.edu/catalog/DUKE004968562) | Peter D. Hoff, 2009, New York: Springer. | (available online from Duke library)
 [Bayesian Data Analysis (Third Edition)](https://find.library.duke.edu/catalog/DUKE006588051?utm_campaign=bento&utm_content=bento_result_link&utm_source=library.duke.edu&utm_medium=referral) | Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. | Optional
 
+See the [Resources tab for additional links](/resources/)
 
 ### Materials
 
-Lecture notes and slides, lab exercises and assigned readings will be posted on the course website, while lecture and lab videos will be posted on Sakai. White boards will also be used frequently in the lecture videos, so please pay special attention to those. Finally, we will closely follow the main textbook so students should make sure to always read the corresponding textbook chapters in the assigned readings.
-
+Lecture notes and slides, lab exercises and assigned readings will be posted on the course website, while lecture and lab videos will be posted on Sakai. 
 
 ### Important Dates
 
 {.table .table-condensed .table-striped .text-left}
  <span></span>     | <span></span>
 -----------|---------------------------------
-Wed, January 20 | Classes begin
-Tue, February 2 | Drop/Add ends
-Thur, February 11 | Quiz I day (*tentative*)
-Tue - Wed, March 9 - 10	| No classes held
-Mon, March 15 | Midterm exam day (*tentative*)
-Thur, April 8 | Quiz II day (*tentative*)
-Mon, April 12	| Wellness day
-Fri, April 23 | Classes end
-Fri - Sat, April 30 - May 1 | Final exam period
-
-
-### Wellness day
-
-In lieu of a traditional class meeting on April 12, 2021, please use our regular class time to engage in reflection and wellness endeavors. A list of wellness strategies and programs is available at https://studentaffairs.duke.edu/duwell/wellness-day-2021.
-
-Although the goal of Wellness Day 2021 is to provide time and space to engage in activities that enhance your well-being, please remember that wellness isn’t achieved in one day.  Learning to balance your personal, professional, and academic commitments is a skill that should be practiced regularly and over time.
+Tues, Aug 24| Classes begin
+Fri, Sept 3 | Drop/Add ends
+Thur, Sept 30 | Midterm I  (*tentative*)
+Sat - Tues, Oct 2 - 5	| No classes Fall Break
+Thu, Nov 11 | Midterm II (*tentative*)
+Wed, Nov 24 | Graduate Classes End
+Sun, Dec 12 | Final Exam (Perkins 065 2:00-5:00pm)
 
 
 
@@ -112,5 +100,8 @@ This course has achieved Duke’s Green Classroom Certification. The certificati
 
 ### Acknowledgement
 
-This web page contains materials such as lecture slides, homework assignments, and datasets developed or adapted by [Dr. Alexander Volfovsky](https://scholars.duke.edu/person/alexander.volfovsky), [Dr. David B. Dunson](https://scholars.duke.edu/person/dunson) and [Dr. Rebecca Carter Steorts](https://scholars.duke.edu/person/beka).
+This web page contains materials developed or adapted by 
+[Dr. Alexander Volfovsky](https://scholars.duke.edu/person/alexander.volfovsky), 
+[Dr. David B. Dunson](https://scholars.duke.edu/person/dunson), [Dr. Rebecca Carter Steorts](https://scholars.duke.edu/person/beka) and 
+[Dr Michael Akande](https://scholars.duke.edu/person/olanrewaju.akande).
 

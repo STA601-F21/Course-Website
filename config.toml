@@ -38,35 +38,35 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   url = "/"
 [[menu.main]]
   weight = 2
-  identifier = "syllabus_pdf"
-  name = "Syllabus"
-  pre = "<i class=\"material-icons\">book</i>"
-  url = "syllabus_pdf/Syllabus.pdf"
-[[menu.main]]
-  weight = 3
   identifier = "syllabus"
-  name = "Class Schedule"
+  name = "Schedule"
   pre = "<i class=\"material-icons\">date_range</i>"
   url = "/syllabus"
 [[menu.main]]
-  weight = 4
+  weight = 3
   identifier = "policies"
-  name = "Policies"
+  name = "Syllabus & Policies"
   pre = "<i class=\"material-icons\">gavel</i>"
   url = "/policies"
 [[menu.main]]
-  weight = 5
+  weight = 4
   identifier = "resources"
   name = "Resources"
   pre = "<i class=\"material-icons\">folder_shared</i>"
   url = "/resources"
 [[menu.main]]
-  weight = 6
+  weight = 5
   identifier = "gradescope"
   name = "Gradescope"
   pre = "<i class=\"material-icons\">assignment</i>"
-  url = "https://www.gradescope.com/courses/190490/assignments"
+  url = "https://www.gradescope.com/courses/295827"
   
+[[menu.main]]
+  weight = 6
+  identifier = "github"
+  name = "Github"
+  pre = "<i class=\"button-icon fa fa-github\"></i>"
+  url = "https://github.com/sta601-F21"
 
 
 [[menu.footer]]
@@ -91,5 +91,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
   dateFormat = "January 2, 2006"
+#  background = "https://www2.stat.duke.edu/courses/Fall21/sta601.001/img/Bayes_Theorem.jpg" 
   background = "https://www2.stat.duke.edu/courses/Fall21/sta601.001/img/Bayes_Theorem.jpg" 
+
   favicon = "https://github.com/STA601-F21/Course-Website/blob/master/static/img/icon-192.png"

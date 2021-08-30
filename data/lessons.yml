@@ -1,551 +1,96 @@
 lessons:
   
+  - week: "WEEK 0"
+    date: "Tues, Aug 24"
+    title: "Lecture 0: Course Overview and Introduction"
+    reading: "00-reading.html"
+    slides: "00-course-overview.html"
+    slidespdf: "00-course-overview-handout.pdf"
+    
+  - date: "Thur, Aug 26"
+    title: "Lecture 1: Basics of Bayesian Inference"
+    reading: "01-reading.html"
+    slides: "01-basics-of-bayes.html"
+    slidespdf: "01-basics-of-bayes-handout.pdf"
+    lab:  "lab-00-getting-started.html"
+    
   - week: "WEEK 1"
-    date: "Thur, Jan 21"
-    title: "Module 0.1: Course overview and introduction"
-    slides: "0-1-course-overview.html"
-  
-  
-  - title: " "
-  - title: "MODULE 1: INTRODUCTION TO BAYESIAN INFERENCE"
-  - title: " "
-   
-  
-  - week: "WEEK 2"
-    date: "Mon, Jan 25"
-    title: "Lab 1: R review"
+    date: "Mon, Aug 30"
+    title: "Lab 1: R and Monte Carlo Review"
     lab: "lab-01-r-review-blank.html"
-    
-    
-  - date: "Tue, Jan 26"
-    title: "Module 1.1: Building blocks of Bayesian inference"
-    reading: "1-1-reading.html"
-    slides: "1-1-building-blocks-bayes.html"
-    slidespdf: "1-1-building-blocks-bayes.pdf"
-    video: "https://api.playposit.com/go/play/735956/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-11-Building-blocks-of-Bayesian-inference"
-    
-  - title: "Module 1.2: Probability review"
-    reading: "1-2-reading.html"
-    slides: "1-2-prob-review.html"
-    slidespdf: "1-2-prob-review.pdf"
-    video: "https://api.playposit.com/go/play/736001/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-12-Probability-review"
-    
-    
-  - title: " "
-  - title: "MODULE 2: ONE PARAMETER MODELS"
-  - title: " "
-    
-    
-  - date: "Thur, Jan 28"
-    title: "Module 2.1: Conjugacy; Beta-Bernoulli and beta-binomial models"
-    reading: "2-1-reading.html"
-    slides: "2-1-beta-binomial.html"
-    slidespdf: "2-1-beta-binomial.pdf"
-    video: "https://api.playposit.com/go/play/736861/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-21-Conjugacy-Beta-Bernoulli-and-beta-binomial-models"
-    
-    
-  - title: "Module 2.2: Operationalizing data analysis; selecting priors"
-    reading: "2-2-reading.html"
-    slides: "2-2-selecting-priors.html"
-    slidespdf: "2-2-selecting-priors.pdf"
-    video: "https://api.playposit.com/go/play/736899/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-22-Operationalizing-data-analysis-selecting-priors"
-  
-  
-  - date: "Fri, Jan 29 | NEW ASSIGNMENT:"
+
+  - date: "Tues, Aug 31"
     title: "Homework 1"
     hw: "hw-01.html"
-  
-  
-  - week: "WEEK 3"
-    date: "Mon, Feb 1"
-    title: "Lab 2: The Beta-Binomial model"
-    lab: "lab-02-beta-binomial-blank.html"
-    
-    
-  - date: "Tue, Feb 2"
-    title: "Module 2.3: Marginal likelihood and posterior prediction"
-    reading: "2-3-reading.html"
-    slides: "2-3-posterior-prediction.html"
-    slidespdf: "2-3-posterior-prediction.pdf"
-    video: "https://api.playposit.com/go/play/738165/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-23-Marginal-likelihood-and-posterior-prediction"
-    
-  - title: "Module 2.4: Truncated priors and the inverse cdf method"
-    reading: "2-4-reading.html"
-    slides: "2-4-inverse-cdf.html"
-    slidespdf: "2-4-inverse-cdf.pdf"
-    video: "https://api.playposit.com/go/play/738212/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-24-Truncated-priors-and-the-inverse-cdf-method"
-  
-  - title: "Drop/Add ends"
-    
-    
-  - date: "Thur, Feb 4"
-    title: "Module 2.5: Frequentist vs Bayesian intervals"
-    reading: "2-5-reading.html"
-    slides: "2-5-intervals.html"
-    slidespdf: "2-5-intervals.pdf"
-    video: "https://api.playposit.com/go/play/739070/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-25-Frequentist-vs-Bayesian-intervals"
-    
-  - title: "Module 2.6: Loss functions and Bayes risk"
-    reading: "2-6-reading.html"
-    slides: "2-6-bayes-risk.html"
-    slidespdf: "2-6-bayes-risk.pdf"
-    video: "https://api.playposit.com/go/play/739082/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-26-Loss-functions-and-Bayes-risk"
-    
-  
-  - week: "WEEK 4"
-    date: "Mon, Feb 8"
-    title: "Lab 3: The Poisson model and posterior predictive checks"
-    lab: "lab-03-poisson-blank.html"
-  
-  
-  - date: "Tue, Feb 9"
-    title: "Module 2.7: Gamma-Poisson model I"
-    reading: "2-7-reading.html"
-    slides: "2-7-gamma-poisson.html"
-    slidespdf: "2-7-gamma-poisson.pdf"
-    video: "https://api.playposit.com/go/play/742730/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-27-Gamma-Poisson-model-I"
-    
-  - title: "Module 2.8: Gamma-Poisson model II; finding conjugate distributions"
-    reading: "2-8-reading.html"
-    slides: "2-8-derive-conjugacy.html"
-    slidespdf: "2-8-derive-conjugacy.pdf"
-    video: "https://api.playposit.com/go/play/742747/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-28-Gamma-Poisson-model-II-finding-conjugate-distributions"
-    
-    
-  - date: "Thur, Feb 11"
-    title: "Quiz I"
-    
-    
-  - date: "Fri, Feb 12 | DELIVERABLES:"
-    title: "Homework 1 due!"
-    
-  - date: "NEW ASSIGNMENT:"
-    title: "Homework 2"
-    hw: "hw-02.html"
-  
-  
-  - title: " "   
-  - title: "MODULE 3: MONTE CARLO AND MULTIPARAMETER MODELS"
-  - title: " "
-  
-  
-  - week: "WEEK 5"
-    date: "Mon, Feb 15"
-    title: "Lab 4: Prior selection and model reparameterization"
-    lab: "lab-04-model-reparameterization-blank.html"
-  
-    
-  - date: "Tue, Feb 16"
-    title: "Module 3.1: Monte Carlo approximation and sampling"
-    reading: "3-1-reading.html"
-    slides: "3-1-monte-carlo.html"
-    slidespdf: "3-1-monte-carlo.pdf"
-    video: "https://api.playposit.com/go/play/745244/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-31-Monte-Carlo-approximation-and-sampling"
-    
-  - title: "Module 3.2: Rejection sampling; Importance sampling"
-    reading: "3-2-reading.html"
-    slides: "3-2-rejection-importance-sampling.html"
-    slidespdf: "3-2-rejection-importance-sampling.pdf"
-    video: "https://api.playposit.com/go/play/745281/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-32-Rejection-sampling-Importance-sampling"
 
+  - date: "Tues, Aug 31"
+    title: "Lecture 2: Loss Functions & Summaries"
     
-  - date: "Thur, Feb 18"
-    title: "Module 3.3: The normal model: introduction and motivating examples"
-    reading: "3-3-reading.html"
-    slides: "3-3-normal-intro.html"
-    slidespdf: "3-3-normal-intro.pdf"
-    video: "https://api.playposit.com/go/play/746405/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-33-The-normal-model-introduction-and-motivating-examples"
+  - date: "Thur, Sept 2"
+    title: "Lecture 3: Predictive Distributions"
+  
+  - title: "Drop/Add Ends"
+    date: "Fri, Sept 3"
     
-  - title: "Module 3.4: The normal model: conditional inference for the mean"
-    reading: "3-4-reading.html"
-    slides: "3-4-normal-cond-inference.html"
-    slidespdf: "3-4-normal-cond-inference.pdf"
-    video: "https://api.playposit.com/go/play/746431/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-34-The-normal-model-conditional-inference-for-the-mean"
-    
-    
-  - date: "Fri, Feb 19 | DELIVERABLES:"
-    title: "Homework 2 due!"
-    
-  - date: "NEW ASSIGNMENT:"
-    title: "Homework 3"
-    hw: "hw-03.html"
-    
-    
-    
+  - week: "WEEK 2" 
+    date: "Mon, Sept 6"
+
+  - week: "WEEK 3"
+    date: "Mon, Sept 13"
+
+  - week: "WEEK 4"
+    date:  "Mon, Sept 20"
+
+  - week: "WEEK 5"
+    date: "Mon, Sept 27"
+  
+  - date: "Thu, Sept 30"
+  
   - week: "WEEK 6"
-    date: "Mon, Feb 22"
-    title: "Lab 5: Truncated data"
-    lab: "lab-05-truncated-data-blank.html"
-    
-    
-  - date: "Tue, Feb 23"
-    title: "Module 3.5: The normal model: joint inference for mean and variance"
-    reading: "3-5-reading.html"
-    slides: "3-5-normal-joint-inference.html"
-    slidespdf: "3-5-normal-joint-inference.pdf"
-    video: "https://api.playposit.com/go/play/747833/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-35-The-normal-model-joint-inference-for-mean-and-variance"
-    
-  - title: "Module 3.5b: The normal model: joint inference for mean and variance (illustration)"
-    slides: "3-5b-normal-joint-inference.html"
-    slidespdf: "3-5b-normal-joint-inference.pdf"
-    video: "https://api.playposit.com/go/play/747835/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-35b-The-normal-model-joint-inference-for-mean-and-variance-illustration"
-    
-  - title: "Module 3.6: Noninformative and improper priors"
-    reading: "3-6-reading.html"
-    slides: "3-6-noninformative-priors.html"
-    slidespdf: "3-6-noninformative-priors.pdf"
-    video: "https://api.playposit.com/go/play/747838/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-36-Noninformative-and-improper-priors"
+    date: "Mon, Oct 4"
+    title: "NO LAB FALL BREAK"
+
+  - date: "Tue, Oct 5"
+    title: "NO CLASS FALL BREAK"
+
+  - date: "Thu, Oct 7"
+    title: "Midterm I (***tentative***)"
   
-  
-  - date: "Thur, Feb 25"
-    title: "Module 3.7: MCMC and Gibbs sampling I"
-    reading: "3-7-reading.html"
-    slides: "3-7-gibbs-sampling-I.html"
-    slidespdf: "3-7-gibbs-sampling-I.pdf"
-    video: "https://api.playposit.com/go/play/750338/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-37-MCMC-and-Gibbs-sampling-I"
-    
-  - title: "Module 3.8: MCMC and Gibbs sampling II"
-    reading: "3-8-reading.html"
-    slides: "3-8-gibbs-sampling-II.html"
-    slidespdf: "3-8-gibbs-sampling-II.pdf"
-    video: "https://api.playposit.com/go/play/750358/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-38-MCMC-and-Gibbs-sampling-II"
-    
-    
-  - date: "Fri, Feb 26 | DELIVERABLES:"
-    title: "Homework 3 due!"
-    
-  - date: "NEW ASSIGNMENT:"
-    title: "Homework 4"
-    hw: "hw-04.html"
-    
-    
   - week: "WEEK 7"
-    date: "Mon, Mar 1"
-    title: "No lab: mini-break"
-    
-    
-  - date: "Tue, Mar 2"
-    title: "Module 3.9: MCMC and Gibbs sampling III"
-    reading: "3-9-reading.html"
-    slides: "3-9-gibbs-sampling-III.html"
-    slidespdf: "3-9-gibbs-sampling-III.pdf"
-    video: "https://api.playposit.com/go/play/751448/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-39-MCMC-and-Gibbs-sampling-III"
-    
-  - title: "Module 3.10: MCMC and Gibbs sampling IV"
-    reading: "3-10-reading.html"
-    slides: "3-10-gibbs-sampling-IV.html"
-    slidespdf: "3-10-gibbs-sampling-IV.pdf"
-    video: "https://api.playposit.com/go/play/751515/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-310-MCMC-and-Gibbs-sampling-IV"
-    
-  - title: "Module 3.11: Discussion session exercise"
-    slides: "3-11-in-class-exercise.html"
-  
-    
-  - title: " " 
-  - title: "MODULE 4: MULTIVARIATE DATA"
-  - title: " " 
-  
-  
-  - date: "Thur, Mar 4"
-    title: "Module 4.1: Multivariate normal model I"
-    reading: "4-1-reading.html"
-    slides: "4-1-multivariate-normal-I.html"
-    slidespdf: "4-1-multivariate-normal-I.pdf"
-    video: "https://api.playposit.com/go/play/752934/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-41-Multivariate-normal-model-I"
-    
-  - title: "Module 4.2: Multivariate normal model II"
-    reading: "4-2-reading.html"
-    slides: "4-2-multivariate-normal-II.html"
-    slidespdf: "4-2-multivariate-normal-II.pdf"
-    video: "https://api.playposit.com/go/play/753022/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-42-Multivariate-normal-model-II"
-    
-    
-  - date: "Fri, Mar 5 | DELIVERABLES:"
-    title: "Homework 4 due!"
-    
+    date: "Mon, Oct 11"
   
   - week: "WEEK 8"
-    date: "Mon, Mar 8"
-    title: "No lab"
-    
-    
-  - date: "Tue, Mar 9"
-    title: "No class"
-    
-    
-  - date: "Thur, Mar 11"
-    title: "Review for midterm exam"
-    
+    date: "Mon, Oct 18"
     
   - week: "WEEK 9"
-    date: "Mon, Mar 15"
-    title: "Midterm exam"
+    date: "Mon, Oct 25"
   
-  
-  - date: "Tue, Mar 16"
-    title: "Module 4.3: Multivariate normal model III"
-    reading: "4-3-reading.html"
-    slides: "4-3-multivariate-normal-III.html"
-    slidespdf: "4-3-multivariate-normal-III.pdf"
-    video: "https://api.playposit.com/go/play/759262/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-43-Multivariate-normal-model-III"
-    
-  - title: "Module 4.4: Multivariate normal model IV"
-    reading: "4-4-reading.html"
-    slides: "4-4-multivariate-normal-IV.html"
-    slidespdf: "4-4-multivariate-normal-IV.pdf"
-    video: "https://api.playposit.com/go/play/759282/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-44-Multivariate-normal-model-IV"
-    
-    
-  - date: "Thur, Mar 18"
-    title: "Module 4.5: Missing data and imputation I"
-    slides: "4-5-missing-data-I.html"
-    slidespdf: "4-5-missing-data-I.pdf"
-    reading: "4-5-reading.html"
-    video: "https://api.playposit.com/go/play/760758/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-45-Missing-data-and-imputation-I"
-    
-  - title: "Module 4.6: Missing data and imputation II"
-    reading: "4-6-reading.html"
-    slides: "4-6-missing-data-II.html"
-    slidespdf: "4-6-missing-data-II.pdf"
-    video: "https://api.playposit.com/go/play/760786/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-46-Missing-data-and-imputation-II"
-    
-    
-  - date: "Fri, Mar 19 | NEW ASSIGNMENT:"
-    title: "Homework 5"
-    hw: "hw-05.html"
-    
-    
-    
   - week: "WEEK 10"
-    date: "Mon, Mar 22"
-    title: "Lab 6: Gibbs sampling with block updates"
-    lab: "lab-06-block-gibbs-blank.html"
+    date: "Mon, Nov 1"
   
-  - date: "OPTIONAL MATERIAL:"
-    title: "Lab 7: Introduction to Hamiltonian Monte Carlo"
-    lab: "lab-07-HMC-blank.html"
-    
-    
-  
-  - title: " "
-  - title: "MODULE 5: HIERARCHICAL MODELS"
-  - title: " "
-    
-    
-  - date: "Tue, Mar 23"
-    title: "Module 5.1: Hierarchical normal models with constant variance: two groups"
-    reading: "5-1-reading.html"
-    slides: "5-1-hierarchical-models-two-groups-I.html"
-    slidespdf: "5-1-hierarchical-models-two-groups-I.pdf"
-    video: "https://api.playposit.com/go/play/762753/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-51-Hierarchical-normal-models-with-constant-variance-two-groups"
-    
-  - title: "Module 5.2: Hierarchical normal models with constant variance: two groups (illustration)"
-    slides: "5-2-hierarchical-models-two-groups-II.html"
-    slidespdf: "5-2-hierarchical-models-two-groups-II.pdf"
-    #video: ""
-    
-  - title: "Module 5.3: Hierarchical normal models with constant variance: multiple groups"
-    reading: "5-3-reading.html"
-    slides: "5-3-hierarchical-models-multiple-groups-constant-var.html"
-    slidespdf: "5-3-hierarchical-models-multiple-groups-constant-var.pdf"
-    video: "https://api.playposit.com/go/play/762815/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-53-Hierarchical-normal-models-with-constant-variance-multiple-groups"
-    
-    
-  - date: "Thur, Mar 25"
-    title: "Module 5.4: Hierarchical normal modeling of means and variances"
-    slides: "5-4-hierarchical-models-means-and-variances-I.html"
-    slidespdf: "5-4-hierarchical-models-means-and-variances-I.pdf"
-    reading: "5-4-reading.html"
-    video: "https://api.playposit.com/go/play/763931/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-54-Hierarchical-normal-modeling-of-means-and-variances"
-    
-  - title: "Module 5.5: Hierarchical normal modeling of means and variances (illustration)"
-    slides: "5-5-hierarchical-models-means-and-variances-II.html"
-    slidespdf: "5-5-hierarchical-models-means-and-variances-II.pdf"
-    video: "https://api.playposit.com/go/play/763971/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-55-Hierarchical-normal-modeling-of-means-and-variances-illustration"
-    
-  - date: "Fri, Mar 26 | NEW ASSIGNMENT:"
-    title: "Homework 6"
-    hw: "hw-06.html"
-    
-  - date: "Sun, Mar 28 | DELIVERABLES:"
-    title: "Homework 5 due!"
-    
-    
-    
   - week: "WEEK 11"
-    date: "Mon, Mar 29"
-    title: "Lab 8: Hierarchical modeling"
-    lab: "lab-08-multilevel-modeling-blank.html"
+    date: "Mon, Nov 8"
     
-    
-    
-  - title: " "
-  - title: "MODULE 6: BAYESIAN LINEAR REGRESSION"
-  - title: " "
-    
-    
-  - date: "Tue, Mar 30"
-    title: "Module 6.1: Bayesian linear regression"
-    reading: "6-1-reading.html"
-    slides: "6-1-linear-regression-I.html"
-    slidespdf: "6-1-linear-regression-I.pdf"
-    video: "https://api.playposit.com/go/play/765610/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-61-Bayesian-linear-regression"
-    
-  - title: "Module 6.2: Bayesian linear regression (illustration)"
-    reading: "6-2-reading.html"
-    slides: "6-2-linear-regression-II.html"
-    slidespdf: "6-2-linear-regression-II.pdf"
-    video: "https://api.playposit.com/go/play/765629/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-62-Bayesian-linear-regression-illustration"
-    
-    
-  - date: "Thur, Apr 1"
-    title: "Module 6.3: Bayesian linear regression: weakly informative priors"
-    reading: "6-3-reading.html"
-    slides: "6-3-linear-regression-III.html"
-    slidespdf: "6-3-linear-regression-III.pdf"
-    video: "https://api.playposit.com/go/play/768503/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-63-Bayesian-linear-regression-weakly-informative-priors"
-    
-  - title: "Module 6.4: Bayesian hypothesis testing"
-    reading: "6-4-reading.html"
-    slides: "6-4-hypothesis-testing.html"
-    slidespdf: "6-4-hypothesis-testing.pdf"
-    video: "https://api.playposit.com/go/play/768507/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-64-Bayesian-hypothesis-testing"
-    
-    
-  - date: "Fri, Apr 2 | NEW ASSIGNMENT:"
-    title: "Homework 7"
-    hw: "hw-07.html"
-    
-  - date: "Sun, Apr 4 | DELIVERABLES:"
-    title: "Homework 6 due!"
-    
-    
+  - date: "Thu, Nov 11"
+    title: "Midterm II (**tentative**)"
     
   - week: "WEEK 12"
-    date: "Mon, Apr 5"
-    title: "Lab 9: Bayesian (Generalized) Linear Regression Models"
-    lab: "lab-09-glms-blank.html"
-    
-  
-  - date: "Tue, Apr 6"
-    title: "Module 6.5: Bayesian model selection"
-    reading: "6-5-reading.html"
-    slides: "6-5-model-selection.html"
-    slidespdf: "6-5-model-selection.pdf"
-    video: "https://api.playposit.com/go/play/769990/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-65-Bayesian-model-selection"
-    
-  - title: "Module 6.6: Bayesian model selection (illustration)"
-    video: "https://api.playposit.com/go/play/770039/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-66-Bayesian-model-selection-illustration"
-    
-  
-  - date: "Thur, Apr 8"
-    title: "Quiz II"
-    
-    
-  - date: "Fri, Apr 9 | NEW ASSIGNMENT:"
-    title: "Homework 8"
-    hw: "hw-08.html"
-    
-  - date: "Sun, Apr 11 | DELIVERABLES:"
-    title: "Homework 7 due!"
-    
-    
+    date: "Mon, Nov 15"
     
   - week: "WEEK 13"
-    date: "Mon, Apr 12"
-    title: "Wellness day; no lab"
-    
-    
-  - title: " "
-  - title: "MODULE 7: METROPOLIS AND METROPOLIS-HASTINGS"
-  - title: " "
+    date: "Mon, Nov 22"
   
-  
-  - date: "Tue, Apr 13"
-    title: "Module 7.1: The Metropolis algorithm"
-    reading: "7-1-reading.html"
-    slides: "7-1-metropolis-I.html"
-    slidespdf: "7-1-metropolis-I.pdf"
-    video: "https://api.playposit.com/go/play/773431/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-71-The-Metropolis-algorithm"
-    
-  - title: "Module 7.2: Metropolis in action"
-    slides: "7-2-metropolis-II.html"
-    slidespdf: "7-2-metropolis-II.pdf"
-    video: "https://api.playposit.com/go/play/773485/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-72-Metropolis-in-action"
-    
-  
-  - date: "Thur, Apr 15"
-    title: "Module 7.3: The Metropolis-Hastings algorithm"
-    reading: "7-3-reading.html"
-    slides: "7-3-metropolis-hastings.html"
-    slidespdf: "7-3-metropolis-hastings.pdf"
-    video: "https://api.playposit.com/go/play/774989/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-73-The-Metropolis-Hastings-algorithm"
-    
-  - title: "Module 7.4: Metropolis within Gibbs"
-    slides: "7-4-metropolis-within-gibbs.html"
-    slidespdf: "7-4-metropolis-within-gibbs.pdf"
-    video: "https://api.playposit.com/go/play/774997/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-74-Metropolis-within-Gibbs"
-    
-    
-  - date: "Sun, Apr 18 | DELIVERABLES:"
-    title: "Homework 8 due!"
-    
-    
-    
   - week: "WEEK 14"
-    date: "Mon, Apr 19"
-    title: "Lab 10: Metropolis-Hastings"
-    lab: "lab-10-metropolis-blank.html"
-   
-   
-  - title: " "  
-  - title: "MODULE 8: CATEGORICAL DATA AND MIXTURE MODELS"
-  - title: " "
-    
-    
-  - date: "Tue, Apr 20"
-    title: "Module 8.1: The multinomial model"
-    reading: "8-1-reading.html"
-    slides: "8-1-multinomial-model.html"
-    slidespdf: "8-1-multinomial-model.pdf"
-    video: "https://api.playposit.com/go/play/777565/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-81-The-multinomial-model"
-    
-  - title: "Module 8.2: Finite mixture models: univariate categorical data"
-    slides: "8-2-finite-mixture-univariate-categorical.html"
-    slidespdf: "8-2-finite-mixture-univariate-categorical.pdf"
-    video: "https://api.playposit.com/go/play/777578/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-82-Finite-mixture-models-univariate-categorical-data"
-    
-    
-  - date: "Thur, Apr 22"
-    title: "Module 8.3: Finite mixture models: univariate continuous data"
-    slides: "8-3-finite-mixture-univariate-continuous.html"
-    slidespdf: "8-3-finite-mixture-univariate-continuous.pdf"
-    video: "https://api.playposit.com/go/play/778998/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-83-Finite-mixture-models-univariate-continuous-data"
-    
-  - title: "Module 8.4: Finite mixture models: univariate continuous data (illustration)"
-    slides: "8-4-finite-mixture-univariate-continuous-illustration.html"
-    slidespdf: "8-4-finite-mixture-univariate-continuous-illustration.pdf"
-    video: "https://api.playposit.com/go/play/779007/1403540/1024314/0/Bayesian-and-Modern-Statistics--Module-84-Finite-mixture-models-univariate-continuous-data-illustration"
-    
-  - title: "Course wrap-up and review for final exam"
-  
-  - date: "Fri, Apr 23 | OPTIONAL MATERIAL:"
-    title: "Module 8.5: Finite mixture models: multivariate categorical data"
-    slides: "8-5-finite-mixture-multivariate-categorical.html"
-    slidespdf: "8-5-finite-mixture-multivariate-categorical.pdf"
-    
-  - title: "Module 8.6: Finite mixture models: multivariate continuous data"
-    slides: "8-6-finite-mixture-multivariate-continuous.html"
-    slidespdf: "8-6-finite-mixture-multivariate-continuous.pdf"
-  
-  
-  - week: "WEEK 15"
-    date: "Tue, Apr 27"
+    date: "Mon, Nov 29"
     title: "Reading week; no class"
+
+  - date: "Tue, Dec 7"
+    title: "Reading period; no class"
     
-  - date: "Thur, Apr 29"
-    title: "Reading week; no class"
+  - week: "WEEK 15"  
+    date: "Sun, Dec 12"
+    title: "Final Exam Perkins LINK 065 (Classroom 2) 2:00-5:00pm"
     
-  - date: "Fri, Apr 30 - Sat, May 1"
-    title: "Final exam"
+
+    
     
