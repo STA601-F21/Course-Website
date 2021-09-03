@@ -85,8 +85,8 @@ Lecture notes and slides, lab exercises and assigned readings will be posted on 
 -----------|---------------------------------
 Tues, Aug 24| Classes begin
 Fri, Sept 3 | Drop/Add ends
-Thur, Sept 30 | Midterm I  (*tentative*)
 Sat - Tues, Oct 2 - 5	| No classes Fall Break
+Thur, Oct 7 | Midterm I  (*tentative*)
 Thu, Nov 11 | Midterm II (*tentative*)
 Wed, Nov 24 | Graduate Classes End
 Sun, Dec 12 | Final Exam (Perkins 065 2:00-5:00pm)

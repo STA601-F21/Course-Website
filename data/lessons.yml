@@ -25,16 +25,24 @@ lessons:
 
   - date: "Tues, Aug 31"
     title: "Lecture 2: Loss Functions & Summaries"
+    reading: "02-reading.html"
+    slides: "02-loss-functions.html"
+    slidespdf: "02-loss-functions-handout.pdf"
+
     
   - date: "Thur, Sept 2"
-    title: "Lecture 3: Predictive Distributions"
-  
+    title: "Lecture 3: Normal Model & Predictive Distributions"
+    slides: "03-normal-predictive-distributions.html"
+    slidespdf: "03-normal-predictive-distributions-handout.pdf"
+    reading: "03-reading.html"
+    
   - title: "Drop/Add Ends"
     date: "Fri, Sept 3"
     
   - week: "WEEK 2" 
     date: "Mon, Sept 6"
-
+    title: "Lab 2: Beta-Binomial Model and Introduction to stan"
+    
   - week: "WEEK 3"
     date: "Mon, Sept 13"
 
