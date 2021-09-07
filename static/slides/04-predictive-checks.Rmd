@@ -305,7 +305,7 @@ How might our model be misspecified?
 ---
 ##  Example Over Dispersion
 
-```{r, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
+```{r overdispersion, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
  n = 100
  phi = 1
  mu = 5
@@ -355,7 +355,7 @@ use as a diagnostic plot to see how model might fall flat
 
 --
 
-Better approach is to split the data use one piece to learn $\theta$ and the other to calculate $t_{\textrm{obs}}$ 
+Better approach is to split the data use one piece to learn $\theta$ and the other to calculate $t_{\textrm{obs}}$  
 
 
 ---
@@ -379,7 +379,7 @@ $$t(y) = \frac{\sum_{i = 1}^{n}1(y_i = 0)}{n}$$
 ##  Posterior Predictive Distribution
 
 
-```{r, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
+```{r zeroPP, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
 
 a = 1; b = 1;
 t.obs = mean(y == 0)
@@ -450,4 +450,6 @@ $$\theta_i \sim \textsf{Gamma}(\phi, \phi/\mu)$$
 
 
 
+--
 
+- See Bayarri & Berger (2000) for more discussion about why PPP should not be used as a test

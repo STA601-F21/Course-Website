@@ -21,6 +21,7 @@ setwd("/Users/clyde/Dropbox/sta601/Course-Website/static/slides")
 #convert("00-course-overview")
 #convert("01-basics-of-bayes")
 #convert("02-loss-functions")
-convert("03-normal-predictive-distributions")
+#convert("03-normal-predictive-distributions")
+convert("04-predictive-checks")
 
 setwd(basedir)
