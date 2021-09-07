@@ -145,7 +145,7 @@ $$\textsf{E}_{\bar{y} \mid \theta}\left[\left(\hat{\theta} - \theta \right)^2 \m
 - Bias of Bayes Estimate
 
 $$\textsf{E}_{\bar{Y} \mid \theta}\left[ \frac{\tau_0 \theta_0 + \tau n \bar{Y}}
-{\tau_0  + \tau n}\right] = 
+{\tau_0  + \tau n}\right]  - \theta = 
 \frac{\tau_0(\theta_0 - \theta)}{\tau_0 + \tau n}$$
 
 --
@@ -305,7 +305,7 @@ How might our model be misspecified?
 ---
 ##  Example Over Dispersion
 
-```{r overdispersion, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
+```{r overdispersion, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5, out.width="90%"}
  n = 100
  phi = 1
  mu = 5
@@ -379,7 +379,7 @@ $$t(y) = \frac{\sum_{i = 1}^{n}1(y_i = 0)}{n}$$
 ##  Posterior Predictive Distribution
 
 
-```{r zeroPP, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5}
+```{r zeroPP, fig=TRUE, echo=FALSE, fig.height=4, fig.width=5, out.width="90%"}
 
 a = 1; b = 1;
 t.obs = mean(y == 0)
