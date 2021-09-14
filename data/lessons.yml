@@ -13,14 +13,11 @@ lessons:
     slides: "01-basics-of-bayes.html"
     slidespdf: "01-basics-of-bayes-handout.pdf"
     lab:  "lab-00-getting-started.html"
-    
+
   - week: "WEEK 1"
     date: "Mon, Aug 30"
-    title: "Lab 1: R and Monte Carlo Review"
+    title: "Lab 1: R and Monte Carlo Review + HW 1"
     lab: "lab-01-r-review-blank.html"
-
-  - date: "Tues, Aug 31"
-    title: "Homework 1"
     hw: "hw-01.html"
 
   - date: "Tues, Aug 31"
@@ -41,11 +38,8 @@ lessons:
     
   - week: "WEEK 2" 
     date: "Mon, Sept 6"
-    title: "Lab 2: Beta-Binomial Model and Introduction to stan"
+    title: "Lab 2: Beta-Binomial Model and Introduction to stan + HW 2"
     lab: "lab-02-beta-binomial.html"
-    
-  - date: "Tues, Sept 7"   
-    title: "Homework 2"
     hw: "hw-02.html"
     
   - date: "Tues, Sept 7"
@@ -57,15 +51,31 @@ lessons:
 
   - date: "Thurs, Sept 9"
     title: "Lecture 5: Basics of Bayesian Hypothesis Testing"
-  
+    reading: "05-reading.html"
+    slides: "05-hypothesis-testing.html"
+    slidespdf: "05-hypothesis-testing-handout.pdf"
+ 
+    
   - week: "WEEK 3"
     date: "Mon, Sept 13"
+    title: "Lab 3 + HW 3"
+    lab: "lab-03-posterior-predictive-checks.html"
+    hw: "hw-03.html"
+    
+  - date: "Tues, Sept 14"
+    title: "Lecture 6: Bayesian Hypothesis Testing Continued"
+    reading: "06-reading.html"
+    slides: "06-hypothesis-testing-cont.html"
+    slidespdf: "06-hypothesis-testing-cont-handout.pdf"
+
 
   - week: "WEEK 4"
     date:  "Mon, Sept 20"
+    title: "Lab 4 + HW 4"
 
   - week: "WEEK 5"
     date: "Mon, Sept 27"
+    title: "Lab 5 + HW 5"    
   
   - date: "Thu, Sept 30"
   
@@ -81,7 +91,8 @@ lessons:
   
   - week: "WEEK 7"
     date: "Mon, Oct 11"
-  
+    title: "Lab 6 + HW 6"  
+    
   - week: "WEEK 8"
     date: "Mon, Oct 18"
     
