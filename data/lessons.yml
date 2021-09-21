@@ -68,16 +68,38 @@ lessons:
     slides: "06-hypothesis-testing-cont.html"
     slidespdf: "06-hypothesis-testing-cont-handout.pdf"
 
-
+  - date:  "Thur, September 16"
+    title: "Lecture 7: Introduction to Hierarchical Models, EB & Metropolis"
+    reading: "07-reading.html"
+    slides: "07-hierarchical-models.html"
+    slidespdf: "07-hierarchical-models-handout.pdf"
+    
   - week: "WEEK 4"
     date:  "Mon, Sept 20"
     title: "Lab 4 + HW 4"
-
+    lab: "lab-04-metropolis.html"
+    hw: "hw-04.html"
+    
+    
+  - date: "Tues, Sept 21"
+    title: "Lecture 8:  Metropolis Algorithms & Diagnostics"
+    reading: "08-reading.html"
+    slides: "08-metropolis-diagnostics.html"
+    slidespdf: "08-metropolis-diagnostics-handout.pdf"
+  
+  - date: "Thur, Sept 23"
+    title: "Lecture 9: Metropolis-Hastings and Adaptive Metropolis"
+    reading: "09-reading.html"
+    
   - week: "WEEK 5"
     date: "Mon, Sept 27"
-    title: "Lab 5 + HW 5"    
+    title: "Lab 5 + HW 5"  
+    
+  - date: "Tues: Tues, Sept 28" 
+    title: "Lecture 10:" 
   
   - date: "Thu, Sept 30"
+    title: "Lecture 11:" 
   
   - week: "WEEK 6"
     date: "Mon, Oct 4"

@@ -1,44 +1,61 @@
 ---
-title: "Homework 4"
-date: "Due: 11:59pm, Friday, March 5"
+title: "Homework  4"
+author: "STA 601L: Bayesian and Modern Statistics"
+#date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Sept 20, 2021"
 output: 
-  html_document: 
-    css: hw.css
-    theme: yeti
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
     toc: true
-    fig_caption: false
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
+link-citations: yes
 ---
 
-## Instructions
+```{r include=FALSE}
+library(tidyverse)
+library(tufte)
+library(knitr)
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  digits = 2
+  )
+knitr::opts_chunk$set(eval = FALSE)
+```
 
-Please make sure your final output file is a pdf document. You can submit handwritten solutions for non-programming exercises or type them using R Markdown, LaTeX or any other word processor. All programming exercises must be done in R, typed up clearly and with all code attached. Submissions should be made on gradescope: go to Assignments $\rightarrow$ Homework 4.
+**Due:** 11:00pm, Tues, Sept 28
 
-## Questions
 
-1. Hoff problem 6.1
-    + <font color="blue">**Part (a): 2 points**</font>
-    + <font color="blue">**Part (b): 3 points**</font>
-    + <font color="blue">**Part (c): 3 points**</font>
-    + <font color="blue">**Part (d): 3 points**</font>
+# Housekeeping
 
-2. <font color="green">**Continuation of question 4 from homework 3.**</font> Suppose we have count data $y_i$ with $(i = 1,\ldots, n)$, where $x_i = 0$ for control subjects and $x_i = 1$ for treated subjects. Consider the following model for the data: $$y_i \sim \textrm{Poisson}(\lambda \gamma^{x_i}),$$ where $\lambda = \mathbb{E}[y_i | x_i = 0]$ and $\gamma$ is a multiplicative change in the mean in the treated group. Choose gamma priors for the parameters $\lambda$ and $\gamma$, $$\lambda \sim \textrm{Ga}(1,1),\ \ \ \gamma \sim \textrm{Ga}(1,1).$$
-You should already have the correct posterior density from homework 3.
-    + <font color="green">**Part (a):**</font>  Derive the full conditional distributions for $\lambda$ and $\gamma$.  
-    <font color="blue">**(3 points)**</font>
-    + <font color="green">**Part (b):**</font>  Simulate data in which n = 100, with 50 in each group, where $\lambda = \gamma = 1$, and generate samples from the posterior distribution for these data.  
-    <font color="blue">**(3 points)**</font>
-    + <font color="green">**Part (c):**</font>  Use your code to (i) estimate the posterior mean and a 95% credible interval for $\textrm{log}(\lambda)$; and (ii) estimate the predictive distribution for subjects having $x_i = 0$ and $x_i = 1$. Are these predictive distributions different?  
-    <font color="blue">**(2 points)**</font>
-    + <font color="green">**Part (d):**</font>  Run convergence diagnostics -- is your chain mixing well? What is the effective sample size? Does the mixing differ for $\lambda$ and $\gamma$?  
-    <font color="blue">**(1 point)**</font>
-    
+## R/RStudio
 
-  
-  
+You all should have R and RStudio installed on your computers by now or access to the Department Server. If you do not, first install the latest version of R here: https://cran.rstudio.com (remember to select the right installer for your operating system). Next, install the latest version of RStudio here: https://www.rstudio.com/products/rstudio/download/. Scroll down to the "Installers for Supported Platforms" section and find the right installer for your operating system.
+
+## R Knitr
+
+You are required to use R knitr with the Rnw format to type up this lab report.  To get started see [basics](https://kbroman.org/knitr_knutshell/pages/latex.html) about knitr.
+
+
+# Getting started
+
+Go to Github classroom to  accept the invitation to create a repository for this assignment  at [HW4](https://classroom.github.com/a/sXNObmAp)
+
+This will create a private repo in the STA601-F21 organization on Github with your github user name. Note: You may receive an email invitation to join STA601-F21 on your behalf. 
+
+Hit refresh, to see the link for the repo, and then click on it to go to the STA601-F21 organization in Github.
+
+Follow the instructions in the README in your repo and in the  Rnw file to complete the assignment. 
+
+## Github Classroom & Gradescope
+
+You MUST submit both your final .Rnw and .pdf files to the repo on Github and upload the pdf to Gradescope here: https://www.gradescope.com/courses/295827/assignments. 
+
+Make sure to knit to pdf ; ask the TA about knitting to pdf if you cannot figure it out. Be sure to submit under the right assignment entry by the due date!
+
+
+
 ## Grading
 
-20 points.
+Total: 20 points.
   
