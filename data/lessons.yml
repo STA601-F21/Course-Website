@@ -88,9 +88,11 @@ lessons:
     slidespdf: "08-metropolis-diagnostics-handout.pdf"
   
   - date: "Thur, Sept 23"
-    title: "Lecture 9: Metropolis-Hastings and Adaptive Metropolis"
+    title: "Lecture 9: More MCMC - Adaptive Metropolis, Metropolis Hastings and Gibbs"
     reading: "09-reading.html"
-    
+    slides: "09-adaptive-metropolis.html"
+    slidespdf: "09-adaptive-metropolis-handout.pdf"
+  
   - week: "WEEK 5"
     date: "Mon, Sept 27"
     title: "Lab 5 + HW 5"  
