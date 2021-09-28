@@ -1,5 +1,5 @@
 ---
-title: "Lecture 7: Introduction to Hierarchical Models"
+title: "Lecture 8: Introduction to Metropolis Algorithms and Diagnostics"
 output: 
   html_document:
     theme: yeti
