@@ -1,8 +1,8 @@
 ---
-title: "Homework  7"
+title: "Homework  9"
 author: "STA 601L: Bayesian and Modern Statistics"
 #date: "`r format(Sys.time(), '%d %B, %Y')`"
-date: "October 19, 2021"
+date: "October 31, 2021"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -36,7 +36,7 @@ You are required to use R knitr with the Rnw format to type up this lab report. 
 
 # Getting started
 
-Go to Github classroom to  accept the invitation to create a repository for this assignment  at [HW7](https://classroom.github.com/a/fJl3wEyG)
+Go to Github classroom to  accept the invitation to create a repository for this assignment  at [HW9](https://classroom.github.com/a/5HBttswP)
 
 This will create a private repo in the STA601-F21 organization on Github with your github user name. Note: You may receive an email invitation to join STA601-F21 on your behalf. 
 
