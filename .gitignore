@@ -9,4 +9,4 @@
 docs/*
 docs/*/*
 docs
-*.Rproj
+website.Rproj
